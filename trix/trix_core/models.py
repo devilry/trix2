@@ -123,7 +123,7 @@ class Tag(models.Model):
     )
 
     def __unicode__(self):
-        return '{}'.format(self.tag)
+        return self.tag
 
 class Course(models.Model):
     """
@@ -139,7 +139,7 @@ class Course(models.Model):
         null=True, blank=True)
 
     def __unicode__(self):
-        return '{}'.format(self.course_tag.tag)
+        return self.course_tag.tag
 
 class Assignment(models.Model):
     unique_string = models.CharField(max_length=255,
@@ -151,7 +151,7 @@ class Assignment(models.Model):
     solution = models.TextField()
 
     def __unicode__(self):
-        return '{}'.format(self.title)
+        return self.title
 
 
 
