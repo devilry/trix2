@@ -22,3 +22,6 @@ python-dateutil==2.2
 
 # For mocking tests
 mock==1.0.1
+
+# For debugging
+django-debug-toolbar==1.2.1
