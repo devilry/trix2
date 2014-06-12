@@ -1,3 +1,4 @@
+import re
 from django.utils.translation import ugettext_lazy as _
 from django.db import models
 from django.contrib.auth.models import AbstractBaseUser
@@ -128,6 +129,19 @@ class Tag(models.Model):
 
     def __unicode__(self):
         return self.tag
+
+
+    @staticmethod
+    def normalize_tag(self, tag):
+        """
+        Normalize a tag:
+
+            - Lowercase.
+            - Replace all whitespace with a single space.
+            - Strip all whitespace at both ends.
+        """
+        return re.sub(r'\s+', ' ', tag.strip().lower())
+
 
 
 
