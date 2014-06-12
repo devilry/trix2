@@ -32,6 +32,9 @@ class TrixUserManager(BaseUserManager):
 
 
 class User(AbstractBaseUser):
+    """
+    The Trix user model.
+    """
     is_active = models.BooleanField(default=True,
             verbose_name=_('Is active?'),
             help_text=_('User is active? Inactive users can not log in.'))
@@ -99,6 +102,9 @@ class User(AbstractBaseUser):
 
 
 class Tag(models.Model):
+    """
+    A tag for an assignment.
+    """
 
     # NOTE: Help and field size in UI must make users use short tags
     tag = models.CharField(
@@ -118,13 +124,17 @@ class Tag(models.Model):
 
 
 class Course(models.Model):
+    """
+    A course is simply a tag with an optional active period tag, and a list of admins.
+    """
     admins = models.ManyToManyField(User)
 
     #: TODO: Limit choices to ``c``-tags
     course_tag = models.ForeignKey(Tag, related_name='course_set')
 
     #: TODO: Limit choices to ``p``-tags
-    active_period = models.ForeignKey(Tag, related_name='active_period_set')
+    active_period = models.ForeignKey(Tag, related_name='active_period_set',
+        null=True, blank=True)
 
 
 

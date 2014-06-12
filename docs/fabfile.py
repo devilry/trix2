@@ -17,7 +17,7 @@ def docs():
             + glob('../trix/*/tests/')
     exclude = map(os.path.abspath, exclude)
 
-    local('sphinx-apidoc -o django/_apidoc/ --no-toc ../trix {exclude}'.format(
+    local('sphinx-apidoc -o develop/_apidoc/ --no-toc ../trix {exclude}'.format(
         exclude=' '.join(exclude)
     ))
     local('sphinx-build -b html . _build')
