@@ -42,6 +42,7 @@ INSTALLED_APPS = (
     'crispy_forms',
     'django_cradmin',
     'trix.trix_core',
+    'trix.trix_admin',
 )
 
 MIDDLEWARE_CLASSES = (
