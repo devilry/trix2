@@ -1,5 +1,8 @@
 South==0.8.4
 
+Django==1.6.5
+django-crispy-forms==1.4.0
+
 # TODO: Move cradmin to pypi
 -e git://github.com/appressoas/django_cradmin.git#egg=django_cradmin
 
