@@ -103,7 +103,7 @@ class User(AbstractBaseUser):
 
 class Tag(models.Model):
     """
-    A tag for an assignment.
+    A tag for an assignment and a course.
     """
 
     # NOTE: Help and field size in UI must make users use short tags
