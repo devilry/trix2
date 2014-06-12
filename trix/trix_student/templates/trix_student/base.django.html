@@ -1,12 +1,23 @@
+{% spaceless %}
 {% load i18n %}
-{% load staticfiles %}
-{% block doctype %}<!DOCTYPE html>{% endblock doctype %}
-<html>
+{% load static %}
+{% endspaceless %}<!DOCTYPE html>
+<html lang="en">
     <head>
-        <title>{% block title %}{% trans "Trix" %}{% endblock title %}</title>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        <title>{% block title %}{% endblock title %} - {% trans "Trix" %}</title>
+
+        {% block css %}
+            <link href='{% static "trix_student/dist/styles.css" %}' rel="stylesheet">
+        {% endblock %}
+
     </head>
 
     <body>
-    {% block content %}{% endblock content %}
+
+        {% block body %}{% endblock %}
     </body>
 </html>
