@@ -1,3 +1,4 @@
+import re
 from django.utils.translation import ugettext_lazy as _
 from django.db import models
 from django.contrib.auth.models import AbstractBaseUser
@@ -122,8 +123,27 @@ class Tag(models.Model):
         ]
     )
 
+    class Meta:
+        verbose_name = _('Tag')
+        verbose_name_plural = _('Tags')
+
     def __unicode__(self):
         return self.tag
+
+
+    @staticmethod
+    def normalize_tag(self, tag):
+        """
+        Normalize a tag:
+
+            - Lowercase.
+            - Replace all whitespace with a single space.
+            - Strip all whitespace at both ends.
+        """
+        return re.sub(r'\s+', ' ', tag.strip().lower())
+
+
+
 
 class Course(models.Model):
     """
@@ -138,28 +158,54 @@ class Course(models.Model):
     active_period = models.ForeignKey(Tag, related_name='active_period_set',
         null=True, blank=True)
 
+    class Meta:
+        verbose_name = _('Course')
+        verbose_name_plural = _('Courses')
+
     def __unicode__(self):
         return self.course_tag.tag
 
-class Assignment(models.Model):
-    unique_string = models.CharField(max_length=255,
-        unique=True, blank=False, null=False)
 
-    title = models.CharField(max_length=255)
-    tags = models.ManyToManyField(Tag)
-    text = models.TextField()
-    solution = models.TextField()
+class Assignment(models.Model):
+    title = models.CharField(
+        max_length=255,
+        verbose_name=_('Title'))
+    tags = models.ManyToManyField(Tag,
+        verbose_name=_('Tags'))
+    text = models.TextField(
+        verbose_name=_('Assignment text'),
+        help_text=_('Write the assignment here.'))
+    solution = models.TextField(
+        blank=True, null=False, default='',
+        verbose_name=_('Solution'),
+        help_text=_('If you want your students to be able to view a suggested solution, write the solution here.'))
+
+    class Meta:
+        verbose_name = _('Assignment')
+        verbose_name_plural = _('Assignments')
 
     def __unicode__(self):
         return self.title
 
+    @property
+    def readable_id(self):
+        return str(self.id)
 
 
 class Permalink(models.Model):
-    unique_string = models.CharField(max_length=255,
-        unique=True, blank=False, null=False)
     tags = models.ManyToManyField(Tag)
     title = models.CharField(max_length=255,
         blank=True, null=False, default='')
     description = models.TextField(
         blank=True, null=False, default='')
+
+    class Meta:
+        verbose_name = _('Permalink')
+        verbose_name_plural = _('Permalinks')
+
+    def  __unicode__(self):
+        return self.title
+
+    @property
+    def readable_id(self):
+        return str(self.id)
