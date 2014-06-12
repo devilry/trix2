@@ -50,4 +50,4 @@ def recreate_testdb(djangoenv='develop'):
     """
     resetdb(djangoenv)
     with shell_env(DJANGOENV=djangoenv):
-        _manage('runscript lokalt_project.develop.dumps.core.data')
+        _manage('runscript trix.project.develop.dumps.dev.data')

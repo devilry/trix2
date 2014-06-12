@@ -52,3 +52,5 @@ coverage.xml
 # Sphinx documentation
 docs/_build/
 
+# Django development database
+db.sqlite3

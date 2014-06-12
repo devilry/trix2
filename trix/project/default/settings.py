@@ -12,7 +12,7 @@ from os.path import dirname
 
 
 # The /REPOROOT directory
-REPOROOT_DIR = dirname(dirname(dirname(dirname(dirname(__file__)))))
+REPOROOT_DIR = dirname(dirname(dirname(dirname(__file__))))
 
 
 # Quick-start development settings - unsuitable for production
