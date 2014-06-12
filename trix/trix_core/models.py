@@ -122,6 +122,8 @@ class Tag(models.Model):
         ]
     )
 
+    def __unicode__(self):
+        return '{}'.format(self.tag)
 
 class Course(models.Model):
     """
@@ -136,7 +138,8 @@ class Course(models.Model):
     active_period = models.ForeignKey(Tag, related_name='active_period_set',
         null=True, blank=True)
 
-
+    def __unicode__(self):
+        return 'Course'
 
 class Assignment(models.Model):
     unique_string = models.CharField(max_length=255,
@@ -146,6 +149,9 @@ class Assignment(models.Model):
     tags = models.ManyToManyField(Tag)
     text = models.TextField()
     solution = models.TextField()
+
+    def __unicode__(self):
+        return '{}'.format(self.title)
 
 
 

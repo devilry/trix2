@@ -134,8 +134,8 @@ def import_data():
     from trix.trix_core.models import User
 
     trix_core_user_1 = User()
-    trix_core_user_1.password = u'pbkdf2_sha256$12000$W4uME3HeCcf9$wqod5vM9yeIYC5KJNjAHGutTbhnQVWR35NvsTqxEZgw='
-    trix_core_user_1.last_login = dateutil.parser.parse("2014-06-12T12:15:15.054614+00:00")
+    trix_core_user_1.password = u'pbkdf2_sha256$12000$akVvyGIzv5mu$u1ds2n9HivKsZh/wee0SZaf5u9rkmIhG/mp+j+zVSLI='
+    trix_core_user_1.last_login = dateutil.parser.parse("2014-06-12T12:45:27.876570+00:00")
     trix_core_user_1.is_active = True
     trix_core_user_1.is_admin = True
     trix_core_user_1.email = u'grandma@example.com'
@@ -145,16 +145,50 @@ def import_data():
 
     from trix.trix_core.models import Tag
 
+    trix_core_tag_1 = Tag()
+    trix_core_tag_1.tag = u'inf1000'
+    trix_core_tag_1.category = u'c'
+    trix_core_tag_1 = importer.save_or_locate(trix_core_tag_1)
+
+    trix_core_tag_2 = Tag()
+    trix_core_tag_2.tag = u'var2014'
+    trix_core_tag_2.category = u'p'
+    trix_core_tag_2 = importer.save_or_locate(trix_core_tag_2)
+
+    trix_core_tag_3 = Tag()
+    trix_core_tag_3.tag = u'host2014'
+    trix_core_tag_3.category = u'p'
+    trix_core_tag_3 = importer.save_or_locate(trix_core_tag_3)
+
+    trix_core_tag_4 = Tag()
+    trix_core_tag_4.tag = u'host2013'
+    trix_core_tag_4.category = u'p'
+    trix_core_tag_4 = importer.save_or_locate(trix_core_tag_4)
 
     # Processing model: Course
 
     from trix.trix_core.models import Course
 
+    trix_core_course_1 = Course()
+    trix_core_course_1.course_tag = trix_core_tag_1
+    trix_core_course_1.active_period = trix_core_tag_2
+    trix_core_course_1 = importer.save_or_locate(trix_core_course_1)
+
+    trix_core_course_1.admins.add(trix_core_user_1)
 
     # Processing model: Assignment
 
     from trix.trix_core.models import Assignment
 
+    trix_core_assignment_1 = Assignment()
+    trix_core_assignment_1.unique_string = u'luring'
+    trix_core_assignment_1.title = u'Hello World'
+    trix_core_assignment_1.text = u'Print hello world in the terminal.'
+    trix_core_assignment_1.solution = u'public class HelloWorld {\r\n    public static void main(String [] args) {\r\n        System.out.println("Hello World!");\r\n    }\r\n}'
+    trix_core_assignment_1 = importer.save_or_locate(trix_core_assignment_1)
+
+    trix_core_assignment_1.tags.add(trix_core_tag_1)
+    trix_core_assignment_1.tags.add(trix_core_tag_2)
 
     # Processing model: Permalink
 
