@@ -39,7 +39,7 @@ Install in a virtualenv
 ***********************
 Create a virtualenv (an isolated Python environment)::
 
-    $ mkvirtualenv lokalt
+    $ mkvirtualenv trix
 
 Install the development requirements::
 
@@ -53,7 +53,7 @@ Install the development requirements::
     Whenever you start a new shell where you need to use the virtualenv we created
     with ``mkvirtualenv`` above, you have to run::
 
-        $ workon lokalt
+        $ workon trix
 
 
 *****************
