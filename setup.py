@@ -1,11 +1,11 @@
 from setuptools import setup, find_packages
 
-execfile('django_dbdev/version.py')
+execfile('trix/version.py')
 
 setup(
     name='trix2',
     description='Trix2.',
-    version=version,
+    version=__version__,
     url='https://gifthub.com/devilry/trix2',
     author='Tor Johansen, Espen Angell Kristiansen',
     license='BSD',

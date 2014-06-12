@@ -1,6 +1,6 @@
 South==0.8.4
 
 # TODO: Move cradmin to pypi
--e git@github.com:appressoas/django_cradmin.git#egg=django_cradmin
+-e git://github.com/appressoas/django_cradmin.git#egg=django_cradmin
 
 -e .
