@@ -139,7 +139,7 @@ class Course(models.Model):
         null=True, blank=True)
 
     def __unicode__(self):
-        return 'Course'
+        return '{}'.format(self.course_tag.tag)
 
 class Assignment(models.Model):
     unique_string = models.CharField(max_length=255,
