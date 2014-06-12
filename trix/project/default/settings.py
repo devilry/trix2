@@ -41,6 +41,7 @@ INSTALLED_APPS = (
     'south',
     'crispy_forms',
     'django_cradmin',
+    'trix.trix_core',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -78,7 +79,7 @@ USE_TZ = True
 STATIC_URL = '/static/'
 
 # Custom authentication model
-AUTH_USER_MODEL = 'lokalt_core.User'
+AUTH_USER_MODEL = 'trix_core.User'
 
 # Redirect logins to the frontpage by default
 LOGIN_REDIRECT_URL = '/'

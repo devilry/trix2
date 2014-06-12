@@ -121,10 +121,10 @@ class Course(models.Model):
     admins = models.ManyToManyField(User)
 
     #: TODO: Limit choices to ``c``-tags
-    course_tag = models.ForeignKey(Tag)
+    course_tag = models.ForeignKey(Tag, related_name='course_set')
 
     #: TODO: Limit choices to ``p``-tags
-    active_period = models.ForeignKey(Tag)
+    active_period = models.ForeignKey(Tag, related_name='active_period_set')
 
 
 
