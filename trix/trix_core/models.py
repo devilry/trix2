@@ -122,6 +122,8 @@ class Tag(models.Model):
         ]
     )
 
+    def __unicode__(self):
+        return '{}'.format(self.tag)
 
 class Course(models.Model):
     """
