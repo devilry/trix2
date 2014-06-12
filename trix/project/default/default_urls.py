@@ -9,5 +9,5 @@ admin.autodiscover()
 default_urls = [
     url(r'^admin/', include(admin.site.urls)),
     url(r'^a/', include(CrAdminInstance.urls())),
-    #url(r'^$', HomepageView.as_view(), name='lokalt_home'),
+    # url(r'^', include('trix.trix_student.urls')),
 ]
