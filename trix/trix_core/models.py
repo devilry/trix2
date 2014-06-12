@@ -142,10 +142,9 @@ class Course(models.Model):
         return self.course_tag.tag
 
 class Assignment(models.Model):
-    unique_string = models.CharField(max_length=255,
-        unique=True, blank=False, null=False)
-
-    title = models.CharField(max_length=255)
+    title = models.CharField(
+        max_length=255,
+        verbose_name=_('Title'))
     tags = models.ManyToManyField(Tag)
     text = models.TextField()
     solution = models.TextField()
@@ -153,13 +152,21 @@ class Assignment(models.Model):
     def __unicode__(self):
         return self.title
 
+    @property
+    def readable_id(self):
+        return str(self.id)
 
 
 class Permalink(models.Model):
-    unique_string = models.CharField(max_length=255,
-        unique=True, blank=False, null=False)
     tags = models.ManyToManyField(Tag)
     title = models.CharField(max_length=255,
         blank=True, null=False, default='')
     description = models.TextField(
         blank=True, null=False, default='')
+
+    def  __unicode__(self):
+        return self.title
+
+    @property
+    def readable_id(self):
+        return str(self.id)
