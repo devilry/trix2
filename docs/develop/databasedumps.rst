@@ -49,7 +49,7 @@ To add data manually, you should first run thr ``recreate_devdb`` management
 command to make sure you start out with the current up-to-date dataset. Then you
 can use the web-UI or the Django shell to add data. Finally, run::
 
-    $ python manage.py dumpscript lokalt_core > trix/project/develop/dumps/dev/data.py
+    $ python manage.py dumpscript trix_core > trix/project/develop/dumps/dev/data.py
 
 
 Adding data programmatically
