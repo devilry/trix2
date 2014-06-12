@@ -14,7 +14,8 @@ setup(
     include_package_data=True,
     install_requires=[
         'setuptools',
-        'Django'
+        'Django>=1.6.0',
+        'django-crispy-forms>=1.4.0'
     ],
     classifiers=[
         'Development Status :: 4 - Beta',
