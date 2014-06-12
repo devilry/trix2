@@ -122,8 +122,14 @@ class Tag(models.Model):
         ]
     )
 
+    class Meta:
+        verbose_name = _('Tag')
+        verbose_name_plural = _('Tags')
+
     def __unicode__(self):
         return self.tag
+
+
 
 class Course(models.Model):
     """
@@ -138,16 +144,31 @@ class Course(models.Model):
     active_period = models.ForeignKey(Tag, related_name='active_period_set',
         null=True, blank=True)
 
+    class Meta:
+        verbose_name = _('Course')
+        verbose_name_plural = _('Courses')
+
     def __unicode__(self):
         return self.course_tag.tag
+
 
 class Assignment(models.Model):
     title = models.CharField(
         max_length=255,
         verbose_name=_('Title'))
-    tags = models.ManyToManyField(Tag)
-    text = models.TextField()
-    solution = models.TextField()
+    tags = models.ManyToManyField(Tag,
+        verbose_name=_('Tags'))
+    text = models.TextField(
+        verbose_name=_('Assignment text'),
+        help_text=_('Write the assignment here.'))
+    solution = models.TextField(
+        blank=True, null=False, default='',
+        verbose_name=_('Solution'),
+        help_text=_('If you want your students to be able to view a suggested solution, write the solution here.'))
+
+    class Meta:
+        verbose_name = _('Assignment')
+        verbose_name_plural = _('Assignments')
 
     def __unicode__(self):
         return self.title
@@ -163,6 +184,10 @@ class Permalink(models.Model):
         blank=True, null=False, default='')
     description = models.TextField(
         blank=True, null=False, default='')
+
+    class Meta:
+        verbose_name = _('Permalink')
+        verbose_name_plural = _('Permalinks')
 
     def  __unicode__(self):
         return self.title
