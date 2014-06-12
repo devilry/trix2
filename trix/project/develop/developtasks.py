@@ -44,7 +44,7 @@ def resetdb(djangoenv='develop'):
 
 
 @task
-def recreate_testdb(djangoenv='develop'):
+def recreate_devdb(djangoenv='develop'):
     """
     Recreate the test database.
     """
