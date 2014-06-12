@@ -1,0 +1,12 @@
+{% load i18n %}
+{% load staticfiles %}
+{% block doctype %}<!DOCTYPE html>{% endblock doctype %}
+<html>
+    <head>
+        <title>{% block title %}{% trans "Trix" %}{% endblock title %}</title>
+    </head>
+
+    <body>
+    {% block content %}{% endblock content %}
+    </body>
+</html>

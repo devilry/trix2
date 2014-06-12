@@ -43,6 +43,7 @@ INSTALLED_APPS = (
     'django_cradmin',
     'trix.trix_core',
     'trix.trix_admin',
+    'trix.trix_student'
 )
 
 MIDDLEWARE_CLASSES = (
