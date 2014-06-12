@@ -1,6 +1,7 @@
 import re
 from django.utils.translation import ugettext_lazy as _
 from django.db import models
+from django.db import IntegrityError
 from django.contrib.auth.models import AbstractBaseUser
 from django.contrib.auth.models import BaseUserManager
 
@@ -102,10 +103,32 @@ class User(AbstractBaseUser):
 
 
 
+class TagQuerySet(models.query.QuerySet):
+    def to_unicode(self):
+        return ', '.join(tag.tag for tag in self.all())
+
+
+
+class TagManager(models.Manager):
+    use_for_related_fields = True
+
+    def get_queryset(self):
+        return TagQuerySet(self.model)
+
+    def get_or_create(self, tag):
+        try:
+            tag = Tag.objects.get(tag=tag)
+        except Tag.DoesNotExist:
+            tag = Tag.objects.create(tag=tag)
+        return tag
+
+
+
 class Tag(models.Model):
     """
     A tag for an assignment and a course.
     """
+    objects = TagManager()
 
     # NOTE: Help and field size in UI must make users use short tags
     tag = models.CharField(
@@ -131,8 +154,8 @@ class Tag(models.Model):
         return self.tag
 
 
-    @staticmethod
-    def normalize_tag(self, tag):
+    @classmethod
+    def normalize_tag(cls, tag):
         """
         Normalize a tag:
 
@@ -142,6 +165,11 @@ class Tag(models.Model):
         """
         return re.sub(r'\s+', ' ', tag.strip().lower())
 
+    @classmethod
+    def split_commaseparated_tags(cls, commaseparatedtags):
+        return [
+            cls.normalize_tag(tagstring)
+            for tagstring in commaseparatedtags.split(',')]
 
 
 
@@ -190,6 +218,12 @@ class Assignment(models.Model):
     @property
     def readable_id(self):
         return str(self.id)
+
+    # def replace_tags(self, *tagstrings):
+    #     self.tags.clear()
+    #     for tagstring in tagstrings:
+    #         tag = Tag.objects.get_or_create(tagstring)
+    #         self.tags.add(tag)
 
 
 class Permalink(models.Model):

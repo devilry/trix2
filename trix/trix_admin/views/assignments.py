@@ -1,6 +1,6 @@
-from django.core.urlresolvers import reverse
 from django.utils.translation import ugettext_lazy as _
 from django.template.defaultfilters import truncatechars
+from django import forms
 from django_cradmin.viewhelpers import objecttable
 from django_cradmin.viewhelpers import create
 from django_cradmin.viewhelpers import update
@@ -8,9 +8,7 @@ from django_cradmin.viewhelpers import delete
 from django_cradmin import crapp
 from crispy_forms import layout
 
-
-from trix.trix_core.models import Assignment
-
+from trix.trix_core import models as trix_models
 
 
 class TitleColumn(objecttable.MultiActionColumn):
@@ -44,7 +42,7 @@ class TagsColumn(objecttable.PlainTextColumn):
 
 
 class ProductListView(objecttable.ObjectTableView):
-    model = Assignment
+    model = trix_models.Assignment
     columns = [
         TitleColumn,
         TagsColumn,
@@ -62,8 +60,23 @@ class ProductListView(objecttable.ObjectTableView):
         ]
 
 
+
+class ManyToManyTagInputField(forms.CharField):
+
+    def prepare_value(self, value):
+        return trix_models.Tag.objects.filter(id__in=value).to_unicode()
+
+    def to_python(self, value):
+        tags = []
+        for tagstring in trix_models.Tag.split_commaseparated_tags(value):
+            tag = trix_models.Tag.objects.get_or_create(tagstring)
+            tags.append(tag)
+        return tags
+
+
+
 class ProductCreateUpdateMixin(object):
-    model = Assignment
+    model = trix_models.Assignment
 
     # def get_preview_url(self):
     #     return reverse('lokalt_company_product_preview')
@@ -80,7 +93,9 @@ class ProductCreateUpdateMixin(object):
         ]
 
     def get_form(self, *args, **kwargs):
-        return super(ProductCreateUpdateMixin, self).get_form(*args, **kwargs)
+        form = super(ProductCreateUpdateMixin, self).get_form(*args, **kwargs)
+        form.fields['tags'] = ManyToManyTagInputField()
+        return form
 
 
 class ProductCreateView(ProductCreateUpdateMixin, create.CreateView):
@@ -98,7 +113,7 @@ class ProductDeleteView(delete.DeleteView):
     """
     View used to delete existing products.
     """
-    model = Assignment
+    model = trix_models.Assignment
 
 
 
