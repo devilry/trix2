@@ -1,8 +1,28 @@
 {% extends "trix_student/base.django.html" %}
 {% load i18n %}
 {% block title %}{% trans "Trix - student" %}{% endblock title %}
-<div class="container">
-    <div class="page-header">
-        <h1>Hello World</h1>
+
+{% block body %}
+    <div class="container">
+        <div class="page-header">
+            <h1>Hello World</h1>
+        </div>
     </div>
-</div>
+
+    <div class="container">
+        <div class="alert alert-info">
+            <strong>{% trans "Welcome to" %}</strong> 
+            <p>{% trans "Trix is a teaching platform to help you work more systematic towards your goal, resulting in a better learning outcome." %}</p>
+        </div>
+        
+    </div>
+    <div class="container">
+        <div class="course-list">
+            {% for obj in object_list %}
+                <div class="course-list-element">
+                    <h1>{{ obj }}</h1>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+{% endblock body %}
