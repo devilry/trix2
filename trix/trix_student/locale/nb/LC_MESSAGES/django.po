@@ -1,0 +1,42 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2014-06-13 14:58+0000\n"
+"PO-Revision-Date: 2014-06-13 17:00+0100\n"
+"Last-Translator: Tor Ivar Johansen <tor@torjohansen.no>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 1.5.4\n"
+
+#: templates/trix_student/base.django.html:11
+msgid "Trix"
+msgstr "Trix"
+
+#: templates/trix_student/dashboard.django.html:3
+msgid "Trix - student"
+msgstr "Trix - student"
+
+#: templates/trix_student/dashboard.django.html:8
+msgid "Course list"
+msgstr "Kursliste"
+
+#: templates/trix_student/dashboard.django.html:14
+msgid "Welcome to"
+msgstr "Velkommen til"
+
+#: templates/trix_student/dashboard.django.html:15
+msgid ""
+"Trix is a teaching platform to help you work more systematic towards your "
+"goal, resulting in a better learning outcome."
+msgstr ""
+"Trix er en læringsplattform for å hjelpe deg til å jobbe systematisk mot å "
+"nå læringsmålene i kurset ditt."
