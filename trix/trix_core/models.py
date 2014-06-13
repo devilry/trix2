@@ -178,6 +178,8 @@ class Course(models.Model):
     A course is simply a tag with an optional active period tag, and a list of admins.
     """
     admins = models.ManyToManyField(User)
+    description = models.TextField(
+            blank=True, null=False, default='') 
 
     #: TODO: Limit choices to ``c``-tags
     course_tag = models.ForeignKey(Tag, related_name='course_set')

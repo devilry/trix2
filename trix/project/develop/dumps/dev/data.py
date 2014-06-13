@@ -134,8 +134,8 @@ def import_data():
     from trix.trix_core.models import User
 
     trix_core_user_1 = User()
-    trix_core_user_1.password = u'pbkdf2_sha256$12000$akVvyGIzv5mu$u1ds2n9HivKsZh/wee0SZaf5u9rkmIhG/mp+j+zVSLI='
-    trix_core_user_1.last_login = dateutil.parser.parse("2014-06-12T12:45:27.876570+00:00")
+    trix_core_user_1.password = u'pbkdf2_sha256$12000$6nqrLaK5w26r$1NwdmoTp9rzqZ2dWy1zgPe9Si4/yjgmw6LG//2soikg='
+    trix_core_user_1.last_login = dateutil.parser.parse("2014-06-13T14:15:24.196000+00:00")
     trix_core_user_1.is_active = True
     trix_core_user_1.is_admin = True
     trix_core_user_1.email = u'grandma@example.com'
@@ -170,6 +170,7 @@ def import_data():
     from trix.trix_core.models import Course
 
     trix_core_course_1 = Course()
+    trix_core_course_1.description = u'Grunnkurs i objektorientert programmering. '
     trix_core_course_1.course_tag = trix_core_tag_1
     trix_core_course_1.active_period = trix_core_tag_2
     trix_core_course_1 = importer.save_or_locate(trix_core_course_1)
@@ -181,7 +182,6 @@ def import_data():
     from trix.trix_core.models import Assignment
 
     trix_core_assignment_1 = Assignment()
-    trix_core_assignment_1.unique_string = u'luring'
     trix_core_assignment_1.title = u'Hello World'
     trix_core_assignment_1.text = u'Print hello world in the terminal.'
     trix_core_assignment_1.solution = u'public class HelloWorld {\r\n    public static void main(String [] args) {\r\n        System.out.println("Hello World!");\r\n    }\r\n}'
