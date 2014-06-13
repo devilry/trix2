@@ -5,7 +5,7 @@
 {% block body %}
     <div class="container">
         <div class="page-header">
-            <h1>Hello World</h1>
+            <h1>{% trans "Course list" %}</h1>
         </div>
     </div>
 
@@ -20,7 +20,7 @@
         <div class="course-list">
             {% for obj in object_list %}
                 <div class="course-list-element">
-                    <h1>{{ obj }}</h1>
+                    <h1><a href="#">{{ obj }}</a></h1>
                 </div>
             {% endfor %}
         </div>
