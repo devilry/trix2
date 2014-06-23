@@ -1,0 +1,28 @@
+#trix_header {
+    height: @header-height;
+    background-color: @header-bgcolor;
+    position: relative;
+    box-shadow: 0 0px 7px rgb(30, 30, 30);
+    box-sizing: border-box;
+    font-family: @header-font-family;
+}
+
+#trix_header {
+
+    .trix_header_brand {
+            box-sizing: border-box;
+            // background-color: rgb(50, 50, 50);
+            display: inline-block;
+            height: @header-height;
+            font-size: 18px;
+
+            a {
+                // color: rgb(30, 30, 30);
+                text-decoration: none;
+                display: inline-block;
+                margin-left: 10px;
+                line-height: @header-height;
+                height: @header-height;
+            }
+    }   
+}
