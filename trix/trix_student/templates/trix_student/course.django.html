@@ -10,7 +10,29 @@
     </div>
 
     <div class="container">
-        <button type="button" class="btn btn-primary btn-sm disabled">{{ object.active_period }}</button>
+        <div class="row">
+        <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+            {% for tag in locked_tags %}
+                <button type="button" class="btn btn-primary btn-sm disabled">{{ tag }}</button>
+            {% endfor %}
+            {% for tag in selected_tag %}
+                <button type="button" class="btn btn-primary btn-sm">{{ tag }}</button>
+            {% endfor %}
+            
+        </div>
+        <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+        <form>
+            {{ tag_select_form }}
+            
+            {% for tag in locked_tags %}
+                <input type="hidden" name="locked_tags" value="{{ tag.id }}">
+            {% endfor %}
+
+            <input type="submit" value="Submit">
+
+        </form>
+        </div>
+        </div>
     </div>
 
     {% include "trix_student/include/assignment_list.django.html" %}
