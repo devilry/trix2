@@ -9,13 +9,25 @@
         </div>
     </div>
 
-    <div class="container">
-        <div class="alert alert-info">
-            <strong>{% trans "Welcome to" %}</strong> 
-            <p>{% trans "Trix is a teaching platform to help you work more systematic towards your goal, resulting in a better learning outcome." %}</p>
+    {% if request.user.is_staff %}
+        <div class="alert alert-edgetoedge alert-staff">
+            <div class="container">
+                <h1>{% trans "Administrate Trix" %}</h1>
+                <div class="btn-group btn-group-lg">
+                    <a href="/a/" class="btn btn-default" role="button">{% trans "Administer" %}</a>
+                </div>
+            </div>
         </div>
-        
-    </div>
+    {% endif %}
+
+
+        <div class="alert alert-info alert-edgetoedge">
+            <div class="container">
+            <h1>{% trans "Welcome to Trix" %}</h1> 
+            <p>{% trans "Trix is a teaching platform to help you work more systematic towards your goal, resulting in a better learning outcome." %}</p>
+            </div>
+        </div>
+
     <div class="container">
         <div class="course-list">
             {% for obj in object_list %}
