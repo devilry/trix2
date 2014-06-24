@@ -1,0 +1,12 @@
+{% extends "trix_student/base.django.html" %}
+{% load i18n %}
+{% block title %}{% trans "Assignments" %}{% endblock title %}
+
+{% block body %}
+    <div class="container">
+        <div class="page-header">
+            <h1>{{ object.course_tag }} <small>{{ object.description }}</small></h1>
+        </div>
+    </div>
+
+{% endblock body %}
