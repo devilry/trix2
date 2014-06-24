@@ -170,6 +170,11 @@ def import_data():
     trix_core_tag_5.category = u'c'
     trix_core_tag_5 = importer.save_or_locate(trix_core_tag_5)
 
+    trix_core_tag_6 = Tag()
+    trix_core_tag_6.tag = u'uke1'
+    trix_core_tag_6.category = u''
+    trix_core_tag_6 = importer.save_or_locate(trix_core_tag_6)
+
     # Processing model: Course
 
     from trix.trix_core.models import Course
@@ -202,6 +207,7 @@ def import_data():
 
     trix_core_assignment_1.tags.add(trix_core_tag_1)
     trix_core_assignment_1.tags.add(trix_core_tag_2)
+    trix_core_assignment_1.tags.add(trix_core_tag_6)
 
     trix_core_assignment_2 = Assignment()
     trix_core_assignment_2.title = u'Finn fem feil'
@@ -210,6 +216,7 @@ def import_data():
     trix_core_assignment_2 = importer.save_or_locate(trix_core_assignment_2)
 
     trix_core_assignment_2.tags.add(trix_core_tag_1)
+    trix_core_assignment_2.tags.add(trix_core_tag_2)
 
     trix_core_assignment_3 = Assignment()
     trix_core_assignment_3.title = u'Sum (innlesning av tekst fra terminal)'

@@ -12,11 +12,13 @@
     <div class="container">
         <div class="row">
         <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
-            {% for tag in locked_tags %}
+            {% for tag in non_removeable_tags %}
                 <button type="button" class="btn btn-primary btn-sm disabled">{{ tag }}</button>
             {% endfor %}
-            {% for tag in selected_tag %}
-                <button type="button" class="btn btn-primary btn-sm">{{ tag }}</button>
+
+            {% for tag in locked_tags %}
+                <input type="hidden" name="locked_tags" value="{{ tag.id }}">
+                <a href="{% url 'trix_student_course' object.id %}" class="btn btn-sm btn-primary" role="button" type="submit">{{ tag }}</a>
             {% endfor %}
             
         </div>

@@ -29,9 +29,10 @@ class CourseDetailView(DetailView):
         tags = tags.exclude(id__in=[x.id for x in (obj.course_tag, obj.active_period)])
         context['tags'] = tags
 
+        context['non_removeable_tags'] = [obj.active_period, obj.course_tag]
 
         tag_query_list = self.request.GET.get('locked_tags', None)
-        context['locked_tags'] = [obj.active_period, obj.course_tag]
+        context['locked_tags'] = []
         if tag_query_list:
             for tag in tag_query_list:
                 context['locked_tags'].append(models.Tag.objects.get(id=int(tag)))
