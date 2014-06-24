@@ -23,11 +23,9 @@ class CourseDetailView(DetailView):
         obj = self.get_object()
         assignments = models.Assignment.objects.filter_by_tag(obj.course_tag)\
             .filter_by_tag(obj.active_period)
-        context['assignment_list'] = assignments
 
         tags = models.Tag.objects.filter(assignment__in=assignments).distinct()
         tags = tags.exclude(id__in=[x.id for x in (obj.course_tag, obj.active_period)])
-        context['tags'] = tags
 
         context['non_removeable_tags'] = [obj.active_period, obj.course_tag]
 
@@ -44,8 +42,12 @@ class CourseDetailView(DetailView):
             context['assignment_list'] = assignments.filter_by_tag(selected_tag)
 
         context['locked_tags'] = list(set(context['locked_tags']))
-        print context['locked_tags']
+     
+        for tag in context['locked_tags']:
+            assignments = assignments.filter_by_tag(tag)
 
+        context['assignment_list'] = assignments
+        context['tags'] = tags
         context['tag_select_form'] = TagSelectForm(choices=tags)
         return context
 

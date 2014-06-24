@@ -17,13 +17,12 @@
             {% endfor %}
 
             {% for tag in locked_tags %}
-                <input type="hidden" name="locked_tags" value="{{ tag.id }}">
                 <a href="{% url 'trix_student_course' object.id %}" class="btn btn-sm btn-primary" role="button" type="submit">{{ tag }}</a>
             {% endfor %}
             
         </div>
         <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
-        <form>
+        <form method="get">
             {{ tag_select_form }}
             
             {% for tag in locked_tags %}
