@@ -172,7 +172,6 @@ class Tag(models.Model):
             for tagstring in commaseparatedtags.split(',')]
 
 
-
 class Course(models.Model):
     """
     A course is simply a tag with an optional active period tag, and a list of admins.
@@ -196,6 +195,15 @@ class Course(models.Model):
         return self.course_tag.tag
 
 
+class AssignmentManager(models.Manager):
+    """docstring for AssignmentManager"""
+
+    def get_queryset(self):
+        return super(AssignmentManager, self).get_queryset().all()
+
+    def filter_by_tag(self, tag):
+        return self.get_queryset().filter(tags=tag)  
+
 class Assignment(models.Model):
     title = models.CharField(
         max_length=255,
@@ -209,6 +217,8 @@ class Assignment(models.Model):
         blank=True, null=False, default='',
         verbose_name=_('Solution'),
         help_text=_('If you want your students to be able to view a suggested solution, write the solution here.'))
+
+    objects = AssignmentManager()
 
     class Meta:
         verbose_name = _('Assignment')
