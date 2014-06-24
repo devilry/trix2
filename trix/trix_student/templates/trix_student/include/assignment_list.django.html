@@ -1,6 +1,14 @@
  {% load i18n %}
     <div class="container">
+        <ol>
         {% for assignment in assignment_list %}
-            <h2>{{ assignment }}</h2>
+            <li>
+                <h2>{{ assignment }}</h2>
+                <ul>
+                    <li><p>{{ assignment.text }}</p></li>
+                    <li><p>{{ assignment.solution }}</p></li>
+                </ul>
+            </li>
         {% endfor %}
+        </ol>
     </div>
