@@ -195,14 +195,22 @@ class Course(models.Model):
         return self.course_tag.tag
 
 
+class AssignmentQuerySet(models.query.QuerySet):
+    """ AssignmentQuerySet
+
+    """
+    
+    def filter_by_tag(self, tag):
+        return self.filter(tags=tag)
+
 class AssignmentManager(models.Manager):
     """docstring for AssignmentManager"""
 
     def get_queryset(self):
-        return super(AssignmentManager, self).get_queryset().all()
+        return AssignmentQuerySet(self.model, using=self._db)
 
     def filter_by_tag(self, tag):
-        return self.get_queryset().filter(tags=tag)  
+        return self.get_queryset().filter_by_tag(tag)  
 
 class Assignment(models.Model):
     title = models.CharField(

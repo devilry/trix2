@@ -9,6 +9,10 @@
         </div>
     </div>
 
+    <div class="container">
+        <button type="button" class="btn btn-primary btn-sm disabled">{{ object.active_period }}</button>
+    </div>
+
     {% include "trix_student/include/assignment_list.django.html" %}
 
 {% endblock body %}

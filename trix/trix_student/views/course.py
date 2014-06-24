@@ -10,6 +10,7 @@ class CourseDetailView(DetailView):
     def get_context_data(self, **kwargs):
         context = super(CourseDetailView, self).get_context_data(**kwargs)
         obj = self.get_object()
-        assignments = models.Assignment.objects.filter_by_tag(obj.course_tag)
+        assignments = models.Assignment.objects.filter_by_tag(obj.course_tag)\
+            .filter_by_tag(obj.active_period)
         context['assignment_list'] = assignments
         return context
