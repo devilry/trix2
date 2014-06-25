@@ -47,8 +47,8 @@ Create a demo database
 ======================
 To create the Trix demo database, run::
 
-    $ heroku run python manage.py syncdb --noinput
-    $ heroku run python manage.py migrate --noinput
-    $ heroku run python manage.py runscript trix.project.develop.dumps.dev.data
-
-
+    $ heroku run bash
+    >$ python manage.py syncdb --noinput
+    >$ python manage.py migrate --noinput
+    >$ python manage.py runscript trix.project.develop.dumps.dev.data
+    >$ exit
