@@ -48,7 +48,7 @@ class CourseDetailView(ListView):
         ] + self.selected_tags
 
         tags = models.Tag.objects\
-            .filter(assignment__in=self.all_available_assignments)\
+            .filter(assignment__in=self.get_queryset())\
             .exclude(tag__in=already_selected_tags)\
             .order_by('tag')\
             .distinct()\
@@ -69,7 +69,6 @@ class CourseDetailView(ListView):
     def get_context_data(self, **kwargs):
         context = super(CourseDetailView, self).get_context_data(**kwargs)
 
-        # Show the non removeable tags as disabled
         context['non_removeable_tags'] = [self.course.active_period]
         context['object'] = self.course
         context['selected_tags'] = self.selected_tags

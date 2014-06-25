@@ -15,15 +15,16 @@
             {% for tag in non_removeable_tags %}
                 <button type="button" class="btn btn-primary btn-sm disabled">{{ tag }}</button>
             {% endfor %}
+
+            {% for tag in selected_tags %}
+                <button type="button" class="btn btn-primary btn-sm">{{ tag }}</button>
+            {% endfor %}
             
         </div>
         <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
-        <form method="get">
-            {{ tag_select_form }}
-
-            <input type="submit" value="Submit">
-
-        </form>
+            {% for tag in selectable_tags %}
+                <p>{{ tag }}</p>
+            {% endfor %}
         </div>
         </div>
     </div>
