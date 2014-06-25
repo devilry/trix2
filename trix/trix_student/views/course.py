@@ -1,42 +1,74 @@
-from django.views.generic import DetailView
+from django.views.generic import ListView
+from django import forms
+from django.shortcuts import get_object_or_404
+
 from trix.trix_core import models
 
-from django import forms
 
-class TagSelectForm(forms.Form):
-    tag_choice = forms.ModelChoiceField(queryset=None)
+# class TagSelectForm(forms.Form):
+#     tag_choice = forms.ModelChoiceField(queryset=None)
 
-    def __init__(self, *args, **kwargs):
-        choices = kwargs.pop('choices')
-        super(TagSelectForm, self).__init__(*args, **kwargs)
-        self.fields['tag_choice'].queryset = choices
+#     def __init__(self, *args, **kwargs):
+#         choices = kwargs.pop('choices')
+#         super(TagSelectForm, self).__init__(*args, **kwargs)
+#         self.fields['tag_choice'].queryset = choices
 
-class CourseDetailView(DetailView):
-    model = models.Course
-    pk_url_kwarg = 'course_id'
+
+class CourseDetailView(ListView):
     template_name = "trix_student/course.django.html"
+    # selected_tags = None
+    paginate_by = 20
+    context_object_name = 'assignment_list'
 
-    selected_tags = None
+    def get(self, request, course_id):
+        self.course_id = course_id
+        self.course = get_object_or_404(models.Course, id=self.course_id)
+        
+        self.all_available_assignments = models.Assignment.objects\
+            .filter_by_tag(self.course.course_tag)\
+            .filter_by_tag(self.course.active_period)
+
+        self.selected_tags = self._get_selected_tags()
+        self.selectable_tags = self._get_selectable_tags()
+
+        return super(CourseDetailView, self).get(request, course_id)
+
+    def get_queryset(self):
+        return self.all_available_assignments\
+            .filter(tags__tag__in=self.selected_tags)
+
+    def _get_selectable_tags(self):
+        already_selected_tags = [
+            self.course.course_tag.tag,
+            self.course.active_period.tag
+        ] + self.selected_tags
+
+        tags = models.Tag.objects\
+            .filter(assignment__in=self.all_available_assignments)\
+            .exclude(tag__in=already_selected_tags)\
+            .order_by('tag')\
+            .distinct()\
+            .values_list('tag', flat=True)
+        return tags
+
+    def _get_selected_tags(self):
+        tags_string = self.request.GET.get('tags', None)
+        tags = []
+        if tags_string:
+            tags = tags_string.split(',')
+            tags.sort()
+        return tags
+
+    def get_nonremovable_tags(self):
+        return [self.course.active_period]
 
     def get_context_data(self, **kwargs):
         context = super(CourseDetailView, self).get_context_data(**kwargs)
-        obj = self.get_object()
-        assignments = models.Assignment.objects.filter_by_tag(obj.course_tag)\
-            .filter_by_tag(obj.active_period)
-
-        
-        tags = models.Tag.objects.filter(assignment__in=assignments).distinct()
-        tags = tags.exclude(id__in=[x.id for x in (obj.course_tag, obj.active_period)])
-
-        tag_list_from_url = self.request.GET.get('tags', None)
-        if tag_list_from_url:
-            tag_list_from_url = tag_list_from_url.split(',')
 
         # Show the non removeable tags as disabled
-        context['non_removeable_tags'] = [obj.active_period]
+        # context['non_removeable_tags'] = [self.course.active_period]
 
-        context['assignment_list'] = assignments
-        context['tags'] = tags
-        context['tag_select_form'] = TagSelectForm(choices=tags)
+        context['selected_tags'] = self.selected_tags
+        context['selectable_tags'] = self.selectable_tags
+        # context['tag_select_form'] = TagSelectForm(choices=self.tags)
         return context
-
