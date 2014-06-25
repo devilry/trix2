@@ -24,27 +24,16 @@ class CourseDetailView(DetailView):
         assignments = models.Assignment.objects.filter_by_tag(obj.course_tag)\
             .filter_by_tag(obj.active_period)
 
+        
         tags = models.Tag.objects.filter(assignment__in=assignments).distinct()
         tags = tags.exclude(id__in=[x.id for x in (obj.course_tag, obj.active_period)])
 
-        context['non_removeable_tags'] = [obj.active_period, obj.course_tag]
+        tag_list_from_url = self.request.GET.get('tags', None)
+        if tag_list_from_url:
+            tag_list_from_url = tag_list_from_url.split(',')
 
-        tag_query_list = self.request.GET.get('locked_tags', None)
-        context['locked_tags'] = []
-        if tag_query_list:
-            for tag in tag_query_list:
-                context['locked_tags'].append(models.Tag.objects.get(id=int(tag)))
-
-        tag_param = self.request.GET.get('tag_choice', None)
-        if tag_param:
-            selected_tag = models.Tag.objects.get(id=int(tag_param))
-            context['locked_tags'].append(selected_tag)
-            context['assignment_list'] = assignments.filter_by_tag(selected_tag)
-
-        context['locked_tags'] = list(set(context['locked_tags']))
-     
-        for tag in context['locked_tags']:
-            assignments = assignments.filter_by_tag(tag)
+        # Show the non removeable tags as disabled
+        context['non_removeable_tags'] = [obj.active_period]
 
         context['assignment_list'] = assignments
         context['tags'] = tags
