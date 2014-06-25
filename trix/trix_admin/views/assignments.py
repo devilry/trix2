@@ -7,6 +7,7 @@ from django_cradmin.viewhelpers import update
 from django_cradmin.viewhelpers import delete
 from django_cradmin import crapp
 from crispy_forms import layout
+from django_cradmin.acemarkdown.widgets import AceMarkdownWidget
 
 from trix.trix_core import models as trix_models
 
@@ -93,6 +94,8 @@ class ProductCreateUpdateMixin(object):
     def get_form(self, *args, **kwargs):
         form = super(ProductCreateUpdateMixin, self).get_form(*args, **kwargs)
         form.fields['tags'] = ManyToManyTagInputField()
+        form.fields['text'].widget = AceMarkdownWidget()
+        form.fields['solution'].widget = AceMarkdownWidget()
         return form
 
 
