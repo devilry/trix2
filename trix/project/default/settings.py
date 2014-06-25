@@ -39,7 +39,7 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
     'django.contrib.admin',
     'south',
-    'debug_toolbar',
+    'django_extensions',
     'crispy_forms',
     'django_cradmin',
     'trix.trix_core',

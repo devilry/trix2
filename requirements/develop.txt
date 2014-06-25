@@ -14,7 +14,6 @@ django_dbdev==0.9.1
 sh==1.09
 
 # Better Django shell and other utils for development
-django-extensions==1.3.6
 ipython==2.0.0
 
 # Needed for django-extentions
