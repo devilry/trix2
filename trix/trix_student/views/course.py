@@ -30,12 +30,16 @@ class CourseDetailView(ListView):
 
         self.selected_tags = self._get_selected_tags()
         self.selectable_tags = self._get_selectable_tags()
+        self.non_removeable_tags = self.get_nonremovable_tags()
 
         return super(CourseDetailView, self).get(request, course_id)
 
     def get_queryset(self):
-        return self.all_available_assignments\
-            .filter(tags__tag__in=self.selected_tags)
+        assignments = self.all_available_assignments
+        if self.selected_tags:
+            assignments = self.all_available_assignments\
+                .filter(tags__tag__in=self.selected_tags)
+        return assignments
 
     def _get_selectable_tags(self):
         already_selected_tags = [
@@ -66,8 +70,8 @@ class CourseDetailView(ListView):
         context = super(CourseDetailView, self).get_context_data(**kwargs)
 
         # Show the non removeable tags as disabled
-        # context['non_removeable_tags'] = [self.course.active_period]
-
+        context['non_removeable_tags'] = [self.course.active_period]
+        context['object'] = self.course
         context['selected_tags'] = self.selected_tags
         context['selectable_tags'] = self.selectable_tags
         # context['tag_select_form'] = TagSelectForm(choices=self.tags)
