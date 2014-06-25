@@ -40,7 +40,6 @@ class TagsColumn(objecttable.PlainTextColumn):
         return ', '.join(tag.tag for tag in assignment.tags.all())
 
 
-
 class ProductListView(objecttable.ObjectTableView):
     model = trix_models.Assignment
     columns = [
@@ -60,11 +59,13 @@ class ProductListView(objecttable.ObjectTableView):
         ]
 
 
-
 class ManyToManyTagInputField(forms.CharField):
 
     def prepare_value(self, value):
-        return trix_models.Tag.objects.filter(id__in=value).to_unicode()
+        if value:
+            return trix_models.Tag.objects.filter(id__in=value).to_unicode()
+        else:
+            return ''
 
     def to_python(self, value):
         tags = []
@@ -72,7 +73,6 @@ class ManyToManyTagInputField(forms.CharField):
             tag = trix_models.Tag.objects.get_or_create(tagstring)
             tags.append(tag)
         return tags
-
 
 
 class ProductCreateUpdateMixin(object):
@@ -84,9 +84,7 @@ class ProductCreateUpdateMixin(object):
     def get_field_layout(self):
         return [
             layout.Div('title', css_class="cradmin-focusfield cradmin-focusfield-lg"),
-            layout.Fieldset(_('Organize'),
-                'tags'
-            ),
+            layout.Fieldset(_('Organize'), 'tags'),
             layout.Div('text', css_class="cradmin-focusfield"),
             layout.Div('solution', css_class="cradmin-focusfield"),
 
@@ -109,6 +107,7 @@ class ProductUpdateView(ProductCreateUpdateMixin, update.UpdateView):
     View used to create edit existing products.
     """
 
+
 class ProductDeleteView(delete.DeleteView):
     """
     View used to delete existing products.
@@ -116,19 +115,22 @@ class ProductDeleteView(delete.DeleteView):
     model = trix_models.Assignment
 
 
-
 class App(crapp.App):
     appurls = [
-        crapp.Url(r'^$',
+        crapp.Url(
+            r'^$',
             ProductListView.as_view(),
             name=crapp.INDEXVIEW_NAME),
-        crapp.Url(r'^create$',
+        crapp.Url(
+            r'^create$',
             ProductCreateView.as_view(),
             name="create"),
-        crapp.Url(r'^edit/(?P<pk>\d+)$',
+        crapp.Url(
+            r'^edit/(?P<pk>\d+)$',
             ProductUpdateView.as_view(),
             name="edit"),
-        crapp.Url(r'^delete/(?P<pk>\d+)$',
+        crapp.Url(
+            r'^delete/(?P<pk>\d+)$',
             ProductDeleteView.as_view(),
             name="delete")
     ]
