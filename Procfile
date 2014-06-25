@@ -1,0 +1,1 @@
+web: gunicorn trix.project.production.wsgi
