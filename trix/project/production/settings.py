@@ -46,3 +46,43 @@ STATIC_URL = '/static/'
 #         'INDEX_NAME': 'documents',
 #     },
 # }
+
+
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': True,
+    'formatters': {
+        'verbose': {
+            'format': '[%(levelname)s %(asctime)s %(name)s %(pathname)s:%(lineno)s] %(message)s'
+        }
+    },
+    'filters': {
+        'require_debug_false': {
+            '()': 'django.utils.log.RequireDebugFalse'
+        }
+    },
+    'handlers': {
+        'stderr': {
+            'level': 'DEBUG',
+            'formatter': 'verbose',
+            'class': 'logging.StreamHandler'
+        }
+    },
+    'loggers': {
+        'django.request': {
+            'handlers': ['stderr'],
+            'level': 'INFO',
+            'propagate': False
+        },
+        'django.db': {
+            'handlers': ['stderr'],
+            'level': 'INFO',
+            'propagate': False
+        },
+        '': {
+            'handlers': ['stderr'],
+            'level': 'INFO',
+            'propagate': False
+        }
+    }
+}

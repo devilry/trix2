@@ -28,6 +28,7 @@ Next, create the heroku instance. We have configured everything for Heroku, so a
     $ heroku config:set DJANGOENV=production
     $ heroku config:set DJANGO_SETTINGS_MODULE=trix.project.settingsproxy
     $ git push heroku master
+    $ heroku ps:scale web=1
 
 
 .. note::
@@ -49,3 +50,5 @@ To create the Trix demo database, run::
     $ heroku run python manage.py syncdb --noinput
     $ heroku run python manage.py migrate --noinput
     $ heroku run python manage.py runscript trix.project.develop.dumps.dev.data
+
+
