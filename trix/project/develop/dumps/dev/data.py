@@ -134,8 +134,8 @@ def import_data():
     from trix.trix_core.models import User
 
     trix_core_user_1 = User()
-    trix_core_user_1.password = u'pbkdf2_sha256$12000$8E3thxv6QEIo$QVM2KstYCqHc3ty5fOON70GI0oi8q8Uz4cmry4DASAA='
-    trix_core_user_1.last_login = dateutil.parser.parse("2014-06-23T18:08:09.412929+00:00")
+    trix_core_user_1.password = u'pbkdf2_sha256$12000$DRSBx3dNfYSA$EaKWNg1n0xuGS7Ph6NFdokcKhiEsNW5hj3w6VArE5zw='
+    trix_core_user_1.last_login = dateutil.parser.parse("2014-06-25T19:55:18.528823+00:00")
     trix_core_user_1.is_active = True
     trix_core_user_1.is_admin = True
     trix_core_user_1.email = u'grandma@example.com'
@@ -174,6 +174,11 @@ def import_data():
     trix_core_tag_6.tag = u'uke1'
     trix_core_tag_6.category = u''
     trix_core_tag_6 = importer.save_or_locate(trix_core_tag_6)
+
+    trix_core_tag_7 = Tag()
+    trix_core_tag_7.tag = u'oblig1'
+    trix_core_tag_7.category = u''
+    trix_core_tag_7 = importer.save_or_locate(trix_core_tag_7)
 
     # Processing model: Course
 
@@ -233,6 +238,8 @@ def import_data():
     trix_core_assignment_4 = importer.save_or_locate(trix_core_assignment_4)
 
     trix_core_assignment_4.tags.add(trix_core_tag_1)
+    trix_core_assignment_4.tags.add(trix_core_tag_2)
+    trix_core_assignment_4.tags.add(trix_core_tag_7)
 
     trix_core_assignment_5 = Assignment()
     trix_core_assignment_5.title = u'Hello world'
