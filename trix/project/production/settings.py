@@ -14,6 +14,10 @@ TEMPLATE_DEBUG = DEBUG
 DATABASES = {}
 DATABASES['default'] = dj_database_url.config()
 
+INSTALLED_APPS += [
+    'gunicorn',
+]
+
 # Cache with https://addons.heroku.com/memcachedcloud
 # redis_url = urlparse.urlparse(os.environ.get('REDISCLOUD_URL'))
 # CACHES = {
