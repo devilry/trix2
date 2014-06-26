@@ -41,7 +41,7 @@ class TagsColumn(objecttable.PlainTextColumn):
         return ', '.join(tag.tag for tag in assignment.tags.all())
 
 
-class ProductListView(objecttable.ObjectTableView):
+class AssignmentListView(objecttable.ObjectTableView):
     model = trix_models.Assignment
     columns = [
         TitleColumn,
@@ -76,7 +76,7 @@ class ManyToManyTagInputField(forms.CharField):
         return tags
 
 
-class ProductCreateUpdateMixin(object):
+class AssignmentCreateUpdateMixin(object):
     model = trix_models.Assignment
 
     # def get_preview_url(self):
@@ -92,28 +92,33 @@ class ProductCreateUpdateMixin(object):
         ]
 
     def get_form(self, *args, **kwargs):
-        form = super(ProductCreateUpdateMixin, self).get_form(*args, **kwargs)
-        form.fields['tags'] = ManyToManyTagInputField()
+        form = super(AssignmentCreateUpdateMixin, self).get_form(*args, **kwargs)
+        form.fields['tags'] = ManyToManyTagInputField(required=False)
         form.fields['text'].widget = AceMarkdownWidget()
         form.fields['solution'].widget = AceMarkdownWidget()
         return form
 
-
-class ProductCreateView(ProductCreateUpdateMixin, create.CreateView):
-    """
-    View used to create new products.
-    """
-
-
-class ProductUpdateView(ProductCreateUpdateMixin, update.UpdateView):
-    """
-    View used to create edit existing products.
-    """
+    def form_saved(self, assignment):
+        course = self.request.cradmin_role
+        if not assignment.tags.filter(tag=course.course_tag).exists():
+            assignment.tags.add(course.course_tag)
 
 
-class ProductDeleteView(delete.DeleteView):
+class AssignmentCreateView(AssignmentCreateUpdateMixin, create.CreateView):
     """
-    View used to delete existing products.
+    View used to create new assignments.
+    """
+
+
+class AssignmentUpdateView(AssignmentCreateUpdateMixin, update.UpdateView):
+    """
+    View used to create edit existing assignments.
+    """
+
+
+class AssignmentDeleteView(delete.DeleteView):
+    """
+    View used to delete existing assignments.
     """
     model = trix_models.Assignment
 
@@ -122,18 +127,18 @@ class App(crapp.App):
     appurls = [
         crapp.Url(
             r'^$',
-            ProductListView.as_view(),
+            AssignmentListView.as_view(),
             name=crapp.INDEXVIEW_NAME),
         crapp.Url(
             r'^create$',
-            ProductCreateView.as_view(),
+            AssignmentCreateView.as_view(),
             name="create"),
         crapp.Url(
             r'^edit/(?P<pk>\d+)$',
-            ProductUpdateView.as_view(),
+            AssignmentUpdateView.as_view(),
             name="edit"),
         crapp.Url(
             r'^delete/(?P<pk>\d+)$',
-            ProductDeleteView.as_view(),
+            AssignmentDeleteView.as_view(),
             name="delete")
     ]

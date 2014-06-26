@@ -151,7 +151,6 @@ class Tag(models.Model):
     def __unicode__(self):
         return self.tag
 
-
     @classmethod
     def normalize_tag(cls, tag):
         """
@@ -165,9 +164,12 @@ class Tag(models.Model):
 
     @classmethod
     def split_commaseparated_tags(cls, commaseparatedtags):
-        return [
-            cls.normalize_tag(tagstring)
-            for tagstring in commaseparatedtags.split(',')]
+        if commaseparatedtags.strip() == '':
+            return []
+        else:
+            return [
+                cls.normalize_tag(tagstring)
+                for tagstring in commaseparatedtags.split(',')]
 
 
 class Course(models.Model):
