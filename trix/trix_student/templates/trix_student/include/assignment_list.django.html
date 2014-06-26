@@ -2,13 +2,17 @@
     <div class="container">
         <ol>
         {% for assignment in assignment_list %}
-            <li>
+
+            <section class="assignment">
                 <h2>{{ assignment }}</h2>
-                <ul>
-                    <li><p>{{ assignment.text }}</p></li>
-                    <li><p>{{ assignment.solution }}</p></li>
-                </ul>
-            </li>
+                <section class="assignment-text">
+                    <p>{{ assignment.text }}</p>
+                </section>
+                <section class="assignment-solution">
+                    <p>{{ assignment.solution }}</p>
+                </section>
+            </section>
+
         {% endfor %}
         </ol>
     </div>
