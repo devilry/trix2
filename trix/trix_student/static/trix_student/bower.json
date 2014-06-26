@@ -1,16 +1,10 @@
 {
-  "name": "django_cradmin",
+  "name": "trix_student",
   "version": "0.0.0",
-  "license": "MIT",
   "private": true,
-  "ignore": [
-    "**/.*",
-    "node_modules",
-    "bower_components",
-    "test",
-    "tests"
-  ],
-  "dependencies": {
+  "devDependencies": {
+    "angular": "~1.2",
+    "angular-mocks": "~1.2",
     "fontawesome": "~4.1.0",
     "bootstrap": "~3.1.1"
   }
