@@ -135,7 +135,7 @@ def import_data():
 
     trix_core_user_1 = User()
     trix_core_user_1.password = u'pbkdf2_sha256$12000$EELVoDwGDuAC$wNBzI8R5xihfeL3OoldwQ3coC/9VOUuL5nyhbAeQHR4='
-    trix_core_user_1.last_login = dateutil.parser.parse("2014-06-26T18:27:57.410343+00:00")
+    trix_core_user_1.last_login = dateutil.parser.parse("2014-06-26T23:20:06.395241+00:00")
     trix_core_user_1.is_active = True
     trix_core_user_1.is_admin = True
     trix_core_user_1.email = u'grandma@example.com'
@@ -151,7 +151,7 @@ def import_data():
     trix_core_tag_1 = importer.save_or_locate(trix_core_tag_1)
 
     trix_core_tag_2 = Tag()
-    trix_core_tag_2.tag = u'var2014'
+    trix_core_tag_2.tag = u'v\xe5r2014'
     trix_core_tag_2.category = u'p'
     trix_core_tag_2 = importer.save_or_locate(trix_core_tag_2)
 
@@ -184,6 +184,11 @@ def import_data():
     trix_core_tag_8.tag = u'uke2'
     trix_core_tag_8.category = u''
     trix_core_tag_8 = importer.save_or_locate(trix_core_tag_8)
+
+    trix_core_tag_9 = Tag()
+    trix_core_tag_9.tag = u'oblig2'
+    trix_core_tag_9.category = u''
+    trix_core_tag_9 = importer.save_or_locate(trix_core_tag_9)
 
     # Processing model: Course
 
@@ -223,7 +228,7 @@ def import_data():
     trix_core_assignment_2 = Assignment()
     trix_core_assignment_2.title = u'Finn fem feil'
     trix_core_assignment_2.text = u'``` java\r\nclass Utskrift {\r\n    public stitac void main(String args) (\r\n        System.out.println("Beethoven skrev Skjebnesymfonien")\r\n        System.out.println("og \xe5tte andre symfonier.);\r\n    }\r\n}\r\n```'
-    trix_core_assignment_2.solution = u'N\xf8kkelordet "static" er stavet feil.\r\n\r\nDet mangler hakeparenteser ("[]") etter "String" p\xe5 linje 2.\r\nDenne feilen oppdages ikke av kompilatoren, men av kj\xf8resystemet\r\nfordi det er lov \xe5 lage metoder uten "[]" der, bare ikke lov\r\n\xe5 bruke de som hoved-main-metoden n\xe5r man kj\xf8rer et program.\r\nKj\xf8resystemet gir ofte litt mer uventede feilmeldinger enn\r\nkompilatoren, men disse vil du ogs\xe5 etter hvert l\xe6re deg \xe5 kjenne\r\nigjen.  I dette tilfellet f\xe5r vi f\xf8lgende feilmelding n\xe5r vi\r\npr\xf8ver \xe5 kj\xf8re programmet:\r\n\r\n```\r\njava.lang.NoSuchMethodError: main\r\nException in thread "main"\r\n```\r\n\r\nSom vi ser s\xe5 betyr feilmeldingen at kj\xf8resystemmet ikke fant\r\nnoen (riktig skrevet) main-metode.\r\n\r\nDet st\xe5r vanlig parentes i stedet for kr\xf8llparentes p\xe5 slutten\r\nav linje 2.\r\n\r\nDet mangler semikolon p\xe5 slutten av linje 3.\r\n\r\nAvsluttende anf\xf8rselstegn mangler p\xe5 linje 4.'
+    trix_core_assignment_2.solution = u'N\xf8kkelordet "static" er stavet feil.\r\n\r\nDet mangler hakeparenteser ("[]") etter "String" p\xe5 linje 2. Denne feilen oppdages ikke av kompilatoren, men av kj\xf8resystemet fordi det er lov \xe5 lage metoder uten "[]" der, bare ikke lov \xe5 bruke de som hoved-main-metoden n\xe5r man kj\xf8rer et program. Kj\xf8resystemet gir ofte litt mer uventede feilmeldinger enn kompilatoren, men disse vil du ogs\xe5 etter hvert l\xe6re deg \xe5 kjenne igjen.  I dette tilfellet f\xe5r vi f\xf8lgende feilmelding n\xe5r vi pr\xf8ver \xe5 kj\xf8re programmet: \r\n```\r\njava.lang.NoSuchMethodError: main\r\nException in thread "main"\r\n```\r\n\r\nSom vi ser s\xe5 betyr feilmeldingen at kj\xf8resystemmet ikke fant noen (riktig skrevet) main-metode. Det st\xe5r vanlig parentes i stedet for kr\xf8llparentes p\xe5 slutten av linje 2.\r\n\r\nDet mangler semikolon p\xe5 slutten av linje 3.\r\n\r\nAvsluttende anf\xf8rselstegn mangler p\xe5 linje 4.'
     trix_core_assignment_2 = importer.save_or_locate(trix_core_assignment_2)
 
     trix_core_assignment_2.tags.add(trix_core_tag_1)
@@ -236,6 +241,7 @@ def import_data():
     trix_core_assignment_3 = importer.save_or_locate(trix_core_assignment_3)
 
     trix_core_assignment_3.tags.add(trix_core_tag_1)
+    trix_core_assignment_3.tags.add(trix_core_tag_9)
 
     trix_core_assignment_4 = Assignment()
     trix_core_assignment_4.title = u'Utskrift og sum av oddetalls-array:'
