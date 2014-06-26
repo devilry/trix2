@@ -19,7 +19,6 @@ module.exports = (grunt) ->
             expand: true
             flatten: true
             src: [
-              'bower_components/jquery/dist/jquery.min.js'
               'bower_components/fontawesome/fonts/FontAwesome.otf',
               'bower_components/fontawesome/fonts/fontawesome-webfont.eot',
               'bower_components/fontawesome/fonts/fontawesome-webfont.svg',
