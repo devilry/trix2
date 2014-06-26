@@ -1,0 +1,24 @@
+{% extends "trix_student/base.django.html" %}
+{% load crispy_forms_tags %}
+{% load i18n %}
+
+{% block title %}{% trans "Trix login" %}{% endblock title %}
+
+{% block body %}
+
+    <div class="container">
+        <div class="page-header">
+            <h1>Logg inn</h1>
+        </div>
+    </div>
+
+    <div class="container">
+        {% crispy form form.helper %}
+        {% comment %}
+        <p class="loginregistermeta">
+            <a href="{% url 'trafo-password_reset' %}">Glemt passordet?</a>
+            Har du ikke en bruker? <a href="{% url 'trafo-register' %}">Registrer deg</a>.
+        </p>
+        {% endcomment %}
+    </div>
+{% endblock %}
