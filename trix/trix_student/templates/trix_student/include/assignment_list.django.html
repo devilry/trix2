@@ -3,6 +3,13 @@
     {% for assignment in assignment_list %}
         <section class="assignment">
             <h2>{{ assignment }}</h2>
+            <div class="assignment-tags">
+                {% for tag in assignment.tags.all %}
+                    <button class="btn btn-default" disabled>
+                        {{ tag.tag }}
+                    </button>
+                {% endfor %}
+            </div>
             <section class="assignment-text">
                 <p>{{ assignment.text }}</p>
             </section>
