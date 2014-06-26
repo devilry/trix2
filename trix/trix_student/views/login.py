@@ -12,7 +12,7 @@ from django.core.urlresolvers import reverse
 
 class TrixAuthenticationForm(AuthenticationForm):
     username = forms.CharField(max_length=254,
-        label=_('Email or username'))
+        label=_('Email'))
 
     def __init__(self, *args, **kwargs):
         super(TrixAuthenticationForm, self).__init__(*args, **kwargs)

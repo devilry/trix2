@@ -5,15 +5,15 @@
 {% block title %}{% trans "Assignments" %}{% endblock title %}
 
 {% block body %}
-    <div class="container">
-        <div class="page-header">
+    <div class="page-header">
+        <div class="container">
             <h1>{{ object.course_tag }} <small>{{ object.description }}</small></h1>
         </div>
     </div>
 
-    <div id="assignments-taggingbox" class="container">
+    <div class="container">
         <div class="row">
-            <div class="col-sm-3 col-sm-push-9">
+            <div id="assignments-taggingbox" class="col-sm-3 col-sm-push-9 col-md-3 col-md-push-9">
                 {% if selected_tags %}
                     <div ng-controller="RemoveTagCtrl">
                         <h3>{% trans "Selected tags" %}:</h3>
@@ -42,7 +42,7 @@
                     </form>
                 {% endif %}
             </div>
-            <div class="col-sm-9 col-sm-pull-3">
+            <div class="col-sm-9 col-sm-pull-3 col-md-9 col-md-pull-3">
                 {% for assignment in assignment_list %}
                     <section class="trix-assignment">
                         <h2>{{ assignment }}</h2>
@@ -74,6 +74,4 @@
         </div>
     </div>
 
-
-    
 {% endblock body %}

@@ -1,0 +1,56 @@
+
+
+.trix-assignment {
+    margin-bottom: 70px;
+    padding-top: 70px;
+    border-top: 1px solid #eee;
+
+    &:first-child {
+        border-top: none;
+        padding-top: 0;
+    }
+
+    &>h2 {
+        margin-top: 0;
+        padding-top: 0;
+    }
+
+    .trix-assignmenttext {
+        margin-top: 40px;
+    }
+
+    .trix-assignmentsolution {
+        margin-top: 40px;
+    }
+}
+
+
+#assignments-taggingbox {
+    *:first-child h3 {
+        margin-top: 0;
+    }
+    h3 {
+        margin-top: 30px;
+        font-size: 18px;
+        padding-bottom: 6px;
+        border-bottom: 1px solid #eee;
+    }
+    select {
+        display: block;
+        width: 100%;
+    }
+}
+
+.trix-markdownarticle {
+    // font-family: @font-family-serif;
+    font-size: @trix-article-font-size;
+    line-height: (@trix-article-font-size * 1.8);
+
+    p {
+        padding-bottom: @trix-article-font-size * 1.8;
+        margin: 0;
+        &:last-child {
+            padding-bottom: 0;
+        }
+    }
+}
