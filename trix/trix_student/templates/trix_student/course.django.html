@@ -1,5 +1,7 @@
 {% extends "trix_student/base.django.html" %}
 {% load i18n %}
+{% load trix_core_tags %}
+
 {% block title %}{% trans "Assignments" %}{% endblock title %}
 
 {% block body %}
@@ -11,38 +13,67 @@
 
     <div id="assignments-taggingbox" class="container">
         <div class="row">
-            <div class="col-sm-3">
-                <form ng-controller="AddTagCtrl">
-                    <h2>{% trans "Add tags" %}</h2>
-                    <select ng-model="tagToAdd" ng-change="addTag()">
-                        <option value="" selected>-- {% trans "Select a tag" %} --</option>
-                        {% for tag in selectable_tags %}
-                            <option value="{{ tag }}">{{ tag }}</option>
-                        {% endfor %}
-                    </select>
-                </form>
-            </div>
-            {% if selected_tags %}
-                <div class="col-sm-9 text-right" ng-controller="RemoveTagCtrl">
-                    <h2>{% trans "Selected tags (click to remove)" %}</h2>
-                    {# {% for tag in non_removeable_tags %} #}
-                        {# <button type="button" class="btn btn-primary btn-sm disabled">{{ tag }}</button> #}
-                    {# {% endfor %} #}
+            <div class="col-sm-3 col-sm-push-9">
+                {% if selected_tags %}
+                    <div ng-controller="RemoveTagCtrl">
+                        <h3>{% trans "Selected tags" %}:</h3>
+                        {# {% for tag in non_removeable_tags %} #}
+                            {# <button type="button" class="btn btn-primary btn-sm disabled">{{ tag }}</button> #}
+                        {# {% endfor %} #}
 
-                    {% for tag in selected_tags %}
-                        <button type="button" class="btn btn-primary btn-sm"
-                                ng-click="removeTag('{{ tag }}')">
-                            {{ tag }}
-                            <span class="fa fa-times"></span>
-                        </button>
-                    {% endfor %}
-                </div>
-            {% endif %}
+                        {% for tag in selected_tags %}
+                            <button type="button" class="btn btn-primary btn-sm"
+                                    ng-click="removeTag('{{ tag }}')">
+                                {{ tag }}
+                                <span class="fa fa-times"></span>
+                            </button>
+                        {% endfor %}
+                    </div>
+                {% endif %}
+                {% if selectable_tags %}
+                    <form ng-controller="AddTagCtrl">
+                        <h3>{% trans "Filter" %}:</h3>
+                        <select ng-model="tagToAdd" ng-change="addTag()">
+                            <option value="" selected>-- {% trans "Select a tag" %} --</option>
+                            {% for tag in selectable_tags %}
+                                <option value="{{ tag }}">{{ tag }}</option>
+                            {% endfor %}
+                        </select>
+                    </form>
+                {% endif %}
+            </div>
+            <div class="col-sm-9 col-sm-pull-3">
+                {% for assignment in assignment_list %}
+                    <section class="trix-assignment">
+                        <h2>{{ assignment }}</h2>
+                        <div class="assignment-tags">
+                            {% for tag in assignment.tags.all %}
+                                <button class="btn btn-default" disabled>
+                                    {{ tag.tag }}
+                                </button>
+                            {% endfor %}
+                        </div>
+                        <section class="trix-assignmenttext  trix-markdownarticle">
+                            {% trix_assignment_markdown assignment.text %}
+                        </section>
+                        {% if assignment.solution %}
+                            <section class="trix-assignmentsolution">
+                                <h3 class="trix-expand-header">
+                                    {% trans "Solution" %}
+                                    <span class="fa fa-chevron-right"></span>
+                                </h3>
+                                <section class="trix-markdownarticle"> {# TODO: Angularjs expand/collapse #}
+                                    {% trix_assignment_markdown assignment.solution %}
+                                </section>
+                            </section>
+                        {% endif %}
+                    </section>
+                {% endfor %}
+                {% include "trix_student/include/pager.django.html" %}
+            </div>
         </div>
     </div>
 
-    {% include "trix_student/include/assignment_list.django.html" %}
 
-    {% include "trix_student/include/pager.django.html" %}
     
 {% endblock body %}
