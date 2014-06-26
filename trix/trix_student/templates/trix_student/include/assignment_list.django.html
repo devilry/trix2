@@ -1,18 +1,14 @@
- {% load i18n %}
-    <div class="container">
-        <ol>
-        {% for assignment in assignment_list %}
-
-            <section class="assignment">
-                <h2>{{ assignment }}</h2>
-                <section class="assignment-text">
-                    <p>{{ assignment.text }}</p>
-                </section>
-                <section class="assignment-solution">
-                    <p>{{ assignment.solution }}</p>
-                </section>
+{% load i18n %}
+<div class="container">
+    {% for assignment in assignment_list %}
+        <section class="assignment">
+            <h2>{{ assignment }}</h2>
+            <section class="assignment-text">
+                <p>{{ assignment.text }}</p>
             </section>
-
-        {% endfor %}
-        </ol>
-    </div>
+            <section class="assignment-solution">
+                <p>{{ assignment.solution }}</p>
+            </section>
+        </section>
+    {% endfor %}
+</div>
