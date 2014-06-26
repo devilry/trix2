@@ -1,5 +1,5 @@
 from django.views.generic import ListView
-from django import forms
+# from django import forms
 from django.shortcuts import get_object_or_404
 
 from trix.trix_core import models
@@ -16,7 +16,6 @@ from trix.trix_core import models
 
 class CourseDetailView(ListView):
     template_name = "trix_student/course.django.html"
-    # selected_tags = None
     paginate_by = 20
     context_object_name = 'assignment_list'
 
@@ -37,8 +36,8 @@ class CourseDetailView(ListView):
     def get_queryset(self):
         assignments = self.all_available_assignments
         if self.selected_tags:
-            assignments = self.all_available_assignments\
-                .filter(tags__tag__in=self.selected_tags)
+            for tagstring in self.selected_tags:
+                assignments = assignments.filter(tags__tag=tagstring)
         return assignments
 
     def _get_selectable_tags(self):
