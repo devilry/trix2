@@ -81,17 +81,17 @@ LOGGING = {
     'loggers': {
         'django.request': {
             'handlers': ['stderr'],
-            'level': 'INFO',
+            'level': 'DEBUG',
             'propagate': False
         },
         'django.db': {
             'handlers': ['stderr'],
-            'level': 'INFO',
+            'level': 'DEBUG',
             'propagate': False
         },
         '': {
             'handlers': ['stderr'],
-            'level': 'INFO',
+            'level': 'DEBUG',
             'propagate': False
         }
     }
