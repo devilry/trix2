@@ -16,7 +16,7 @@
 # Also, don't forget to add the necessary Django imports.
 #
 # This file was generated with the following command:
-# manage.py dumpscript trix_core
+# manage.py dumpscript trix_core --traceback
 #
 # to restore it, run
 # manage.py runscript module_name.this_script_name
@@ -269,5 +269,3 @@ def import_data():
     # Processing model: Permalink
 
     from trix.trix_core.models import Permalink
-
-
