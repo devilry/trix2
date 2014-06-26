@@ -1,0 +1,14 @@
+{% extends "trix_student/base.django.html" %}
+{% load crispy_forms_tags %}
+
+{% block body %}
+    <div class="container">
+        <div class="page-header">
+            <h1>{{ title }}</h1>
+        </div>
+    </div>
+    <div class="container">
+        <p>Du er nå logget ut. <a href="{% url 'trix_student_dashboard' %}">Gå til forsiden</a>.</p>
+    </div>
+    
+{% endblock %}
