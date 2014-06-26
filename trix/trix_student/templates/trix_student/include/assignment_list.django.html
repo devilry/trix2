@@ -1,7 +1,9 @@
 {% load i18n %}
+{% load trix_core_tags %}
+
 <div class="container">
     {% for assignment in assignment_list %}
-        <section class="assignment">
+        <section class="trix-assignment">
             <h2>{{ assignment }}</h2>
             <div class="assignment-tags">
                 {% for tag in assignment.tags.all %}
@@ -10,12 +12,20 @@
                     </button>
                 {% endfor %}
             </div>
-            <section class="assignment-text">
-                <p>{{ assignment.text }}</p>
+            <section class="trix-assignmenttext  trix-markdownarticle">
+                {% trix_assignment_markdown assignment.text %}
             </section>
-            <section class="assignment-solution">
-                <p>{{ assignment.solution }}</p>
-            </section>
+            {% if assignment.solution %}
+                <section class="trix-assignmentsolution">
+                    <h3 class="trix-expand-header">
+                        {% trans "Solution" %}
+                        <span class="fa fa-chevron-right"></span>
+                    </h3>
+                    <section class="trix-markdownarticle"> {# TODO: Angularjs expand/collapse #}
+                        {% trix_assignment_markdown assignment.solution %}
+                    </section>
+                </section>
+            {% endif %}
         </section>
     {% endfor %}
 </div>
