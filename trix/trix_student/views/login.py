@@ -7,6 +7,7 @@ from django.contrib.auth import get_user_model
 from django import forms
 from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Submit
+from django.core.urlresolvers import reverse
 
 
 class TrixAuthenticationForm(AuthenticationForm):
@@ -17,12 +18,12 @@ class TrixAuthenticationForm(AuthenticationForm):
         super(TrixAuthenticationForm, self).__init__(*args, **kwargs)
         self.helper = FormHelper()
         self.helper.add_input(Submit('login', _('Log in')))
-
+        self.helper.form_action = reverse('trix-login')
 
     def clean(self):
         username = self.cleaned_data.get('username')
         password = self.cleaned_data.get('password')
-        print "hei"
+
         if username and password:
             if '@' in username:
                 email = username
@@ -32,11 +33,11 @@ class TrixAuthenticationForm(AuthenticationForm):
                 except User.DoesNotExist:
                     pass
                 else:
-                    username = user.username
-            self.user_cache = authenticate(username=username, password=password)
+                    username = user.email
+            self.user_cache = authenticate(email=username, password=password)
             if self.user_cache is None:
                 raise forms.ValidationError(
-                    _("Please enter a correct email/username and password. Note that both fields are be case-sensitive."))
+                    _("Please enter a correct email and password. Note that both fields are be case-sensitive."))
             elif not self.user_cache.is_active:
                 raise forms.ValidationError(self.error_messages['inactive'])
         self.check_for_test_cookie()
