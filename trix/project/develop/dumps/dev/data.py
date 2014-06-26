@@ -134,8 +134,8 @@ def import_data():
     from trix.trix_core.models import User
 
     trix_core_user_1 = User()
-    trix_core_user_1.password = u'pbkdf2_sha256$12000$DRSBx3dNfYSA$EaKWNg1n0xuGS7Ph6NFdokcKhiEsNW5hj3w6VArE5zw='
-    trix_core_user_1.last_login = dateutil.parser.parse("2014-06-25T19:55:18.528823+00:00")
+    trix_core_user_1.password = u'pbkdf2_sha256$12000$EELVoDwGDuAC$wNBzI8R5xihfeL3OoldwQ3coC/9VOUuL5nyhbAeQHR4='
+    trix_core_user_1.last_login = dateutil.parser.parse("2014-06-26T18:27:57.410343+00:00")
     trix_core_user_1.is_active = True
     trix_core_user_1.is_admin = True
     trix_core_user_1.email = u'grandma@example.com'
@@ -180,6 +180,11 @@ def import_data():
     trix_core_tag_7.category = u''
     trix_core_tag_7 = importer.save_or_locate(trix_core_tag_7)
 
+    trix_core_tag_8 = Tag()
+    trix_core_tag_8.tag = u'uke2'
+    trix_core_tag_8.category = u''
+    trix_core_tag_8 = importer.save_or_locate(trix_core_tag_8)
+
     # Processing model: Course
 
     from trix.trix_core.models import Course
@@ -207,17 +212,18 @@ def import_data():
     trix_core_assignment_1 = Assignment()
     trix_core_assignment_1.title = u'Hello World'
     trix_core_assignment_1.text = u'Print hello world in the terminal.'
-    trix_core_assignment_1.solution = u'public class HelloWorld {\r\n    public static void main(String [] args) {\r\n        System.out.println("Hello World!");\r\n    }\r\n}'
+    trix_core_assignment_1.solution = u'``` java\r\npublic class HelloWorld {\r\n    public static void main(String [] args) {\r\n        System.out.println("Hello World!");\r\n    }\r\n}\r\n```'
     trix_core_assignment_1 = importer.save_or_locate(trix_core_assignment_1)
 
     trix_core_assignment_1.tags.add(trix_core_tag_1)
     trix_core_assignment_1.tags.add(trix_core_tag_2)
     trix_core_assignment_1.tags.add(trix_core_tag_6)
+    trix_core_assignment_1.tags.add(trix_core_tag_7)
 
     trix_core_assignment_2 = Assignment()
     trix_core_assignment_2.title = u'Finn fem feil'
-    trix_core_assignment_2.text = u'class Utskrift {\r\n    public stitac void main(String args) (\r\n        System.out.println("Beethoven skrev Skjebnesymfonien")\r\n        System.out.println("og \xe5tte andre symfonier.);\r\n    }\r\n}'
-    trix_core_assignment_2.solution = u'N\xf8kkelordet "static" er stavet feil.\r\n\r\nDet mangler hakeparenteser ("[]") etter "String" p\xe5 linje 2.\r\nDenne feilen oppdages ikke av kompilatoren, men av kj\xf8resystemet\r\nfordi det er lov \xe5 lage metoder uten "[]" der, bare ikke lov\r\n\xe5 bruke de som hoved-main-metoden n\xe5r man kj\xf8rer et program.\r\nKj\xf8resystemet gir ofte litt mer uventede feilmeldinger enn\r\nkompilatoren, men disse vil du ogs\xe5 etter hvert l\xe6re deg \xe5 kjenne\r\nigjen.  I dette tilfellet f\xe5r vi f\xf8lgende feilmelding n\xe5r vi\r\npr\xf8ver \xe5 kj\xf8re programmet:\r\n\r\n        java.lang.NoSuchMethodError: main\r\n        Exception in thread "main"\r\n\r\n      Som vi ser s\xe5 betyr feilmeldingen at kj\xf8resystemmet ikke fant\r\n      noen (riktig skrevet) main-metode.\r\n\r\nDet st\xe5r vanlig parentes i stedet for kr\xf8llparentes p\xe5 slutten\r\nav linje 2.\r\n\r\nDet mangler semikolon p\xe5 slutten av linje 3.\r\n\r\nAvsluttende anf\xf8rselstegn mangler p\xe5 linje 4.'
+    trix_core_assignment_2.text = u'``` java\r\nclass Utskrift {\r\n    public stitac void main(String args) (\r\n        System.out.println("Beethoven skrev Skjebnesymfonien")\r\n        System.out.println("og \xe5tte andre symfonier.);\r\n    }\r\n}\r\n```'
+    trix_core_assignment_2.solution = u'N\xf8kkelordet "static" er stavet feil.\r\n\r\nDet mangler hakeparenteser ("[]") etter "String" p\xe5 linje 2.\r\nDenne feilen oppdages ikke av kompilatoren, men av kj\xf8resystemet\r\nfordi det er lov \xe5 lage metoder uten "[]" der, bare ikke lov\r\n\xe5 bruke de som hoved-main-metoden n\xe5r man kj\xf8rer et program.\r\nKj\xf8resystemet gir ofte litt mer uventede feilmeldinger enn\r\nkompilatoren, men disse vil du ogs\xe5 etter hvert l\xe6re deg \xe5 kjenne\r\nigjen.  I dette tilfellet f\xe5r vi f\xf8lgende feilmelding n\xe5r vi\r\npr\xf8ver \xe5 kj\xf8re programmet:\r\n\r\n```\r\njava.lang.NoSuchMethodError: main\r\nException in thread "main"\r\n```\r\n\r\nSom vi ser s\xe5 betyr feilmeldingen at kj\xf8resystemmet ikke fant\r\nnoen (riktig skrevet) main-metode.\r\n\r\nDet st\xe5r vanlig parentes i stedet for kr\xf8llparentes p\xe5 slutten\r\nav linje 2.\r\n\r\nDet mangler semikolon p\xe5 slutten av linje 3.\r\n\r\nAvsluttende anf\xf8rselstegn mangler p\xe5 linje 4.'
     trix_core_assignment_2 = importer.save_or_locate(trix_core_assignment_2)
 
     trix_core_assignment_2.tags.add(trix_core_tag_1)
@@ -226,7 +232,7 @@ def import_data():
     trix_core_assignment_3 = Assignment()
     trix_core_assignment_3.title = u'Sum (innlesning av tekst fra terminal)'
     trix_core_assignment_3.text = u'Lag et program som ber om og leser inn to heltall. Programmet skal deretter regne ut summen av de to tallene og skrive ut svaret.'
-    trix_core_assignment_3.solution = u'import java.util.*;\r\n\r\nclass Sum {\r\n    public static void main(String[] args) {\r\n        Scanner tast = new Scanner(System.in);\r\n\r\n        System.out.print("Oppgi verdien til x: ");\r\n        int x = tast.nextInt();\r\n        System.out.print("Oppgi verdien til y: ");\r\n        int y = tast.nextInt();\r\n\r\n        int sum = x + y;\r\n\r\n        System.out.println("Summen av x og y er: " + sum);\r\n    }\r\n}'
+    trix_core_assignment_3.solution = u'``` java\r\nimport java.util.*;\r\n\r\nclass Sum {\r\n    public static void main(String[] args) {\r\n        Scanner tast = new Scanner(System.in);\r\n\r\n        System.out.print("Oppgi verdien til x: ");\r\n        int x = tast.nextInt();\r\n        System.out.print("Oppgi verdien til y: ");\r\n        int y = tast.nextInt();\r\n\r\n        int sum = x + y;\r\n\r\n        System.out.println("Summen av x og y er: " + sum);\r\n    }\r\n}\r\n```'
     trix_core_assignment_3 = importer.save_or_locate(trix_core_assignment_3)
 
     trix_core_assignment_3.tags.add(trix_core_tag_1)
@@ -234,7 +240,7 @@ def import_data():
     trix_core_assignment_4 = Assignment()
     trix_core_assignment_4.title = u'Utskrift og sum av oddetalls-array:'
     trix_core_assignment_4.text = u'Skriv et program som inneholder en heltalls-array med f\xf8lgende elementer: 1, 3, 5, 7, 9, 11, 13, 15, 17, 19.  Programmet skal inneholde en l\xf8kke som skriver ut indeksen og verdien for alle elementene i arrayen.'
-    trix_core_assignment_4.solution = u'class Oddetall {\r\n  public static void main(String[] args) {\r\n    int[] oddetall = { 1, 3, 5, 7, 9, 11, 13, 15, 17, 19 };\r\n\r\n    for (int i = 0; i < oddetall.length; i++) {\r\n      System.out.println("oddetall[" + i + "] = " + oddetall[i]);\r\n    }\r\n  }\r\n}'
+    trix_core_assignment_4.solution = u'``` java\r\nclass Oddetall {\r\n  public static void main(String[] args) {\r\n    int[] oddetall = { 1, 3, 5, 7, 9, 11, 13, 15, 17, 19 };\r\n\r\n    for (int i = 0; i < oddetall.length; i++) {\r\n      System.out.println("oddetall[" + i + "] = " + oddetall[i]);\r\n    }\r\n  }\r\n}\r\n```'
     trix_core_assignment_4 = importer.save_or_locate(trix_core_assignment_4)
 
     trix_core_assignment_4.tags.add(trix_core_tag_1)
@@ -243,11 +249,22 @@ def import_data():
 
     trix_core_assignment_5 = Assignment()
     trix_core_assignment_5.title = u'Hello world'
-    trix_core_assignment_5.text = u'Make a Hello class'
-    trix_core_assignment_5.solution = u"class Hello:\r\n    def __call__(self, text):\r\n        return 'Hello, %s!' % text\r\n\r\n    def __str__(self):\r\n        return 'Hello, World!'\r\n\r\na = Hello()\r\nprint a('students')  # looks like a function call!\r\nprint a              # print str(a) -> a.__str__()"
+    trix_core_assignment_5.text = u'Make a Hello class.'
+    trix_core_assignment_5.solution = u"``` python\r\nclass Hello:\r\n    def __call__(self, text):\r\n        return 'Hello, %s!' % text\r\n\r\n    def __str__(self):\r\n        return 'Hello, World!'\r\n\r\na = Hello()\r\nprint a('students')  # looks like a function call!\r\nprint a              # print str(a) -> a.__str__()\r\n```"
     trix_core_assignment_5 = importer.save_or_locate(trix_core_assignment_5)
 
     trix_core_assignment_5.tags.add(trix_core_tag_5)
+
+    trix_core_assignment_6 = Assignment()
+    trix_core_assignment_6.title = u'Lek med datatyper'
+    trix_core_assignment_6.text = u'Pr\xf8v \xe5 lage et program som bruker ALLE disse datatypene:\r\n\r\n- int\r\n- float\r\n- String\r\n- double\r\n- boolean\r\n- char'
+    trix_core_assignment_6.solution = u''
+    trix_core_assignment_6 = importer.save_or_locate(trix_core_assignment_6)
+
+    trix_core_assignment_6.tags.add(trix_core_tag_1)
+    trix_core_assignment_6.tags.add(trix_core_tag_2)
+    trix_core_assignment_6.tags.add(trix_core_tag_7)
+    trix_core_assignment_6.tags.add(trix_core_tag_8)
 
     # Processing model: Permalink
 
