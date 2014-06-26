@@ -2,27 +2,28 @@ from django.utils.translation import ugettext_lazy as _
 from django_cradmin import crinstance, crmenu
 
 from trix.trix_core.models import Course
-from .views import dashboard
+# from .views import dashboard
 from .views import assignments
 
 
 class Menu(crmenu.Menu):
     def build_menu(self):
-        self.add(label=_('Dashboard'), url=self.appindex_url('dashboard'),
-            icon="home")
-        self.add(label=_('Assignments'), url=self.appindex_url('assignments'),
+        # self.add(label=_('Dashboard'), url=self.appindex_url('dashboard'),
+        #     icon="home")
+        self.add(
+            label=_('Assignments'),
+            url=self.appindex_url('assignments'),
             icon="database")
         
-
 
 class CrAdminInstance(crinstance.BaseCrAdminInstance):
     id = 'trix_courseadmin'
     menuclass = Menu
     roleclass = Course
-    rolefrontpage_appname = 'dashboard'
+    rolefrontpage_appname = 'assignments'
 
     apps = [
-        ('dashboard', dashboard.App),
+        # ('dashboard', dashboard.App),
         ('assignments', assignments.App)
     ]
 
