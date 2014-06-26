@@ -1,1 +1,1 @@
-web: gunicorn trix.project.production.wsgi --debug --log-level debug -b 0.0.0.0:\$PORT
+web: gunicorn trix.project.production.wsgi -b 0.0.0.0:\$PORT
