@@ -2,4 +2,7 @@
 Trix sysadmin documentation
 ###########################
 
-TODO
+.. toctree::
+   :maxdepth: 2
+
+   heroku

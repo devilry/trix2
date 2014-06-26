@@ -9,30 +9,35 @@
         </div>
     </div>
 
-    <div class="container">
+    <div id="assignments-taggingbox" class="container">
         <div class="row">
-        <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
-            {% for tag in non_removeable_tags %}
-                <button type="button" class="btn btn-primary btn-sm disabled">{{ tag }}</button>
-            {% endfor %}
+            <div class="col-sm-3">
+                <form ng-controller="AddTagCtrl">
+                    <h2>{% trans "Add tags" %}</h2>
+                    <select ng-model="tagToAdd" ng-change="addTag()">
+                        <option value="" selected>-- {% trans "Select a tag" %} --</option>
+                        {% for tag in selectable_tags %}
+                            <option value="{{ tag }}">{{ tag }}</option>
+                        {% endfor %}
+                    </select>
+                </form>
+            </div>
+            {% if selected_tags %}
+                <div class="col-sm-9 text-right" ng-controller="RemoveTagCtrl">
+                    <h2>{% trans "Selected tags (click to remove)" %}</h2>
+                    {# {% for tag in non_removeable_tags %} #}
+                        {# <button type="button" class="btn btn-primary btn-sm disabled">{{ tag }}</button> #}
+                    {# {% endfor %} #}
 
-            {% for tag in locked_tags %}
-                <a href="{% url 'trix_student_course' object.id %}" class="btn btn-sm btn-primary" role="button" type="submit">{{ tag }}</a>
-            {% endfor %}
-            
-        </div>
-        <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
-        <form method="get">
-            {{ tag_select_form }}
-            
-            {% for tag in locked_tags %}
-                <input type="hidden" name="locked_tags" value="{{ tag.id }}">
-            {% endfor %}
-
-            <input type="submit" value="Submit">
-
-        </form>
-        </div>
+                    {% for tag in selected_tags %}
+                        <button type="button" class="btn btn-primary btn-sm"
+                                ng-click="removeTag('{{ tag }}')">
+                            {{ tag }}
+                            <span class="fa fa-times"></span>
+                        </button>
+                    {% endfor %}
+                </div>
+            {% endif %}
         </div>
     </div>
 

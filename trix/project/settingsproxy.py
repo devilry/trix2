@@ -14,13 +14,13 @@ manage.py`` without anything extra during development.
 
 DJANGOENV = os.environ.get('DJANGOENV', 'develop')
 
-if DJANGOENV == 'develop': # Used for local development
+if DJANGOENV == 'develop':  # Used for local development
     from trix.project.develop.settings.develop import *
-elif DJANGOENV == 'test': # Used when running the Django tests locally
+elif DJANGOENV == 'test':  # Used when running the Django tests locally
     from trix.project.develop.settings.test import *
-elif DJANGOENV == 'production': # Used in production
+elif DJANGOENV == 'production':  # Used in production
     from trix.project.production.settings import *
-elif DJANGOENV == 'staging': # Used in staging (live test on a real server)
-    from trix.project.staging.settings import *
+# elif DJANGOENV == 'staging':  # Used in staging (live test on a real server)
+    # from trix.project.staging.settings import *
 else:
     raise ValueError('Invalid value for the DJANGOENV environment variable: {}'.format(DJANGOENV))

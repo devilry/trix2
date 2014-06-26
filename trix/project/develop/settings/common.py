@@ -10,8 +10,12 @@ ROOT_URLCONF = 'trix.project.develop.urls'
 
 INSTALLED_APPS = list(INSTALLED_APPS) + [
     'django_dbdev',
-    'django_extensions',
+    'debug_toolbar',
 ]
 
 
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+
+MIDDLEWARE_CLASSES += [
+    'debug_toolbar.middleware.DebugToolbarMiddleware',
+]

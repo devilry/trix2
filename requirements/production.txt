@@ -1,0 +1,10 @@
+-r common.txt
+
+gunicorn==0.15.0
+django-toolbelt
+
+# For search
+#pyelasticsearch==0.6.1
+
+# For Redis Cloud as cache backend
+django-redis-cache==0.11.1

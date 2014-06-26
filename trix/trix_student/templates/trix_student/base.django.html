@@ -2,7 +2,7 @@
 {% load i18n %}
 {% load static %}
 {% endspaceless %}<!DOCTYPE html>
-<html lang="en">
+<html lang="en" ng-app="trixStudent">
     <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -11,7 +11,7 @@
         <title>{% block title %}{% endblock title %} - {% trans "Trix" %}</title>
 
         {% block css %}
-            <link href='{% static "trix_student/dist/styles.css" %}' rel="stylesheet">
+            <link href='{% static "trix_student/dist/css/styles.css" %}' rel="stylesheet">
         {% endblock %}
 
     </head>
@@ -19,6 +19,9 @@
     <body>
         {% include "trix_student/include/header.django.html" %}
         {% block body %}{% endblock %}
-        {% include "trix_student/include/footer.django.html" %}
+
+        <script src="{% static 'trix_student/dist/vendor/js/angular.min.js' %}" type="text/javascript"></script>
+        <script src="{% static 'trix_student/dist/vendor/js/url.min.js' %}" type="text/javascript"></script>
+        <script src="{% static 'trix_student/dist/js/trix_student.min.js' %}" type="text/javascript"></script>
     </body>
 </html>
