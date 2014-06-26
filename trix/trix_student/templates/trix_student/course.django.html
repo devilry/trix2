@@ -22,7 +22,15 @@
             
         </div>
         <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+            <form>
+            <label>{% trans "Select tag" %}</label>
+                <select>
+                    {% for tag in selectable_tags %}
+                        <option value="{{ tag }}">{{ tag }}</option>
+                    {% endfor %}
 
+                </select>
+            </form>
         </div>
         </div>
     </div>

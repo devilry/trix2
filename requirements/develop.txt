@@ -17,7 +17,7 @@ sh==1.09
 ipython==2.0.0
 
 # Needed for django-extentions
-python-dateutil==2.2
+#python-dateutil==2.2
 
 # For mocking tests
 mock==1.0.1
