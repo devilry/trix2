@@ -4,6 +4,7 @@ Django==1.6.5
 django-crispy-forms==1.4.0
 python-dateutil==2.2
 Markdown==2.4
+pygments==1.6
 
 # TODO: Move cradmin to pypi
 -e git://github.com/appressoas/django_cradmin.git#egg=django_cradmin
