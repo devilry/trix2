@@ -61,12 +61,23 @@
                             {% trix_assignment_markdown assignment.text %}
                         </section>
                         {% if assignment.solution %}
-                            <section class="trix-assignmentsolution">
-                                <h3 class="trix-expand-header">
-                                    {% trans "Solution" %}
-                                    <span class="fa fa-chevron-right"></span>
-                                </h3>
-                                <section class="trix-markdownarticle"> {# TODO: Angularjs expand/collapse #}
+                            <section class="trix-assignmentsolution" ng-cloak
+                                    ng-controller="SolutionCtrl">
+                                <a class="btn btn-success" ng-click="solvedOnMyOwn()">
+                                    {% trans "Solved on my own" %}
+                                </a>
+                                <a class="btn btn-default" ng-click="solvedWithHelp()">
+                                    {% trans "Solved with help" %}
+                                </a>
+                                <a ng-click="isVisible = !isVisible" class="btn btn-default"
+                                        ng-class="{'active': isVisible}">
+                                    {% trans "See solution" %}
+                                    <span class="fa" ng-class="{
+                                        'fa-angle-right': !isVisible,
+                                        'fa-angle-down': isVisible
+                                    }"></span>
+                                </a>
+                                <section class="trix-markdownarticle" collapse="!isVisible">
                                     {% trix_assignment_markdown assignment.solution %}
                                 </section>
                             </section>

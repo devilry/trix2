@@ -29,3 +29,15 @@ angular.module('trixStudent.assignments.controllers', [])
       currentUrl.query.tags = tags
       $window.location.href = currentUrl.toString()
 ])
+
+.controller('SolutionCtrl', [
+  '$scope',
+  ($scope) ->
+    $scope.isVisible = false
+
+    $scope.solvedOnMyOwn = ->
+      alert('Coming soon')
+
+    $scope.solvedWithHelp = ->
+      alert('Coming soon')
+])

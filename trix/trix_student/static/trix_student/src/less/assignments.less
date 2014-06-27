@@ -5,9 +5,11 @@
     padding-top: 70px;
     border-top: 1px solid #eee;
 
-    &:first-child {
-        border-top: none;
-        padding-top: 0;
+    @media (min-width: @screen-sm-min) {
+        &:first-child {
+            border-top: none;
+            padding-top: 0;
+        }
     }
 
     &>h2 {
@@ -21,6 +23,10 @@
 
     .trix-assignmentsolution {
         margin-top: 40px;
+        .trix-markdownarticle {
+            background-color: #fff;
+            padding: 20px;
+        }
     }
 }
 
@@ -29,6 +35,7 @@
     *:first-child h3 {
         margin-top: 0;
     }
+
     h3 {
         margin-top: 30px;
         font-size: 18px;

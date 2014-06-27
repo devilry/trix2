@@ -7370,9 +7370,11 @@ nav#trix_header {
   padding-top: 70px;
   border-top: 1px solid #eee;
 }
-.trix-assignment:first-child {
-  border-top: none;
-  padding-top: 0;
+@media (min-width: 768px) {
+  .trix-assignment:first-child {
+    border-top: none;
+    padding-top: 0;
+  }
 }
 .trix-assignment > h2 {
   margin-top: 0;
@@ -7383,6 +7385,10 @@ nav#trix_header {
 }
 .trix-assignment .trix-assignmentsolution {
   margin-top: 40px;
+}
+.trix-assignment .trix-assignmentsolution .trix-markdownarticle {
+  background-color: #fff;
+  padding: 20px;
 }
 #assignments-taggingbox *:first-child h3 {
   margin-top: 0;

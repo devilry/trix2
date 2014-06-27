@@ -1,5 +1,5 @@
 (function() {
-  angular.module('trixStudent', ['trixStudent.assignments.controllers']);
+  angular.module('trixStudent', ['ui.bootstrap', 'trixStudent.assignments.controllers']);
 
 }).call(this);
 
@@ -32,6 +32,16 @@
         tags = tagsArray.join(',');
         currentUrl.query.tags = tags;
         return $window.location.href = currentUrl.toString();
+      };
+    }
+  ]).controller('SolutionCtrl', [
+    '$scope', function($scope) {
+      $scope.isVisible = false;
+      $scope.solvedOnMyOwn = function() {
+        return alert('Coming soon');
+      };
+      return $scope.solvedWithHelp = function() {
+        return alert('Coming soon');
       };
     }
   ]);

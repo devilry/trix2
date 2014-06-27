@@ -16,6 +16,7 @@ module.exports = (grunt) ->
     js: [
       'bower_components/angular/angular.min.js'
       'bower_components/jsurl/url.min.js'
+      'bower_components/angular-bootstrap/ui-bootstrap.min.js'
     ]
   }
 
