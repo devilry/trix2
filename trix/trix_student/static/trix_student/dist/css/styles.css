@@ -7389,6 +7389,8 @@ nav#trix_header {
 .trix-assignment .trix-assignmentsolution .trix-markdownarticle {
   background-color: #fff;
   padding: 20px;
+  margin-top: 5px;
+  border: 1px solid #eee;
 }
 #assignments-taggingbox *:first-child h3 {
   margin-top: 0;
@@ -7413,6 +7415,11 @@ nav#trix_header {
 }
 .trix-markdownarticle p:last-child {
   padding-bottom: 0;
+}
+.trix-markdownarticle p:last-child,
+.trix-markdownarticle pre:last-child,
+.trix-markdownarticle blockquote:last-child {
+  margin-bottom: 0;
 }
 body {
   background-color: #fbfbfb;
