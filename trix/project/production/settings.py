@@ -9,6 +9,7 @@ ROOT_URLCONF = 'trix.project.production.urls'
 
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
+LANGUAGE_CODE = 'nb'
 
 # Database
 DATABASES = {}
