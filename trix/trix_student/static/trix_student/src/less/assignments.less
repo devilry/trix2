@@ -51,16 +51,16 @@
 }
 
 .trix-markdownarticle {
-    // font-family: @font-family-serif;
     font-size: @trix-article-font-size;
     line-height: (@trix-article-font-size * 1.8);
 
     p {
         padding-bottom: @trix-article-font-size * 1.8;
         margin: 0;
-        &:last-child {
-            padding-bottom: 0;
-        }
+    }
+
+    pre, .codehilite {
+        margin-bottom: @trix-article-font-size * 1.8;
     }
 
     p, pre, blockquote {

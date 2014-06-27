@@ -7413,8 +7413,9 @@ nav#trix_header {
   padding-bottom: 32.4px;
   margin: 0;
 }
-.trix-markdownarticle p:last-child {
-  padding-bottom: 0;
+.trix-markdownarticle pre,
+.trix-markdownarticle .codehilite {
+  margin-bottom: 32.4px;
 }
 .trix-markdownarticle p:last-child,
 .trix-markdownarticle pre:last-child,
