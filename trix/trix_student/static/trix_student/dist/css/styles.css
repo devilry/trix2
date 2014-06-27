@@ -7365,6 +7365,59 @@ nav#trix_header {
 .alert-staff .alert-link {
   color: #d5d5d5;
 }
+.btn-trix-admin {
+  color: #ffffff;
+  background-color: #333333;
+  border-color: #222222;
+}
+.btn-trix-admin:hover,
+.btn-trix-admin:focus,
+.btn-trix-admin:active,
+.btn-trix-admin.active,
+.open .dropdown-toggle.btn-trix-admin {
+  color: #ffffff;
+  background-color: #1f1f1f;
+  border-color: #030303;
+}
+.btn-trix-admin:active,
+.btn-trix-admin.active,
+.open .dropdown-toggle.btn-trix-admin {
+  background-image: none;
+}
+.btn-trix-admin.disabled,
+.btn-trix-admin[disabled],
+fieldset[disabled] .btn-trix-admin,
+.btn-trix-admin.disabled:hover,
+.btn-trix-admin[disabled]:hover,
+fieldset[disabled] .btn-trix-admin:hover,
+.btn-trix-admin.disabled:focus,
+.btn-trix-admin[disabled]:focus,
+fieldset[disabled] .btn-trix-admin:focus,
+.btn-trix-admin.disabled:active,
+.btn-trix-admin[disabled]:active,
+fieldset[disabled] .btn-trix-admin:active,
+.btn-trix-admin.disabled.active,
+.btn-trix-admin[disabled].active,
+fieldset[disabled] .btn-trix-admin.active {
+  background-color: #333333;
+  border-color: #222222;
+}
+.btn-trix-admin .badge {
+  color: #333333;
+  background-color: #ffffff;
+}
+@media (min-width: 768px) {
+  #assignments-heading .btn-trix-admin,
+  .trix-assignment .btn-trix-admin {
+    opacity: 0;
+    transition-duration: 0.4s;
+    transition-property: opacity;
+  }
+  #assignments-heading:hover .btn-trix-admin,
+  .trix-assignment:hover .btn-trix-admin {
+    opacity: 1;
+  }
+}
 .trix-assignment {
   margin-bottom: 80px;
   padding-top: 80px;
@@ -7391,59 +7444,6 @@ nav#trix_header {
   padding: 20px;
   margin-top: 5px;
   border: 1px solid #eee;
-}
-.trix-assignment .btn-trix-assignmentedit {
-  color: #ffffff;
-  background-color: #333333;
-  border-color: #222222;
-}
-.trix-assignment .btn-trix-assignmentedit:hover,
-.trix-assignment .btn-trix-assignmentedit:focus,
-.trix-assignment .btn-trix-assignmentedit:active,
-.trix-assignment .btn-trix-assignmentedit.active,
-.open .dropdown-toggle.trix-assignment .btn-trix-assignmentedit {
-  color: #ffffff;
-  background-color: #1f1f1f;
-  border-color: #030303;
-}
-.trix-assignment .btn-trix-assignmentedit:active,
-.trix-assignment .btn-trix-assignmentedit.active,
-.open .dropdown-toggle.trix-assignment .btn-trix-assignmentedit {
-  background-image: none;
-}
-.trix-assignment .btn-trix-assignmentedit.disabled,
-.trix-assignment .btn-trix-assignmentedit[disabled],
-fieldset[disabled] .trix-assignment .btn-trix-assignmentedit,
-.trix-assignment .btn-trix-assignmentedit.disabled:hover,
-.trix-assignment .btn-trix-assignmentedit[disabled]:hover,
-fieldset[disabled] .trix-assignment .btn-trix-assignmentedit:hover,
-.trix-assignment .btn-trix-assignmentedit.disabled:focus,
-.trix-assignment .btn-trix-assignmentedit[disabled]:focus,
-fieldset[disabled] .trix-assignment .btn-trix-assignmentedit:focus,
-.trix-assignment .btn-trix-assignmentedit.disabled:active,
-.trix-assignment .btn-trix-assignmentedit[disabled]:active,
-fieldset[disabled] .trix-assignment .btn-trix-assignmentedit:active,
-.trix-assignment .btn-trix-assignmentedit.disabled.active,
-.trix-assignment .btn-trix-assignmentedit[disabled].active,
-fieldset[disabled] .trix-assignment .btn-trix-assignmentedit.active {
-  background-color: #333333;
-  border-color: #222222;
-}
-.trix-assignment .btn-trix-assignmentedit .badge {
-  color: #333333;
-  background-color: #ffffff;
-}
-@media (min-width: 768px) {
-  .trix-assignment .btn-trix-assignmentedit {
-    opacity: 0;
-    transition-duration: 0.4s;
-    transition-property: opacity;
-  }
-}
-@media (min-width: 768px) {
-  .trix-assignment:hover .btn-trix-assignmentedit {
-    opacity: 1;
-  }
 }
 #assignments-taggingbox *:first-child h3 {
   margin-top: 0;

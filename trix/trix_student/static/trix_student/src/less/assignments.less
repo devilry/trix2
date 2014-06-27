@@ -1,4 +1,17 @@
-
+#assignments-heading, .trix-assignment {
+    @media (min-width: @screen-sm-min) {
+        .btn-trix-admin {
+            opacity: 0;
+            transition-duration: 0.4s;
+            transition-property: opacity;
+        }
+        &:hover {
+            .btn-trix-admin {
+                opacity: 1;
+            }
+        }
+    }
+}
 
 .trix-assignment {
     margin-bottom: 80px;
@@ -28,23 +41,6 @@
             padding: 20px;
             margin-top: 5px;
             border: 1px solid #eee;
-        }
-    }
-
-    .btn-trix-assignmentedit {
-        .button-variant(#fff; #333; #222);
-        @media (min-width: @screen-sm-min) {
-            opacity: 0;
-            transition-duration: 0.4s;
-            transition-property: opacity;
-        }
-    }
-
-    @media (min-width: @screen-sm-min) {
-        &:hover {
-            .btn-trix-assignmentedit {
-                opacity: 1;
-            }
         }
     }
 }

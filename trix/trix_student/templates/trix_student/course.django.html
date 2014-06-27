@@ -5,8 +5,15 @@
 {% block title %}{% trans "Assignments" %}{% endblock title %}
 
 {% block body %}
-    <div class="page-header">
+    <div id="assignments-heading" class="page-header">
         <div class="container">
+            {% if user_is_admin %}
+                <a href="{% url 'trix_courseadmin-assignments-INDEX' course.id %}"
+                        class="btn btn-trix-admin pull-right">
+                    <span class="fa fa-edit"></span>
+                    {% trans "Edit" %}
+                </a>
+            {% endif %}
             <h1>
                 {{ course.course_tag }}
                 {{ course.active_period }}
@@ -50,7 +57,8 @@
                 {% for assignment in assignment_list %}
                     <section class="trix-assignment">
                         {% if user_is_admin %}
-                            <a href="{% url 'trix_courseadmin-assignments-edit' course.id assignment.id %}"         class="btn btn-trix-assignmentedit pull-right">
+                            <a href="{% url 'trix_courseadmin-assignments-edit' course.id assignment.id %}"
+                                    class="btn btn-trix-admin pull-right">
                                 <span class="fa fa-edit"></span>
                                 {% trans "Edit" %}
                             </a>
