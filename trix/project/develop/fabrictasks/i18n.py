@@ -8,7 +8,7 @@ def makemessages(langcode='nb'):
     """
     Runs /path/to/reporoot/manage.py makemessages for the given locale (default to nb).
     """
-    root_develop_managepy('makemessages -l {} -i static/*'.format(langcode))
+    root_develop_managepy('makemessages -l {} -i "static/*"'.format(langcode))
 
 @task
 def jsmakemessages(langcode='nb'):
