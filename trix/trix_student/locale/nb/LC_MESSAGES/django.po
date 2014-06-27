@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: trix_student\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-06-27 01:54+0000\n"
-"PO-Revision-Date: 2014-06-27 03:06+0100\n"
+"POT-Creation-Date: 2014-06-27 02:44+0000\n"
+"PO-Revision-Date: 2014-06-27 04:44+0100\n"
 "Last-Translator: Espen Angell Kristiansen <post@espenak.net>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: nb\n"
@@ -28,27 +28,32 @@ msgstr "Oppgaver"
 msgid "Trix"
 msgstr "Trix"
 
-#: templates/trix_student/course.django.html:23
+#: templates/trix_student/course.django.html:14
+#: templates/trix_student/course.django.html:63
+msgid "Edit"
+msgstr "Rediger"
+
+#: templates/trix_student/course.django.html:30
 msgid "Selected tags"
 msgstr "Valgte tags"
 
-#: templates/trix_student/course.django.html:39
+#: templates/trix_student/course.django.html:46
 msgid "Filter"
 msgstr "Filtrer"
 
-#: templates/trix_student/course.django.html:41
+#: templates/trix_student/course.django.html:48
 msgid "Select a tag"
 msgstr "Velg en tag"
 
-#: templates/trix_student/course.django.html:67
+#: templates/trix_student/course.django.html:81
 msgid "Solved on my own"
 msgstr "Løst på egenhånd"
 
-#: templates/trix_student/course.django.html:70
+#: templates/trix_student/course.django.html:84
 msgid "Solved with help"
 msgstr "Løst med hjelp"
 
-#: templates/trix_student/course.django.html:74
+#: templates/trix_student/course.django.html:88
 msgid "See solution"
 msgstr "Vi løsningsforslag"
 
