@@ -1,3 +1,4 @@
+import urllib
 from django.views.generic import ListView
 # from django import forms
 from django.shortcuts import get_object_or_404
@@ -82,5 +83,7 @@ class CourseDetailView(ListView):
         context['selected_tags'] = self.selected_tags
         context['selectable_tags'] = self.selectable_tags
         context['user_is_admin'] = self._get_user_is_admin()
+        context['urlencoded_success_url'] = urllib.urlencode({
+            'success_url': self.request.get_full_path()})
         # context['tag_select_form'] = TagSelectForm(choices=self.tags)
         return context

@@ -9,7 +9,7 @@
         <div class="container">
             {% if user_is_admin %}
                 <a href="{% url 'trix_courseadmin-assignments-INDEX' course.id %}"
-                        class="btn btn-trix-admin pull-right" target="_blank">
+                        class="btn btn-trix-admin pull-right">
                     <span class="fa fa-edit"></span>
                     {% trans "Edit" %}
                 </a>
@@ -57,8 +57,8 @@
                 {% for assignment in assignment_list %}
                     <section class="trix-assignment">
                         {% if user_is_admin %}
-                            <a href="{% url 'trix_courseadmin-assignments-edit' course.id assignment.id %}"
-                                    class="btn btn-trix-admin pull-right" target="_blank">
+                            <a href="{% url 'trix_courseadmin-assignments-edit' course.id assignment.id %}?{{ urlencoded_success_url }}"
+                                    class="btn btn-trix-admin pull-right">
                                 <span class="fa fa-edit"></span>
                                 {% trans "Edit" %}
                             </a>
