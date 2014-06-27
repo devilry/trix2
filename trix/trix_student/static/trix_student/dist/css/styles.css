@@ -7421,6 +7421,16 @@ nav#trix_header {
 .trix-markdownarticle blockquote:last-child {
   margin-bottom: 0;
 }
+.trix-markdownarticle h1 {
+  font-size: 29px;
+}
+.trix-markdownarticle h2 {
+  font-size: 24px;
+}
+.trix-markdownarticle h3 {
+  font-size: 20px;
+  font-weight: bold;
+}
 body {
   background-color: #fbfbfb;
 }
