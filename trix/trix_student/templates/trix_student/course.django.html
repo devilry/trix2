@@ -8,10 +8,10 @@
     <div class="page-header">
         <div class="container">
             <h1>
-                {{ object.course_tag }}
-                {{ object.active_period }}
+                {{ course.course_tag }}
+                {{ course.active_period }}
             </h1>
-            <p>{{ object.description }}</p>
+            <p>{{ course.description }}</p>
         </div>
     </div>
 
@@ -49,10 +49,16 @@
             <div class="col-sm-9 col-sm-pull-3 col-md-9 col-md-pull-3">
                 {% for assignment in assignment_list %}
                     <section class="trix-assignment">
+                        {% if user_is_admin %}
+                            <a href="{% url 'trix_courseadmin-assignments-edit' course.id assignment.id %}"         class="btn btn-trix-assignmentedit pull-right">
+                                <span class="fa fa-edit"></span>
+                                {% trans "Edit" %}
+                            </a>
+                        {% endif %}
                         <h2>{{ assignment }}</h2>
                         <div class="assignment-tags">
                             {% for tag in assignment.tags.all %}
-                                <button class="btn btn-default" disabled>
+                                <button class="btn btn-default btn-xs" disabled>
                                     {{ tag.tag }}
                                 </button>
                             {% endfor %}

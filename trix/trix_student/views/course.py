@@ -65,12 +65,22 @@ class CourseDetailView(ListView):
     def get_nonremovable_tags(self):
         return [self.course.active_period]
 
+    def _get_user_is_admin(self):
+        if self.request.user.is_authenticated():
+            if self.request.user.is_admin:
+                return True
+            else:
+                return self.course.admins.filter(id=self.request.user.id)
+        else:
+            return False
+
     def get_context_data(self, **kwargs):
         context = super(CourseDetailView, self).get_context_data(**kwargs)
 
         context['non_removeable_tags'] = [self.course.active_period]
-        context['object'] = self.course
+        context['course'] = self.course
         context['selected_tags'] = self.selected_tags
         context['selectable_tags'] = self.selectable_tags
+        context['user_is_admin'] = self._get_user_is_admin()
         # context['tag_select_form'] = TagSelectForm(choices=self.tags)
         return context

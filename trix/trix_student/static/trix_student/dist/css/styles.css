@@ -7392,6 +7392,59 @@ nav#trix_header {
   margin-top: 5px;
   border: 1px solid #eee;
 }
+.trix-assignment .btn-trix-assignmentedit {
+  color: #ffffff;
+  background-color: #333333;
+  border-color: #222222;
+}
+.trix-assignment .btn-trix-assignmentedit:hover,
+.trix-assignment .btn-trix-assignmentedit:focus,
+.trix-assignment .btn-trix-assignmentedit:active,
+.trix-assignment .btn-trix-assignmentedit.active,
+.open .dropdown-toggle.trix-assignment .btn-trix-assignmentedit {
+  color: #ffffff;
+  background-color: #1f1f1f;
+  border-color: #030303;
+}
+.trix-assignment .btn-trix-assignmentedit:active,
+.trix-assignment .btn-trix-assignmentedit.active,
+.open .dropdown-toggle.trix-assignment .btn-trix-assignmentedit {
+  background-image: none;
+}
+.trix-assignment .btn-trix-assignmentedit.disabled,
+.trix-assignment .btn-trix-assignmentedit[disabled],
+fieldset[disabled] .trix-assignment .btn-trix-assignmentedit,
+.trix-assignment .btn-trix-assignmentedit.disabled:hover,
+.trix-assignment .btn-trix-assignmentedit[disabled]:hover,
+fieldset[disabled] .trix-assignment .btn-trix-assignmentedit:hover,
+.trix-assignment .btn-trix-assignmentedit.disabled:focus,
+.trix-assignment .btn-trix-assignmentedit[disabled]:focus,
+fieldset[disabled] .trix-assignment .btn-trix-assignmentedit:focus,
+.trix-assignment .btn-trix-assignmentedit.disabled:active,
+.trix-assignment .btn-trix-assignmentedit[disabled]:active,
+fieldset[disabled] .trix-assignment .btn-trix-assignmentedit:active,
+.trix-assignment .btn-trix-assignmentedit.disabled.active,
+.trix-assignment .btn-trix-assignmentedit[disabled].active,
+fieldset[disabled] .trix-assignment .btn-trix-assignmentedit.active {
+  background-color: #333333;
+  border-color: #222222;
+}
+.trix-assignment .btn-trix-assignmentedit .badge {
+  color: #333333;
+  background-color: #ffffff;
+}
+@media (min-width: 768px) {
+  .trix-assignment .btn-trix-assignmentedit {
+    opacity: 0;
+    transition-duration: 0.4s;
+    transition-property: opacity;
+  }
+}
+@media (min-width: 768px) {
+  .trix-assignment:hover .btn-trix-assignmentedit {
+    opacity: 1;
+  }
+}
 #assignments-taggingbox *:first-child h3 {
   margin-top: 0;
 }
