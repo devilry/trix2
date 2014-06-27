@@ -5,38 +5,112 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: PACKAGE VERSION\n"
+"Project-Id-Version: trix_student\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-06-13 14:58+0000\n"
-"PO-Revision-Date: 2014-06-13 17:00+0100\n"
-"Last-Translator: Tor Ivar Johansen <tor@torjohansen.no>\n"
+"POT-Creation-Date: 2014-06-27 01:04+0000\n"
+"PO-Revision-Date: 2014-06-27 03:06+0100\n"
+"Last-Translator: Espen Angell Kristiansen <post@espenak.net>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: nb\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 1.5.4\n"
+"X-Generator: Poedit 1.6.5\n"
+
+#: templates/trix_student/assignments.django.html:3
+#: templates/trix_student/assignments.django.html:8
+#: templates/trix_student/course.django.html:5
+msgid "Assignments"
+msgstr "Oppgaver"
 
 #: templates/trix_student/base.django.html:11
 msgid "Trix"
 msgstr "Trix"
+
+#: templates/trix_student/course.django.html:23
+msgid "Selected tags"
+msgstr "Valgte tags"
+
+#: templates/trix_student/course.django.html:39
+msgid "Filter"
+msgstr "Filtrer"
+
+#: templates/trix_student/course.django.html:41
+msgid "Select a tag"
+msgstr "Velg en tag"
+
+#: templates/trix_student/course.django.html:67
+msgid "Solved on my own"
+msgstr "Løst på egenhånd"
+
+#: templates/trix_student/course.django.html:70
+msgid "Solved with help"
+msgstr "Løst med hjelp"
+
+#: templates/trix_student/course.django.html:74
+msgid "See solution"
+msgstr "Vi løsningsforslag"
 
 #: templates/trix_student/dashboard.django.html:3
 msgid "Trix - student"
 msgstr "Trix - student"
 
 #: templates/trix_student/dashboard.django.html:8
-msgid "Course list"
-msgstr "Kursliste"
+msgid "Welcome to Trix"
+msgstr "Velkommen til Trix"
 
-#: templates/trix_student/dashboard.django.html:14
-msgid "Welcome to"
-msgstr "Velkommen til"
-
-#: templates/trix_student/dashboard.django.html:15
+#: templates/trix_student/dashboard.django.html:9
 msgid ""
 "Trix is a teaching platform to help you work more systematic towards your "
 "goal, resulting in a better learning outcome."
 msgstr ""
 "Trix er en læringsplattform for å hjelpe deg til å jobbe systematisk mot å "
 "nå læringsmålene i kurset ditt."
+
+#: templates/trix_student/login.django.html:5
+msgid "Trix login"
+msgstr "Logg inn i Trix"
+
+#: templates/trix_student/include/header.django.html:12
+msgid "Toggle navigation"
+msgstr "Vis/sjul navigering"
+
+#: templates/trix_student/include/header.django.html:28
+msgid "Administer"
+msgstr "Administrer"
+
+#: templates/trix_student/include/header.django.html:37
+msgid "Sign out"
+msgstr "Logg ut"
+
+#: templates/trix_student/include/header.django.html:42
+msgid "Sign in"
+msgstr "Logg inn"
+
+#: templates/trix_student/include/pager.django.html:24
+msgid "Previous"
+msgstr "Forrige"
+
+#: templates/trix_student/include/pager.django.html:30
+msgid "Next"
+msgstr "Neste"
+
+#: views/login.py:15
+msgid "Email"
+msgstr "Epost"
+
+#: views/login.py:20
+msgid "Log in"
+msgstr "Logg inn"
+
+#: views/login.py:40
+msgid ""
+"Please enter a correct email and password. Note that both fields are be case-"
+"sensitive."
+msgstr ""
+"Venligst skriv inn en gyldig epostaddresse og passord. Begge feltene skiller "
+"mellom store og små bokstaver."
+
+#~ msgid "Course list"
+#~ msgstr "Kursliste"
