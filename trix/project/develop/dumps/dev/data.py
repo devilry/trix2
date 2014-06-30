@@ -134,8 +134,8 @@ def import_data():
     from trix.trix_core.models import User
 
     trix_core_user_1 = User()
-    trix_core_user_1.password = u'pbkdf2_sha256$12000$EELVoDwGDuAC$wNBzI8R5xihfeL3OoldwQ3coC/9VOUuL5nyhbAeQHR4='
-    trix_core_user_1.last_login = dateutil.parser.parse("2014-06-26T23:20:06.395241+00:00")
+    trix_core_user_1.password = u'pbkdf2_sha256$12000$6qEBQVnjeivy$kXhstjtqHt+XauVf1JZWIBmtmHSkiTURu/hUR9UXnps='
+    trix_core_user_1.last_login = dateutil.parser.parse("2014-06-30T20:50:48.679561+00:00")
     trix_core_user_1.is_active = True
     trix_core_user_1.is_admin = True
     trix_core_user_1.email = u'grandma@example.com'
@@ -272,6 +272,19 @@ def import_data():
     trix_core_assignment_6.tags.add(trix_core_tag_7)
     trix_core_assignment_6.tags.add(trix_core_tag_8)
 
+    # Processing model: HowSolved
+
+    from trix.trix_core.models import HowSolved
+
+
     # Processing model: Permalink
 
     from trix.trix_core.models import Permalink
+
+    trix_core_permalink_1 = Permalink()
+    trix_core_permalink_1.title = u'Treningsoppgave til Oblig 1'
+    trix_core_permalink_1.description = u'Dette er oppgaver som egner seg godt til trening til oblig 1. L\xf8s oppgavene stegvis og s\xf8rg for \xe5 bruke god tid p\xe5 oppgavene for \xe5 s\xf8rge for at du er best mulig rustet til \xe5 komme i m\xe5l.'
+    trix_core_permalink_1 = importer.save_or_locate(trix_core_permalink_1)
+
+    trix_core_permalink_1.tags.add(trix_core_tag_6)
+    trix_core_permalink_1.tags.add(trix_core_tag_7)
