@@ -264,6 +264,9 @@ class AssignmentSolution(models.Model):
     assignment = models.ForeignKey(Assignment)
     user = models.ForeignKey(User)
 
+    def  __unicode__(self):
+        return self.howsolved
+
 
 class Permalink(models.Model):
     tags = models.ManyToManyField(Tag)
