@@ -247,6 +247,24 @@ class Assignment(models.Model):
     #         self.tags.add(tag)
 
 
+class AssignmentSolution(models.Model):
+    """This class holds information on how the assignment was solved.
+
+
+    """
+    howsolved = models.CharField(
+        max_length=10,
+        null=False,
+        choices=[
+            ('bymyself', _('Solved by myself')),
+            ('withhelp', _('Solved with help')),
+        ]
+    )
+    
+    assignment = models.ForeignKey(Assignment)
+    user = models.ForeignKey(User)
+
+
 class Permalink(models.Model):
     tags = models.ManyToManyField(Tag)
     title = models.CharField(max_length=255,
