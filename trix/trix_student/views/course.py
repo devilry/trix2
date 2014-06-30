@@ -75,6 +75,9 @@ class CourseDetailView(ListView):
         else:
             return False
 
+    def _get_assignments_solved(self):
+        return models.AssignmentSolution.objects.filter(assignment__in=self.get_queryset())
+
     def get_context_data(self, **kwargs):
         context = super(CourseDetailView, self).get_context_data(**kwargs)
 
@@ -85,5 +88,8 @@ class CourseDetailView(ListView):
         context['user_is_admin'] = self._get_user_is_admin()
         context['urlencoded_success_url'] = urllib.urlencode({
             'success_url': self.request.get_full_path()})
+
+
+        context['assignments_solved'] = self._get_assignments_solved()
         # context['tag_select_form'] = TagSelectForm(choices=self.tags)
         return context
