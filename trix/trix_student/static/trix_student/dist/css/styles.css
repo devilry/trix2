@@ -7436,8 +7436,11 @@ fieldset[disabled] .btn-trix-admin.active {
 .trix-assignment .trix-assignmenttext {
   margin-top: 40px;
 }
-.trix-assignment .trix-assignmentsolution {
+.trix-assignment .trix-assignmenthowsolved {
   margin-top: 40px;
+}
+.trix-assignment .trix-assignmentsolution {
+  margin-top: 10px;
 }
 .trix-assignment .trix-assignmentsolution .trix-markdownarticle {
   background-color: #fff;

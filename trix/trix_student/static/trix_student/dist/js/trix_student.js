@@ -1,5 +1,5 @@
 (function() {
-  angular.module('trixStudent', ['ui.bootstrap', 'trixStudent.assignments.controllers']);
+  angular.module('trixStudent', ['ui.bootstrap', 'trixStudent.directives', 'trixStudent.assignments.controllers']);
 
 }).call(this);
 
@@ -36,12 +36,19 @@
     }
   ]).controller('SolutionCtrl', [
     '$scope', function($scope) {
-      $scope.isVisible = false;
+      return $scope.isVisible = false;
+    }
+  ]).controller('HowSolvedCtrl', [
+    '$scope', function($scope) {
+      $scope.howsolved = null;
       $scope.solvedOnMyOwn = function() {
-        return alert('Coming soon');
+        return $scope.howsolved = 'bymyself';
       };
-      return $scope.solvedWithHelp = function() {
-        return alert('Coming soon');
+      $scope.solvedWithHelp = function() {
+        return $scope.howsolved = 'withhelp';
+      };
+      return $scope.notSolved = function() {
+        return $scope.howsolved = null;
       };
     }
   ]);
@@ -49,16 +56,27 @@
 }).call(this);
 
 (function() {
-  angular.module('trixStudent.assignments.directives', []).directive('trixStudentAddTagSelect', function() {
+  angular.module('trixStudent.directives', []).directive('trixAriaChecked', function() {
     return {
       restrict: 'A',
-      link: function(scope, element, attrs) {
-        element.on('change', function() {
-          return console.log(scope.stuff);
-        });
+      scope: {
+        'checked': '=trixAriaChecked'
       },
-      controller: function($scope) {
-        return $scope.stuff = '';
+      controller: function($scope) {},
+      link: function(scope, element, attrs) {
+        var updateAriaChecked;
+        updateAriaChecked = function() {
+          if (scope.checked) {
+            return element.attr('aria-checked', 'true');
+          } else {
+            return element.attr('aria-checked', 'false');
+          }
+        };
+        updateAriaChecked();
+        scope.$watch(attrs.trixAriaChecked, function(newValue, oldValue) {
+          console.log('Changed!', newValue);
+          return updateAriaChecked();
+        });
       }
     };
   });

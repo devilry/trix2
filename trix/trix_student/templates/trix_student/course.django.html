@@ -74,15 +74,27 @@
                         <section class="trix-assignmenttext  trix-markdownarticle">
                             {% trix_assignment_markdown assignment.text %}
                         </section>
+                        <div class="trix-assignmenthowsolved btn-group" ng-cloak
+                                ng-controller="HowSolvedCtrl" role="radiogroup">
+                            <a class="btn btn-default" ng-click="solvedOnMyOwn()"
+                                    role="radio" trix-aria-checked="howsolved=='bymyself'">
+                                <span class="fa fa-check" ng-show="howsolved=='bymyself'"></span>
+                                {% trans "Solved on my own" %}
+                            </a>
+                            <a class="btn btn-default" ng-click="solvedWithHelp()"
+                                    role="radio" trix-aria-checked="howsolved=='withhelp'">
+                                <span class="fa fa-check" ng-show="howsolved=='withhelp'"></span>
+                                {% trans "Solved with help" %}
+                            </a>
+                            <a class="btn btn-default" ng-click="notSolved()"
+                                    role="radio" trix-aria-checked="!howsolved">
+                                <span class="fa fa-check" ng-show="!howsolved"></span>
+                                {% trans "Not solved" %}
+                            </a>
+                        </div>
                         {% if assignment.solution %}
                             <section class="trix-assignmentsolution" ng-cloak
                                     ng-controller="SolutionCtrl">
-                                <a class="btn btn-success" ng-click="solvedOnMyOwn()">
-                                    {% trans "Solved on my own" %}
-                                </a>
-                                <a class="btn btn-default" ng-click="solvedWithHelp()">
-                                    {% trans "Solved with help" %}
-                                </a>
                                 <a ng-click="isVisible = !isVisible" class="btn btn-default"
                                         ng-class="{'active': isVisible}">
                                     {% trans "See solution" %}

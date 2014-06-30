@@ -34,10 +34,20 @@ angular.module('trixStudent.assignments.controllers', [])
   '$scope',
   ($scope) ->
     $scope.isVisible = false
+])
+
+.controller('HowSolvedCtrl', [
+  '$scope',
+  ($scope) ->
+    $scope.howsolved = null
 
     $scope.solvedOnMyOwn = ->
-      alert('Coming soon')
+      $scope.howsolved = 'bymyself'
 
     $scope.solvedWithHelp = ->
-      alert('Coming soon')
+      $scope.howsolved = 'withhelp'
+
+    $scope.notSolved = ->
+      $scope.howsolved = null
+
 ])
