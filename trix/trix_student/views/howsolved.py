@@ -9,7 +9,7 @@ from trix.trix_core import models
 
 class HowSolvedForm(forms.ModelForm):
     class Meta:
-        model = models.AssignmentSolution
+        model = models.HowSolved
         fields = ['howsolved']
 
 
@@ -27,7 +27,7 @@ class HowsolvedView(View):
         return get_object_or_404(models.Assignment, id=self.kwargs['assignment_id'])
 
     def _get_howsolved(self, assignment_id):
-        return models.AssignmentSolution.objects\
+        return models.HowSolved.objects\
             .filter(assignment_id=assignment_id, user=self.request.user)\
             .get()
 
@@ -46,8 +46,8 @@ class HowsolvedView(View):
 
             try:
                 howsolvedobject = self._get_howsolved(assignment.id)
-            except models.AssignmentSolution.DoesNotExist:
-                howsolvedobject = models.AssignmentSolution.objects.create(
+            except models.HowSolved.DoesNotExist:
+                howsolvedobject = models.HowSolved.objects.create(
                     howsolved=howsolved,
                     assignment=assignment,
                     user=request.user)
@@ -64,7 +64,7 @@ class HowsolvedView(View):
     def delete(self, request, **kwargs):
         try:
             howsolved = self._get_howsolved(self.kwargs['assignment_id'])
-        except models.AssignmentSolution.DoesNotExist:
+        except models.HowSolved.DoesNotExist:
             raise http.Http404()
         else:
             howsolved.delete()

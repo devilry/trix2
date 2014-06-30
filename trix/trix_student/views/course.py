@@ -44,7 +44,7 @@ class AssignmentListViewBase(ListView):
             return False
 
     def _get_assignments_solved_percentage(self):
-        num_solved = models.AssignmentSolution.objects.filter(assignment__in=self.get_queryset()).count()
+        num_solved = models.HowSolved.objects.filter(assignment__in=self.get_queryset()).count()
         num_total = self.get_queryset().count()
         return int(num_solved / float(num_total) * 100)
 
