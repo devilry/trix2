@@ -25,7 +25,7 @@
     <div class="container">
         <div class="row">
             <div id="assignments-taggingbox" class="col-sm-3 col-sm-push-9 col-md-3 col-md-push-9">
-                {% if assignments_solved_percentage %}
+                {% if request.user.is_authenticated and assignments_solved_percentage %}
                     <div class="progress">
                         <div class="progress-bar
                                 {% if assignments_solved_percentage < 20 %}
@@ -94,31 +94,48 @@
                         <section class="trix-assignmenttext  trix-markdownarticle">
                             {% trix_assignment_markdown assignment.text %}
                         </section>
-                        <div class="trix-assignmenthowsolved" ng-cloak
-                                ng-controller="HowSolvedCtrl" ng-init="assignment_id='{{ assignment.id }}'">
-                            <div class="btn-group" role="radiogroup">
-                                <a class="btn btn-default" ng-click="solvedOnMyOwn()"
-                                        role="radio" trix-aria-checked="howsolved=='bymyself'">
-                                    <span class="fa fa-check" ng-show="howsolved=='bymyself'"></span>
-                                    {% trans "Solved on my own" %}
-                                </a>
-                                <a class="btn btn-default" ng-click="solvedWithHelp()"
-                                        role="radio" trix-aria-checked="howsolved=='withhelp'">
-                                    <span class="fa fa-check" ng-show="howsolved=='withhelp'"></span>
-                                    {% trans "Solved with help" %}
-                                </a>
-                                <a class="btn btn-default" ng-click="notSolved()"
-                                        role="radio" trix-aria-checked="!howsolved">
-                                    <span class="fa fa-check" ng-show="!howsolved"></span>
-                                    {% trans "Not solved" %}
-                                </a>
+                        {% if request.user.is_authenticated %}
+                            <div class="trix-assignmenthowsolved" ng-cloak
+                                    ng-controller="HowSolvedCtrl" ng-init="assignment_id='{{ assignment.id }}'">
+                                <p>
+                                    {% trans "Have you solved the assignment? How did you solve it?" %}
+                                </p>
+                                <div class="btn-group" role="radiogroup">
+                                    <a class="btn"
+                                            ng-click="solvedOnMyOwn()"
+                                            ng-disabled="saving"
+                                            ng-class="buttonClass"
+                                            role="radio"
+                                            trix-aria-checked="howsolved=='bymyself'">
+                                        <span class="fa fa-check" ng-show="howsolved=='bymyself'"></span>
+                                        {% trans "On my own" %}
+                                    </a>
+                                    <a class="btn btn-default"
+                                            ng-click="solvedWithHelp()"
+                                            ng-class="buttonClass"
+                                            ng-disabled="saving"
+                                            role="radio"
+                                            trix-aria-checked="howsolved=='withhelp'">
+                                        <span class="fa fa-check" ng-show="howsolved=='withhelp'"></span>
+                                        {% trans "With help" %}
+                                    </a>
+                                    <a class="btn btn-default"
+                                            ng-click="notSolved()"
+                                            ng-class="buttonClass"
+                                            ng-disabled="saving"
+                                            role="radio"
+                                            trix-aria-checked="!howsolved">
+                                        <span class="fa fa-check" ng-show="!howsolved"></span>
+                                        {% trans "Not solved" %}
+                                    </a>
+                                </div>
+                                <span role="status" tabindex="-1" class="trix-assignmenthowsolvedsaving"
+                                        ng-show="saving">
+                                    <span class="fa fa-spin fa-spinner"></span>
+                                    <span class="text-success">{% trans "Saving..." %}</span>
+                                </span>
                             </div>
-                            <span role="status" tabindex="-1" class="trix-assignmenthowsolvedsaving"
-                                    ng-show="saving">
-                                <span class="fa fa-spin fa-spinner"></span>
-                                <span class="text-success">{% trans "Saving..." %}</span>
-                            </span>
-                        </div>
+                        {% endif %}
                         {% if assignment.solution %}
                             <section class="trix-assignmentsolution" ng-cloak
                                     ng-controller="SolutionCtrl">

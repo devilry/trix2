@@ -46,6 +46,16 @@
     '$scope', '$http', function($scope, $http) {
       $scope.howsolved = null;
       $scope.saving = false;
+      $scope.buttonClass = 'btn-success';
+      $scope.$watch('howsolved', function(newValue) {
+        if (newValue === 'bymyself') {
+          $scope.buttonClass = 'btn-success';
+        } else if (newValue === 'withhelp') {
+          $scope.buttonClass = 'btn-warning';
+        } else {
+          $scope.buttonClass = 'btn-default';
+        }
+      });
       $scope._getApiUrl = function() {
         return "/assignment/howsolved/" + $scope.assignment_id;
       };
