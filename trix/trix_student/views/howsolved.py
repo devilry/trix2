@@ -28,4 +28,5 @@ class HowsolvedView(View):
 
         response_data = {}
         response_data['success'] = 'True'
+        response_data['howsolved'] = self.howsolved
         return HttpResponse(json.dumps(response_data), content_type='application/json')
