@@ -75,8 +75,10 @@ class CourseDetailView(ListView):
         else:
             return False
 
-    def _get_assignments_solved(self):
-        return models.AssignmentSolution.objects.filter(assignment__in=self.get_queryset())
+    def _get_assignments_solved_percentage(self):
+        num_solved = models.AssignmentSolution.objects.filter(assignment__in=self.get_queryset()).count()
+        num_total = self.get_queryset().count()
+        return int(num_solved / float(num_total) * 100)
 
     def get_context_data(self, **kwargs):
         context = super(CourseDetailView, self).get_context_data(**kwargs)
@@ -90,6 +92,7 @@ class CourseDetailView(ListView):
             'success_url': self.request.get_full_path()})
 
 
-        context['assignments_solved'] = self._get_assignments_solved()
+        context['assignments_solved_percentage'] = self._get_assignments_solved_percentage()
+        print context['assignments_solved_percentage']
         # context['tag_select_form'] = TagSelectForm(choices=self.tags)
         return context
