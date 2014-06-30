@@ -73,6 +73,7 @@
         return $scope._updateHowSolved('withhelp');
       };
       return $scope.notSolved = function() {
+        $scope.saving = true;
         return $http["delete"]($scope._getApiUrl()).success(function(data) {
           $scope.saving = false;
           return $scope.howsolved = null;
