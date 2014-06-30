@@ -1,7 +1,7 @@
 (function() {
   angular.module('trixStudent', ['ngCookies', 'ui.bootstrap', 'trixStudent.directives', 'trixStudent.assignments.controllers']).run([
     '$http', '$cookies', function($http, $cookies) {
-      return $http.defaults.headers.post['X-CSRFToken'] = $cookies.csrftoken;
+      return $http.defaults.headers.common['X-CSRFToken'] = $cookies.csrftoken;
     }
   ]);
 
@@ -44,23 +44,26 @@
     }
   ]).controller('HowSolvedCtrl', [
     '$scope', '$http', function($scope, $http) {
-      var apiurl;
       $scope.howsolved = null;
       $scope.saving = false;
-      apiurl = '/assignment/howsolved';
+      $scope._getApiUrl = function() {
+        return "/assignment/howsolved/" + $scope.assignment_id;
+      };
+      $scope._showError = function(message) {
+        $scope.saving = false;
+        return alert(message);
+      };
       $scope._updateHowSolved = function(howsolved) {
         var data;
         $scope.saving = true;
         data = {
-          howsolved: howsolved,
-          assignment_id: $scope.assignment_id
+          howsolved: howsolved
         };
-        return $http.post(apiurl, data).success(function(data) {
+        return $http.post($scope._getApiUrl(), data).success(function(data) {
           $scope.saving = false;
-          return console.log('Success!', data);
-        }).error(function() {
-          $scope.saving = false;
-          return alert('An error occurred!');
+          return $scope.howsolved = data.howsolved;
+        }).error(function(data) {
+          return $scope._showError('An error occurred!');
         });
       };
       $scope.solvedOnMyOwn = function() {
@@ -70,7 +73,12 @@
         return $scope._updateHowSolved('withhelp');
       };
       return $scope.notSolved = function() {
-        return $scope.howsolved = null;
+        return $http["delete"]($scope._getApiUrl()).success(function(data) {
+          $scope.saving = false;
+          return $scope.howsolved = null;
+        }).error(function(data) {
+          return $scope._showError('An error occurred!');
+        });
       };
     }
   ]);
