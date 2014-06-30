@@ -43,7 +43,7 @@
                         </div>
                     </div>
                     <p class="text-muted"><small>
-                        {% blocktrans with percent="40" %}You have completed {{ percent }}% of assignments matching the currently selected tags.{% endblocktrans %}
+                        {% blocktrans with percent=assignments_solved_percentage %}You have completed {{ percent }}% of assignments matching the currently selected tags.{% endblocktrans %}
                     </small></p>
                 {% endif %}
                 <div ng-controller="RemoveTagCtrl" class="assignments-selectedtags-listing">
