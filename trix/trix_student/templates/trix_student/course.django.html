@@ -25,7 +25,7 @@
     <div class="container">
         <div class="row">
             <div id="assignments-taggingbox" class="col-sm-3 col-sm-push-9 col-md-3 col-md-push-9">
-                {% if request.user.is_authenticated and assignments_solved_percentage %}
+                {% if request.user.is_authenticated %}
                     <div class="progress">
                         <div class="progress-bar
                                 {% if assignments_solved_percentage < 20 %}
