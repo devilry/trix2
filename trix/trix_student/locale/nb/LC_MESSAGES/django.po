@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: trix_student\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-06-30 12:11+0000\n"
-"PO-Revision-Date: 2014-06-30 14:11+0100\n"
+"POT-Creation-Date: 2014-06-30 18:52+0000\n"
+"PO-Revision-Date: 2014-06-30 20:53+0100\n"
 "Last-Translator: Espen Angell Kristiansen <post@espenak.net>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: nb\n"
@@ -29,31 +29,50 @@ msgid "Trix"
 msgstr "Trix"
 
 #: templates/trix_student/course.django.html:14
-#: templates/trix_student/course.django.html:63
+#: templates/trix_student/course.django.html:83
 msgid "Edit"
 msgstr "Rediger"
 
-#: templates/trix_student/course.django.html:30
+#: templates/trix_student/course.django.html:46
+#, python-format
+msgid ""
+"You have completed %(percent)s%% of assignments matching the currently "
+"selected tags."
+msgstr "Du har fullført  %(percent)s%% av oppgavene med de valgte taggene."
+
+#: templates/trix_student/course.django.html:50
 msgid "Selected tags"
 msgstr "Valgte tags"
 
-#: templates/trix_student/course.django.html:46
+#: templates/trix_student/course.django.html:66
 msgid "Filter"
 msgstr "Filtrer"
 
-#: templates/trix_student/course.django.html:48
+#: templates/trix_student/course.django.html:68
 msgid "Select a tag"
 msgstr "Velg en tag"
 
-#: templates/trix_student/course.django.html:81
-msgid "Solved on my own"
-msgstr "Løst på egenhånd"
+#: templates/trix_student/course.django.html:103
+msgid "How did you solve the assignment?"
+msgstr "Hvordan løste du oppgaven?"
 
-#: templates/trix_student/course.django.html:84
-msgid "Solved with help"
-msgstr "Løst med hjelp"
+#: templates/trix_student/course.django.html:113
+msgid "On my own"
+msgstr "På egenhånd"
 
-#: templates/trix_student/course.django.html:88
+#: templates/trix_student/course.django.html:122
+msgid "With help"
+msgstr "Med hjelp"
+
+#: templates/trix_student/course.django.html:131
+msgid "Not solved"
+msgstr "Ikke løst"
+
+#: templates/trix_student/course.django.html:137
+msgid "Saving..."
+msgstr "Lagrer..."
+
+#: templates/trix_student/course.django.html:146
 msgid "See solution"
 msgstr "Vis løsningsforslag"
 
