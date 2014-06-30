@@ -13,18 +13,20 @@ class HowsolvedView(View):
 
     def post(self, request, *args, **kwargs):
         howsolved = request.POST.get('howsolved', None)
-        self.assignment_id = request.POST.get('assignment_id', None)
+        assignment_id = request.POST.get('assignment_id', None)
+        assignment = get_object_or_404(models.Assignment, id=assignment_id)
 
-        self.assignment = get_object_or_404(models.Assignment, id=self.assignment_id)
-        self.assignment_solution = self.assignment.assignment_set\
-                .filter(id=self.assignment.id)\
-                .filter(user=request.user)
-
-        if self.assignment_solution:
-            self.assignment_solution.howsolved = self.howsolved
-            self.assignment_solution.save()
+        try:
+            assignment_solution = self.assignment.assignmentsolution_set\
+                .filter(id=assignment, user=request.user).get()
+        except models.AssignmentSolution.DoesNotExist:
+            models.AssignmentSolution.create(
+                howsolved=howsolved,
+                assignment=self.assignment,
+                user=request.user)
         else:
-            models.AssignmentSolution.create(howsolved=self.howsolved, assignment=self.assignment, user=request.user)
+            assignment_solution.howsolved = howsolved
+            assignment_solution.save()
 
         response_data = {}
         response_data['success'] = 'True'
