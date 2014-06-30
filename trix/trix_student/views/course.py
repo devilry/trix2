@@ -83,7 +83,7 @@ class CourseDetailView(ListView):
     def get_context_data(self, **kwargs):
         context = super(CourseDetailView, self).get_context_data(**kwargs)
 
-        context['non_removeable_tags'] = [self.course.active_period]
+        context['non_removeable_tags'] = [self.course.course_tag, self.course.active_period]
         context['course'] = self.course
         context['selected_tags'] = self.selected_tags
         context['selectable_tags'] = self.selectable_tags
@@ -91,7 +91,6 @@ class CourseDetailView(ListView):
         context['urlencoded_success_url'] = urllib.urlencode({
             'success_url': self.request.get_full_path()})
 
-
         context['assignments_solved_percentage'] = self._get_assignments_solved_percentage()
-        # context['tag_select_form'] = TagSelectForm(choices=self.tags)
+        # context['assignments_solved_percentage'] = 81
         return context
