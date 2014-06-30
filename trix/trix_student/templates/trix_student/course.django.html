@@ -25,13 +25,33 @@
     <div class="container">
         <div class="row">
             <div id="assignments-taggingbox" class="col-sm-3 col-sm-push-9 col-md-3 col-md-push-9">
-                {% if selected_tags %}
-                    <div ng-controller="RemoveTagCtrl">
-                        <h3>{% trans "Selected tags" %}:</h3>
-                        {# {% for tag in non_removeable_tags %} #}
-                            {# <button type="button" class="btn btn-primary btn-sm disabled">{{ tag }}</button> #}
-                        {# {% endfor %} #}
-
+                {% if assignments_solved_percentage %}
+                    <div class="progress">
+                        <div class="progress-bar
+                                {% if assignments_solved_percentage < 20 %}
+                                    progress-bar-danger
+                                {% elif assignments_solved_percentage < 50 %}
+                                    progress-bar-warning
+                                {% elif assignments_solved_percentage > 80 %}
+                                    progress-bar-success
+                                {% endif %}
+                                "
+                                role="progressbar"
+                                aria-valuenow="{{ assignments_solved_percentage }}" aria-valuemin="0" aria-valuemax="100"
+                                style="width: {{ assignments_solved_percentage }}%">
+                            {{ assignments_solved_percentage }}%
+                        </div>
+                    </div>
+                    <p class="text-muted"><small>
+                        {% blocktrans with percent="40" %}You have completed {{ percent }}% of assignments matching the currently selected tags.{% endblocktrans %}
+                    </small></p>
+                {% endif %}
+                <div ng-controller="RemoveTagCtrl" class="assignments-selectedtags-listing">
+                    <h3>{% trans "Selected tags" %}:</h3>
+                    {% for tag in non_removeable_tags %}
+                        <button type="button" class="btn btn-primary btn-sm disabled">{{ tag }}</button>
+                    {% endfor %}
+                    {% if selected_tags %}
                         {% for tag in selected_tags %}
                             <button type="button" class="btn btn-primary btn-sm"
                                     ng-click="removeTag('{{ tag }}')">
@@ -39,8 +59,8 @@
                                 <span class="fa fa-times"></span>
                             </button>
                         {% endfor %}
-                    </div>
-                {% endif %}
+                    {% endif %}
+                </div>
                 {% if selectable_tags %}
                     <form ng-controller="AddTagCtrl">
                         <h3>{% trans "Filter" %}:</h3>

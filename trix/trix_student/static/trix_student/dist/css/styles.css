@@ -7451,6 +7451,9 @@ fieldset[disabled] .btn-trix-admin.active {
 #assignments-taggingbox *:first-child h3 {
   margin-top: 0;
 }
+#assignments-taggingbox .progress {
+  margin-bottom: 10px;
+}
 #assignments-taggingbox h3 {
   margin-top: 30px;
   font-size: 18px;
@@ -7460,6 +7463,9 @@ fieldset[disabled] .btn-trix-admin.active {
 #assignments-taggingbox select {
   display: block;
   width: 100%;
+}
+#assignments-taggingbox .assignments-selectedtags-listing .btn {
+  margin-bottom: 4px;
 }
 .trix-markdownarticle {
   font-size: 18px;
