@@ -93,6 +93,5 @@ class CourseDetailView(ListView):
 
 
         context['assignments_solved_percentage'] = self._get_assignments_solved_percentage()
-        print context['assignments_solved_percentage']
         # context['tag_select_form'] = TagSelectForm(choices=self.tags)
         return context
