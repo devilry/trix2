@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: trix_student\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-06-27 02:44+0000\n"
-"PO-Revision-Date: 2014-06-27 04:44+0100\n"
+"POT-Creation-Date: 2014-06-30 12:11+0000\n"
+"PO-Revision-Date: 2014-06-30 14:11+0100\n"
 "Last-Translator: Espen Angell Kristiansen <post@espenak.net>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: nb\n"
@@ -55,7 +55,7 @@ msgstr "Løst med hjelp"
 
 #: templates/trix_student/course.django.html:88
 msgid "See solution"
-msgstr "Vi løsningsforslag"
+msgstr "Vis løsningsforslag"
 
 #: templates/trix_student/dashboard.django.html:3
 msgid "Trix - student"
