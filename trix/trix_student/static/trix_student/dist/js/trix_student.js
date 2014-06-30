@@ -39,13 +39,31 @@
       return $scope.isVisible = false;
     }
   ]).controller('HowSolvedCtrl', [
-    '$scope', function($scope) {
+    '$scope', '$http', function($scope, $http) {
+      var apiurl;
       $scope.howsolved = null;
+      $scope.saving = false;
+      apiurl = '/assignment/howsolved';
+      $scope._updateHowSolved = function(howsolved) {
+        var data;
+        $scope.saving = true;
+        data = {
+          howsolved: howsolved,
+          assignment_id: $scope.assignment_id
+        };
+        return $http.post(apiurl, data).success(function(data) {
+          $scope.saving = false;
+          return console.log('Success!', data);
+        }).error(function() {
+          $scope.saving = false;
+          return alert('An error occurred!');
+        });
+      };
       $scope.solvedOnMyOwn = function() {
-        return $scope.howsolved = 'bymyself';
+        return $scope._updateHowSolved('bymyself');
       };
       $scope.solvedWithHelp = function() {
-        return $scope.howsolved = 'withhelp';
+        return $scope._updateHowSolved('withhelp');
       };
       return $scope.notSolved = function() {
         return $scope.howsolved = null;
@@ -74,7 +92,6 @@
         };
         updateAriaChecked();
         scope.$watch(attrs.trixAriaChecked, function(newValue, oldValue) {
-          console.log('Changed!', newValue);
           return updateAriaChecked();
         });
       }

@@ -37,15 +37,34 @@ angular.module('trixStudent.assignments.controllers', [])
 ])
 
 .controller('HowSolvedCtrl', [
-  '$scope',
-  ($scope) ->
+  '$scope', '$http',
+  ($scope, $http) ->
     $scope.howsolved = null
+    $scope.saving = false
+    apiurl = '/assignment/howsolved'
+
+    $scope._updateHowSolved = (howsolved) ->
+      $scope.saving = true
+      data = {
+        howsolved: howsolved
+        assignment_id: $scope.assignment_id
+      }
+      $http.post(apiurl, data)
+        .success (data) ->
+          $scope.saving = false
+          console.log('Success!', data)
+        .error ->
+          # TODO: Use bootstrap modal and a scope variable
+          $scope.saving = false
+          alert('An error occurred!')
 
     $scope.solvedOnMyOwn = ->
-      $scope.howsolved = 'bymyself'
+      $scope._updateHowSolved('bymyself')
+      # $scope.howsolved = 'bymyself'
 
     $scope.solvedWithHelp = ->
-      $scope.howsolved = 'withhelp'
+      $scope._updateHowSolved('withhelp')
+      # $scope.howsolved = 'withhelp'
 
     $scope.notSolved = ->
       $scope.howsolved = null
