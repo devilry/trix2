@@ -1,34 +1,71 @@
+import json
 from django.views.generic import View
-from django.http import HttpResponse
+from django import http
 from django.shortcuts import get_object_or_404
+from django import forms
 
 from trix.trix_core import models
 
-import json
+
+class HowSolvedForm(forms.ModelForm):
+    class Meta:
+        model = models.AssignmentSolution
+        fields = ['howsolved']
 
 
 class HowsolvedView(View):
     """docstring for UpdateHowSolvedView"""
-    http_method_names = ['post']
+    http_method_names = ['post', 'delete']
 
-    def post(self, request, *args, **kwargs):
-        howsolved = request.POST.get('howsolved', None)
-        assignment_id = request.POST.get('assignment_id', None)
-        assignment = get_object_or_404(models.Assignment, id=assignment_id)
+    def _bad_request_response(self, data):
+        return http.HttpResponseBadRequest(json.dumps(data), content_type='application/json')
 
+    def _200_response(self, data):
+        return http.HttpResponse(json.dumps(data), content_type='application/json')
+
+    def _get_assignment(self):
+        return get_object_or_404(models.Assignment, id=self.kwargs['assignment_id'])
+
+    def _get_howsolved(self, assignment_id):
+        return models.AssignmentSolution.objects\
+            .filter(assignment_id=assignment_id, user=self.request.user)\
+            .get()
+
+    def post(self, request, **kwargs):
         try:
-            assignment_solution = self.assignment.assignmentsolution_set\
-                .filter(id=assignment, user=request.user).get()
-        except models.AssignmentSolution.DoesNotExist:
-            models.AssignmentSolution.create(
-                howsolved=howsolved,
-                assignment=self.assignment,
-                user=request.user)
-        else:
-            assignment_solution.howsolved = howsolved
-            assignment_solution.save()
+            data = json.loads(request.body)
+        except ValueError:
+            return self._bad_request_response({
+                'error': 'Invalid JSON data.'
+            })
 
-        response_data = {}
-        response_data['success'] = 'True'
-        response_data['howsolved'] = self.howsolved
-        return HttpResponse(json.dumps(response_data), content_type='application/json')
+        form = HowSolvedForm(data)
+        if form.is_valid():
+            howsolved = form.cleaned_data['howsolved']
+            assignment = self._get_assignment()
+
+            try:
+                howsolvedobject = self._get_howsolved(assignment.id)
+            except models.AssignmentSolution.DoesNotExist:
+                howsolvedobject = models.AssignmentSolution.objects.create(
+                    howsolved=howsolved,
+                    assignment=assignment,
+                    user=request.user)
+            else:
+                howsolvedobject.howsolved = howsolved
+                howsolvedobject.save()
+
+            return self._200_response({'howsolved': howsolvedobject.howsolved})
+        else:
+            return self._bad_request_response({
+                'error': form.errors.as_text()
+            })
+
+    def delete(self, request, **kwargs):
+        try:
+            howsolved = self._get_howsolved(self.kwargs['assignment_id'])
+        except models.AssignmentSolution.DoesNotExist:
+            raise http.Http404()
+        else:
+            howsolved.delete()
+            return self._200_response({'success': True})

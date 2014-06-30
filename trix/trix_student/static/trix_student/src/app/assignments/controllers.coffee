@@ -41,22 +41,26 @@ angular.module('trixStudent.assignments.controllers', [])
   ($scope, $http) ->
     $scope.howsolved = null
     $scope.saving = false
-    apiurl = '/assignment/howsolved'
+
+    $scope._getApiUrl = ->
+      return "/assignment/howsolved/#{$scope.assignment_id}"
+
+    $scope._showError = (message) ->
+      # TODO: Use bootstrap modal and a scope variable
+      $scope.saving = false
+      alert(message)
 
     $scope._updateHowSolved = (howsolved) ->
       $scope.saving = true
       data = {
         howsolved: howsolved
-        assignment_id: $scope.assignment_id
       }
-      $http.post(apiurl, data)
+      $http.post($scope._getApiUrl(), data)
         .success (data) ->
           $scope.saving = false
-          console.log('Success!', data)
-        .error ->
-          # TODO: Use bootstrap modal and a scope variable
-          $scope.saving = false
-          alert('An error occurred!')
+          $scope.howsolved = data.howsolved
+        .error (data) ->
+          $scope._showError('An error occurred!')
 
     $scope.solvedOnMyOwn = ->
       $scope._updateHowSolved('bymyself')
@@ -67,6 +71,10 @@ angular.module('trixStudent.assignments.controllers', [])
       # $scope.howsolved = 'withhelp'
 
     $scope.notSolved = ->
-      $scope.howsolved = null
-
+      $http.delete($scope._getApiUrl())
+        .success (data) ->
+          $scope.saving = false
+          $scope.howsolved = null
+        .error (data) ->
+          $scope._showError('An error occurred!')
 ])
