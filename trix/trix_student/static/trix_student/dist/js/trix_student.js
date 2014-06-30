@@ -46,14 +46,18 @@
     '$scope', '$http', function($scope, $http) {
       $scope.howsolved = null;
       $scope.saving = false;
-      $scope.buttonClass = 'btn-success';
+      $scope.buttonClass = 'btn-default';
+      $scope.boxClass = '';
       $scope.$watch('howsolved', function(newValue) {
         if (newValue === 'bymyself') {
           $scope.buttonClass = 'btn-success';
+          $scope.boxClass = 'alert alert-success';
         } else if (newValue === 'withhelp') {
           $scope.buttonClass = 'btn-warning';
+          $scope.boxClass = 'alert alert-warning';
         } else {
           $scope.buttonClass = 'btn-default';
+          $scope.boxClass = '';
         }
       });
       $scope._getApiUrl = function() {

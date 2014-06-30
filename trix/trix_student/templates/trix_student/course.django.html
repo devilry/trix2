@@ -96,9 +96,11 @@
                         </section>
                         {% if request.user.is_authenticated %}
                             <div class="trix-assignmenthowsolved" ng-cloak
-                                    ng-controller="HowSolvedCtrl" ng-init="assignment_id='{{ assignment.id }}'">
+                                    ng-controller="HowSolvedCtrl"
+                                    ng-class="boxClass"
+                                    ng-init="assignment_id='{{ assignment.id }}'">
                                 <p>
-                                    {% trans "Have you solved the assignment? How did you solve it?" %}
+                                    {% trans "How did you solve the assignment?" %}
                                 </p>
                                 <div class="btn-group" role="radiogroup">
                                     <a class="btn"
@@ -110,7 +112,7 @@
                                         <span class="fa fa-check" ng-show="howsolved=='bymyself'"></span>
                                         {% trans "On my own" %}
                                     </a>
-                                    <a class="btn btn-default"
+                                    <a class="btn"
                                             ng-click="solvedWithHelp()"
                                             ng-class="buttonClass"
                                             ng-disabled="saving"
@@ -119,7 +121,7 @@
                                         <span class="fa fa-check" ng-show="howsolved=='withhelp'"></span>
                                         {% trans "With help" %}
                                     </a>
-                                    <a class="btn btn-default"
+                                    <a class="btn"
                                             ng-click="notSolved()"
                                             ng-class="buttonClass"
                                             ng-disabled="saving"

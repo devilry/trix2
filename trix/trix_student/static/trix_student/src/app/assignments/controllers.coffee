@@ -41,15 +41,19 @@ angular.module('trixStudent.assignments.controllers', [])
   ($scope, $http) ->
     $scope.howsolved = null
     $scope.saving = false
-    $scope.buttonClass = 'btn-success'
+    $scope.buttonClass = 'btn-default'
+    $scope.boxClass = ''
 
     $scope.$watch 'howsolved', (newValue) ->
       if newValue == 'bymyself'
         $scope.buttonClass = 'btn-success'
+        $scope.boxClass = 'alert alert-success'
       else if newValue == 'withhelp'
         $scope.buttonClass = 'btn-warning'
+        $scope.boxClass = 'alert alert-warning'
       else
         $scope.buttonClass = 'btn-default'
+        $scope.boxClass = ''
       return
 
     $scope._getApiUrl = ->
