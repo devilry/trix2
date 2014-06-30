@@ -132,7 +132,8 @@ class PermalinkView(AssignmentListViewBase):
         return super(PermalinkView, self).get(request, **kwargs)
 
     def get_already_selected_tags(self):
-        return self.permalink.tags.values_list('tag', flat=True)
+        return []
+        #self.permalink.tags.values_list('tag', flat=True)
 
     def get_nonremoveable_tags(self):
         return self.permalink.tags.values_list(flat=True)
