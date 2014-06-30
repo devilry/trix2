@@ -71,6 +71,7 @@ angular.module('trixStudent.assignments.controllers', [])
       # $scope.howsolved = 'withhelp'
 
     $scope.notSolved = ->
+      $scope.saving = true
       $http.delete($scope._getApiUrl())
         .success (data) ->
           $scope.saving = false

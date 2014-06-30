@@ -247,7 +247,7 @@ class Assignment(models.Model):
     #         self.tags.add(tag)
 
 
-class AssignmentSolution(models.Model):
+class HowSolved(models.Model):
     """This class holds information on how the assignment was solved.
 
 

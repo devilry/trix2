@@ -16,7 +16,7 @@ class TestHowSolved(TestCase, LoginTestCaseMixin):
         return reverse('trix_student_howsolved', args=[id])
 
     def test_create(self):
-        self.assertEquals(models.AssignmentSolution.objects.count(), 0)
+        self.assertEquals(models.HowSolved.objects.count(), 0)
         response = self.post_as(
             self.testuser, self._geturl(self.assignment.id),
             content_type='application/json',
@@ -27,15 +27,15 @@ class TestHowSolved(TestCase, LoginTestCaseMixin):
         self.assertEquals(response.status_code, 200)
         responsedata = json.loads(response.content)
         self.assertEquals(responsedata, {'howsolved': 'bymyself'})
-        self.assertEquals(models.AssignmentSolution.objects.count(), 1)
-        solved = models.AssignmentSolution.objects.first()
+        self.assertEquals(models.HowSolved.objects.count(), 1)
+        solved = models.HowSolved.objects.first()
         self.assertEquals(solved.howsolved, 'bymyself')
 
     def test_update(self):
-        models.AssignmentSolution.objects.create(
+        models.HowSolved.objects.create(
             user=self.testuser, assignment=self.assignment,
             howsolved='withhelp')
-        self.assertEquals(models.AssignmentSolution.objects.count(), 1)
+        self.assertEquals(models.HowSolved.objects.count(), 1)
         response = self.post_as(
             self.testuser, self._geturl(self.assignment.id),
             content_type='application/json',
@@ -46,8 +46,8 @@ class TestHowSolved(TestCase, LoginTestCaseMixin):
         self.assertEquals(response.status_code, 200)
         responsedata = json.loads(response.content)
         self.assertEquals(responsedata, {'howsolved': 'bymyself'})
-        self.assertEquals(models.AssignmentSolution.objects.count(), 1)
-        solved = models.AssignmentSolution.objects.first()
+        self.assertEquals(models.HowSolved.objects.count(), 1)
+        solved = models.HowSolved.objects.first()
         self.assertEquals(solved.howsolved, 'bymyself')
 
     def test_post_invalid_json(self):
@@ -71,14 +71,14 @@ class TestHowSolved(TestCase, LoginTestCaseMixin):
         self.assertEquals(response.status_code, 400)
 
     def test_delete(self):
-        models.AssignmentSolution.objects.create(
+        models.HowSolved.objects.create(
             user=self.testuser, assignment=self.assignment,
             howsolved='withhelp')
-        self.assertEquals(models.AssignmentSolution.objects.count(), 1)
+        self.assertEquals(models.HowSolved.objects.count(), 1)
         response = self.delete_as(
             self.testuser, self._geturl(self.assignment.id))
         self.assertEquals(response.status_code, 200)
-        self.assertEquals(models.AssignmentSolution.objects.count(), 0)
+        self.assertEquals(models.HowSolved.objects.count(), 0)
 
     def test_delete_invalid_assignment_id(self):
         response = self.delete_as(
