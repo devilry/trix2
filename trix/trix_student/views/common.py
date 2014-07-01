@@ -37,6 +37,8 @@ class AssignmentListViewBase(ListView):
     def _get_assignments_solved_percentage(self):
         num_solved = models.HowSolved.objects.filter(assignment__in=self.get_queryset()).count()
         num_total = self.get_queryset().count()
+        if num_total == 0:
+            return 0
         return int(num_solved / float(num_total) * 100)
 
     def _get_selectable_tags(self):
