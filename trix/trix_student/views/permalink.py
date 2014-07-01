@@ -14,9 +14,10 @@ class PermalinkView(AssignmentListViewBase):
     def get(self, request, **kwargs):
         self.permalink_id = kwargs['permalink_id']
         self.permalink = get_object_or_404(models.Permalink, id=self.permalink_id)
-        
-        self.all_available_assignments = models.Assignment.objects.all()
-        #TODO filter
+    
+
+        self.all_available_assignments = models.Assignment.objects\
+                    .filter_by_tags(self.permalink.tags.all())
 
         return super(PermalinkView, self).get(request, **kwargs)
 

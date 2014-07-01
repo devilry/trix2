@@ -212,6 +212,11 @@ class AssignmentManager(models.Manager):
     def filter_by_tag(self, tag):
         return self.get_queryset().filter_by_tag(tag)
 
+    def filter_by_tags(self, tags):
+        qryset = self.get_queryset()
+        for tag in tags:
+            qryset = qryset.filter_by_tag(tag)
+        return qryset
 
 class Assignment(models.Model):
     title = models.CharField(
