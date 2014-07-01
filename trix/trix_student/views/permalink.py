@@ -36,3 +36,8 @@ class PermalinkView(AssignmentListViewBase):
         context['permalink'] = self.permalink
 
         return context
+
+
+class PermalinkListView(ListView):
+    model = models.Permalink
+    template_name = "trix_student/permalink_list.django.html"

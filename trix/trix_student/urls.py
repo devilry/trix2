@@ -15,6 +15,7 @@ urlpatterns = patterns('trix',
         name='trix_student_howsolved'),
     url('^course/(?P<course_id>\d+)$', course.CourseDetailView.as_view(), name='trix_student_course'),
     url('^permalink/(?P<permalink_id>\d+)$', permalink.PermalinkView.as_view(), name='trix_student_permalink'),
+    url('^permalink/list/$', permalink.PermalinkListView.as_view(), name='trix_student_permalink_list_view'),
     url(r'^login$', 'trix_student.views.login.loginview', name='trix-login'),
     url(r'^logout$', 'trix_student.views.logout.logoutview', name='trix-logout'),
 )
