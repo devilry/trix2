@@ -1,7 +1,13 @@
-{% extends "trix_student/base.django.html" %}
+{% extends "trix_student/assignment_list_base.django.html" %}
 
-{% block body %}
-    <div class="container">
-        <h2>Hei</h2>
-    </div>
-{% endblock body %}
+{% block pageheader %}
+
+        <div id="assignments-heading" class="page-header">
+            <div class="container">
+                <h1>
+                    {{ permalink.title }}
+                </h1>
+                <p>{{ permalink.description }}</p>
+            </div>
+        </div>     
+{% endblock pageheader %}
