@@ -15,13 +15,25 @@
 
 .trix-assignment {
     margin-bottom: 80px;
-    padding-top: 80px;
-    border-top: 1px solid #eee;
+    // padding-top: 80px;
+    // border-top: 1px solid #eee;
+    padding: 15px 20px;
+    font-size: @trix-article-font-size;
+
+    &.trix-assignment-notsolved {
+        background-color: #f4f4f4;
+    }
+    &.trix-assignment-solvedwithhelp {
+        background-color: @state-warning-bg;
+    }
+    &.trix-assignment-solvedbymyself {
+        background-color: @state-success-bg;
+    }
 
     @media (min-width: @screen-sm-min) {
         &:first-child {
-            border-top: none;
-            padding-top: 0;
+            // border-top: none;
+            // padding-top: 0;
         }
     }
 
@@ -43,6 +55,9 @@
     }
     .trix-assignmentsolution {
         margin-top: 10px;
+        .trix-assignmentsolutionexpander {
+            cursor: pointer;
+        }
         .trix-markdownarticle {
             background-color: #fff;
             padding: 20px;

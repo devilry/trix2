@@ -36,7 +36,7 @@ angular.module('trixStudent.assignments.controllers', [])
     $scope.isVisible = false
 ])
 
-.controller('HowSolvedCtrl', [
+.controller('AssignmentCtrl', [
   '$scope', '$http',
   ($scope, $http) ->
     $scope.howsolved = null
@@ -45,15 +45,16 @@ angular.module('trixStudent.assignments.controllers', [])
     $scope.boxClass = ''
 
     $scope.$watch 'howsolved', (newValue) ->
+      console.log newValue
       if newValue == 'bymyself'
         $scope.buttonClass = 'btn-success'
-        $scope.boxClass = 'alert alert-success'
+        $scope.boxClass = 'trix-assignment-solvedbymyself'
       else if newValue == 'withhelp'
         $scope.buttonClass = 'btn-warning'
-        $scope.boxClass = 'alert alert-warning'
+        $scope.boxClass = 'trix-assignment-solvedwithhelp'
       else
         $scope.buttonClass = 'btn-default'
-        $scope.boxClass = ''
+        $scope.boxClass = 'trix-assignment-notsolved'
       return
 
     $scope._getApiUrl = ->
@@ -90,6 +91,10 @@ angular.module('trixStudent.assignments.controllers', [])
         .success (data) ->
           $scope.saving = false
           $scope.howsolved = null
-        .error (data) ->
-          $scope._showError('An error occurred!')
+        .error (data, status) ->
+          if status == 404  # Handle 404 just like 200
+            $scope.saving = false
+            $scope.howsolved = null
+          else
+            $scope._showError('An error occurred!')
 ])

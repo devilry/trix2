@@ -7420,14 +7420,17 @@ fieldset[disabled] .btn-trix-admin.active {
 }
 .trix-assignment {
   margin-bottom: 80px;
-  padding-top: 80px;
-  border-top: 1px solid #eee;
+  padding: 15px 20px;
+  font-size: 18px;
 }
-@media (min-width: 768px) {
-  .trix-assignment:first-child {
-    border-top: none;
-    padding-top: 0;
-  }
+.trix-assignment.trix-assignment-notsolved {
+  background-color: #f4f4f4;
+}
+.trix-assignment.trix-assignment-solvedwithhelp {
+  background-color: #fcf8e3;
+}
+.trix-assignment.trix-assignment-solvedbymyself {
+  background-color: #dff0d8;
 }
 .trix-assignment > h2 {
   margin-top: 0;
@@ -7442,6 +7445,9 @@ fieldset[disabled] .btn-trix-admin.active {
 }
 .trix-assignment .trix-assignmentsolution {
   margin-top: 10px;
+}
+.trix-assignment .trix-assignmentsolution .trix-assignmentsolutionexpander {
+  cursor: pointer;
 }
 .trix-assignment .trix-assignmentsolution .trix-markdownarticle {
   background-color: #fff;

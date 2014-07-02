@@ -21,6 +21,7 @@ class AssignmentListViewBase(ListView):
         if self.selected_tags:
             for tagstring in self.selected_tags:
                 assignments = assignments.filter(tags__tag=tagstring)
+        assignments = assignments.order_by('title')
         return assignments
 
     def _get_user_is_admin(self):
@@ -66,7 +67,7 @@ class AssignmentListViewBase(ListView):
         Returns:
             A list with ``(assignment, howsolved)`` tuples where ``howsolved``
             is one of the valid values for the ``howsolved`` field in
-            :class:`trix.trix_core.models.HowSolved``, or None if there is no
+            :class:`trix.trix_core.models.HowSolved``, or empty string if there is no
             HowSolved object for ``request.user`` for the assignment.
         """
         howsolvedmap = {}  # Map of assignment ID to HowSolved.howsolved for request.user
@@ -74,7 +75,7 @@ class AssignmentListViewBase(ListView):
             howsolvedquery = models.HowSolved.objects.filter(assignment__in=assignment_list)
             howsolvedmap = dict(howsolvedquery.values_list('assignment_id', 'howsolved'))
         return [
-            (assignment, howsolvedmap.get(assignment.id, None))
+            (assignment, howsolvedmap.get(assignment.id, ''))
             for assignment in assignment_list]
 
     def get_context_data(self, **kwargs):

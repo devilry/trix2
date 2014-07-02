@@ -19,6 +19,9 @@ class HowsolvedView(View):
 
     def _bad_request_response(self, data):
         return http.HttpResponseBadRequest(json.dumps(data), content_type='application/json')
+    
+    def _not_found_response(self, data):
+        return http.HttpResponseNotFound(json.dumps(data), content_type='application/json')
 
     def _200_response(self, data):
         return http.HttpResponse(json.dumps(data), content_type='application/json')
@@ -65,7 +68,9 @@ class HowsolvedView(View):
         try:
             howsolved = self._get_howsolved(self.kwargs['assignment_id'])
         except models.HowSolved.DoesNotExist:
-            raise http.Http404()
+            return self._not_found_response({
+                'message': 'No HowSolved for this user and assignment.'
+            })
         else:
             howsolved.delete()
             return self._200_response({'success': True})

@@ -42,22 +42,23 @@
     '$scope', function($scope) {
       return $scope.isVisible = false;
     }
-  ]).controller('HowSolvedCtrl', [
+  ]).controller('AssignmentCtrl', [
     '$scope', '$http', function($scope, $http) {
       $scope.howsolved = null;
       $scope.saving = false;
       $scope.buttonClass = 'btn-default';
       $scope.boxClass = '';
       $scope.$watch('howsolved', function(newValue) {
+        console.log(newValue);
         if (newValue === 'bymyself') {
           $scope.buttonClass = 'btn-success';
-          $scope.boxClass = 'alert alert-success';
+          $scope.boxClass = 'trix-assignment-solvedbymyself';
         } else if (newValue === 'withhelp') {
           $scope.buttonClass = 'btn-warning';
-          $scope.boxClass = 'alert alert-warning';
+          $scope.boxClass = 'trix-assignment-solvedwithhelp';
         } else {
           $scope.buttonClass = 'btn-default';
-          $scope.boxClass = '';
+          $scope.boxClass = 'trix-assignment-notsolved';
         }
       });
       $scope._getApiUrl = function() {
@@ -91,8 +92,13 @@
         return $http["delete"]($scope._getApiUrl()).success(function(data) {
           $scope.saving = false;
           return $scope.howsolved = null;
-        }).error(function(data) {
-          return $scope._showError('An error occurred!');
+        }).error(function(data, status) {
+          if (status === 404) {
+            $scope.saving = false;
+            return $scope.howsolved = null;
+          } else {
+            return $scope._showError('An error occurred!');
+          }
         });
       };
     }
