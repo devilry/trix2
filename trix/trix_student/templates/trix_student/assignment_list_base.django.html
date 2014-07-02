@@ -12,7 +12,9 @@
         <div class="row">
             <div id="assignments-taggingbox" class="col-sm-3 col-sm-push-9 col-md-3 col-md-push-9">
                 {% if request.user.is_authenticated %}
-                    <div ng-controller="AssignmentListProgressController" ng-cloak>
+                    <div ng-controller="AssignmentListProgressController"
+                            class="assignments-progressbox"
+                            ng-cloak>
                         <div ng-show="loading">
                             <span class="fa fa-spin fa-spinner"></span>
                             <span class="sr-only">{% trans "Loading progress..." %}</span>

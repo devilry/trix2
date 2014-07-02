@@ -7455,10 +7455,13 @@ fieldset[disabled] .btn-trix-admin.active {
   margin-top: 5px;
   border: 1px solid #eee;
 }
-#assignments-taggingbox *:first-child h3 {
-  margin-top: 0;
+#assignments-taggingbox .assignments-progressbox {
+  min-height: 80px;
 }
-#assignments-taggingbox .progress {
+#assignments-taggingbox .assignments-progressbox .fa.fa-spin {
+  font-size: 30px;
+}
+#assignments-taggingbox .assignments-progressbox .progress {
   margin-bottom: 10px;
 }
 #assignments-taggingbox h3 {
@@ -7485,6 +7488,9 @@ fieldset[disabled] .btn-trix-admin.active {
 .trix-markdownarticle pre,
 .trix-markdownarticle .codehilite {
   margin-bottom: 32.4px;
+}
+.trix-markdownarticle pre {
+  background-color: #fff;
 }
 .trix-markdownarticle h1 {
   font-size: 29px;

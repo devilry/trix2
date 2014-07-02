@@ -69,12 +69,18 @@
 
 
 #assignments-taggingbox {
-    *:first-child h3 {
-        margin-top: 0;
-    }
+    // *:first-child h3 {
+    //     margin-top: 0;
+    // }
 
-    .progress {
-        margin-bottom: 10px;
+    .assignments-progressbox {
+        min-height: 80px;
+        .fa.fa-spin {
+            font-size: 30px;
+        }
+        .progress {
+            margin-bottom: 10px;
+        }
     }
 
     h3 {
@@ -106,6 +112,9 @@
 
     pre, .codehilite {
         margin-bottom: @trix-article-font-size * 1.8;
+    }
+    pre {
+        background-color: #fff;
     }
 
     // p, pre, blockquote {
