@@ -49,7 +49,6 @@
       $scope.buttonClass = 'btn-default';
       $scope.boxClass = '';
       $scope.$watch('howsolved', function(newValue) {
-        console.log(newValue);
         if (newValue === 'bymyself') {
           $scope.buttonClass = 'btn-success';
           $scope.boxClass = 'trix-assignment-solvedbymyself';

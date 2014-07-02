@@ -45,7 +45,6 @@ angular.module('trixStudent.assignments.controllers', [])
     $scope.boxClass = ''
 
     $scope.$watch 'howsolved', (newValue) ->
-      console.log newValue
       if newValue == 'bymyself'
         $scope.buttonClass = 'btn-success'
         $scope.boxClass = 'trix-assignment-solvedbymyself'

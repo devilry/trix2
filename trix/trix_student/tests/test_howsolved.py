@@ -84,4 +84,3 @@ class TestHowSolved(TestCase, LoginTestCaseMixin):
         response = self.delete_as(
             self.testuser, self._geturl(100001))
         self.assertEquals(response.status_code, 404)
-        print response
