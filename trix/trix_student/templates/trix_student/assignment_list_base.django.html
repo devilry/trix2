@@ -60,7 +60,7 @@
                 {% endif %}
             </div>
             <div class="col-sm-9 col-sm-pull-3 col-md-9 col-md-pull-3">
-                {% for assignment in assignment_list %}
+                {% for assignment, howsolved in assignmentlist_with_howsolved %}
                     <section class="trix-assignment">
                         {% if user_is_admin %}
                             <a href="{% url 'trix_courseadmin-assignments-edit' course.id assignment.id %}?{{ urlencoded_success_url }}"
@@ -84,7 +84,7 @@
                             <div class="trix-assignmenthowsolved" ng-cloak
                                     ng-controller="HowSolvedCtrl"
                                     ng-class="boxClass"
-                                    ng-init="assignment_id='{{ assignment.id }}'">
+                                    ng-init="assignment_id='{{ assignment.id }}'; howsolved='{{ howsolved }}';">
                                 <p>
                                     {% trans "How did you solve the assignment?" %}
                                 </p>

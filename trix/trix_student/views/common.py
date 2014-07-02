@@ -58,8 +58,24 @@ class AssignmentListViewBase(ListView):
             tags.sort()
         return tags
 
-    # def _assignmentlist_with_howsolved(self, assignment_list):
+    def _get_assignmentlist_with_howsolved(self, assignment_list):
+        """
+        Expand the given list of Assignment objects with information
+        about how ``request.user`` solved the assignment.
 
+        Returns:
+            A list with ``(assignment, howsolved)`` tuples where ``howsolved``
+            is one of the valid values for the ``howsolved`` field in
+            :class:`trix.trix_core.models.HowSolved``, or None if there is no
+            HowSolved object for ``request.user`` for the assignment.
+        """
+        howsolvedmap = {}  # Map of assignment ID to HowSolved.howsolved for request.user
+        if self.request.user.is_authenticated():
+            howsolvedquery = models.HowSolved.objects.filter(assignment__in=assignment_list)
+            howsolvedmap = dict(howsolvedquery.values_list('assignment_id', 'howsolved'))
+        return [
+            (assignment, howsolvedmap.get(assignment.id, None))
+            for assignment in assignment_list]
 
     def get_context_data(self, **kwargs):
         context = super(AssignmentListViewBase, self).get_context_data(**kwargs)
@@ -73,17 +89,8 @@ class AssignmentListViewBase(ListView):
 
         context['assignments_solved_percentage'] = self._get_assignments_solved_percentage()
         # context['assignments_solved_percentage'] = 81
-        # context['assignment_list_with'] = 
-        # print
-        # print
-        # print '='*70
-        # print
-        # from pprint import pprint
-        # pprint(context)
-        # print
-        # print '='*70
-        # print
-        # print
+        context['assignmentlist_with_howsolved'] = self._get_assignmentlist_with_howsolved(
+            context['assignment_list'])
         return context
 
     def get_all_available_assignments(self):
