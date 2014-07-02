@@ -1,6 +1,3 @@
-import urllib
-from django.views.generic import ListView
-# from django import forms
 from django.shortcuts import get_object_or_404
 
 from trix.trix_core import models
@@ -14,12 +11,12 @@ class CourseDetailView(AssignmentListViewBase):
     def get(self, request, **kwargs):
         self.course_id = kwargs['course_id']
         self.course = get_object_or_404(models.Course, id=self.course_id)
-        
-        self.all_available_assignments = models.Assignment.objects\
+        return super(CourseDetailView, self).get(request, **kwargs)
+
+    def get_all_available_assignments(self):
+        return models.Assignment.objects\
             .filter_by_tag(self.course.course_tag)\
             .filter_by_tag(self.course.active_period)
-
-        return super(CourseDetailView, self).get(request, **kwargs)
 
     def get_already_selected_tags(self):
         already_selected_tags = [
@@ -33,7 +30,5 @@ class CourseDetailView(AssignmentListViewBase):
 
     def get_context_data(self, **kwargs):
         context = super(CourseDetailView, self).get_context_data(**kwargs)
-
         context['course'] = self.course
-
         return context

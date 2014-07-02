@@ -1,4 +1,3 @@
-import urllib
 from django.views.generic import ListView
 # from django import forms
 from django.shortcuts import get_object_or_404
@@ -14,12 +13,11 @@ class PermalinkView(AssignmentListViewBase):
     def get(self, request, **kwargs):
         self.permalink_id = kwargs['permalink_id']
         self.permalink = get_object_or_404(models.Permalink, id=self.permalink_id)
-    
-
-        self.all_available_assignments = models.Assignment.objects\
-                    .filter_by_tags(self.permalink.tags.all())
-
         return super(PermalinkView, self).get(request, **kwargs)
+
+    def get_all_available_assignments(self):
+        return models.Assignment.objects\
+            .filter_by_tags(self.permalink.tags.all())
 
     def get_already_selected_tags(self):
         already_selected_tags = []
@@ -28,13 +26,11 @@ class PermalinkView(AssignmentListViewBase):
         return already_selected_tags
 
     def get_nonremoveable_tags(self):
-        return self.permalink.tags.values_list('tag',flat=True)
+        return self.permalink.tags.values_list('tag', flat=True)
 
     def get_context_data(self, **kwargs):
         context = super(PermalinkView, self).get_context_data(**kwargs)
-
         context['permalink'] = self.permalink
-
         return context
 
 

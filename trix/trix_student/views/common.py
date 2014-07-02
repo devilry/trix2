@@ -1,9 +1,9 @@
 import urllib
 from django.views.generic import ListView
 # from django import forms
-from django.shortcuts import get_object_or_404
 
 from trix.trix_core import models
+
 
 class AssignmentListViewBase(ListView):
     paginate_by = 100
@@ -11,15 +11,13 @@ class AssignmentListViewBase(ListView):
     already_selected_tags = []
 
     def get(self, request, **kwargs):
-
         self.selected_tags = self._get_selected_tags()
         self.selectable_tags = self._get_selectable_tags()
         self.non_removeable_tags = self.get_nonremoveable_tags()
-
         return super(AssignmentListViewBase, self).get(request, **kwargs)
         
     def get_queryset(self):
-        assignments = self.all_available_assignments
+        assignments = self.get_all_available_assignments()
         if self.selected_tags:
             for tagstring in self.selected_tags:
                 assignments = assignments.filter(tags__tag=tagstring)
@@ -73,6 +71,9 @@ class AssignmentListViewBase(ListView):
         context['assignments_solved_percentage'] = self._get_assignments_solved_percentage()
         # context['assignments_solved_percentage'] = 81
         return context
+
+    def get_all_available_assignments(self):
+        raise NotImplementedError()
 
     def get_nonremoveable_tags(self):
         raise NotImplementedError()
