@@ -1,8 +1,16 @@
 {% extends "trix_student/assignment_list_base.django.html" %}
+{% load i18n %}
 
 {% block pageheader %}
     <div id="assignments-heading" class="page-header">
         <div class="container">
+            {% if user_is_admin %}
+                <a href="{% url 'trix_courseadmin-permalinks-edit' course.id permalink.id %}"
+                        class="btn btn-trix-admin pull-right">
+                    <span class="fa fa-edit"></span>
+                    {% trans "Edit" %}
+                </a>
+            {% endif %}
             <h1>
                 {{ permalink.title }}
             </h1>
