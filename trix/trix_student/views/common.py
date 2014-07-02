@@ -58,6 +58,9 @@ class AssignmentListViewBase(ListView):
             tags.sort()
         return tags
 
+    # def _assignmentlist_with_howsolved(self, assignment_list):
+
+
     def get_context_data(self, **kwargs):
         context = super(AssignmentListViewBase, self).get_context_data(**kwargs)
 
@@ -70,6 +73,17 @@ class AssignmentListViewBase(ListView):
 
         context['assignments_solved_percentage'] = self._get_assignments_solved_percentage()
         # context['assignments_solved_percentage'] = 81
+        # context['assignment_list_with'] = 
+        # print
+        # print
+        # print '='*70
+        # print
+        # from pprint import pprint
+        # pprint(context)
+        # print
+        # print '='*70
+        # print
+        # print
         return context
 
     def get_all_available_assignments(self):

@@ -31,6 +31,7 @@ class PermalinkView(AssignmentListViewBase):
     def get_context_data(self, **kwargs):
         context = super(PermalinkView, self).get_context_data(**kwargs)
         context['permalink'] = self.permalink
+        context['course'] = self.permalink.course
         return context
 
 
