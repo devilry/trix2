@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: trix_student\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-07-02 18:42+0000\n"
-"PO-Revision-Date: 2014-07-02 20:42+0100\n"
+"POT-Creation-Date: 2014-07-02 22:14+0000\n"
+"PO-Revision-Date: 2014-07-03 00:15+0100\n"
 "Last-Translator: Espen Angell Kristiansen <post@espenak.net>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: nb\n"
@@ -43,6 +43,7 @@ msgstr "Velg en tag"
 
 #: templates/trix_student/assignment_list_base.django.html:82
 #: templates/trix_student/course.django.html:13
+#: templates/trix_student/permalink.django.html:11
 msgid "Edit"
 msgstr "Rediger"
 
@@ -73,6 +74,23 @@ msgstr "Vis løsningsforslag"
 #: templates/trix_student/base.django.html:11
 msgid "Trix"
 msgstr "Trix"
+
+#: templates/trix_student/base.django.html:31
+msgid "You are not authenticated."
+msgstr "Du er ikke logget inn."
+
+#: templates/trix_student/base.django.html:32
+msgid ""
+"If you are not authenticated, you will not be able to keep track of your "
+"progress."
+msgstr ""
+"Så lenge du ikke er logget inn går du glipp av muligheten for å holde styr "
+"på din egen progresjon."
+
+#: templates/trix_student/base.django.html:36
+#: templates/trix_student/include/header.django.html:42
+msgid "Sign in"
+msgstr "Logg inn"
 
 #: templates/trix_student/dashboard.django.html:3
 msgid "Trix - student"
@@ -114,17 +132,9 @@ msgstr "Vis/sjul navigering"
 msgid "Administer"
 msgstr "Administrer"
 
-#: templates/trix_student/include/header.django.html:33
-msgid "Permalinks"
-msgstr "Permalinker"
-
-#: templates/trix_student/include/header.django.html:42
+#: templates/trix_student/include/header.django.html:37
 msgid "Sign out"
 msgstr "Logg ut"
-
-#: templates/trix_student/include/header.django.html:47
-msgid "Sign in"
-msgstr "Logg inn"
 
 #: templates/trix_student/include/pager.django.html:24
 msgid "Previous"
@@ -156,6 +166,9 @@ msgid ""
 msgstr ""
 "Venligst skriv inn en gyldig epostaddresse og passord. Begge feltene skiller "
 "mellom store og små bokstaver."
+
+#~ msgid "Permalinks"
+#~ msgstr "Permalinker"
 
 #~ msgid "Course list"
 #~ msgstr "Kursliste"

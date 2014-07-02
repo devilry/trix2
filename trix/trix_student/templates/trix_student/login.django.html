@@ -4,6 +4,7 @@
 
 {% block title %}{% trans "Trix login" %}{% endblock title %}
 
+{% block not_signed_in_warning %}{% endblock %}
 {% block body %}
 
     <div class="page-header">
@@ -14,11 +15,5 @@
 
     <div class="container">
         {% crispy form form.helper %}
-        {% comment %}
-        <p class="loginregistermeta">
-            <a href="{% url 'trafo-password_reset' %}">Glemt passordet?</a>
-            Har du ikke en bruker? <a href="{% url 'trafo-register' %}">Registrer deg</a>.
-        </p>
-        {% endcomment %}
     </div>
 {% endblock %}

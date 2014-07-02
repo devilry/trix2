@@ -23,6 +23,22 @@
 
     <body>
         {% include "trix_student/include/header.django.html" %}
+        {% block not_signed_in_warning %}
+            {% if not request.user.is_authenticated %}
+                <div class="alert alert-warning alert-edgetoedge alert-nomargin">
+                    <div class="container">
+                        <p>
+                            <strong>{% trans "You are not authenticated." %}</strong>
+                            {% trans "If you are not authenticated, you will not be able to keep track of your progress." %}
+                        </p>
+                        <a href="{% url 'trix-login' %}" class="btn btn-warning">
+                            <span class="fa fa-sign-in"></span>
+                            {% trans "Sign in" %}
+                        </a>
+                    </div>
+                </div>
+            {% endif %}
+        {% endblock not_signed_in_warning %}
         {% block body %}{% endblock %}
     </body>
 </html>

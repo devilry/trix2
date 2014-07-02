@@ -7354,6 +7354,9 @@ nav#trix_header {
   border-left-width: 0;
   border-right-width: 0;
 }
+.alert-nomargin {
+  margin: 0;
+}
 .alert-staff {
   background-color: #333333;
   border-color: #000000;
