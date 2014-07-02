@@ -7,7 +7,6 @@ from django_cradmin.viewhelpers import update
 from django_cradmin.viewhelpers import delete
 from django_cradmin import crapp
 from crispy_forms import layout
-from django_cradmin.acemarkdown.widgets import AceMarkdownWidget
 
 from trix.trix_core import models as trix_models
 from trix.trix_admin import formfields
@@ -19,13 +18,13 @@ class TitleColumn(objecttable.MultiActionColumn):
     def get_buttons(self, permalink):
         return [
             objecttable.Button(
-                label='Edit',
+                label=_('Edit'),
                 url=self.reverse_appurl('edit', args=[permalink.id])),
             objecttable.Button(
-                label='View',
+                label=_('View'),
                 url=reverse('trix_student_permalink', args=[permalink.id])),
             objecttable.Button(
-                label='Delete',
+                label=_('Delete'),
                 url=self.reverse_appurl('delete', args=[permalink.id]),
                 buttonclass="danger"),
         ]
@@ -65,6 +64,7 @@ class PermalinkListView(objecttable.ObjectTableView):
 
 class PermalinkCreateUpdateMixin(object):
     model = trix_models.Permalink
+    roleid_field = 'course'
 
     # def get_preview_url(self):
     #     return reverse('lokalt_company_product_preview')
@@ -80,7 +80,6 @@ class PermalinkCreateUpdateMixin(object):
     def get_form(self, *args, **kwargs):
         form = super(PermalinkCreateUpdateMixin, self).get_form(*args, **kwargs)
         form.fields['tags'] = formfields.ManyToManyTagInputField(required=False)
-        form.fields['description'].widget = AceMarkdownWidget()
         return form
 
     def form_saved(self, permalink):
