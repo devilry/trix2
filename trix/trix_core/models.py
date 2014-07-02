@@ -35,13 +35,15 @@ class User(AbstractBaseUser):
     """
     The Trix user model.
     """
-    is_active = models.BooleanField(default=True,
-            verbose_name=_('Is active?'),
-            help_text=_('User is active? Inactive users can not log in.'))
+    is_active = models.BooleanField(
+        default=True,
+        verbose_name=_('Is active?'),
+        help_text=_('User is active? Inactive users can not log in.'))
 
-    is_admin = models.BooleanField(default=False,
-            verbose_name=_('Is admin?'),
-            help_text=_('User is admin? Admins have full access to the admin UI.'))
+    is_admin = models.BooleanField(
+        default=False,
+        verbose_name=_('Is admin?'),
+        help_text=_('User is admin? Admins have full access to the admin UI.'))
 
     email = models.EmailField(max_length=250, blank=False, unique=True)
 
@@ -50,11 +52,9 @@ class User(AbstractBaseUser):
 
     objects = TrixUserManager()
 
-
     class Meta:
         verbose_name = _("User")
         verbose_name_plural = _("Users")
-
 
     def __unicode__(self):
         return self.displayname
@@ -100,11 +100,9 @@ class User(AbstractBaseUser):
         return self.is_admin
 
 
-
 class TagQuerySet(models.query.QuerySet):
     def to_unicode(self):
         return ', '.join(tag.tag for tag in self.all())
-
 
 
 class TagManager(models.Manager):
@@ -119,7 +117,6 @@ class TagManager(models.Manager):
         except Tag.DoesNotExist:
             tag = Tag.objects.create(tag=tag)
         return tag
-
 
 
 class Tag(models.Model):
@@ -178,13 +175,16 @@ class Course(models.Model):
     """
     admins = models.ManyToManyField(User)
     description = models.TextField(
-            blank=True, null=False, default='') 
+        verbose_name=_('Description'),
+        blank=True, null=False, default='')
 
     #: TODO: Limit choices to ``c``-tags
     course_tag = models.ForeignKey(Tag, related_name='course_set')
 
     #: TODO: Limit choices to ``p``-tags
-    active_period = models.ForeignKey(Tag, related_name='active_period_set',
+    active_period = models.ForeignKey(
+        Tag,
+        related_name='active_period_set',
         null=True, blank=True)
 
     class Meta:
@@ -218,11 +218,13 @@ class AssignmentManager(models.Manager):
             qryset = qryset.filter_by_tag(tag)
         return qryset
 
+
 class Assignment(models.Model):
     title = models.CharField(
         max_length=255,
         verbose_name=_('Title'))
-    tags = models.ManyToManyField(Tag,
+    tags = models.ManyToManyField(
+        Tag,
         verbose_name=_('Tags'))
     text = models.TextField(
         verbose_name=_('Assignment text'),
@@ -253,9 +255,8 @@ class Assignment(models.Model):
 
 
 class HowSolved(models.Model):
-    """This class holds information on how the assignment was solved.
-
-
+    """
+    This class holds information on how the assignment was solved.
     """
     howsolved = models.CharField(
         max_length=10,
@@ -274,12 +275,18 @@ class HowSolved(models.Model):
 
 
 class Permalink(models.Model):
-    course = models.ForeignKey(Course)
-    tags = models.ManyToManyField(Tag)
+    course = models.ForeignKey(
+        Course,
+        verbose_name=_('Course'))
+    tags = models.ManyToManyField(
+        Tag,
+        verbose_name=_('Tags'))
     title = models.CharField(
+        verbose_name=_('Title'),
         max_length=255,
         blank=True, null=False, default='')
     description = models.TextField(
+        verbose_name=_('Description'),
         blank=True, null=False, default='')
 
     class Meta:
