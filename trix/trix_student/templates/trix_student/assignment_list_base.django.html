@@ -12,25 +12,30 @@
         <div class="row">
             <div id="assignments-taggingbox" class="col-sm-3 col-sm-push-9 col-md-3 col-md-push-9">
                 {% if request.user.is_authenticated %}
-                    <div class="progress">
-                        <div class="progress-bar
-                                {% if assignments_solved_percentage < 20 %}
-                                    progress-bar-danger
-                                {% elif assignments_solved_percentage < 50 %}
-                                    progress-bar-warning
-                                {% elif assignments_solved_percentage > 80 %}
-                                    progress-bar-success
-                                {% endif %}
-                                "
-                                role="progressbar"
-                                aria-valuenow="{{ assignments_solved_percentage }}" aria-valuemin="0" aria-valuemax="100"
-                                style="width: {{ assignments_solved_percentage }}%">
-                            {{ assignments_solved_percentage }}%
+                    <div ng-controller="AssignmentListProgressController" ng-cloak>
+                        <div ng-show="loading">
+                            <span class="fa fa-spin fa-spinner"></span>
+                            <span class="sr-only">{% trans "Loading progress..." %}</span>
+                        </div>
+                        <div ng-show="!loading">
+                            {% verbatim %}
+                                <div class="progress">
+                                    <div class="progress-bar"
+                                            ng-class="progressBarClass"
+                                            role="progressbar"
+                                            aria-valuenow="{{ solvedPercentage }}"
+                                            aria-valuemin="0"
+                                            aria-valuemax="100"
+                                            style="width: {{ solvedPercentage }}%;">
+                                        {{ solvedPercentage }}%
+                                    </div>
+                                </div>
+                            {% endverbatim %}
+                            <p class="text-muted"><small>
+                                {% blocktrans with percent=solvedPercentage %}You have completed {{ percent }}% of assignments matching the currently selected tags.{% endblocktrans %}
+                            </small></p>
                         </div>
                     </div>
-                    <p class="text-muted"><small>
-                        {% blocktrans with percent=assignments_solved_percentage %}You have completed {{ percent }}% of assignments matching the currently selected tags.{% endblocktrans %}
-                    </small></p>
                 {% endif %}
                 <div ng-controller="RemoveTagCtrl" class="assignments-selectedtags-listing">
                     <h3>{% trans "Selected tags" %}:</h3>

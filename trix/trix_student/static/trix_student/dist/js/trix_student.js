@@ -43,7 +43,7 @@
       return $scope.isVisible = false;
     }
   ]).controller('AssignmentCtrl', [
-    '$scope', '$http', function($scope, $http) {
+    '$scope', '$http', '$rootScope', function($scope, $http, $rootScope) {
       $scope.howsolved = null;
       $scope.saving = false;
       $scope.buttonClass = 'btn-default';
@@ -59,6 +59,7 @@
           $scope.buttonClass = 'btn-default';
           $scope.boxClass = 'trix-assignment-notsolved';
         }
+        $rootScope.$emit('assignments.progressChanged');
       });
       $scope._getApiUrl = function() {
         return "/assignment/howsolved/" + $scope.assignment_id;
@@ -100,6 +101,35 @@
           }
         });
       };
+    }
+  ]).controller('AssignmentListProgressController', [
+    '$scope', '$http', '$rootScope', function($scope, $http, $rootScope) {
+      var apiUrl, unbindProgressChanged;
+      $scope.loading = true;
+      apiUrl = new Url();
+      apiUrl.query.progressjson = '1';
+      $scope._loadProgress = function() {
+        $scope.loading = true;
+        return $http.get(apiUrl.toString()).success(function(data) {
+          $scope.loading = false;
+          $scope.solvedPercentage = data.percent;
+          if ($scope.solvedPercentage > 1 && $scope.solvedPercentage < 20) {
+            return $scope.progressBarClass = 'progress-bar-danger';
+          } else if ($scope.solvedPercentage < 45) {
+            return $scope.progressBarClass = 'progress-bar-warning';
+          } else if ($scope.solvedPercentage === 100) {
+            return $scope.progressBarClass = 'progress-bar-success';
+          } else {
+            return $scope.progressBarClass = '';
+          }
+        }).error(function(data) {
+          return console.error('Failed to load progress:', data);
+        });
+      };
+      unbindProgressChanged = $rootScope.$on('assignments.progressChanged', function() {
+        return $scope._loadProgress();
+      });
+      return $scope.$on('$destroy', unbindProgressChanged);
     }
   ]);
 

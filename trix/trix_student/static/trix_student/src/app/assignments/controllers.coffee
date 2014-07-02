@@ -37,8 +37,8 @@ angular.module('trixStudent.assignments.controllers', [])
 ])
 
 .controller('AssignmentCtrl', [
-  '$scope', '$http',
-  ($scope, $http) ->
+  '$scope', '$http', '$rootScope',
+  ($scope, $http, $rootScope) ->
     $scope.howsolved = null
     $scope.saving = false
     $scope.buttonClass = 'btn-default'
@@ -54,6 +54,9 @@ angular.module('trixStudent.assignments.controllers', [])
       else
         $scope.buttonClass = 'btn-default'
         $scope.boxClass = 'trix-assignment-notsolved'
+
+      # Tell AssignmentListProgressController to reload
+      $rootScope.$emit('assignments.progressChanged')
       return
 
     $scope._getApiUrl = ->
@@ -96,4 +99,34 @@ angular.module('trixStudent.assignments.controllers', [])
             $scope.howsolved = null
           else
             $scope._showError('An error occurred!')
+])
+
+.controller('AssignmentListProgressController', [
+  '$scope', '$http', '$rootScope',
+  ($scope, $http, $rootScope) ->
+    $scope.loading = true
+    apiUrl = new Url()
+    apiUrl.query.progressjson = '1'
+
+    $scope._loadProgress = ->
+      $scope.loading = true
+      $http.get(apiUrl.toString())
+        .success (data) ->
+          $scope.loading = false
+          $scope.solvedPercentage = data.percent
+          if $scope.solvedPercentage > 1 and $scope.solvedPercentage < 20
+            $scope.progressBarClass = 'progress-bar-danger'
+          else if $scope.solvedPercentage < 45
+            $scope.progressBarClass = 'progress-bar-warning'
+          else if $scope.solvedPercentage == 100
+            $scope.progressBarClass = 'progress-bar-success'
+          else
+            $scope.progressBarClass = ''
+        .error (data) ->
+          console.error('Failed to load progress:', data)
+    # $scope._loadProgress()
+
+    unbindProgressChanged = $rootScope.$on 'assignments.progressChanged', ->
+      $scope._loadProgress()
+    $scope.$on('$destroy', unbindProgressChanged)
 ])

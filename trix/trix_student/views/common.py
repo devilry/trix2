@@ -1,5 +1,7 @@
 import urllib
+import json
 from django.views.generic import ListView
+from django import http
 # from django import forms
 
 from trix.trix_core import models
@@ -14,7 +16,10 @@ class AssignmentListViewBase(ListView):
         self.selected_tags = self._get_selected_tags()
         self.selectable_tags = self._get_selectable_tags()
         self.non_removeable_tags = self.get_nonremoveable_tags()
-        return super(AssignmentListViewBase, self).get(request, **kwargs)
+        if self.request.GET.get('progressjson'):
+            return self._progressjson()
+        else:
+            return super(AssignmentListViewBase, self).get(request, **kwargs)
         
     def get_queryset(self):
         assignments = self.get_all_available_assignments()
@@ -33,12 +38,24 @@ class AssignmentListViewBase(ListView):
         else:
             return False
 
-    def _get_assignments_solved_percentage(self):
+    def _get_progress(self):
         num_solved = models.HowSolved.objects.filter(assignment__in=self.get_queryset()).count()
         num_total = self.get_queryset().count()
         if num_total == 0:
-            return 0
-        return int(num_solved / float(num_total) * 100)
+            percent = 0
+        else:
+            percent = int(num_solved / float(num_total) * 100)
+        return {
+            'num_total': num_total,
+            'num_solved': num_solved,
+            'percent': percent
+        }
+
+    def _progressjson(self):
+        return http.HttpResponse(
+            json.dumps(self._get_progress()),
+            content_type='application/json'
+        )
 
     def _get_selectable_tags(self):
         already_selected_tags = self.get_already_selected_tags() + self.selected_tags
@@ -88,8 +105,6 @@ class AssignmentListViewBase(ListView):
         context['urlencoded_success_url'] = urllib.urlencode({
             'success_url': self.request.get_full_path()})
 
-        context['assignments_solved_percentage'] = self._get_assignments_solved_percentage()
-        # context['assignments_solved_percentage'] = 81
         context['assignmentlist_with_howsolved'] = self._get_assignmentlist_with_howsolved(
             context['assignment_list'])
         return context
