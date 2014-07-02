@@ -7436,9 +7436,6 @@ fieldset[disabled] .btn-trix-admin.active {
 .trix-assignment .trix-assignmenttext {
   margin-top: 40px;
 }
-.trix-assignment .trix-assignmenthowsolved {
-  margin-top: 40px;
-}
 .trix-assignment .trix-assignmenthowsolved .trix-assignmenthowsolvedsaving {
   display: inline-block;
   margin-left: 10px;
@@ -7482,11 +7479,6 @@ fieldset[disabled] .btn-trix-admin.active {
 .trix-markdownarticle pre,
 .trix-markdownarticle .codehilite {
   margin-bottom: 32.4px;
-}
-.trix-markdownarticle p:last-child,
-.trix-markdownarticle pre:last-child,
-.trix-markdownarticle blockquote:last-child {
-  margin-bottom: 0;
 }
 .trix-markdownarticle h1 {
   font-size: 29px;
