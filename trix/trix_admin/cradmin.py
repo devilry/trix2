@@ -4,6 +4,7 @@ from django_cradmin import crinstance, crmenu
 from trix.trix_core.models import Course
 # from .views import dashboard
 from .views import assignments
+from .views import permalinks
 
 
 class Menu(crmenu.Menu):
@@ -14,7 +15,11 @@ class Menu(crmenu.Menu):
             label=_('Assignments'),
             url=self.appindex_url('assignments'),
             icon="database")
-        
+        self.add(
+            label=_('Permalinks'),
+            url=self.appindex_url('permalinks'),
+            icon="link")
+
 
 class CrAdminInstance(crinstance.BaseCrAdminInstance):
     id = 'trix_courseadmin'
@@ -24,7 +29,8 @@ class CrAdminInstance(crinstance.BaseCrAdminInstance):
 
     apps = [
         # ('dashboard', dashboard.App),
-        ('assignments', assignments.App)
+        ('assignments', assignments.App),
+        ('permalinks', permalinks.App),
     ]
 
     def get_rolequeryset(self):

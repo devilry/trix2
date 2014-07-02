@@ -1,4 +1,4 @@
-# from django.core.urlresolvers import reverse
+from django.core.urlresolvers import reverse
 from django.utils.translation import ugettext_lazy as _
 from django.template.defaultfilters import truncatechars
 from django_cradmin.viewhelpers import objecttable
@@ -16,43 +16,45 @@ from trix.trix_admin import formfields
 class TitleColumn(objecttable.MultiActionColumn):
     modelfield = 'title'
 
-    def get_buttons(self, assignment):
+    def get_buttons(self, permalink):
         return [
             objecttable.Button(
-                label=_('Edit'),
-                url=self.reverse_appurl('edit', args=[assignment.id])),
+                label='Edit',
+                url=self.reverse_appurl('edit', args=[permalink.id])),
             objecttable.Button(
-                label=_('Delete'),
-                url=self.reverse_appurl('delete', args=[assignment.id]),
+                label='View',
+                url=reverse('trix_student_permalink', args=[permalink.id])),
+            objecttable.Button(
+                label='Delete',
+                url=self.reverse_appurl('delete', args=[permalink.id]),
                 buttonclass="danger"),
         ]
 
 
-class TextIntroColumn(objecttable.PlainTextColumn):
-    modelfield = 'text'
+class DescriptionIntroColumn(objecttable.PlainTextColumn):
+    modelfield = 'description'
 
-    def render_value(self, assignment):
-        return truncatechars(assignment.text, 50)
+    def render_value(self, permalink):
+        return truncatechars(permalink.description, 50)
 
 
 class TagsColumn(objecttable.PlainTextColumn):
     modelfield = 'tags'
 
-    def render_value(self, assignment):
-        return ', '.join(tag.tag for tag in assignment.tags.all())
+    def render_value(self, permalink):
+        return ', '.join(tag.tag for tag in permalink.tags.all())
 
 
-class AssignmentListView(objecttable.ObjectTableView):
-    model = trix_models.Assignment
+class PermalinkListView(objecttable.ObjectTableView):
+    model = trix_models.Permalink
     columns = [
         TitleColumn,
         TagsColumn,
-        TextIntroColumn
+        DescriptionIntroColumn
     ]
 
     def get_queryset_for_role(self, course):
-        return self.model.objects.filter(tags=course.course_tag)\
-            .prefetch_related('tags')
+        return self.model.objects.filter(course=course)
 
     def get_buttons(self):
         app = self.request.cradmin_app
@@ -61,8 +63,8 @@ class AssignmentListView(objecttable.ObjectTableView):
         ]
 
 
-class AssignmentCreateUpdateMixin(object):
-    model = trix_models.Assignment
+class PermalinkCreateUpdateMixin(object):
+    model = trix_models.Permalink
 
     # def get_preview_url(self):
     #     return reverse('lokalt_company_product_preview')
@@ -71,59 +73,57 @@ class AssignmentCreateUpdateMixin(object):
         return [
             layout.Div('title', css_class="cradmin-focusfield cradmin-focusfield-lg"),
             layout.Fieldset(_('Organize'), 'tags'),
-            layout.Div('text', css_class="cradmin-focusfield"),
-            layout.Div('solution', css_class="cradmin-focusfield"),
+            layout.Div('description', css_class="cradmin-focusfield"),
 
         ]
 
     def get_form(self, *args, **kwargs):
-        form = super(AssignmentCreateUpdateMixin, self).get_form(*args, **kwargs)
+        form = super(PermalinkCreateUpdateMixin, self).get_form(*args, **kwargs)
         form.fields['tags'] = formfields.ManyToManyTagInputField(required=False)
-        form.fields['text'].widget = AceMarkdownWidget()
-        form.fields['solution'].widget = AceMarkdownWidget()
+        form.fields['description'].widget = AceMarkdownWidget()
         return form
 
-    def form_saved(self, assignment):
+    def form_saved(self, permalink):
         course = self.request.cradmin_role
-        if not assignment.tags.filter(tag=course.course_tag).exists():
-            assignment.tags.add(course.course_tag)
+        if not permalink.tags.filter(tag=course.course_tag).exists():
+            permalink.tags.add(course.course_tag)
 
 
-class AssignmentCreateView(AssignmentCreateUpdateMixin, create.CreateView):
+class PermalinkCreateView(PermalinkCreateUpdateMixin, create.CreateView):
     """
-    View used to create new assignments.
-    """
-
-
-class AssignmentUpdateView(AssignmentCreateUpdateMixin, update.UpdateView):
-    """
-    View used to create edit existing assignments.
+    View used to create new permalinks.
     """
 
 
-class AssignmentDeleteView(delete.DeleteView):
+class PermalinkUpdateView(PermalinkCreateUpdateMixin, update.UpdateView):
     """
-    View used to delete existing assignments.
+    View used to create edit existing permalinks.
     """
-    model = trix_models.Assignment
+
+
+class PermalinkDeleteView(delete.DeleteView):
+    """
+    View used to delete existing permalinks.
+    """
+    model = trix_models.Permalink
 
 
 class App(crapp.App):
     appurls = [
         crapp.Url(
             r'^$',
-            AssignmentListView.as_view(),
+            PermalinkListView.as_view(),
             name=crapp.INDEXVIEW_NAME),
         crapp.Url(
             r'^create$',
-            AssignmentCreateView.as_view(),
+            PermalinkCreateView.as_view(),
             name="create"),
         crapp.Url(
             r'^edit/(?P<pk>\d+)$',
-            AssignmentUpdateView.as_view(),
+            PermalinkUpdateView.as_view(),
             name="edit"),
         crapp.Url(
             r'^delete/(?P<pk>\d+)$',
-            AssignmentDeleteView.as_view(),
+            PermalinkDeleteView.as_view(),
             name="delete")
     ]
