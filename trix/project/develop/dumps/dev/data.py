@@ -282,6 +282,7 @@ def import_data():
     from trix.trix_core.models import Permalink
 
     trix_core_permalink_1 = Permalink()
+    trix_core_permalink_1.course = trix_core_course_1
     trix_core_permalink_1.title = u'Treningsoppgave til Oblig 1'
     trix_core_permalink_1.description = u'Dette er oppgaver som egner seg godt til trening til oblig 1. L\xf8s oppgavene stegvis og s\xf8rg for \xe5 bruke god tid p\xe5 oppgavene for \xe5 s\xf8rge for at du er best mulig rustet til \xe5 komme i m\xe5l.'
     trix_core_permalink_1 = importer.save_or_locate(trix_core_permalink_1)

@@ -269,13 +269,15 @@ class HowSolved(models.Model):
     assignment = models.ForeignKey(Assignment)
     user = models.ForeignKey(User)
 
-    def  __unicode__(self):
+    def __unicode__(self):
         return self.howsolved
 
 
 class Permalink(models.Model):
+    course = models.ForeignKey(Course)
     tags = models.ManyToManyField(Tag)
-    title = models.CharField(max_length=255,
+    title = models.CharField(
+        max_length=255,
         blank=True, null=False, default='')
     description = models.TextField(
         blank=True, null=False, default='')
@@ -284,7 +286,7 @@ class Permalink(models.Model):
         verbose_name = _('Permalink')
         verbose_name_plural = _('Permalinks')
 
-    def  __unicode__(self):
+    def __unicode__(self):
         return self.title
 
     @property
