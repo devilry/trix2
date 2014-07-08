@@ -36,7 +36,7 @@ class CrAdminInstance(crinstance.BaseCrAdminInstance):
     def get_rolequeryset(self):
         queryset = Course.objects.all()
         if not self.request.user.is_admin:
-            queryset = queryset.filter(admins=self.requestuser)
+            queryset = queryset.filter(admins=self.request.user)
         queryset = queryset.select_related('course_tag')
         return queryset
 
