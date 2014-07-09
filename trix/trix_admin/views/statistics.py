@@ -16,8 +16,14 @@ from trix.trix_core import models as trix_models
 #     def get_queryset_for_role(self, course):
 #         return self.model.objects.filter(course=course)
 
-class TitleColumn(objecttable.PlainTextColumn):
+class StatisticsChartView(TemplateView):
+    template_name = 'trix_admin/statistics.django.html'
+
+class TitleColumn(objecttable.SingleActionColumn):
     modelfield = 'tag'
+
+    def get_actionurl(self, obj):
+        return self.reverse_appurl('view')
 
 class StatisticsView(objecttable.ObjectTableView):
     model = trix_models.Tag
@@ -34,5 +40,8 @@ class App(crapp.App):
     appurls = [
         crapp.Url(r'^$',
             StatisticsView.as_view(),
-            name=crapp.INDEXVIEW_NAME)
+            name=crapp.INDEXVIEW_NAME),
+        crapp.Url(r'^view$',
+            StatisticsChartView.as_view(),
+            name='view'),
     ]
