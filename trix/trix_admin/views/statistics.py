@@ -1,4 +1,5 @@
 from django.views.generic import TemplateView
+from django.contrib.auth import get_user_model
 
 from django_cradmin import crapp
 from django_cradmin.viewhelpers import objecttable
@@ -23,12 +24,15 @@ class StatisticsChartView(TemplateView):
         context = super(StatisticsChartView, self).get_context_data(*args, **kwargs)
 
         assignments = trix_models.Assignment.objects.filter(tags__id=kwargs['pk'])
+        user = get_user_model()
+        users = get_user_model().objects.all().count()
+        print users
 
         total = assignments.count()
-        bymyself = assignments.filter(howsolved__howsolved='bymyself').count()
-        withhelp = assignments.filter(howsolved__howsolved='withhelp').count()
-        notsolved = total - (bymyself + withhelp)
         if total > 0:
+            bymyself = assignments.filter(howsolved__howsolved='bymyself').count()
+            withhelp = assignments.filter(howsolved__howsolved='withhelp').count()
+            notsolved = total - (bymyself + withhelp)
             context['bymyself_percent'] = int(bymyself / float(total) * 100)
             context['withhelp_percent'] = int(withhelp / float(total) * 100)
             context['notsolved_percent'] = int(notsolved / float(total) * 100)
