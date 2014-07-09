@@ -19,11 +19,27 @@ from trix.trix_core import models as trix_models
 class StatisticsChartView(TemplateView):
     template_name = 'trix_admin/statistics.django.html'
 
+    def get_context_data(self, *args, **kwargs):
+        context = super(StatisticsChartView, self).get_context_data(*args, **kwargs)
+
+        assignments = trix_models.Assignment.objects.filter(tags__id=kwargs['pk'])
+
+        total = assignments.count()
+        bymyself = assignments.filter(howsolved__howsolved='bymyself').count()
+        withhelp = assignments.filter(howsolved__howsolved='withhelp').count()
+        notsolved = total - (bymyself + withhelp)
+        context['bymyself_percent'] = int(bymyself / float(total) * 100)
+        context['withhelp_percent'] = int(withhelp / float(total) * 100)
+        context['notsolved_percent'] = int(notsolved / float(total) * 100)
+
+        return context
+
+
 class TitleColumn(objecttable.SingleActionColumn):
     modelfield = 'tag'
 
     def get_actionurl(self, obj):
-        return self.reverse_appurl('view')
+        return self.reverse_appurl('view', args=[obj.id])
 
 class StatisticsView(objecttable.ObjectTableView):
     model = trix_models.Tag
@@ -41,7 +57,7 @@ class App(crapp.App):
         crapp.Url(r'^$',
             StatisticsView.as_view(),
             name=crapp.INDEXVIEW_NAME),
-        crapp.Url(r'^view$',
+        crapp.Url(r'^view/(?P<pk>\d+)$',
             StatisticsChartView.as_view(),
             name='view'),
     ]
