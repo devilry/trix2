@@ -28,10 +28,11 @@ class StatisticsChartView(TemplateView):
         bymyself = assignments.filter(howsolved__howsolved='bymyself').count()
         withhelp = assignments.filter(howsolved__howsolved='withhelp').count()
         notsolved = total - (bymyself + withhelp)
-        context['bymyself_percent'] = int(bymyself / float(total) * 100)
-        context['withhelp_percent'] = int(withhelp / float(total) * 100)
-        context['notsolved_percent'] = int(notsolved / float(total) * 100)
-
+        if total > 0:
+            context['bymyself_percent'] = int(bymyself / float(total) * 100)
+            context['withhelp_percent'] = int(withhelp / float(total) * 100)
+            context['notsolved_percent'] = int(notsolved / float(total) * 100)
+        context['total'] = total
         return context
 
 

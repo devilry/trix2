@@ -11,33 +11,44 @@
             </h1>
         </div>
     </div>
+
+{% if total > 0 %}
     <div class="container">
-        <h2>{% trans "Aggregated statistics on how the assignments where solved" %}</h2>
+        <h3>{% trans "Aggregated statistics on how the assignments where solved" %}</h3>
+        <div class="statistic-info">        
+            <ul>
+                <li><strong>{% trans "Total assignments: " %}</strong>{{ total }}</li>
+            </ul>
+        </div>
     </div>
     <div class="container">
         <div class="alert alert-success">
             <h4>{% trans "Solved by their own" %} {{ bymyself_percent }}%</h4>
             <div class="progress">
               <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="{{ bymyself_percent }}" aria-valuemin="0" aria-valuemax="100" style="width: {{ bymyself_percent }}%">
-                <span class="sr-only">40% Complete (success)</span>
-              </div>
-            </div>
-        </div>
-        <div class="alert alert-info">
-            <h4>{% trans "Solved with help" %} {{ withhelp_percent }}%</h4>
-            <div class="progress">
-              <div class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="{{ withhelp_percent }}" aria-valuemin="0" aria-valuemax="100" style="width: {{ withhelp_percent }}%">
-                <span class="sr-only">20% Complete</span>
               </div>
             </div>
         </div>
         <div class="alert alert-warning">
+            <h4>{% trans "Solved with help" %} {{ withhelp_percent }}%</h4>
+            <div class="progress">
+              <div class="progress-bar progress-bar-warning" role="progressbar" aria-valuenow="{{ withhelp_percent }}" aria-valuemin="0" aria-valuemax="100" style="width: {{ withhelp_percent }}%">
+              </div>
+            </div>
+        </div>
+        <div class="alert alert-info">
             <h4>{% trans "Not solved" %} {{ notsolved_percent }}%</h4>
             <div class="progress">
-              <div class="progress-bar progress-bar-warning" role="progressbar" aria-valuenow="{{ notsolved_percent }}" aria-valuemin="0" aria-valuemax="100" style="width: {{ notsolved_percent }}%">
-                <span class="sr-only">60% Complete (warning)</span>
+              <div class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="{{ notsolved_percent }}" aria-valuemin="0" aria-valuemax="100" style="width: {{ notsolved_percent }}%">
               </div>
             </div>
         </div>
     </div>
+{% else %}
+    <div class="container">
+        <h2>{% trans "There is no assignments with this tag" %}</h2>
+    </div>
+{% endif %}
+
+
 {% endblock content %}
