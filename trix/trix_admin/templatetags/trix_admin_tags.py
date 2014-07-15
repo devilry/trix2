@@ -18,7 +18,9 @@ def compute_stats(assignment, howsolved_filter):
     elif howsolved_filter == 'withhelp':
         numerator = assignment.howsolved_set.filter(howsolved='withhelp').count()
     else: # Not solved
-        numerator = 0
+        bymyself_count = assignment.howsolved_set.filter(howsolved='bymyself').count()
+        withhelp_count = assignment.howsolved_set.filter(howsolved='withhelp').count()
+        numerator = user_count - (bymyself_count + withhelp_count)
 
     percentage = int(numerator / float(user_count) * 100) 
     return percentage

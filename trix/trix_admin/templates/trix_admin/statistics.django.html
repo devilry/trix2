@@ -34,27 +34,17 @@
                 
                         {% with assignment|compute_stats:'bymyself' as bymyself_percent %}                        
                             <h4>{% trans "Solved by their own" %}</h4>
-                            <div class="progress">
-                              <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="{{ bymyself_percent }}" aria-valuemin="0" aria-valuemax="100" style="width: {{ bymyself_percent }}%">
-                              </div>
-                            </div>
+                            {% include "trix_admin/include/progress_bar.django.html" with percent=bymyself_percent %}
                         {% endwith %}
 
                         {% with assignment|compute_stats:'withhelp' as withhelp_percent %}
                             <h4>{% trans "Solved with help" %} {{ withhelp_percent }}%</h4>
-                            <div class="progress">
-                              <div class="progress-bar progress-bar-warning" role="progressbar" aria-valuenow="{{ withhelp_percent }}" aria-valuemin="0" aria-valuemax="100" style="width: {{ withhelp_percent }}%">
-                              </div>
-                            </div>                               
+                            {% include "trix_admin/include/progress_bar.django.html" with percent=withhelp_percent %}                              
                         {% endwith %}
-
 
                         {% with assignment|compute_stats:'notsolved' as notsolved_percent %}
                              <h4>{% trans "Not solved" %} {{ notsolved_percent }}%</h4>
-                            <div class="progress">
-                              <div class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="{{ notsolved_percent }}" aria-valuemin="0" aria-valuemax="100" style="width: {{ notsolved_percent }}%">
-                              </div>
-                            </div>                           
+                             {% include "trix_admin/include/progress_bar.django.html" with percent=notsolved_percent %}                         
                         {% endwith %}
 
 
