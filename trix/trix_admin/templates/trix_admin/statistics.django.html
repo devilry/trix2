@@ -1,5 +1,6 @@
 {% extends "django_cradmin/base.django.html" %}
-{% load i18n %}
+{% load i18n %}l
+{% load trix_admin_tags %}
 
 {% block content %}
     <div class="page-header">
@@ -21,6 +22,51 @@
             </ul>
         </div>
     </div>
+
+    <div class="container">
+        {% for assignment in assignment_list %}
+            <div class="row">
+                <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+                    <h2>{{ assignment }}</h2>
+                    
+                </div>
+                <div class="col-xs-9 col-sm-9 col-md-9 col-lg-9">
+                
+                        {% with assignment|compute_stats:'bymyself' as bymyself_percent %}                        
+                            <h4>{% trans "Solved by their own" %}</h4>
+                            <div class="progress">
+                              <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="{{ bymyself_percent }}" aria-valuemin="0" aria-valuemax="100" style="width: {{ bymyself_percent }}%">
+                              </div>
+                            </div>
+                        {% endwith %}
+
+                        {% with assignment|compute_stats:'withhelp' as withhelp_percent %}
+                            <h4>{% trans "Solved with help" %} {{ withhelp_percent }}%</h4>
+                            <div class="progress">
+                              <div class="progress-bar progress-bar-warning" role="progressbar" aria-valuenow="{{ withhelp_percent }}" aria-valuemin="0" aria-valuemax="100" style="width: {{ withhelp_percent }}%">
+                              </div>
+                            </div>                               
+                        {% endwith %}
+
+
+                        {% with assignment|compute_stats:'notsolved' as notsolved_percent %}
+                             <h4>{% trans "Not solved" %} {{ notsolved_percent }}%</h4>
+                            <div class="progress">
+                              <div class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="{{ notsolved_percent }}" aria-valuemin="0" aria-valuemax="100" style="width: {{ notsolved_percent }}%">
+                              </div>
+                            </div>                           
+                        {% endwith %}
+
+
+                </div>
+            </div>
+        {% endfor %}
+            
+
+    </div>
+
+    {% comment %}
+        
     <div class="container">
         <div class="alert alert-success">
             <h4>{% trans "Solved by their own" %} {{ bymyself_percent }}%</h4>
@@ -44,6 +90,7 @@
             </div>
         </div>
     </div>
+    {% endcomment %}
 {% else %}
     <div class="container">
         <h2>{% trans "There is no assignments with this tag" %}</h2>

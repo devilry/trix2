@@ -25,8 +25,7 @@ class StatisticsChartView(TemplateView):
 
         assignments = trix_models.Assignment.objects.filter(tags__id=kwargs['pk'])
         user = get_user_model()
-        users = get_user_model().objects.all().count()
-        print users
+        user_count = get_user_model().objects.all().count()
 
         total = assignments.count()
         if total > 0:
@@ -37,6 +36,7 @@ class StatisticsChartView(TemplateView):
             context['withhelp_percent'] = int(withhelp / float(total) * 100)
             context['notsolved_percent'] = int(notsolved / float(total) * 100)
         context['total'] = total
+        context['assignment_list'] = assignments
         return context
 
 
