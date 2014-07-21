@@ -5,6 +5,7 @@ from trix.trix_core.models import Course
 # from .views import dashboard
 from .views import assignments
 from .views import permalinks
+from .views import statistics
 
 
 class Menu(crmenu.Menu):
@@ -19,7 +20,10 @@ class Menu(crmenu.Menu):
             label=_('Permalinks'),
             url=self.appindex_url('permalinks'),
             icon="link")
-
+        self.add(
+            label=_('Statistics'),
+            url=self.appindex_url('statistics'),
+            icon='bar-chart-o')
 
 class CrAdminInstance(crinstance.BaseCrAdminInstance):
     id = 'trix_courseadmin'
@@ -31,6 +35,7 @@ class CrAdminInstance(crinstance.BaseCrAdminInstance):
         # ('dashboard', dashboard.App),
         ('assignments', assignments.App),
         ('permalinks', permalinks.App),
+        ('statistics', statistics.App),
     ]
 
     def get_rolequeryset(self):

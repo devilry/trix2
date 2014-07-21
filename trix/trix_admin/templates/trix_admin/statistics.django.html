@@ -1,0 +1,94 @@
+{% extends "django_cradmin/base.django.html" %}
+{% load i18n %}l
+{% load trix_admin_tags %}
+
+{% block content %}
+    <div class="page-header">
+        <div class="container-fluid">
+            <span class="fa fa-bar-chart-o"></span>
+            <h1>
+                {% trans "Trix" %}:
+                <strong>{% trans "Statistics" %}</strong>
+            </h1>
+        </div>
+    </div>
+
+{% if total > 0 %}
+    <div class="container">
+        <h3>{% trans "Aggregated statistics on how the assignments where solved" %}</h3>
+        <div class="statistic-info">        
+            <ul>
+                <li><strong>{% trans "Total assignments: " %}</strong>{{ total }}</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="container">
+        {% for assignment in assignment_list %}
+            <div class="row">
+                <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+                    <h2>{{ assignment }}</h2>
+                    
+                </div>
+                <div class="col-xs-8 col-sm-8 col-md-8 col-lg-8">
+                
+                        {% with assignment|compute_stats:'bymyself' as bymyself_percent %}
+                        <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+                                                    
+                            <span class="pull-left">Løst på egenhånd</span>
+                                                </div>                        
+                            {% include "trix_admin/include/progress_bar.django.html" with percent=bymyself_percent style='success' %}
+                        {% endwith %}
+
+                        {% with assignment|compute_stats:'withhelp' as withhelp_percent %}
+
+                            {% include "trix_admin/include/progress_bar.django.html" with percent=withhelp_percent style='warning'%}                              
+                        {% endwith %}
+
+                        {% with assignment|compute_stats:'notsolved' as notsolved_percent %}
+
+                             {% include "trix_admin/include/progress_bar.django.html" with percent=notsolved_percent style='info'%}                         
+                        {% endwith %}
+
+
+                </div>
+            </div>
+        {% endfor %}
+            
+
+    </div>
+
+    {% comment %}
+        
+    <div class="container">
+        <div class="alert alert-success">
+            <h4>{% trans "Solved by their own" %} {{ bymyself_percent }}%</h4>
+            <div class="progress">
+              <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="{{ bymyself_percent }}" aria-valuemin="0" aria-valuemax="100" style="width: {{ bymyself_percent }}%">
+              </div>
+            </div>
+        </div>
+        <div class="alert alert-warning">
+            <h4>{% trans "Solved with help" %} {{ withhelp_percent }}%</h4>
+            <div class="progress">
+              <div class="progress-bar progress-bar-warning" role="progressbar" aria-valuenow="{{ withhelp_percent }}" aria-valuemin="0" aria-valuemax="100" style="width: {{ withhelp_percent }}%">
+              </div>
+            </div>
+        </div>
+        <div class="alert alert-info">
+            <h4>{% trans "Not solved" %} {{ notsolved_percent }}%</h4>
+            <div class="progress">
+              <div class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="{{ notsolved_percent }}" aria-valuemin="0" aria-valuemax="100" style="width: {{ notsolved_percent }}%">
+              </div>
+            </div>
+        </div>
+    </div>
+    {% endcomment %}
+{% else %}
+    <div class="container">
+        <h2>{% trans "There is no assignments with this tag" %}</h2>
+    </div>
+{% endif %}
+
+
+{% endblock content %}
