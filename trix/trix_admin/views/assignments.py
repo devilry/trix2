@@ -42,7 +42,13 @@ class TagsColumn(objecttable.PlainTextColumn):
         return ', '.join(tag.tag for tag in assignment.tags.all())
 
 
-class AssignmentListView(objecttable.ObjectTableView):
+class AssignmentEditMixin(object):
+    def get_queryset_for_role(self, course):
+        return self.model.objects.filter(tags=course.course_tag)\
+            .prefetch_related('tags')
+
+
+class AssignmentListView(AssignmentEditMixin, objecttable.ObjectTableView):
     model = trix_models.Assignment
     columns = [
         TitleColumn,
@@ -50,14 +56,20 @@ class AssignmentListView(objecttable.ObjectTableView):
         TextIntroColumn
     ]
 
-    def get_queryset_for_role(self, course):
-        return self.model.objects.filter(tags=course.course_tag)\
-            .prefetch_related('tags')
-
     def get_buttons(self):
         app = self.request.cradmin_app
         return [
             objecttable.Button(_('Create'), url=app.reverse_appurl('create')),
+        ]
+
+    def get_multiselect_actions(self):
+        app = self.request.cradmin_app
+        return [
+            objecttable.MultiSelectAction(
+                label=_('Edit'),
+                # url=app.reverse_appurl('multiedit')
+                url='/to/do'
+            ),
         ]
 
 
@@ -95,13 +107,13 @@ class AssignmentCreateView(AssignmentCreateUpdateMixin, create.CreateView):
     """
 
 
-class AssignmentUpdateView(AssignmentCreateUpdateMixin, update.UpdateView):
+class AssignmentUpdateView(AssignmentEditMixin, AssignmentCreateUpdateMixin, update.UpdateView):
     """
     View used to create edit existing assignments.
     """
 
 
-class AssignmentDeleteView(delete.DeleteView):
+class AssignmentDeleteView(AssignmentEditMixin, delete.DeleteView):
     """
     View used to delete existing assignments.
     """
