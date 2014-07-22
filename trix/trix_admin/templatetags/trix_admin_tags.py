@@ -1,9 +1,8 @@
 from django import template
 from django.contrib.auth import get_user_model
 
-from trix.trix_core import models as trix_models
-
 register = template.Library()
+
 
 @register.filter
 def compute_stats(assignment, howsolved_filter):
@@ -17,10 +16,10 @@ def compute_stats(assignment, howsolved_filter):
         numerator = assignment.howsolved_set.filter(howsolved='bymyself').count()
     elif howsolved_filter == 'withhelp':
         numerator = assignment.howsolved_set.filter(howsolved='withhelp').count()
-    else: # Not solved
+    else:  # Not solved
         bymyself_count = assignment.howsolved_set.filter(howsolved='bymyself').count()
         withhelp_count = assignment.howsolved_set.filter(howsolved='withhelp').count()
         numerator = user_count - (bymyself_count + withhelp_count)
 
-    percentage = int(numerator / float(user_count) * 100) 
+    percentage = int(numerator / float(user_count) * 100)
     return percentage

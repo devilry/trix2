@@ -7,8 +7,9 @@ from trix.trix_student.views import course
 from trix.trix_student.views import howsolved
 from trix.trix_student.views import permalink
 
-urlpatterns = patterns('trix',
-    url('^$', dashboard.CourseListView.as_view(), name='trix_student_dashboard' ),
+urlpatterns = patterns(
+    'trix',
+    url('^$', dashboard.CourseListView.as_view(), name='trix_student_dashboard'),
     url('^assignments/$', assignments.AssignmentListView.as_view(), name='trix_student_assignments'),
     url('^assignment/howsolved/(?P<assignment_id>\d+)$',
         login_required(howsolved.HowsolvedView.as_view()),

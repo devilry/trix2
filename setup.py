@@ -5,7 +5,7 @@ execfile('trix/version.py')
 setup(
     name='trix2',
     description='Trix2.',
-    version=__version__,
+    version=__version__,   # noqa
     url='https://gifthub.com/devilry/trix2',
     author='Tor Johansen, Espen Angell Kristiansen',
     license='BSD',

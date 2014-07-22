@@ -1,5 +1,5 @@
 from django.views.generic import TemplateView
-from django.contrib.auth import get_user_model
+# from django.contrib.auth import get_user_model
 
 from django_cradmin import crapp
 from django_cradmin.viewhelpers import objecttable
@@ -17,6 +17,7 @@ from trix.trix_core import models as trix_models
 #     def get_queryset_for_role(self, course):
 #         return self.model.objects.filter(course=course)
 
+
 class StatisticsChartView(TemplateView):
     template_name = 'trix_admin/statistics.django.html'
 
@@ -24,8 +25,8 @@ class StatisticsChartView(TemplateView):
         context = super(StatisticsChartView, self).get_context_data(*args, **kwargs)
 
         assignments = trix_models.Assignment.objects.filter(tags__id=kwargs['pk'])
-        user = get_user_model()
-        user_count = get_user_model().objects.all().count()
+        # user = get_user_model()
+        # user_count = get_user_model().objects.all().count()
 
         total = assignments.count()
         if total > 0:
@@ -46,9 +47,9 @@ class TitleColumn(objecttable.SingleActionColumn):
     def get_actionurl(self, obj):
         return self.reverse_appurl('view', args=[obj.id])
 
+
 class StatisticsView(objecttable.ObjectTableView):
     model = trix_models.Tag
-  
     columns = [
         TitleColumn,
     ]
@@ -59,10 +60,6 @@ class StatisticsView(objecttable.ObjectTableView):
 
 class App(crapp.App):
     appurls = [
-        crapp.Url(r'^$',
-            StatisticsView.as_view(),
-            name=crapp.INDEXVIEW_NAME),
-        crapp.Url(r'^view/(?P<pk>\d+)$',
-            StatisticsChartView.as_view(),
-            name='view'),
+        crapp.Url(r'^$', StatisticsView.as_view(), name=crapp.INDEXVIEW_NAME),
+        crapp.Url(r'^view/(?P<pk>\d+)$', StatisticsChartView.as_view(), name='view'),
     ]

@@ -1,4 +1,4 @@
-from fabric.api import local, task
+from fabric.api import task
 
 from .common import root_develop_managepy
 
@@ -9,6 +9,7 @@ def makemessages(langcode='nb'):
     Runs /path/to/reporoot/manage.py makemessages for the given locale (default to nb).
     """
     root_develop_managepy('makemessages -l {} -i "static/*"'.format(langcode))
+
 
 @task
 def jsmakemessages(langcode='nb'):

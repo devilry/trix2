@@ -6,7 +6,7 @@ from django.contrib.auth.models import BaseUserManager
 
 
 class TrixUserManager(BaseUserManager):
- 
+
     def create_user(self, email, password=None):
         """
         Creates and saves a User with the given email and password.
@@ -266,7 +266,7 @@ class HowSolved(models.Model):
             ('withhelp', _('Solved with help')),
         ]
     )
-    
+
     assignment = models.ForeignKey(Assignment)
     user = models.ForeignKey(User)
 

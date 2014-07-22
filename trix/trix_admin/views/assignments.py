@@ -63,7 +63,7 @@ class AssignmentListView(AssignmentEditMixin, objecttable.ObjectTableView):
         ]
 
     def get_multiselect_actions(self):
-        app = self.request.cradmin_app
+        # app = self.request.cradmin_app
         return [
             objecttable.MultiSelectAction(
                 label=_('Edit'),

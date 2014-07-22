@@ -25,6 +25,7 @@ class Menu(crmenu.Menu):
             url=self.appindex_url('statistics'),
             icon='bar-chart-o')
 
+
 class CrAdminInstance(crinstance.BaseCrAdminInstance):
     id = 'trix_courseadmin'
     menuclass = Menu

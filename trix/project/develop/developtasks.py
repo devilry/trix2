@@ -66,6 +66,7 @@ def dump_current_db_to_dumpscript_datafile():
     with open(DUMPSCRIPT_DATAFILE, 'wb') as outfile:
         outfile.write(dump + '\n')
 
+
 @task
 def dump_devdb():
     dump_current_db_to_dumpscript_datafile()

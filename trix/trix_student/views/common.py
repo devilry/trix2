@@ -21,7 +21,7 @@ class AssignmentListViewBase(ListView):
             return self._progressjson()
         else:
             return super(AssignmentListViewBase, self).get(request, **kwargs)
-        
+
     def get_queryset(self):
         assignments = self.get_all_available_assignments()
         if self.selected_tags:
@@ -109,7 +109,8 @@ class AssignmentListViewBase(ListView):
         context['assignmentlist_with_howsolved'] = self._get_assignmentlist_with_howsolved(
             context['assignment_list'])
 
-        context['progresstext'] = _('You have completed {{ solvedPercentage }} percent of assignments matching the currently selected tags.')
+        context['progresstext'] = _(
+            'You have completed {{ solvedPercentage }} percent of assignments matching the currently selected tags.')
         return context
 
     def get_all_available_assignments(self):

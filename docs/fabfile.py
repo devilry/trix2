@@ -14,7 +14,7 @@ def docs():
         rmtree(apidocdir)
 
     exclude = glob('../trix/*/migrations/') \
-            + glob('../trix/*/tests/')
+        + glob('../trix/*/tests/')
     exclude = map(os.path.abspath, exclude)
 
     local('sphinx-apidoc -o develop/_apidoc/ --no-toc ../trix {exclude}'.format(

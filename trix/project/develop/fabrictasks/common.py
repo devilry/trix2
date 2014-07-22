@@ -20,7 +20,7 @@ def get_reporoot_path():
             return os.path.abspath(path)
         newpath = os.path.dirname(path)
         if newpath == path:
-            break # Break on /
+            break  # Break on /
         path = newpath
 
     raise ValueError('The CWD is not in the Trix repository.')

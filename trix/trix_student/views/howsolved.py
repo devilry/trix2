@@ -19,7 +19,7 @@ class HowsolvedView(View):
 
     def _bad_request_response(self, data):
         return http.HttpResponseBadRequest(json.dumps(data), content_type='application/json')
-    
+
     def _not_found_response(self, data):
         return http.HttpResponseNotFound(json.dumps(data), content_type='application/json')
 
