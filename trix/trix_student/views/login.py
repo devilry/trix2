@@ -11,8 +11,7 @@ from django.core.urlresolvers import reverse
 
 
 class TrixAuthenticationForm(AuthenticationForm):
-    username = forms.CharField(max_length=254,
-        label=_('Email'))
+    username = forms.CharField(max_length=254, label=_('Email'))
 
     def __init__(self, *args, **kwargs):
         super(TrixAuthenticationForm, self).__init__(*args, **kwargs)
@@ -25,15 +24,13 @@ class TrixAuthenticationForm(AuthenticationForm):
         password = self.cleaned_data.get('password')
 
         if username and password:
-            if '@' in username:
-                email = username
-                User = get_user_model()
-                try:
-                    user = User.objects.get(email=username)
-                except User.DoesNotExist:
-                    pass
-                else:
-                    username = user.email
+            User = get_user_model()
+            try:
+                user = User.objects.get(email=username)
+            except User.DoesNotExist:
+                pass
+            else:
+                username = user.email
             self.user_cache = authenticate(email=username, password=password)
             if self.user_cache is None:
                 raise forms.ValidationError(
@@ -45,7 +42,8 @@ class TrixAuthenticationForm(AuthenticationForm):
 
 
 def loginview(request):
-    return login(request,
+    return login(
+        request,
         template_name='trix_student/login.django.html',
         authentication_form=TrixAuthenticationForm
     )
