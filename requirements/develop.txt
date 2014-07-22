@@ -3,6 +3,10 @@
 # For automating development tasks
 fabric==1.8.3
 
+# For test/CI automation
+flake8==2.2.2
+tox==1.7.2
+
 # Required by sphinx
 Jinja2==2.7.2
 Sphinx==1.2.2
