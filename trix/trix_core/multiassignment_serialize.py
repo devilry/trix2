@@ -6,6 +6,7 @@ from django.core.exceptions import ValidationError
 from django import forms
 
 from trix.trix_core import models as coremodels
+from trix.trix_core.tagutils import bulk_update_assignment_tags
 
 
 class MarkdownString(object):
@@ -216,10 +217,7 @@ class Deserializer(object):
             raise DeserializerSingleValidationError(
                 errordict=form.errors, data=updated_data)
 
-    @transaction.atomic
-    def _update_existing_assignments(self):
-        AssignmentTag = coremodels.Assignment.tags.through
-        updated_assignments = []
+    def _validate_existing_assignments(self):
         validationerrors = []
         existing_assignments = self._get_existing_assignments()
         assignments_by_tag = {}
@@ -244,29 +242,19 @@ class Deserializer(object):
 
         if validationerrors:
             raise DeserializerValidationErrors(validationerrors)
+        return existing_assignments, assignments_by_tag
+
+    def _update_existing_assignments(self, existing_assignments, assignments_by_tag):
         for assignment in existing_assignments:
             assignment.save()
-
-        # Clear the tags
-        AssignmentTag.objects\
-            .filter(assignment__in=existing_assignments)\
-            .delete()
-
-        # Bulk create any missing tags
-        existing_tags = coremodels.Tag.objects.filter(tag__in=assignments_by_tag.keys())
-        new_tags = set(assignments_by_tag.keys())
-        new_tags.difference_update(set([tagobject.tag for tagobject in existing_tags]))
-        new_tagobjects = [coremodels.Tag(tag=tag) for tag in new_tags]
-        coremodels.Tag.objects.bulk_create(new_tagobjects)
-
-        # Bulk add tags to the assignments
-        assignmenttags = []
-        for tagobject in coremodels.Tag.objects.filter(tag__in=assignments_by_tag.keys()):
-            assignments = assignments_by_tag[tagobject.tag]
-            for assignment in assignments:
-                assignmenttags.append(AssignmentTag(tag=tagobject, assignment=assignment))
-        AssignmentTag.objects.bulk_create(assignmenttags)
 
         updated_assignments = coremodels.Assignment.objects.filter(
             id__in=self.deserialized_assignments_with_id.keys())
         return updated_assignments
+
+    @transaction.atomic
+    def sync(self):
+        existing_assignments, assignments_by_tag = self._validate_existing_assignments()
+        self._update_existing_assignments(existing_assignments, assignments_by_tag)
+        self._create_new_assignments(assignments_by_tag)
+        bulk_update_assignment_tags(assignments_by_tag, existing_assignments)
