@@ -15,7 +15,7 @@ class TestTagUtils(TestCase):
                 'duck1000': [assignment1, assignment2],
                 'oblig2': [assignment1]
             },
-            existing_assignments=[assignment1])
+            existing_assignments=[assignment1, assignment2])
         self.assertEquals(
             set([tagobject.tag for tagobject in assignment1.tags.all()]),
             set(['duck1000', 'oblig2']))

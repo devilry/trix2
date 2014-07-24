@@ -137,7 +137,9 @@ text: Testtext
             {'id': assignment2.id, 'title': 'Updated2', 'text': 'updatedText2',
              'tags': ['duck1000', 'oblig2', 'week3']},
         ]), coursetag='duck1000')
-        existing_assignments, assignments_by_tag = deserializer._validate_existing_assignments()
+        
+        assignments_by_tag = {}
+        existing_assignments = deserializer._validate_existing_assignments(assignments_by_tag)
         self.assertEquals(len(existing_assignments), 2)
         self.assertEquals(
             set(assignments_by_tag.keys()),
@@ -155,9 +157,9 @@ text: Testtext
             {'id': assignment1.id},
         ]), coursetag='duck1000')
         with self.assertRaises(multiassignment_serialize.DeserializerValidationErrors):
-            deserializer._validate_existing_assignments()
+            deserializer._validate_existing_assignments(assignments_by_tag={})
 
-    def test_deserializer_update_existing_assignments(self):
+    def test_deserializer_sync(self):
         assignment1 = coremodels.Assignment.objects.create(
             title='Existing1', text='text1')
         assignment2 = coremodels.Assignment.objects.create(
@@ -166,15 +168,11 @@ text: Testtext
         assignment1.tags.add(duck1000tag)
         assignment2.tags.add(duck1000tag)
         deserializer = multiassignment_serialize.Deserializer(yaml.safe_dump_all([
-            {'id': assignment1.id, 'title': 'Updated1', 'text': 'updatedText1',
-             'tags': ['oblig1']},
-            {'title': 'New'},
-            {'id': assignment2.id, 'title': 'Updated2', 'text': 'updatedText2',
-             'tags': ['duck1000', 'oblig2', 'week3']},
+            {'id': assignment1.id, 'title': 'Updated1', 'text': 'updatedText1'},
+            {'id': assignment2.id, 'title': 'Updated2', 'text': 'updatedText2'},
         ]), coursetag='duck1000')
-        updated_assignments = deserializer._update_existing_assignments(
-            *deserializer._validate_existing_assignments())
-        self.assertEquals(set(updated_assignments), set([assignment1, assignment2]))
+        deserializer.sync()
+
         assignment1 = coremodels.Assignment.objects.get(id=assignment1.id)
         assignment2 = coremodels.Assignment.objects.get(id=assignment2.id)
         self.assertEquals(assignment1.title, 'Updated1')

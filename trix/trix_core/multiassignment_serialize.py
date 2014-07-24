@@ -199,62 +199,52 @@ class Deserializer(object):
                   'accessible by "%(coursetag)s".') % {'coursetag': self.coursetag})
         return existing_assignments
 
-    def _validate_assignment(self, assignment, updated_data):
+    def _validate_assignment(self, assignment, data, assignments_by_tag):
         """
         Validate the given data, apply it to the given assignment, and
         return the list of tags (list of strings).
 
         Does not save the assignment.
         """
-        form = AssignmentDataForm(updated_data)
+        form = AssignmentDataForm(data)
         if form.is_valid():
             assignment.title = form.cleaned_data['title']
             assignment.text = form.cleaned_data['text']
             assignment.solution = form.cleaned_data['solution']
             tags = form.cleaned_data['tags']
-            return tags
+
+            # Add the assignment to assignments_by_tag
+            # - used below to bulk create the tags
+            for tag in tags:
+                if tag != self.coursetag:  # We skip the coursetag - we add all assignments to it
+                    if tag not in assignments_by_tag:
+                        assignments_by_tag[tag] = []
+                    assignments_by_tag[tag].append(assignment)
+            if self.coursetag not in assignments_by_tag:
+                assignments_by_tag[self.coursetag] = []
+            assignments_by_tag[self.coursetag].append(assignment)
         else:
             raise DeserializerSingleValidationError(
-                errordict=form.errors, data=updated_data)
+                errordict=form.errors, data=data)
 
-    def _validate_existing_assignments(self):
+    def _validate_existing_assignments(self, assignments_by_tag):
         validationerrors = []
         existing_assignments = self._get_existing_assignments()
-        assignments_by_tag = {}
-
         for assignment in existing_assignments:
             updated_data = self.deserialized_assignments_with_id[assignment.id]
             try:
-                tags = self._validate_assignment(assignment, updated_data)
+                self._validate_assignment(assignment, updated_data, assignments_by_tag)
             except DeserializerSingleValidationError as e:
                 validationerrors.append(e)
-            else:
-                # Add the assignment to assignments_by_tag
-                # - used below to bulk create the tags
-                for tag in tags:
-                    if tag != self.coursetag:  # We skip the coursetag - we add all assignments to it
-                        if tag not in assignments_by_tag:
-                            assignments_by_tag[tag] = []
-                        assignments_by_tag[tag].append(assignment)
-                if self.coursetag not in assignments_by_tag:
-                    assignments_by_tag[self.coursetag] = []
-                assignments_by_tag[self.coursetag].append(assignment)
-
         if validationerrors:
             raise DeserializerValidationErrors(validationerrors)
-        return existing_assignments, assignments_by_tag
-
-    def _update_existing_assignments(self, existing_assignments, assignments_by_tag):
-        for assignment in existing_assignments:
-            assignment.save()
-
-        updated_assignments = coremodels.Assignment.objects.filter(
-            id__in=self.deserialized_assignments_with_id.keys())
-        return updated_assignments
+        return existing_assignments
 
     @transaction.atomic
     def sync(self):
-        existing_assignments, assignments_by_tag = self._validate_existing_assignments()
-        self._update_existing_assignments(existing_assignments, assignments_by_tag)
-        self._create_new_assignments(assignments_by_tag)
+        assignments_by_tag = {}
+        existing_assignments = self._validate_existing_assignments(assignments_by_tag)
+        # new_assignments = self._validate_new_assignments(assignments_by_tag)
+        for assignment in existing_assignments:
+            assignment.save()
         bulk_update_assignment_tags(assignments_by_tag, existing_assignments)
