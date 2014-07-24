@@ -15,7 +15,9 @@ setup(
     install_requires=[
         'setuptools',
         'Django',
-        'django-crispy-forms'
+        'django-crispy-forms',
+        'Markdown',
+        'PyYAML'
     ],
     classifiers=[
         'Development Status :: 4 - Beta',
