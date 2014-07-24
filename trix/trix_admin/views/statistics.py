@@ -1,6 +1,5 @@
-from django.views.generic import TemplateView
 from django.views.generic import ListView
-# from django.contrib.auth import get_user_model
+from django.contrib.auth import get_user_model
 
 from django_cradmin import crapp
 from django_cradmin.viewhelpers import objecttable
@@ -20,21 +19,25 @@ from trix.trix_core import models as trix_models
 
 
 class StatisticsChartView(ListView):
+    """
+    Class for the statistics charts displayed.
+
+    This views takes the pk of a Tag to filter the assignments
+    """
     template_name = 'trix_admin/statistics.django.html'
     model = trix_models.Assignment
     context_object_name = 'assignment_list'
-    paginate_by = 2
+    paginate_by = 20
     queryset = None
 
     def get(self, request, *args, **kwargs):
         self.queryset = trix_models.Assignment.objects.filter(tags__id=kwargs['pk'])
         return super(StatisticsChartView, self).get(request, *args, **kwargs)
 
-    # def get_queryset(self):
-    #     return trix_models.Assignment.objects.all()
-
     def get_context_data(self, *args, **kwargs):
         context = super(StatisticsChartView, self).get_context_data(*args, **kwargs)
+        context['user_count'] = get_user_model().objects.all().count()
+        context['assignment_count'] = self.queryset.count()
         return context
 
 
