@@ -13,14 +13,8 @@
         </div>
     </div>
 
-{% if total > 0 %}
     <div class="container">
-        <h3>{% trans "Aggregated statistics on how the assignments where solved" %}</h3>
-        <div class="statistic-info">        
-            <ul>
-                <li><strong>{% trans "Total assignments: " %}</strong>{{ total }}</li>
-            </ul>
-        </div>
+        <h1>{% trans "Aggregated statistics on how the assignments where solved" %}</h1>
     </div>
 
     <div class="container">
@@ -55,7 +49,7 @@
             </div>
         {% endfor %}
             
-
+    {% include "trix_student/include/pager.django.html" %}
     </div>
 
     {% comment %}
@@ -84,11 +78,7 @@
         </div>
     </div>
     {% endcomment %}
-{% else %}
-    <div class="container">
-        <h2>{% trans "There is no assignments with this tag" %}</h2>
-    </div>
-{% endif %}
+
 
 
 {% endblock content %}

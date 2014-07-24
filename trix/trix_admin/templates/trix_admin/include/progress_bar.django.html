@@ -1,3 +1,8 @@
+{% comment %}
+    Parameters: 
+        style: css class  describing the color of the progress bar
+        percent: the percentage of the progressbar to be filled
+{% endcomment %}
 <div class="progress">
   <div class="progress-bar progress-bar-{{ style }}" role="progressbar" aria-valuenow="{{ percent }}" aria-valuemin="0" aria-valuemax="100" style="width: {{ percent }}%">
   </div>

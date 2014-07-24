@@ -1,4 +1,5 @@
 from django.views.generic import TemplateView
+from django.views.generic import ListView
 # from django.contrib.auth import get_user_model
 
 from django_cradmin import crapp
@@ -18,26 +19,22 @@ from trix.trix_core import models as trix_models
 #         return self.model.objects.filter(course=course)
 
 
-class StatisticsChartView(TemplateView):
+class StatisticsChartView(ListView):
     template_name = 'trix_admin/statistics.django.html'
+    model = trix_models.Assignment
+    context_object_name = 'assignment_list'
+    paginate_by = 2
+    queryset = None
+
+    def get(self, request, *args, **kwargs):
+        self.queryset = trix_models.Assignment.objects.filter(tags__id=kwargs['pk'])
+        return super(StatisticsChartView, self).get(request, *args, **kwargs)
+
+    # def get_queryset(self):
+    #     return trix_models.Assignment.objects.all()
 
     def get_context_data(self, *args, **kwargs):
         context = super(StatisticsChartView, self).get_context_data(*args, **kwargs)
-
-        assignments = trix_models.Assignment.objects.filter(tags__id=kwargs['pk'])
-        # user = get_user_model()
-        # user_count = get_user_model().objects.all().count()
-
-        total = assignments.count()
-        if total > 0:
-            bymyself = assignments.filter(howsolved__howsolved='bymyself').count()
-            withhelp = assignments.filter(howsolved__howsolved='withhelp').count()
-            notsolved = total - (bymyself + withhelp)
-            context['bymyself_percent'] = int(bymyself / float(total) * 100)
-            context['withhelp_percent'] = int(withhelp / float(total) * 100)
-            context['notsolved_percent'] = int(notsolved / float(total) * 100)
-        context['total'] = total
-        context['assignment_list'] = assignments
         return context
 
 
