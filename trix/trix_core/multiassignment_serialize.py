@@ -1,5 +1,6 @@
 import collections
 import yaml
+import itertools
 from django.db import transaction
 from django.utils.translation import ugettext_lazy as _
 from django.core.exceptions import ValidationError
@@ -231,20 +232,34 @@ class Deserializer(object):
         validationerrors = []
         existing_assignments = self._get_existing_assignments()
         for assignment in existing_assignments:
-            updated_data = self.deserialized_assignments_with_id[assignment.id]
+            data = self.deserialized_assignments_with_id[assignment.id]
             try:
-                self._validate_assignment(assignment, updated_data, assignments_by_tag)
+                self._validate_assignment(assignment, data, assignments_by_tag)
             except DeserializerSingleValidationError as e:
                 validationerrors.append(e)
         if validationerrors:
             raise DeserializerValidationErrors(validationerrors)
         return existing_assignments
 
+    def _validate_new_assignments(self, assignments_by_tag):
+        validationerrors = []
+        new_assignments = []
+        for data in self.deserialized_assignments_without_id:
+            assignment = coremodels.Assignment()
+            try:
+                self._validate_assignment(assignment, data, assignments_by_tag)
+            except DeserializerSingleValidationError as e:
+                validationerrors.append(e)
+            new_assignments.append(assignment)
+        if validationerrors:
+            raise DeserializerValidationErrors(validationerrors)
+        return new_assignments
+
     @transaction.atomic
     def sync(self):
         assignments_by_tag = {}
         existing_assignments = self._validate_existing_assignments(assignments_by_tag)
-        # new_assignments = self._validate_new_assignments(assignments_by_tag)
-        for assignment in existing_assignments:
+        new_assignments = self._validate_new_assignments(assignments_by_tag)
+        for assignment in itertools.chain(existing_assignments, new_assignments):
             assignment.save()
         bulk_update_assignment_tags(assignments_by_tag, existing_assignments)

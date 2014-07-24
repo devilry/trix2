@@ -137,7 +137,7 @@ text: Testtext
             {'id': assignment2.id, 'title': 'Updated2', 'text': 'updatedText2',
              'tags': ['duck1000', 'oblig2', 'week3']},
         ]), coursetag='duck1000')
-        
+
         assignments_by_tag = {}
         existing_assignments = deserializer._validate_existing_assignments(assignments_by_tag)
         self.assertEquals(len(existing_assignments), 2)
@@ -168,12 +168,36 @@ text: Testtext
         assignment1.tags.add(duck1000tag)
         assignment2.tags.add(duck1000tag)
         deserializer = multiassignment_serialize.Deserializer(yaml.safe_dump_all([
-            {'id': assignment1.id, 'title': 'Updated1', 'text': 'updatedText1'},
-            {'id': assignment2.id, 'title': 'Updated2', 'text': 'updatedText2'},
+            {'id': assignment1.id, 'title': 'Updated1', 'text': 'updatedText1',
+             'tags': ['oblig1']},
+            {'title': 'New1', 'text': 'newText1'},
+            {'title': 'New2', 'text': 'newText2',
+             'tags': ['duck1000', 'oblig1'],
+             'solution': 'newSolution'},
+            {'id': assignment2.id, 'title': 'Updated2', 'text': 'updatedText2',
+             'tags': ['duck1000', 'oblig2'],
+             'solution': 'updatedSolution'},
         ]), coursetag='duck1000')
         deserializer.sync()
 
         assignment1 = coremodels.Assignment.objects.get(id=assignment1.id)
         assignment2 = coremodels.Assignment.objects.get(id=assignment2.id)
+        newassignment1 = coremodels.Assignment.objects.get(title='New1')
+        newassignment2 = coremodels.Assignment.objects.get(title='New2')
+
         self.assertEquals(assignment1.title, 'Updated1')
+        self.assertEquals(assignment1.solution, '')
         self.assertEquals(assignment2.title, 'Updated2')
+        self.assertEquals(assignment2.solution, 'updatedSolution')
+        self.assertEquals(
+            set([tagobject.tag for tagobject in assignment1.tags.all()]),
+            set(['duck1000', 'oblig1']))
+        self.assertEquals(
+            set([tagobject.tag for tagobject in assignment2.tags.all()]),
+            set(['duck1000', 'oblig2']))
+        self.assertEquals(
+            set([tagobject.tag for tagobject in newassignment1.tags.all()]),
+            set(['duck1000']))
+        self.assertEquals(
+            set([tagobject.tag for tagobject in newassignment2.tags.all()]),
+            set(['duck1000', 'oblig1']))
