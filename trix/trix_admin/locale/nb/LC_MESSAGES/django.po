@@ -7,9 +7,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: trix_admin\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-07-02 22:00+0000\n"
-"PO-Revision-Date: 2014-07-03 00:00+0100\n"
-"Last-Translator: Espen Angell Kristiansen <post@espenak.net>\n"
+"POT-Creation-Date: 2014-07-24 20:45+0000\n"
+"PO-Revision-Date: 2014-07-24 22:48+0100\n"
+"Last-Translator: Tor Ivar Johansen <tor@torjohansen.no>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: nb\n"
 "MIME-Version: 1.0\n"
@@ -18,34 +18,101 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Poedit 1.6.5\n"
 
-#: cradmin.py:15
+#: cradmin.py:16
 msgid "Assignments"
 msgstr "Oppgaver"
 
-#: cradmin.py:19
+#: cradmin.py:20
 msgid "Permalinks"
 msgstr "Permalinker"
 
+#: cradmin.py:24
+#: templates/trix_admin/statistics.django.html:11
+msgid "Statistics"
+msgstr "Statistikk"
+
 #: templates/trix_admin/frontpage.django.html:9
+#: templates/trix_admin/statistics.django.html:10
 msgid "Trix"
 msgstr "Trix"
 
-#: views/assignments.py:22 views/permalinks.py:21
+#: templates/trix_admin/statistics.django.html:18
+msgid "Aggregated statistics on how the assignments where solved"
+msgstr "Aggregert statistikk over hvodan oppgavene ble løst"
+
+#: templates/trix_admin/statistics.django.html:19
+msgid "The stats below show how many percentage of the total number of users that have completed the assignment by their own, with help or not completed it."
+msgstr "Statistikken nedenfor viser hvor many prosent av det totale antall studenter som har klart oppgaven på egenhånd, med hjelp eller ikke løst den."
+
+#: templates/trix_admin/statistics.django.html:22
+msgid "Number of users:"
+msgstr "Antall brukere:"
+
+#: templates/trix_admin/statistics.django.html:23
+msgid "Number of assignments:"
+msgstr "Antall oppgaver:"
+
+#: templates/trix_admin/statistics.django.html:24
+msgid "Download csv file"
+msgstr "Last ned csv fil"
+
+#: templates/trix_admin/statistics.django.html:46
+#: views/statistics.py:55
+msgid "Completed by their own"
+msgstr "Løst på egenhånd"
+
+#: templates/trix_admin/statistics.django.html:53
+#: views/statistics.py:56
+msgid "Completed with help"
+msgstr "Løst med hjelp"
+
+#: templates/trix_admin/statistics.django.html:60
+#: views/statistics.py:57
+msgid "Not completed"
+msgstr "Ikke løst"
+
+#: templates/trix_admin/statistics.django.html:70
+msgid "There was no assignments matching the choosen tag"
+msgstr "Det fantes ingen oppgaver som er merket med valgte tag"
+
+#: views/assignments.py:22
+#: views/assignments.py:69
+#: views/permalinks.py:21
 msgid "Edit"
 msgstr "Rediger"
 
-#: views/assignments.py:25 views/permalinks.py:27
+#: views/assignments.py:25
+#: views/permalinks.py:27
 msgid "Delete"
 msgstr "Slett"
 
-#: views/assignments.py:60 views/permalinks.py:61
+#: views/assignments.py:62
+#: views/permalinks.py:61
 msgid "Create"
 msgstr "Opprett"
 
-#: views/assignments.py:73 views/permalinks.py:75
+#: views/assignments.py:85
+#: views/permalinks.py:75
 msgid "Organize"
 msgstr "Organiser"
 
 #: views/permalinks.py:24
 msgid "View"
 msgstr "Vis"
+
+#: views/statistics.py:49
+msgid "Simple statitics showing percentage share of how the assignments where solved"
+msgstr "Enkel statistikk som viser prosentvis del av hvordan oppgavene er løst"
+
+#: views/statistics.py:50
+msgid "Total number of users"
+msgstr "Totalt antall brukere"
+
+#: views/statistics.py:52
+msgid "Assignment title"
+msgstr "Oppgavetittel"
+
+#: views/statistics.py:52
+msgid "Percentage"
+msgstr "Prosent"
+
