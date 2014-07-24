@@ -3,6 +3,7 @@ from django.views.generic import View
 from django.contrib.auth import get_user_model
 from django.utils.translation import ugettext as _
 from django.http import HttpResponse
+from django.http import HttpResponseBadRequest
 from django_cradmin import crapp
 from django_cradmin.viewhelpers import objecttable
 
@@ -36,7 +37,10 @@ class AssignmentStatsCsv(View):
         return percentage
 
     def get(self, request, *args, **kwargs):
-        queryset = trix_models.Assignment.objects.filter(tags__id=1)
+        tag_id = request.GET.get('tag', None)
+        if not tag_id:
+            return HttpResponseBadRequest()
+        queryset = trix_models.Assignment.objects.filter(tags__id=tag_id)
         user_count = get_user_model().objects.all().count()
         response = HttpResponse(content_type='text/csv')
         try:
@@ -56,6 +60,7 @@ class AssignmentStatsCsv(View):
             raise e
         return response
 
+
 class StatisticsChartView(ListView):
     """
     Class for the statistics charts displayed.
@@ -69,6 +74,7 @@ class StatisticsChartView(ListView):
     queryset = None
 
     def get(self, request, *args, **kwargs):
+        self.tag_id = kwargs['pk']
         self.queryset = trix_models.Assignment.objects.filter(tags__id=kwargs['pk'])
         return super(StatisticsChartView, self).get(request, *args, **kwargs)
 
@@ -76,6 +82,7 @@ class StatisticsChartView(ListView):
         context = super(StatisticsChartView, self).get_context_data(*args, **kwargs)
         context['user_count'] = get_user_model().objects.all().count()
         context['assignment_count'] = self.queryset.count()
+        context['tag_id'] = self.tag_id
         return context
 
 
@@ -100,5 +107,4 @@ class App(crapp.App):
     appurls = [
         crapp.Url(r'^$', StatisticsView.as_view(), name=crapp.INDEXVIEW_NAME),
         crapp.Url(r'^view/(?P<pk>\d+)$', StatisticsChartView.as_view(), name='view'),
-        crapp.Url(r'^view/ascsv$', AssignmentStatsCsv.as_view(), name='stats_ascsv'),
     ]

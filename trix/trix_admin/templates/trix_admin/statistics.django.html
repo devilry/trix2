@@ -21,6 +21,7 @@
                 <ul>
                     <li>{% trans "Number of users:" %} {{ user_count }}</li>
                     <li>{% trans "Number of assignments:" %} {{ assignment_count }}</li>
+                    <li><a href="{% url 'trix_stats_ascsv' %}?tag={{ tag_id }}" class="btn btn-primary btn-sm" role="button">{% trans "Download csv file" %}</a></li>
                 </ul>
             </div>
         </div>
