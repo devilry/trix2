@@ -1,6 +1,7 @@
 from django.views.generic import ListView
 from django.views.generic import View
 from django.contrib.auth import get_user_model
+from django.utils.translation import ugettext as _
 from django.http import HttpResponse
 from django_cradmin import crapp
 from django_cradmin.viewhelpers import objecttable
@@ -8,34 +9,52 @@ from django_cradmin.viewhelpers import objecttable
 from trix.trix_core import models as trix_models
 import csv
 
-# class PermalinkListView(objecttable.ObjectTableView):
-#     model = trix_models.Permalink
-#     columns = [
-#         TitleColumn,
-#         TagsColumn,
-#         DescriptionIntroColumn
-#     ]
 
-#     def get_queryset_for_role(self, course):
-#         return self.model.objects.filter(course=course)
 class AssignmentStatsCsv(View):
+
+    def _compute_stats(self, assignment, howsolved_filter):
+        user_count = get_user_model().objects.all().count()
+        if user_count == 0:
+            return 0
+        percentage = 0
+        numerator = 0
+
+        if howsolved_filter == 'bymyself':
+            numerator = assignment.howsolved_set.\
+                filter(howsolved='bymyself').count()
+        elif howsolved_filter == 'withhelp':
+            numerator = assignment.howsolved_set.\
+                filter(howsolved='withhelp').count()
+        else:  # Not solved
+            bymyself_count = assignment.howsolved_set.\
+                filter(howsolved='bymyself').count()
+            withhelp_count = assignment.howsolved_set.\
+                filter(howsolved='withhelp').count()
+            numerator = user_count - (bymyself_count + withhelp_count)
+
+        percentage = int(numerator / float(user_count) * 100)
+        return percentage
 
     def get(self, request, *args, **kwargs):
         queryset = trix_models.Assignment.objects.filter(tags__id=1)
+        user_count = get_user_model().objects.all().count()
+        response = HttpResponse(content_type='text/csv')
         try:
-            fileobj = open('test.csv', 'wb')
-            csvwriter = csv.writer(fileobj, dialect='excel')
+            response['Content-Disposition'] = 'attachment; filename="trix-statistics.csv"'
+            csvwriter = csv.writer(response, dialect='excel')
+            csvwriter.writerow([_('Simple statitics showing percentage share of how the assignments where solved')])
+            csvwriter.writerow([_('Total number of users'), user_count])
+            csvwriter.writerow('')
+            csvwriter.writerow([_('Assignment title'), _('Percentage')])
             for assignment in queryset:
                 csvwriter.writerow([assignment.title])
-                csvwriter.writerow(['solved by themself', 10])
-                csvwriter.writerow(['solved by help', 10])
-                csvwriter.writerow(['notsolved', 10])
-                csvwriter.writerow([''])
+                csvwriter.writerow([_('Completed by their own'), "{} %".format(self._compute_stats(assignment, 'bymyself'))])
+                csvwriter.writerow([_('Completed with help'), "{} %".format(self._compute_stats(assignment, 'withhelp'))])
+                csvwriter.writerow([_('Not completed'), "{} %".format(self._compute_stats(assignment, 'notsolved'))])
+                csvwriter.writerow('')
         except Exception, e:
             raise e
-        finally:
-            fileobj.close()
-        return HttpResponse('Hei')
+        return response
 
 class StatisticsChartView(ListView):
     """
