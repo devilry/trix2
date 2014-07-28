@@ -165,16 +165,16 @@ class Deserializer(object):
     wants to create a new assignment.
     """
 
-    def __init__(self, serialized_assignments, coursetag):
+    def __init__(self, serialized_assignments, course_tag):
         """
         Parameters:
             serialized_assignments: Assignments as serialized by :func:`serialize`.
-            coursetag: A tag to add even if it is not on the given assignments.
+            course_tag: A tag to add even if it is not on the given assignments.
                 Only assignments with this tag already in the database is allowed
                 to be updated.
         """
         self._deserialize(serialized_assignments)
-        self.coursetag = coursetag
+        self.course_tag = course_tag
 
     def _deserialize(self, serialized_assignments):
         self.deserialized_assignments_with_id = {}
@@ -193,11 +193,11 @@ class Deserializer(object):
         existing_assignments = coremodels.Assignment.objects\
             .filter(
                 id__in=self.deserialized_assignments_with_id.keys(),
-                tags__tag=self.coursetag)
+                tags__tag=self.course_tag)
         if len(existing_assignments) != len(self.deserialized_assignments_with_id):
             raise DeserializerNotFoundError(
                 _('One or more of the given IDs was not found among the assignments '
-                  'accessible by "%(coursetag)s".') % {'coursetag': self.coursetag})
+                  'accessible by "%(course_tag)s".') % {'course_tag': self.course_tag})
         return existing_assignments
 
     def _validate_assignment(self, assignment, data, assignments_by_tag):
@@ -217,13 +217,13 @@ class Deserializer(object):
             # Add the assignment to assignments_by_tag
             # - used below to bulk create the tags
             for tag in tags:
-                if tag != self.coursetag:  # We skip the coursetag - we add all assignments to it
+                if tag != self.course_tag:  # We skip the course_tag - we add all assignments to it
                     if tag not in assignments_by_tag:
                         assignments_by_tag[tag] = []
                     assignments_by_tag[tag].append(assignment)
-            if self.coursetag not in assignments_by_tag:
-                assignments_by_tag[self.coursetag] = []
-            assignments_by_tag[self.coursetag].append(assignment)
+            if self.course_tag not in assignments_by_tag:
+                assignments_by_tag[self.course_tag] = []
+            assignments_by_tag[self.course_tag].append(assignment)
         else:
             raise DeserializerSingleValidationError(
                 errordict=form.errors, data=data)

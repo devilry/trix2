@@ -40,7 +40,7 @@ text: Testtext
             {'id': 1, 'title': 'Existing1'},
             {'title': 'New'},
             {'id': 2, 'title': 'Existing2'},
-        ]), coursetag='duck1000')
+        ]), course_tag='duck1000')
         self.assertEquals(
             deserializer.deserialized_assignments_with_id,
             {1: {'id': 1, 'title': 'Existing1'}, 2: {'id': 2, 'title': 'Existing2'}}
@@ -136,7 +136,7 @@ text: Testtext
             {'title': 'New'},
             {'id': assignment2.id, 'title': 'Updated2', 'text': 'updatedText2',
              'tags': ['duck1000', 'oblig2', 'week3']},
-        ]), coursetag='duck1000')
+        ]), course_tag='duck1000')
 
         assignments_by_tag = {}
         existing_assignments = deserializer._validate_existing_assignments(assignments_by_tag)
@@ -155,7 +155,7 @@ text: Testtext
         assignment1.tags.create(tag='duck1000')
         deserializer = multiassignment_serialize.Deserializer(yaml.safe_dump_all([
             {'id': assignment1.id},
-        ]), coursetag='duck1000')
+        ]), course_tag='duck1000')
         with self.assertRaises(multiassignment_serialize.DeserializerValidationErrors):
             deserializer._validate_existing_assignments(assignments_by_tag={})
 
@@ -177,7 +177,7 @@ text: Testtext
             {'id': assignment2.id, 'title': 'Updated2', 'text': 'updatedText2',
              'tags': ['duck1000', 'oblig2'],
              'solution': 'updatedSolution'},
-        ]), coursetag='duck1000')
+        ]), course_tag='duck1000')
         deserializer.sync()
 
         assignment1 = coremodels.Assignment.objects.get(id=assignment1.id)
