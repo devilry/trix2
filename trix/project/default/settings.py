@@ -87,6 +87,9 @@ AUTH_USER_MODEL = 'trix_core.User'
 # Redirect logins to the frontpage by default
 LOGIN_REDIRECT_URL = '/'
 
+LOGIN_URL = '/login'
+LOGOUT_URL = '/logout'
+
 # Use bootstrap3 template pack to django-crispy-forms.
 CRISPY_TEMPLATE_PACK = 'bootstrap3'
 
