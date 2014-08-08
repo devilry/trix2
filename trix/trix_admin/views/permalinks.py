@@ -12,6 +12,12 @@ from trix.trix_core import models as trix_models
 from trix.trix_admin import formfields
 
 
+class PermalinkQuerysetForRoleMixin(object):
+    def get_queryset_for_role(self, course):
+        return self.model.objects.filter(course=course)\
+            .prefetch_related('tags')
+
+
 class TitleColumn(objecttable.MultiActionColumn):
     modelfield = 'title'
 
@@ -44,16 +50,13 @@ class TagsColumn(objecttable.PlainTextColumn):
         return ', '.join(tag.tag for tag in permalink.tags.all())
 
 
-class PermalinkListView(objecttable.ObjectTableView):
+class PermalinkListView(PermalinkQuerysetForRoleMixin, objecttable.ObjectTableView):
     model = trix_models.Permalink
     columns = [
         TitleColumn,
         TagsColumn,
         DescriptionIntroColumn
     ]
-
-    def get_queryset_for_role(self, course):
-        return self.model.objects.filter(course=course)
 
     def get_buttons(self):
         app = self.request.cradmin_app
@@ -94,13 +97,13 @@ class PermalinkCreateView(PermalinkCreateUpdateMixin, create.CreateView):
     """
 
 
-class PermalinkUpdateView(PermalinkCreateUpdateMixin, update.UpdateView):
+class PermalinkUpdateView(PermalinkQuerysetForRoleMixin, PermalinkCreateUpdateMixin, update.UpdateView):
     """
     View used to create edit existing permalinks.
     """
 
 
-class PermalinkDeleteView(delete.DeleteView):
+class PermalinkDeleteView(PermalinkQuerysetForRoleMixin, delete.DeleteView):
     """
     View used to delete existing permalinks.
     """
