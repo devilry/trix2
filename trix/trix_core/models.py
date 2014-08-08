@@ -247,6 +247,22 @@ class Assignment(models.Model):
     def readable_id(self):
         return str(self.id)
 
+    def _normalize_text(self, text):
+        # Normalize newlines. Just makes sure newlines is \n,
+        # does not remove any empty lines or anything like that.
+        text = '\n'.join(text.splitlines())
+        
+        # Convert tabs to spaces. Editing tabs through the browser
+        # is very error prone, so it is safer to just convert them.
+        text = text.replace('\t', '    ')
+
+        return text
+
+    def clean(self):
+        # NOTE: Without this, the YAML output for bulk editing becomes unreadable
+        self.text = self._normalize_text(self.text)
+        self.solution = self._normalize_text(self.solution)
+
     # def replace_tags(self, *tagstrings):
     #     self.tags.clear()
     #     for tagstring in tagstrings:
