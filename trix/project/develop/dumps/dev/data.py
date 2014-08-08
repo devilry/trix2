@@ -217,7 +217,7 @@ def import_data():
     trix_core_assignment_1 = Assignment()
     trix_core_assignment_1.title = u'Hello World'
     trix_core_assignment_1.text = u'Print hello world in the terminal.'
-    trix_core_assignment_1.solution = u'``` java\r\npublic class HelloWorld {\r\n    public static void main(String [] args) {\r\n        System.out.println("Hello World!");\r\n    }\r\n}\r\n```'
+    trix_core_assignment_1.solution = u'``` java\npublic class HelloWorld {\n    public static void main(String [] args) {\n        System.out.println("Hello World!");\n    }\n}\n```'
     trix_core_assignment_1 = importer.save_or_locate(trix_core_assignment_1)
 
     trix_core_assignment_1.tags.add(trix_core_tag_1)
@@ -227,8 +227,8 @@ def import_data():
 
     trix_core_assignment_2 = Assignment()
     trix_core_assignment_2.title = u'Finn fem feil'
-    trix_core_assignment_2.text = u'``` java\r\nclass Utskrift {\r\n    public stitac void main(String args) (\r\n        System.out.println("Beethoven skrev Skjebnesymfonien")\r\n        System.out.println("og \xe5tte andre symfonier.);\r\n    }\r\n}\r\n```'
-    trix_core_assignment_2.solution = u'N\xf8kkelordet "static" er stavet feil.\r\n\r\nDet mangler hakeparenteser ("[]") etter "String" p\xe5 linje 2. Denne feilen oppdages ikke av kompilatoren, men av kj\xf8resystemet fordi det er lov \xe5 lage metoder uten "[]" der, bare ikke lov \xe5 bruke de som hoved-main-metoden n\xe5r man kj\xf8rer et program. Kj\xf8resystemet gir ofte litt mer uventede feilmeldinger enn kompilatoren, men disse vil du ogs\xe5 etter hvert l\xe6re deg \xe5 kjenne igjen.  I dette tilfellet f\xe5r vi f\xf8lgende feilmelding n\xe5r vi pr\xf8ver \xe5 kj\xf8re programmet: \r\n```\r\njava.lang.NoSuchMethodError: main\r\nException in thread "main"\r\n```\r\n\r\nSom vi ser s\xe5 betyr feilmeldingen at kj\xf8resystemmet ikke fant noen (riktig skrevet) main-metode. Det st\xe5r vanlig parentes i stedet for kr\xf8llparentes p\xe5 slutten av linje 2.\r\n\r\nDet mangler semikolon p\xe5 slutten av linje 3.\r\n\r\nAvsluttende anf\xf8rselstegn mangler p\xe5 linje 4.'
+    trix_core_assignment_2.text = u'``` java\nclass Utskrift {\n    public stitac void main(String args) (\n        System.out.println("Beethoven skrev Skjebnesymfonien")\n        System.out.println("og \xe5tte andre symfonier.);\n    }\n}\n```'
+    trix_core_assignment_2.solution = u'N\xf8kkelordet "static" er stavet feil.\nDet mangler hakeparenteser ("[]") etter "String" p\xe5 linje 2. Denne feilen oppdages ikke av kompilatoren, men av kj\xf8resystemet fordi det er lov \xe5 lage metoder uten "[]" der, bare ikke lov \xe5 bruke de som hoved-main-metoden n\xe5r man kj\xf8rer et program. Kj\xf8resystemet gir ofte litt mer uventede feilmeldinger enn kompilatoren, men disse vil du ogs\xe5 etter hvert l\xe6re deg \xe5 kjenne igjen.  I dette tilfellet f\xe5r vi f\xf8lgende feilmelding n\xe5r vi pr\xf8ver \xe5 kj\xf8re programmet: \n```\njava.lang.NoSuchMethodError: main\nException in thread "main"\n```\nSom vi ser s\xe5 betyr feilmeldingen at kj\xf8resystemmet ikke fant noen (riktig skrevet) main-metode. Det st\xe5r vanlig parentes i stedet for kr\xf8llparentes p\xe5 slutten av linje 2.\nDet mangler semikolon p\xe5 slutten av linje 3.\nAvsluttende anf\xf8rselstegn mangler p\xe5 linje 4.'
     trix_core_assignment_2 = importer.save_or_locate(trix_core_assignment_2)
 
     trix_core_assignment_2.tags.add(trix_core_tag_1)
@@ -237,7 +237,7 @@ def import_data():
     trix_core_assignment_3 = Assignment()
     trix_core_assignment_3.title = u'Sum (innlesning av tekst fra terminal)'
     trix_core_assignment_3.text = u'Lag et program som ber om og leser inn to heltall. Programmet skal deretter regne ut summen av de to tallene og skrive ut svaret.'
-    trix_core_assignment_3.solution = u'``` java\r\nimport java.util.*;\r\n\r\nclass Sum {\r\n    public static void main(String[] args) {\r\n        Scanner tast = new Scanner(System.in);\r\n\r\n        System.out.print("Oppgi verdien til x: ");\r\n        int x = tast.nextInt();\r\n        System.out.print("Oppgi verdien til y: ");\r\n        int y = tast.nextInt();\r\n\r\n        int sum = x + y;\r\n\r\n        System.out.println("Summen av x og y er: " + sum);\r\n    }\r\n}\r\n```'
+    trix_core_assignment_3.solution = u'``` java\nimport java.util.*;\nclass Sum {\n    public static void main(String[] args) {\n        Scanner tast = new Scanner(System.in);\n        System.out.print("Oppgi verdien til x: ");\n        int x = tast.nextInt();\n        System.out.print("Oppgi verdien til y: ");\n        int y = tast.nextInt();\n        int sum = x + y;\n        System.out.println("Summen av x og y er: " + sum);\n    }\n}\n```'
     trix_core_assignment_3 = importer.save_or_locate(trix_core_assignment_3)
 
     trix_core_assignment_3.tags.add(trix_core_tag_1)
@@ -246,7 +246,7 @@ def import_data():
     trix_core_assignment_4 = Assignment()
     trix_core_assignment_4.title = u'Utskrift og sum av oddetalls-array:'
     trix_core_assignment_4.text = u'Skriv et program som inneholder en heltalls-array med f\xf8lgende elementer: 1, 3, 5, 7, 9, 11, 13, 15, 17, 19.  Programmet skal inneholde en l\xf8kke som skriver ut indeksen og verdien for alle elementene i arrayen.'
-    trix_core_assignment_4.solution = u'``` java\r\nclass Oddetall {\r\n  public static void main(String[] args) {\r\n    int[] oddetall = { 1, 3, 5, 7, 9, 11, 13, 15, 17, 19 };\r\n\r\n    for (int i = 0; i < oddetall.length; i++) {\r\n      System.out.println("oddetall[" + i + "] = " + oddetall[i]);\r\n    }\r\n  }\r\n}\r\n```'
+    trix_core_assignment_4.solution = u'``` java\nclass Oddetall {\n  public static void main(String[] args) {\n    int[] oddetall = { 1, 3, 5, 7, 9, 11, 13, 15, 17, 19 };\n    for (int i = 0; i < oddetall.length; i++) {\n      System.out.println("oddetall[" + i + "] = " + oddetall[i]);\n    }\n  }\n}\n```'
     trix_core_assignment_4 = importer.save_or_locate(trix_core_assignment_4)
 
     trix_core_assignment_4.tags.add(trix_core_tag_1)
@@ -256,14 +256,14 @@ def import_data():
     trix_core_assignment_5 = Assignment()
     trix_core_assignment_5.title = u'Hello world'
     trix_core_assignment_5.text = u'Make a Hello class.'
-    trix_core_assignment_5.solution = u"``` python\r\nclass Hello:\r\n    def __call__(self, text):\r\n        return 'Hello, %s!' % text\r\n\r\n    def __str__(self):\r\n        return 'Hello, World!'\r\n\r\na = Hello()\r\nprint a('students')  # looks like a function call!\r\nprint a              # print str(a) -> a.__str__()\r\n```"
+    trix_core_assignment_5.solution = u"``` python\nclass Hello:\n    def __call__(self, text):\n        return 'Hello, %s!' % text\n    def __str__(self):\n        return 'Hello, World!'\na = Hello()\nprint a('students')  # looks like a function call!\nprint a              # print str(a) -> a.__str__()\n```"
     trix_core_assignment_5 = importer.save_or_locate(trix_core_assignment_5)
 
     trix_core_assignment_5.tags.add(trix_core_tag_5)
 
     trix_core_assignment_6 = Assignment()
     trix_core_assignment_6.title = u'Lek med datatyper'
-    trix_core_assignment_6.text = u'Pr\xf8v \xe5 lage et program som bruker ALLE disse datatypene:\r\n\r\n- int\r\n- float\r\n- String\r\n- double\r\n- boolean\r\n- char'
+    trix_core_assignment_6.text = u'Pr\xf8v \xe5 lage et program som bruker ALLE disse datatypene:\n- int\n- float\n- String\n- double\n- boolean\n- char'
     trix_core_assignment_6.solution = u''
     trix_core_assignment_6 = importer.save_or_locate(trix_core_assignment_6)
 
