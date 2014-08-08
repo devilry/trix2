@@ -261,5 +261,8 @@ class Deserializer(object):
         existing_assignments = self._validate_existing_assignments(assignments_by_tag)
         new_assignments = self._validate_new_assignments(assignments_by_tag)
         for assignment in itertools.chain(existing_assignments, new_assignments):
+            assignment.full_clean()
             assignment.save()
+        from pprint import pprint
+        pprint(assignments_by_tag)
         bulk_update_assignment_tags(assignments_by_tag, existing_assignments)

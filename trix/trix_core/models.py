@@ -251,7 +251,7 @@ class Assignment(models.Model):
         # Normalize newlines. Just makes sure newlines is \n,
         # does not remove any empty lines or anything like that.
         text = '\n'.join(text.splitlines())
-        
+
         # Convert tabs to spaces. Editing tabs through the browser
         # is very error prone, so it is safer to just convert them.
         text = text.replace('\t', '    ')

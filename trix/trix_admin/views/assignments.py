@@ -1,15 +1,20 @@
 # from django.core.urlresolvers import reverse
 from django.utils.translation import ugettext_lazy as _
 from django.template.defaultfilters import truncatechars
+from django import forms
+from django import http
 from django_cradmin.viewhelpers import objecttable
 from django_cradmin.viewhelpers import create
 from django_cradmin.viewhelpers import update
 from django_cradmin.viewhelpers import delete
+from django_cradmin.viewhelpers import multiselect
+from django_cradmin import crispylayouts
 from django_cradmin import crapp
 from crispy_forms import layout
 from django_cradmin.acemarkdown.widgets import AceMarkdownWidget
 
 from trix.trix_core import models as trix_models
+from trix.trix_core import multiassignment_serialize
 from trix.trix_admin import formfields
 
 
@@ -42,13 +47,13 @@ class TagsColumn(objecttable.PlainTextColumn):
         return ', '.join(tag.tag for tag in assignment.tags.all())
 
 
-class AssignmentEditMixin(object):
+class AssignmentQuerysetForRoleMixin(object):
     def get_queryset_for_role(self, course):
         return self.model.objects.filter(tags=course.course_tag)\
             .prefetch_related('tags')
 
 
-class AssignmentListView(AssignmentEditMixin, objecttable.ObjectTableView):
+class AssignmentListView(AssignmentQuerysetForRoleMixin, objecttable.ObjectTableView):
     model = trix_models.Assignment
     columns = [
         TitleColumn,
@@ -63,12 +68,11 @@ class AssignmentListView(AssignmentEditMixin, objecttable.ObjectTableView):
         ]
 
     def get_multiselect_actions(self):
-        # app = self.request.cradmin_app
+        app = self.request.cradmin_app
         return [
             objecttable.MultiSelectAction(
                 label=_('Edit'),
-                # url=app.reverse_appurl('multiedit')
-                url='/to/do'
+                url=app.reverse_appurl('multiedit')
             ),
         ]
 
@@ -107,13 +111,61 @@ class AssignmentCreateView(AssignmentCreateUpdateMixin, create.CreateView):
     """
 
 
-class AssignmentUpdateView(AssignmentEditMixin, AssignmentCreateUpdateMixin, update.UpdateView):
+class AssignmentUpdateView(AssignmentQuerysetForRoleMixin, AssignmentCreateUpdateMixin, update.UpdateView):
     """
-    View used to create edit existing assignments.
+    View used to edit existing assignments.
     """
 
 
-class AssignmentDeleteView(AssignmentEditMixin, delete.DeleteView):
+class AssignmentMultiEditForm(forms.Form):
+    data = forms.CharField(
+        required=True,
+        label=_('Assignment YAML'),
+        widget=forms.Textarea)
+
+
+class AssignmentMultiEditView(AssignmentQuerysetForRoleMixin, multiselect.MultiSelectFormView):
+    """
+    View used to edit multiple assignments.
+    Supports both updating and creating assignments.
+    """
+    form_class = AssignmentMultiEditForm
+    model = trix_models.Assignment
+
+    def form_valid(self, form):
+        course = self.request.cradmin_role
+        multiassignment_serialize.Deserializer(
+            serialized_assignments=form.cleaned_data['data'],
+            course_tag=course.course_tag.tag).sync()
+        # print
+        # print
+        # print '='*70
+        # print
+        # from pprint import pprint
+        # pprint(form.cleaned_data)
+        # print
+        # print '='*70
+        # print
+        # print
+        return http.HttpResponseRedirect(self.request.cradmin_app.reverse_appindexurl())
+
+    def get_initial(self):
+        return {
+            'data': multiassignment_serialize.serialize(self.selected_objects)
+        }
+
+    def get_buttons(self):
+        return [
+            crispylayouts.PrimarySubmit('submit-save', _('Save'))
+        ]
+
+    def get_field_layout(self):
+        return [
+            layout.Div('data', css_class="cradmin-focusfield"),
+        ]
+
+
+class AssignmentDeleteView(AssignmentQuerysetForRoleMixin, delete.DeleteView):
     """
     View used to delete existing assignments.
     """
@@ -134,6 +186,10 @@ class App(crapp.App):
             r'^edit/(?P<pk>\d+)$',
             AssignmentUpdateView.as_view(),
             name="edit"),
+        crapp.Url(
+            r'^multiedit$',
+            AssignmentMultiEditView.as_view(),
+            name="multiedit"),
         crapp.Url(
             r'^delete/(?P<pk>\d+)$',
             AssignmentDeleteView.as_view(),
