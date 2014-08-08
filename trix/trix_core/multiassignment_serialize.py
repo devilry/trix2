@@ -75,7 +75,7 @@ def serialize(assignments):
         if assignment.solution:
             serializable_assignment['solution'] = MarkdownString(assignment.solution)
         serializable_assignments.append(serializable_assignment)
-    return yaml.safe_dump_all(serializable_assignments)
+    return yaml.safe_dump_all(serializable_assignments, allow_unicode=True)
 
 
 class DeserializerError(Exception):
