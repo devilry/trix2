@@ -131,22 +131,22 @@ class AssignmentMultiEditView(AssignmentQuerysetForRoleMixin, multiselect.MultiS
     """
     form_class = AssignmentMultiEditForm
     model = trix_models.Assignment
+    template_name = 'trix_admin/assignments/multiedit.django.html'
 
     def form_valid(self, form):
         course = self.request.cradmin_role
-        multiassignment_serialize.Deserializer(
-            serialized_assignments=form.cleaned_data['data'],
-            course_tag=course.course_tag.tag).sync()
-        # print
-        # print
-        # print '='*70
-        # print
-        # from pprint import pprint
-        # pprint(form.cleaned_data)
-        # print
-        # print '='*70
-        # print
-        # print
+        try:
+            multiassignment_serialize.Deserializer(
+                serialized_assignments=form.cleaned_data['data'],
+                course_tag=course.course_tag.tag).sync()
+        except multiassignment_serialize.DeserializerValidationErrors as e:
+            return self.render_to_response(self.get_context_data(
+                form=form,
+                deserializer_validationerrors=e.errors))
+        except multiassignment_serialize.DeserializerError as e:
+            return self.render_to_response(self.get_context_data(
+                form=form,
+                deserializererror=e))
         return http.HttpResponseRedirect(self.request.cradmin_app.reverse_appindexurl())
 
     def get_initial(self):

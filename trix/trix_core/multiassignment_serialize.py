@@ -263,6 +263,4 @@ class Deserializer(object):
         for assignment in itertools.chain(existing_assignments, new_assignments):
             assignment.full_clean()
             assignment.save()
-        from pprint import pprint
-        pprint(assignments_by_tag)
         bulk_update_assignment_tags(assignments_by_tag, existing_assignments)

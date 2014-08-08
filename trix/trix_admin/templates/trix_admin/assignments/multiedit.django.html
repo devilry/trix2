@@ -1,0 +1,22 @@
+{% extends "django_cradmin/viewhelpers/multiselect/formview.django.html" %}
+{% load i18n %}
+
+{% block forms %}
+    {% if deserializer_validationerrors or deserializererror %}
+        <div class="alert alert-danger">
+            {% if deserializererror %}
+                <h2>{% trans "Error" %}</h2>
+                {{ deserializererror }}
+            {% endif %}
+            {% if deserializer_validationerrors %}
+                <h2>{% trans "Validation errors" %}</h2>
+                {% for error in deserializer_validationerrors %}
+                    <strong>{% trans "In" %}
+                    {{ error.data }}</strong>
+                    {{ error.errordict }}
+                {% endfor %}
+            {% endif %}
+        </div>
+    {% endif %}
+    {{ block.super }}
+{% endblock forms %}
