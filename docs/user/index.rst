@@ -2,7 +2,9 @@
 Trix user documentation
 #######################
 
-.. toctree::
-   :maxdepth: 1
 
+.. toctree::
+   :maxdepth: 2
+
+   markdown
    bulkedit
