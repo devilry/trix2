@@ -41,10 +41,10 @@ INSTALLED_APPS = [
     'south',
     'django_extensions',
     'crispy_forms',
-    'django_cradmin',
     'trix.trix_core',
     'trix.trix_admin',
-    'trix.trix_student'
+    'trix.trix_student',
+    'django_cradmin',  # Important: Must come after trix_admin because of template overrides
 ]
 
 MIDDLEWARE_CLASSES = [
