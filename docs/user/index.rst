@@ -2,4 +2,8 @@
 Trix user documentation
 #######################
 
-TODO
+
+.. toctree::
+   :maxdepth: 2
+
+   markdown
