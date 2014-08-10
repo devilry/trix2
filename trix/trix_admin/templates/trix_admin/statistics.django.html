@@ -21,7 +21,10 @@
                 <ul>
                     <li>{% trans "Number of users:" %} {{ user_count }}</li>
                     <li>{% trans "Number of assignments:" %} {{ assignment_count }}</li>
-                    <li><a href="{% url 'trix_stats_ascsv' %}?tag={{ tag_id }}" class="btn btn-primary btn-sm" role="button">{% trans "Download csv file" %}</a></li>
+                    {% if assignment_list.count  %}
+                        <li><a href="{% url 'trix_stats_ascsv' %}?tag={{ tag_id }}" class="btn btn-primary btn-sm" role="button">{% trans "Download csv file" %}</a></li>
+                    {% endif %}
+                    
                 </ul>
             </div>
         </div>
@@ -32,14 +35,13 @@
             
         {% for assignment in assignment_list %}
 
-                    <div class="row">
-                        <div class="assignment-info col-md-4">
+
+                        <div class="assignment-info">
                             <h2>{{ assignment }}</h2>
-                            <p class="hidden-xs">{{ assignment.text|truncatechars:90 }}</p>
                         </div>
                     
 
-                        <div class="progress-info col-md-8">
+                        <div class="progress-info">
                                
                         {% with assignment|compute_stats:'bymyself' as bymyself_percent %}
                             <p class="progress-element">
@@ -64,10 +66,10 @@
 
                         
                         </div>
-                    </div>
+
 
             {% empty %}
-            <p class="empty-assignment-list-info">{% trans "There was no assignments matching the choosen tag" %}</p>
+            <h2 class="empty-assignment-list-info">{% trans "There was no assignments matching the choosen tag" %}</h2>
         {% endfor %}
         </table>
             
