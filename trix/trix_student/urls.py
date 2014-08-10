@@ -2,7 +2,7 @@ from django.conf.urls import patterns, url
 from django.contrib.auth.decorators import login_required
 
 from trix.trix_student.views import dashboard
-from trix.trix_student.views import assignments
+# from trix.trix_student.views import assignments
 from trix.trix_student.views import course
 from trix.trix_student.views import howsolved
 from trix.trix_student.views import permalink
@@ -11,7 +11,7 @@ from trix.trix_admin.views.statistics import AssignmentStatsCsv
 urlpatterns = patterns(
     'trix',
     url('^$', dashboard.CourseListView.as_view(), name='trix_student_dashboard'),
-    url('^assignments/$', assignments.AssignmentListView.as_view(), name='trix_student_assignments'),
+    # url('^assignments/$', assignments.AssignmentListView.as_view(), name='trix_student_assignments'),
     url('^assignment/howsolved/(?P<assignment_id>\d+)$',
         login_required(howsolved.HowsolvedView.as_view()),
         name='trix_student_howsolved'),
