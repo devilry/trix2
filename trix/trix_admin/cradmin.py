@@ -1,5 +1,6 @@
 from django.utils.translation import ugettext_lazy as _
 from django_cradmin import crinstance, crmenu
+from django.core.urlresolvers import reverse
 
 from trix.trix_core.models import Course
 # from .views import dashboard
@@ -24,6 +25,10 @@ class Menu(crmenu.Menu):
             label=_('Statistics'),
             url=self.appindex_url('statistics'),
             icon='bar-chart-o')
+        self.add(
+            label=_('Back to website'),
+            url=reverse('trix_student_dashboard'),
+            icon='arrow-left')
 
 
 class CrAdminInstance(crinstance.BaseCrAdminInstance):

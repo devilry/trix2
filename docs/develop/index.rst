@@ -12,16 +12,3 @@ Trix developer docs
    databasedumps
    docs
    git
-
-
-
-********
-API docs
-********
-
-.. toctree::
-   :glob:
-   :maxdepth: 1
-
-   _apidoc/*
-

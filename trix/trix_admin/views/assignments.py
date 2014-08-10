@@ -1,4 +1,3 @@
-# from django.core.urlresolvers import reverse
 from django.utils.translation import ugettext_lazy as _
 from django.template.defaultfilters import truncatechars
 from django import forms
@@ -10,6 +9,7 @@ from django_cradmin.viewhelpers import delete
 from django_cradmin.viewhelpers import multiselect
 from django_cradmin import crispylayouts
 from django_cradmin import crapp
+from django.core.urlresolvers import reverse
 from crispy_forms import layout
 from django_cradmin.acemarkdown.widgets import AceMarkdownWidget
 
@@ -22,7 +22,7 @@ class TitleColumn(objecttable.MultiActionColumn):
     modelfield = 'title'
 
     def get_buttons(self, assignment):
-        return [
+        buttons = [
             objecttable.Button(
                 label=_('Edit'),
                 url=self.reverse_appurl('edit', args=[assignment.id])),
@@ -31,6 +31,19 @@ class TitleColumn(objecttable.MultiActionColumn):
                 url=self.reverse_appurl('delete', args=[assignment.id]),
                 buttonclass="danger"),
         ]
+
+        course = self.view.request.cradmin_role
+        tags = set([tag.tag for tag in assignment.tags.all()])
+        if course.active_period.tag in tags:
+            tags.remove(course.course_tag.tag)
+            tags.remove(course.active_period.tag)
+            view_url = u'{}?tags={}'.format(
+                reverse('trix_student_course', kwargs={'course_id': course.id}),
+                u','.join(tags))
+            buttons.insert(1, objecttable.Button(
+                label=_('View'),
+                url=view_url))
+        return buttons
 
 
 class TextIntroColumn(objecttable.PlainTextColumn):
@@ -63,8 +76,12 @@ class AssignmentListView(AssignmentQuerysetForRoleMixin, objecttable.ObjectTable
 
     def get_buttons(self):
         app = self.request.cradmin_app
+        course = self.request.cradmin_role
         return [
             objecttable.Button(_('Create'), url=app.reverse_appurl('create')),
+            objecttable.Button(
+                _('Show on website'),
+                url=reverse('trix_student_course', kwargs={'course_id': course.id})),
         ]
 
     def get_multiselect_actions(self):
@@ -161,7 +178,7 @@ class AssignmentMultiEditView(AssignmentQuerysetForRoleMixin, multiselect.MultiS
 
     def get_field_layout(self):
         return [
-            layout.Div('data', css_class="cradmin-focusfield"),
+            layout.Div('data', css_class="cradmin-focusfield cradmin-focusfield-screenheight"),
         ]
 
 
