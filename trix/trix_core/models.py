@@ -233,12 +233,19 @@ class Assignment(models.Model):
         blank=True, null=False, default='',
         verbose_name=_('Solution'),
         help_text=_('If you want your students to be able to view a suggested solution, write the solution here.'))
+    created_datetime = models.DateTimeField(
+        verbose_name=_('Created'),
+        auto_now_add=True)
+    lastupdate_datetime = models.DateTimeField(
+        verbose_name=_('Last changed'),
+        auto_now=True)
 
     objects = AssignmentManager()
 
     class Meta:
         verbose_name = _('Assignment')
         verbose_name_plural = _('Assignments')
+        ordering = ['-lastupdate_datetime']
 
     def __unicode__(self):
         return self.title
