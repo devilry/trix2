@@ -145,7 +145,7 @@ text: Testtext
             set(assignments_by_tag.keys()),
             set(['duck1000', 'oblig1', 'oblig2', 'week3']))
         self.assertEquals(
-            assignments_by_tag['duck1000'], [assignment1, assignment2])
+            assignments_by_tag['duck1000'], [assignment2, assignment1])
         self.assertEquals(
             assignments_by_tag['oblig2'], [assignment2])
 
