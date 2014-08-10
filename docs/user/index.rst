@@ -2,4 +2,7 @@
 Trix user documentation
 #######################
 
-TODO
+.. toctree::
+   :maxdepth: 1
+
+   bulkedit
