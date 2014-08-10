@@ -52,8 +52,12 @@ class AssignmentStatsCsv(View):
             csvwriter.writerow([_('Assignment title'), _('Percentage')])
             for assignment in queryset:
                 csvwriter.writerow([assignment.title])
-                csvwriter.writerow([_('Completed by their own'), "{} %".format(self._compute_stats(assignment, 'bymyself'))])
-                csvwriter.writerow([_('Completed with help'), "{} %".format(self._compute_stats(assignment, 'withhelp'))])
+                csvwriter.writerow([
+                    _('Completed by their own'),
+                    "{} %".format(self._compute_stats(assignment, 'bymyself'))])
+                csvwriter.writerow([
+                    _('Completed with help'),
+                    "{} %".format(self._compute_stats(assignment, 'withhelp'))])
                 csvwriter.writerow([_('Not completed'), "{} %".format(self._compute_stats(assignment, 'notsolved'))])
                 csvwriter.writerow('')
         except Exception, e:
