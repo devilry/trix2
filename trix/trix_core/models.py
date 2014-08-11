@@ -89,7 +89,7 @@ class User(AbstractBaseUser):
         if self.is_staff:
             return True
         else:
-            return Course.objects.filter(admins__in=self).exists()
+            return Course.objects.filter(admins=self).exists()
 
     @property
     def is_staff(self):
