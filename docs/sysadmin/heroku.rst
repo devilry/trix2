@@ -43,6 +43,8 @@ Next, create the heroku instance. We have configured everything for Heroku, so a
     in https://devcenter.heroku.com/articles/getting-started-with-django.
 
 
+.. _herokucreatedemodb:
+
 Create a demo database
 ======================
 To create the Trix demo database, run::
@@ -52,3 +54,16 @@ To create the Trix demo database, run::
     >$ python manage.py migrate --noinput
     >$ python manage.py runscript trix.project.develop.dumps.dev.data
     >$ exit
+
+
+Drop and recreate the database
+==============================
+If you need to drop and recreate the database, run::
+
+    $ heroku pg:info
+
+You will find database name on the first line (all uppercase, something like HEROKU_POSTGRESQL_AQUA_URL). Then you can run::
+
+    $ heroku pg:reset <database-name>
+
+Lastly, repeat herokucreatedemodb_.
