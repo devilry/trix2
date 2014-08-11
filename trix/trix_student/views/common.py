@@ -89,7 +89,7 @@ class AssignmentListViewBase(ListView):
             HowSolved object for ``request.user`` for the assignment.
         """
         howsolvedmap = {}  # Map of assignment ID to HowSolved.howsolved for request.user
-        if self.request.user.is_authenticated():
+        if self.request.user.is_authenticated() and assignment_list:
             howsolvedquery = models.HowSolved.objects\
                 .filter(user=self.request.user, assignment__in=assignment_list)
             howsolvedmap = dict(howsolvedquery.values_list('assignment_id', 'howsolved'))
