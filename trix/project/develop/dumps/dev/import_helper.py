@@ -13,6 +13,7 @@ class ImportHelper(object):
 
         for user in DUCKBURGH:
             email = '{}{}'.format(user, '@example.com')
-            User.objects.create(email=email)
+            if not User.objects.filter(email=email).exists():
+                User.objects.create(email=email)
 
         User.objects.all().update(password=make_password('test'))
