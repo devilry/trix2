@@ -21,7 +21,7 @@
         </div>
         <div class="collapse navbar-collapse navbar-responsive-collapse" collapse="trixNavigationCollapse">
             <ul class="nav navbar-nav navbar-right">
-                {% if request.user.is_authenticated and request.user.is_staff %}
+                {% if request.user.is_authenticated and request.user.is_admin_on_anything %}
                     <li>
                         <a href="/a/">
                             <span class="fa fa-cog"></span>

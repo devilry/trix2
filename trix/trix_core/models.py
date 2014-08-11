@@ -85,6 +85,12 @@ class User(AbstractBaseUser):
         """
         return True
 
+    def is_admin_on_anything(self):
+        if self.is_staff:
+            return True
+        else:
+            return Course.objects.filter(admins__in=self).exists()
+
     @property
     def is_staff(self):
         """
@@ -173,7 +179,7 @@ class Course(models.Model):
     """
     A course is simply a tag with an optional active period tag, and a list of admins.
     """
-    admins = models.ManyToManyField(User)
+    admins = models.ManyToManyField(User, blank=True)
     description = models.TextField(
         verbose_name=_('Description'),
         blank=True, null=False, default='')
