@@ -11,7 +11,7 @@ Documentation
    :maxdepth: 1
 
    user/index
-   systadmin/index
+   sysadmin/index
    develop/index
 
 
