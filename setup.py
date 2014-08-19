@@ -1,11 +1,11 @@
 from setuptools import setup, find_packages
 
-# execfile('trix/version.py')
+execfile('trix/version.py')
 
 setup(
     name='trix',
     description='Trix.',
-    version='2.0.0-beta.002',   # noqa
+    version=__version__,   # noqa
     url='https://gifthub.com/devilry/trix2',
     author='Tor Johansen, Espen Angell Kristiansen',
     author_email='tor@torjohansen.no, post@espenak.net',
