@@ -12,6 +12,7 @@
   <component name="NewModuleRootManager">
     <content url="file://$MODULE_DIR$">
       <excludeFolder url="file://$MODULE_DIR$/.tox" />
+      <excludeFolder url="file://$MODULE_DIR$/docs/_build" />
       <excludeFolder url="file://$MODULE_DIR$/trix2.egg-info" />
     </content>
     <orderEntry type="jdk" jdkName="Python 2.7.5 virtualenv at ~/Envs/trix2" jdkType="Python SDK" />
