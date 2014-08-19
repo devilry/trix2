@@ -31,13 +31,7 @@ class AssignmentListViewBase(ListView):
         return assignments
 
     def _get_user_is_admin(self):
-        if self.request.user.is_authenticated():
-            if self.request.user.is_admin:
-                return True
-            else:
-                return self.course.admins.filter(id=self.request.user.id)
-        else:
-            return False
+        raise NotImplementedError()
 
     def _get_progress(self):
         num_solved = models.HowSolved.objects.filter(assignment__in=self.get_queryset()).count()
