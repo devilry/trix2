@@ -54,13 +54,6 @@ Copy this script into ``~/trixdeploy/manage.py``::
         from django.core.management import execute_from_command_line
         execute_from_command_line(sys.argv)
 
-Just to make sure everything works, run it with::
-
-    $ cd ~/trixdeploy/
-    $ venv/bin/python manage.py syncdb --noinput
-
-This should create a file named ``~/trixdeploy/trixdb.sqlite``. You can remove that file now - it was just for testing.
-
 
 *********
 Configure
@@ -68,24 +61,56 @@ Configure
 Trix is configured through a ``trix_settings.py`` file. Start by copying the following into
 ``~/trixdeploy/trix_settings.py``::
 
-    TODO
+    from trix.project.production.settings import *
+    import dj_database_url
+
+    # Make this 50 chars and RANDOM - do not share it with anyone
+    SECRET_KEY = 'XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX'
+
+    # Database config
+    DATABASE_URL = 'sqlite:///trixdb.sqlite'
+    DATABASES = {'default': dj_database_url.config(default=DATABASE_URL)}
+
+    # Set this to False to turn of debug mode in production
+    DEBUG = False
+    TEMPLATE_DEBUG = DEBUG
+
+
+******************
+Make sure it works
+******************
+Just to make sure everything works, run::
+
+    $ cd ~/trixdeploy/
+    $ venv/bin/python manage.py syncdb --noinput
+
+This should create a file named ``~/trixdeploy/trixdb.sqlite``. You can remove that file now - it was just for testing.
+
+
+********************
+Collect static files
+********************
+Run the following command to collect all static files (CSS, javascript, ...) for Trix::
+
+    $ venv/bin/python manage.py collectstatic
+
+The files are written to the ``staticfiles`` sub-directory (~/trixdeploy/staticfiles).
 
 
 ********************
 Configure a database
 ********************
-Configure a Postgres database by editing the ``DATABASE_URL`` setting in your ``trix_settings.py`` script. The format is::
+Configure a Postgres database by editing the ``DATABASE_URL`` setting in your ``trix_settings.py`` script.
+The format is::
 
-    postgres://USER:PASSWORD@HOST:PORT/NAME
+    DATABASE_URL = "postgres://USER:PASSWORD@HOST:PORT/NAME"
 
 
 **********************
 Configure a SECRET_KEY
 **********************
 Configure the SECRET_KEY (used for cryptographic signing) by editing the ``SECRET_KEY`` setting in your
-``trix_settings.py`` script. Make it a 50 characters long random string. Example (**DO NOT COPY**)::
-
-    SECRET_KEY = 'XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX'
+``trix_settings.py`` script. Make it a 50 characters long random string.
 
 
 ******************
@@ -104,7 +129,8 @@ Run the production server
 *************************
 ::
 
-    DJANGO_SETTINGS_MODULE=trix_settings gunicorn trix.project.production.wsgi -b 0.0.0.0:8000 --workers=12 --preload
+    DJANGO_SETTINGS_MODULE=trix_settings venv/bin/gunicorn trix.project.production.wsgi -b 0.0.0.0:8000 --workers=12
+    --preload
 
 You can adjust the number of worker threads in the ``--workers`` argument,
 and the port number in the ``-b`` argument. You can run this on port 80,
