@@ -7,13 +7,12 @@ from trix.project.default.settings import *
 
 ROOT_URLCONF = 'trix.project.production.urls'
 
-DEBUG = True
-TEMPLATE_DEBUG = DEBUG
+DEBUG = False
+TEMPLATE_DEBUG = False
 LANGUAGE_CODE = 'nb'
 
 # Database
 DATABASES = {}
-DATABASES['default'] = dj_database_url.config()
 
 INSTALLED_APPS += [
     'gunicorn',
@@ -40,14 +39,8 @@ SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 ALLOWED_HOSTS = ['*']
 
 # Static asset configuration for heroku
-BASE_DIR = os.path.dirname(
-    os.path.dirname(
-        os.path.dirname(os.path.abspath(__file__))))
 STATIC_ROOT = 'staticfiles'
 STATIC_URL = '/static/'
-STATICFILES_DIRS = (
-    os.path.join(BASE_DIR, 'static'),
-)
 
 
 # HAYSTACK_CONNECTIONS = {

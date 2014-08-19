@@ -21,6 +21,9 @@ setup(
         'PyYAML>=3.11',
         'django-extensions',
         'South>=0.8.4',
+        'dj-database-url>=0.3.0',
+        'django_cradmin==1.0.0-alpha.004',
+        'gunicorn',
     ],
     classifiers=[
         'Development Status :: 4 - Beta',
