@@ -129,8 +129,7 @@ Run the production server
 *************************
 ::
 
-    DJANGO_SETTINGS_MODULE=trix_settings venv/bin/gunicorn trix.project.production.wsgi -b 0.0.0.0:8000 --workers=12
-    --preload
+    $ DJANGO_SETTINGS_MODULE=trix_settings venv/bin/gunicorn trix.project.production.wsgi -b 0.0.0.0:8000 --workers=12 --preload
 
 You can adjust the number of worker threads in the ``--workers`` argument,
 and the port number in the ``-b`` argument. You can run this on port 80,
