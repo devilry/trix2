@@ -13,6 +13,15 @@ class CourseDetailView(AssignmentListViewBase):
         self.course = get_object_or_404(models.Course, id=self.course_id)
         return super(CourseDetailView, self).get(request, **kwargs)
 
+    def _get_user_is_admin(self):
+        if self.request.user.is_authenticated():
+            if self.request.user.is_admin:
+                return True
+            else:
+                return self.course.admins.filter(id=self.request.user.id)
+        else:
+            return False
+
     def get_all_available_assignments(self):
         return models.Assignment.objects\
             .filter_by_tag(self.course.course_tag)\

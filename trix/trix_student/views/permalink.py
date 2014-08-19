@@ -15,6 +15,15 @@ class PermalinkView(AssignmentListViewBase):
         self.permalink = get_object_or_404(models.Permalink, id=self.permalink_id)
         return super(PermalinkView, self).get(request, **kwargs)
 
+    def _get_user_is_admin(self):
+        if self.request.user.is_authenticated():
+            if self.request.user.is_admin:
+                return True
+            else:
+                return self.permalink.course.admins.filter(id=self.request.user.id)
+        else:
+            return False
+
     def get_all_available_assignments(self):
         return models.Assignment.objects\
             .filter_by_tags(self.permalink.tags.all())
