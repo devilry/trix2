@@ -9,7 +9,13 @@
 
     <div class="page-header">
         <div class="container">
-            <h1>Logg inn</h1>
+            <h1>{% trans "Log in" %}</h1>
+            {% if TRIX_LOGIN_MESSAGE %}
+                <p class="lead">
+                    {{ TRIX_LOGIN_MESSAGE }}
+                </p>
+            {% endif %}
+
         </div>
     </div>
 

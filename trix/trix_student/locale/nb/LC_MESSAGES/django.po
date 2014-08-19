@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: trix_student\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-07-02 22:14+0000\n"
-"PO-Revision-Date: 2014-07-03 00:15+0100\n"
+"POT-Creation-Date: 2014-08-19 18:07+0000\n"
+"PO-Revision-Date: 2014-08-19 20:08+0100\n"
 "Last-Translator: Espen Angell Kristiansen <post@espenak.net>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: nb\n"
@@ -112,6 +112,10 @@ msgstr ""
 msgid "Trix login"
 msgstr "Logg inn i Trix"
 
+#: templates/trix_student/login.django.html:12 views/login.py:26
+msgid "Log in"
+msgstr "Logg inn"
+
 #: templates/trix_student/permalink_list.django.html:3
 msgid "Trix - permalink"
 msgstr "Trix - permalink"
@@ -144,7 +148,7 @@ msgstr "Forrige"
 msgid "Next"
 msgstr "Neste"
 
-#: views/common.py:112
+#: views/common.py:108
 msgid ""
 "You have completed {{ solvedPercentage }} percent of assignments matching "
 "the currently selected tags."
@@ -155,11 +159,19 @@ msgstr ""
 msgid "Email"
 msgstr "Epost"
 
-#: views/login.py:20
-msgid "Log in"
-msgstr "Logg inn"
+#: views/login.py:17
+msgid "Username"
+msgstr "Brukernavn"
 
-#: views/login.py:40
+#: views/login.py:45
+msgid ""
+"Please enter a correct username and password. Note that both fields are be "
+"case-sensitive."
+msgstr ""
+"Venligst skriv inn et gyldig brukernavn og passord. Begge feltene skiller "
+"mellom store og små bokstaver."
+
+#: views/login.py:48
 msgid ""
 "Please enter a correct email and password. Note that both fields are be case-"
 "sensitive."

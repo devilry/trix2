@@ -114,3 +114,6 @@ TEMPLATE_CONTEXT_PROCESSORS = (
     "django.core.context_processors.request",
     "django.contrib.messages.context_processors.messages",
 )
+
+#TRIX_LOGIN_MESSAGE = 'Sign in with your dreamuniversity username and password'
+#TRIX_LOGIN_IS_USERNAME = True
