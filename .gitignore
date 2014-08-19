@@ -50,3 +50,7 @@ docs/_build/
 
 # Django development database
 db.sqlite3
+
+# Ignore user-specific pycharm settings
+.idea/workspace.xml
+.idea/tasks.xml
