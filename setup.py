@@ -3,8 +3,8 @@ from setuptools import setup, find_packages
 execfile('trix/version.py')
 
 setup(
-    name='trix2',
-    description='Trix2.',
+    name='trix',
+    description='Trix.',
     version=__version__,   # noqa
     url='https://gifthub.com/devilry/trix2',
     author='Tor Johansen, Espen Angell Kristiansen',
@@ -14,10 +14,12 @@ setup(
     include_package_data=True,
     install_requires=[
         'setuptools',
-        'Django',
-        'django-crispy-forms',
-        'Markdown',
-        'PyYAML'
+        'Django>=1.6.5, <1.7.0',
+        'django-crispy-forms>=1.4.0',
+        'Markdown>=2.4',
+        'PyYAML>=3.11',
+        'django-extensions',
+        'South>=0.8.4',
     ],
     classifiers=[
         'Development Status :: 4 - Beta',
