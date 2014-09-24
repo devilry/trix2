@@ -6,9 +6,9 @@ setup(
     name='trix',
     description='Trix.',
     version=__version__,   # noqa
-    url='https://gifthub.com/devilry/trix2',
+    url='https://github.com/devilry/trix2',
     author='Tor Johansen, Espen Angell Kristiansen',
-    author_email='tor@torjohansen.no, post@espenak.net',
+    author_email='tor@appresso.no, espen@appresso.no',
     license='BSD',
     packages=find_packages(exclude=['ez_setup']),
     zip_safe=False,
