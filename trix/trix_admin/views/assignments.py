@@ -38,9 +38,10 @@ class TitleColumn(objecttable.MultiActionColumn):
         if course.active_period.tag in tags:
             tags.remove(course.course_tag.tag)
             tags.remove(course.active_period.tag)
-            view_url = u'{}?tags={}'.format(
-                reverse('trix_student_course', kwargs={'course_id': course.id}),
-                u','.join(tags))
+            view_url = u'{url}?tags={tags}#assignment-{assignmentid}'.format(
+                url=reverse('trix_student_course', kwargs={'course_id': course.id}),
+                tags=u','.join(tags),
+                assignmentid=assignment.id)
             buttons.insert(1, objecttable.Button(
                 label=_('View'),
                 url=view_url))
