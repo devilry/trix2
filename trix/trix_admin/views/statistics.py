@@ -1,4 +1,5 @@
 from django.core.exceptions import PermissionDenied
+from django.db.models import Count
 from django.views.generic import ListView
 from django.views.generic import View
 from django.contrib.auth import get_user_model
@@ -178,7 +179,7 @@ class StatisticsChartView(AssignmentStatsMixin, ListView):
         return context
 
 
-class TitleColumn(objecttable.SingleActionColumn):
+class TagColumn(objecttable.SingleActionColumn):
     modelfield = 'tag'
 
     def get_actionurl(self, tag):
@@ -189,14 +190,31 @@ class TitleColumn(objecttable.SingleActionColumn):
         )
 
 
+class AssignmentCountColumn(objecttable.PlainTextColumn):
+    orderingfield = 'assignment__count'
+
+    def get_header(self):
+        return _('Number of assignments')
+
+    def render_value(self, tag):
+        return tag.assignment__count
+
+
 class StatisticsView(objecttable.ObjectTableView):
     model = trix_models.Tag
     columns = [
-        TitleColumn,
+        TagColumn,
+        AssignmentCountColumn,
+    ]
+    searchfields = [
+        'tag'
     ]
 
     def get_queryset_for_role(self, course):
-        return self.model.objects.exclude(tag=course.course_tag.tag)
+        return self.model.objects\
+            .annotate(Count('assignment', distinct=True))\
+            .exclude(tag=course.course_tag.tag)
+
 
 
 class App(crapp.App):
