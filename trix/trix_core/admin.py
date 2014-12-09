@@ -1,5 +1,8 @@
 from django.contrib import admin
-from trix.trix_core import models
+from django.db.models import Count, Q
+from django.utils.translation import ugettext_lazy as _
+
+from trix.trix_core import models as coremodels
 
 
 class UserAdmin(admin.ModelAdmin):
@@ -18,7 +21,7 @@ class UserAdmin(admin.ModelAdmin):
     fields = ['email', 'is_admin', 'is_active']
     readonly_fields = ['last_login']
 
-admin.site.register(models.User, UserAdmin)
+admin.site.register(coremodels.User, UserAdmin)
 
 
 class AssignmentAdmin(admin.ModelAdmin):
@@ -46,13 +49,62 @@ class AssignmentAdmin(admin.ModelAdmin):
         return queryset
 
 
-admin.site.register(models.Assignment, AssignmentAdmin)
+admin.site.register(coremodels.Assignment, AssignmentAdmin)
+
+
+class TagInUseFilter(admin.SimpleListFilter):
+    title = _('tag is in use')
+    parameter_name = 'tag_is_in_use'
+
+    def lookups(self, request, model_admin):
+        return (
+            ('yes', _('Yes')),
+            ('no', _('No')),
+        )
+
+    def queryset(self, request, queryset):
+        if self.value() == 'yes':
+            return queryset.filter(
+                Q(assignment__count__gt=0) |
+                Q(active_period_set__count__gt=0) |
+                Q(course_set__count__gt=0)
+            )
+        if self.value() == 'no':
+            return queryset.filter(
+                Q(assignment__count=0) &
+                Q(active_period_set__count=0) &
+                Q(course_set__count=0)
+            )
 
 
 class TagAdmin(admin.ModelAdmin):
     search_fields = ['tag']
-    list_display = ['tag']
-admin.site.register(models.Tag, TagAdmin)
+    list_display = [
+        'tag',
+        'category',
+        'get_assignment_count',
+        'is_in_use'
+    ]
+    list_filter = [TagInUseFilter]
+
+    def get_queryset(self, request):
+        return super(TagAdmin, self).get_queryset(request)\
+            .annotate(
+                Count('assignment', distinct=True),
+                Count('active_period_set', distinct=True),
+                Count('course_set', distinct=True))
+
+    def get_assignment_count(self, tag):
+        return unicode(tag.assignment__count)
+    get_assignment_count.short_description = _('Number of assignments')
+    get_assignment_count.admin_order_field = 'assignment__count'
+
+    def is_in_use(self, tag):
+        return (tag.assignment__count + tag.active_period_set__count + tag.course_set__count) > 0
+    is_in_use.short_description = _('Is in use')
+    is_in_use.boolean = True
+
+admin.site.register(coremodels.Tag, TagAdmin)
 
 
 class CourseAdmin(admin.ModelAdmin):
@@ -81,7 +133,7 @@ class CourseAdmin(admin.ModelAdmin):
             .prefetch_related('admins')
         return queryset
 
-admin.site.register(models.Course, CourseAdmin)
+admin.site.register(coremodels.Course, CourseAdmin)
 
 
 class PermalinkAdmin(admin.ModelAdmin):
@@ -114,4 +166,4 @@ class PermalinkAdmin(admin.ModelAdmin):
         return queryset
 
 
-admin.site.register(models.Permalink, PermalinkAdmin)
+admin.site.register(coremodels.Permalink, PermalinkAdmin)
