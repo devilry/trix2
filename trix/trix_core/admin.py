@@ -51,6 +51,7 @@ admin.site.register(models.Assignment, AssignmentAdmin)
 
 class TagAdmin(admin.ModelAdmin):
     search_fields = ['tag']
+    list_display = ['tag']
 admin.site.register(models.Tag, TagAdmin)
 
 
