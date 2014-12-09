@@ -75,6 +75,7 @@
                 </div>
             </div>
             <div class="col-sm-9 col-sm-pull-3 col-md-9 col-md-pull-3">
+                {% include "trix_student/include/pager.django.html" with pager_extraclass="pager-no-topmargin hidden-xs" %}
                 {% for assignment, howsolved in assignmentlist_with_howsolved %}
                     <section class="trix-assignment"
                             ng-controller="AssignmentCtrl"
