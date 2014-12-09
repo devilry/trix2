@@ -46,6 +46,9 @@ class DescriptionIntroColumn(objecttable.PlainTextColumn):
 class TagsColumn(objecttable.PlainTextColumn):
     modelfield = 'tags'
 
+    def is_sortable(self):
+        return False
+
     def render_value(self, permalink):
         return ', '.join(tag.tag for tag in permalink.tags.all())
 
