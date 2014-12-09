@@ -16,13 +16,37 @@
     <div class="page-sub-header">    
         <div class="container-fluid">
             <h1>{% trans "Aggregated statistics on how the assignments where solved" %}</h1>
+            <p>
+                {% for tag in selected_tags_list %}
+                    <a class="btn btn-success"
+                            {% if tag == course_tag %}
+                                disabled
+                            {% else %}
+                                href="?tags={{ selected_tags_string }},-{{ tag }}"
+                            {% endif %}>
+                        {% if tag != course_tag %}
+                            <span class="fa fa-times"></span>
+                        {% endif %}
+                        {{ tag }}
+                    </a>
+                {% endfor %}
+                {% for tag in selectable_tags_list %}
+                    <a class="btn btn-link"
+                            href="?tags={{ selected_tags_string }},{{ tag }}">
+                        <span class="fa fa-plus"></span>
+                        {{ tag }}
+                    </a>
+                {% endfor %}
+
+            </p>
+
             <p>{% trans "The stats below show how many percentage of the total number of users that have completed the assignment by their own, with help or not completed it." %}</p>
             <div class="stat-info">
                 <ul class="list-unstyled">
                     <li>{% trans "Number of users:" %} {{ user_count }}</li>
                     <li>{% trans "Number of assignments:" %} {{ assignment_count }}</li>
                     {% if assignment_list.count  %}
-                        <li><a href="{% url 'trix_stats_ascsv' %}?tag={{ tag_id }}">
+                        <li><a href="{% url 'trix_stats_ascsv' %}?tags={{ selected_tags_string }}">
                             <span class="fa fa-download"></span>
                             {% trans "Download csv file" %}
                         </a></li>

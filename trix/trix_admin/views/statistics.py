@@ -1,3 +1,4 @@
+from django.core.exceptions import PermissionDenied
 from django.views.generic import ListView
 from django.views.generic import View
 from django.contrib.auth import get_user_model
@@ -68,26 +69,56 @@ def compute_stats_for_assignment(assignment, howsolved_filter, user_count):
     return percentage
 
 
-def get_usercount_within_course(course_tag_id):
-    user_ids_within_course = HowSolved.objects\
-        .filter(assignment__tags=course_tag_id)\
+def get_usercount_within_assignments(assignments):
+    user_ids = HowSolved.objects\
+        .filter(assignment__in=assignments)\
         .values_list('user_id', flat=True)
     user_count = get_user_model().objects\
-        .filter(id__in=user_ids_within_course)\
+        .filter(id__in=user_ids)\
         .distinct()\
         .count()
     return user_count
 
 
-class AssignmentStatsCsv(View):
+class AssignmentStatsMixin(object):
+    def get_tags(self, course_tag=None):
+        tags_string = self.request.GET.get('tags')
+        if tags_string:
+            tags = []
+            removetags = []
+            for tag in tags_string.split(','):
+                tag = tag.strip()
+                if tag:
+                    if tag.startswith('-'):
+                        removetags.append(tag.lstrip('-'))
+                    else:
+                        tags.append(tag)
+            for removetag in removetags:
+                tags.remove(removetag)
+        else:
+            tags = []
+        if course_tag is not None and course_tag not in tags:
+            tags.append(course_tag)
+        return tags
+
+    def get_queryset(self):
+        queryset = trix_models.Assignment.objects.all()
+        for tagstring in self.tags:
+            queryset = queryset.filter(tags__tag=tagstring)
+        return queryset
+
+
+class AssignmentStatsCsv(AssignmentStatsMixin, View):
 
     def get(self, request, *args, **kwargs):
-        course_tag_id = request.GET.get('tag', None)
-        if not course_tag_id:
+        self.tags = self.get_tags()
+        if not self.tags:
             return HttpResponseBadRequest()
-        queryset = trix_models.Assignment.objects.filter(tags__id=course_tag_id)
+        if self.request.cradmin_role.course_tag.tag not in self.tags:
+            raise PermissionDenied()
+        assignmentqueryset = self.get_queryset()
 
-        user_count = get_usercount_within_course(course_tag_id)
+        user_count = get_usercount_within_assignments(assignmentqueryset)
         response = HttpResponse(content_type='text/csv')
         try:
             response['Content-Disposition'] = 'attachment; filename="trix-statistics.csv"'
@@ -96,7 +127,7 @@ class AssignmentStatsCsv(View):
             csvwriter.writerow([_('Total number of users'), str(user_count)])
             csvwriter.writerow('')
             csvwriter.writerow([_('Assignment title'), _('Percentage')])
-            for assignment in queryset:
+            for assignment in assignmentqueryset:
                 csvwriter.writerow([assignment.title])
                 csvwriter.writerow([
                     _('Completed by their own'),
@@ -112,7 +143,7 @@ class AssignmentStatsCsv(View):
         return response
 
 
-class StatisticsChartView(ListView):
+class StatisticsChartView(AssignmentStatsMixin, ListView):
     """
     Class for the statistics charts displayed.
 
@@ -122,29 +153,40 @@ class StatisticsChartView(ListView):
     model = trix_models.Assignment
     context_object_name = 'assignment_list'
     paginate_by = 20
-    queryset = None
 
     def get(self, request, *args, **kwargs):
-        self.tag_id = kwargs['pk']
+        self.tags = self.get_tags(self.request.cradmin_role.course_tag.tag)
         return super(StatisticsChartView, self).get(request, *args, **kwargs)
 
-    def get_queryset(self):
-        return super(StatisticsChartView, self).get_queryset()\
-            .filter(tags__id=self.tag_id)
+    def _get_selectable_tags(self):
+        tags = trix_models.Tag.objects\
+            .filter(assignment__in=self.get_queryset())\
+            .exclude(tag__in=self.tags)\
+            .order_by('tag')\
+            .distinct()\
+            .values_list('tag', flat=True)
+        return tags
 
     def get_context_data(self, **kwargs):
         context = super(StatisticsChartView, self).get_context_data(**kwargs)
-        context['user_count'] = get_usercount_within_course(self.request.cradmin_role.course_tag_id)
+        context['user_count'] = get_usercount_within_assignments(self.get_queryset())
         context['assignment_count'] = self.get_queryset().count()
-        context['tag_id'] = self.tag_id
+        context['selected_tags_string'] = ','.join(self.tags)
+        context['selected_tags_list'] = self.tags
+        context['selectable_tags_list'] = self._get_selectable_tags()
+        context['course_tag'] = self.request.cradmin_role.course_tag.tag
         return context
 
 
 class TitleColumn(objecttable.SingleActionColumn):
     modelfield = 'tag'
 
-    def get_actionurl(self, obj):
-        return self.reverse_appurl('view', args=[obj.id])
+    def get_actionurl(self, tag):
+        return '{}?tags={},{}'.format(
+            self.reverse_appurl('view'),
+            self.view.request.cradmin_role.course_tag.tag,
+            tag.tag
+        )
 
 
 class StatisticsView(objecttable.ObjectTableView):
@@ -154,11 +196,11 @@ class StatisticsView(objecttable.ObjectTableView):
     ]
 
     def get_queryset_for_role(self, course):
-        return self.model.objects.all()
+        return self.model.objects.exclude(tag=course.course_tag.tag)
 
 
 class App(crapp.App):
     appurls = [
         crapp.Url(r'^$', StatisticsView.as_view(), name=crapp.INDEXVIEW_NAME),
-        crapp.Url(r'^view/(?P<pk>\d+)$', StatisticsChartView.as_view(), name='view'),
+        crapp.Url(r'^view$', StatisticsChartView.as_view(), name='view'),
     ]
