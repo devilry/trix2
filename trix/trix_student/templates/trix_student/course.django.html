@@ -8,7 +8,7 @@
         <div class="container">
             {% if user_is_admin %}
                 <a href="{% url 'trix_courseadmin-assignments-INDEX' course.id %}"
-                        class="btn btn-trix-admin pull-right">
+                        class="btn btn-trix-admin pull-right trix-no-print">
                     <span class="fa fa-edit"></span>
                     {% trans "Edit" %}
                 </a>

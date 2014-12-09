@@ -55,7 +55,7 @@
                     {% endif %}
                 </div>
                 {% if selectable_tags %}
-                    <form ng-controller="AddTagCtrl">
+                    <form ng-controller="AddTagCtrl" class="trix-no-print">
                         <h3>{% trans "Filter" %}:</h3>
                         <select ng-model="tagToAdd" ng-change="addTag()">
                             <option value="" selected>-- {% trans "Select a tag" %} --</option>
@@ -66,11 +66,13 @@
                     </form>
                 {% endif %}
 
-                <h3>{% trans "Print" %}:</h3>
-                <button class="btn btn-default" onclick="window.print()">
-                    <span class="fa fa-print"></span>
-                    {% trans "Print this page" %}
-                </button>
+                <div class="trix-no-print">
+                    <h3>{% trans "Print" %}:</h3>
+                    <button class="btn btn-default" onclick="window.print()">
+                        <span class="fa fa-print"></span>
+                        {% trans "Print this page" %}
+                    </button>
+                </div>
             </div>
             <div class="col-sm-9 col-sm-pull-3 col-md-9 col-md-pull-3">
                 {% for assignment, howsolved in assignmentlist_with_howsolved %}
@@ -83,7 +85,7 @@
                             ">
                         {% if user_is_admin %}
                             <a href="{% url 'trix_courseadmin-assignments-edit' course.id assignment.id %}?{{ urlencoded_success_url }}"
-                                    class="btn btn-trix-admin pull-right">
+                                    class="btn btn-trix-admin pull-right trix-no-print">
                                 <span class="fa fa-edit"></span>
                                 {% trans "Edit" %}
                             </a>

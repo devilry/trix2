@@ -7818,3 +7818,9 @@ fieldset[disabled] .btn-trix-admin.active {
 body {
   background-color: #fbfbfb;
 }
+@media print {
+  .trix-no-print,
+  .trix-no-print * {
+    display: none !important;
+  }
+}
