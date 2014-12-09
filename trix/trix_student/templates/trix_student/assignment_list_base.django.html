@@ -65,6 +65,12 @@
                         </select>
                     </form>
                 {% endif %}
+
+                <h3>{% trans "Print" %}:</h3>
+                <button class="btn btn-default" onclick="window.print()">
+                    <span class="fa fa-print"></span>
+                    {% trans "Print this page" %}
+                </button>
             </div>
             <div class="col-sm-9 col-sm-pull-3 col-md-9 col-md-pull-3">
                 {% for assignment, howsolved in assignmentlist_with_howsolved %}
