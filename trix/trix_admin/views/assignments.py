@@ -134,6 +134,14 @@ class AssignmentCreateUpdateMixin(object):
         form.fields['solution'].widget = AceMarkdownWidget()
         return form
 
+    def save_object(self, form):
+        assignment = super(AssignmentCreateUpdateMixin, self).save_object(form)
+        # Replace the tags with the new tags
+        assignment.tags.clear()
+        for tag in form.cleaned_data['tags']:
+            assignment.tags.add(tag)
+        return assignment
+
     def form_saved(self, assignment):
         course = self.request.cradmin_role
         if not assignment.tags.filter(tag=course.course_tag).exists():

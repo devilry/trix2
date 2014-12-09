@@ -108,7 +108,7 @@ class User(AbstractBaseUser):
 
 class TagQuerySet(models.query.QuerySet):
     def to_unicode(self):
-        return ', '.join(tag.tag for tag in self.all())
+        return u', '.join(tag.tag for tag in self.all())
 
 
 class TagManager(models.Manager):
