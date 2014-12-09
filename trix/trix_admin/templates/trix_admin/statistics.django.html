@@ -14,15 +14,18 @@
     </div>
     
     <div class="page-sub-header">    
-        <div class="container">
+        <div class="container-fluid">
             <h1>{% trans "Aggregated statistics on how the assignments where solved" %}</h1>
             <p>{% trans "The stats below show how many percentage of the total number of users that have completed the assignment by their own, with help or not completed it." %}</p>
             <div class="stat-info">
-                <ul>
+                <ul class="list-unstyled">
                     <li>{% trans "Number of users:" %} {{ user_count }}</li>
                     <li>{% trans "Number of assignments:" %} {{ assignment_count }}</li>
                     {% if assignment_list.count  %}
-                        <li><a href="{% url 'trix_stats_ascsv' %}?tag={{ tag_id }}" class="btn btn-primary btn-sm" role="button">{% trans "Download csv file" %}</a></li>
+                        <li><a href="{% url 'trix_stats_ascsv' %}?tag={{ tag_id }}">
+                            <span class="fa fa-download"></span>
+                            {% trans "Download csv file" %}
+                        </a></li>
                     {% endif %}
                     
                 </ul>
@@ -30,55 +33,43 @@
         </div>
     </div>
 
-    <div class="container">
-        <table class="table">
-            
+    <div class="container-fluid">
         {% for assignment in assignment_list %}
+            <div class="assignment-info">
+                <h2>{{ assignment }}</h2>
+            </div>
 
 
-                        <div class="assignment-info">
-                            <h2>{{ assignment }}</h2>
-                        </div>
-                    
+            <div class="progress-info">
 
-                        <div class="progress-info">
-                               
-                        {% with assignment|compute_stats:'bymyself' as bymyself_percent %}
-                            <p class="progress-element">
-                                {% trans "Completed by their own" %} {{ bymyself_percent }} %
-                                {% include "trix_admin/include/progress_bar.django.html" with percent=bymyself_percent style='success' %}
-                            </p>
-                        {% endwith %}
+                {% compute_and_set_stats_for_assignment assignment 'bymyself' user_count as bymyself_percent %}
+                <p class="progress-element">
+                    {% trans "Completed by their own" %} {{ bymyself_percent|floatformat:2 }} %
+                    {% include "trix_admin/include/progress_bar.django.html" with percent=bymyself_percent style='success' %}
+                </p>
 
-                        {% with assignment|compute_stats:'withhelp' as withhelp_percent %}
-                            <p class="progress-element"> 
-                                {% trans "Completed with help" %} {{ withhelp_percent }} %
-                                {% include "trix_admin/include/progress_bar.django.html" with percent=withhelp_percent style='warning'%}                              
-                            </p>
-                        {% endwith %}
+                {% compute_and_set_stats_for_assignment assignment 'withhelp' user_count as withhelp_percent %}
+                <p class="progress-element">
+                    {% trans "Completed with help" %} {{ withhelp_percent|floatformat:2 }} %
+                    {% include "trix_admin/include/progress_bar.django.html" with percent=withhelp_percent style='warning'%}
+                </p>
 
-                        {% with assignment|compute_stats:'notsolved' as notsolved_percent %}
-                            <p class="progress-element">
-                                {% trans "Not completed" %} {{ notsolved_percent }} %
-                                {% include "trix_admin/include/progress_bar.django.html" with percent=notsolved_percent style='info'%}                         
-                            </p>
-                        {% endwith %}
-
-                        
-                        </div>
-
-
-            {% empty %}
+                {% compute_and_set_stats_for_assignment assignment 'notsolved' user_count as notsolved_percent %}
+                <p class="progress-element">
+                    {% trans "Not completed" %} {{ notsolved_percent|floatformat:2 }} %
+                    {% include "trix_admin/include/progress_bar.django.html" with percent=notsolved_percent style='info'%}
+                </p>
+            </div>
+        {% empty %}
             <h2 class="empty-assignment-list-info">{% trans "There was no assignments matching the choosen tag" %}</h2>
         {% endfor %}
-        </table>
-            
+
     {% include "trix_student/include/pager.django.html" %}
     </div>
 
     {% comment %}
         
-    <div class="container">
+    <div class="container-fluid">
         <div class="alert alert-success">
             <h4>{% trans "Solved by their own" %} {{ bymyself_percent }}%</h4>
             <div class="progress">

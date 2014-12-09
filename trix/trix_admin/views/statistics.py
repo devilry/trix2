@@ -11,6 +11,7 @@ from trix.trix_core import models as trix_models
 import csv
 import codecs
 import cStringIO
+from trix.trix_core.models import HowSolved
 
 
 class UnicodeWriter:
@@ -46,37 +47,47 @@ class UnicodeWriter:
             self.writerow(row)
 
 
+def compute_stats_for_assignment(assignment, howsolved_filter, user_count):
+    if user_count == 0:
+        return 0
+
+    if howsolved_filter == 'bymyself':
+        numerator = assignment.howsolved_set.\
+            filter(howsolved='bymyself').count()
+    elif howsolved_filter == 'withhelp':
+        numerator = assignment.howsolved_set.\
+            filter(howsolved='withhelp').count()
+    else:  # Not solved
+        bymyself_count = assignment.howsolved_set.\
+            filter(howsolved='bymyself').count()
+        withhelp_count = assignment.howsolved_set.\
+            filter(howsolved='withhelp').count()
+        numerator = user_count - (bymyself_count + withhelp_count)
+
+    percentage = numerator / float(user_count) * 100
+    return percentage
+
+
+def get_usercount_within_course(course_tag_id):
+    user_ids_within_course = HowSolved.objects\
+        .filter(assignment__tags=course_tag_id)\
+        .values_list('user_id', flat=True)
+    user_count = get_user_model().objects\
+        .filter(id__in=user_ids_within_course)\
+        .distinct()\
+        .count()
+    return user_count
+
+
 class AssignmentStatsCsv(View):
 
-    def _compute_stats(self, assignment, howsolved_filter):
-        user_count = get_user_model().objects.all().count()
-        if user_count == 0:
-            return 0
-        percentage = 0
-        numerator = 0
-
-        if howsolved_filter == 'bymyself':
-            numerator = assignment.howsolved_set.\
-                filter(howsolved='bymyself').count()
-        elif howsolved_filter == 'withhelp':
-            numerator = assignment.howsolved_set.\
-                filter(howsolved='withhelp').count()
-        else:  # Not solved
-            bymyself_count = assignment.howsolved_set.\
-                filter(howsolved='bymyself').count()
-            withhelp_count = assignment.howsolved_set.\
-                filter(howsolved='withhelp').count()
-            numerator = user_count - (bymyself_count + withhelp_count)
-
-        percentage = int(numerator / float(user_count) * 100)
-        return percentage
-
     def get(self, request, *args, **kwargs):
-        tag_id = request.GET.get('tag', None)
-        if not tag_id:
+        course_tag_id = request.GET.get('tag', None)
+        if not course_tag_id:
             return HttpResponseBadRequest()
-        queryset = trix_models.Assignment.objects.filter(tags__id=tag_id)
-        user_count = get_user_model().objects.all().count()
+        queryset = trix_models.Assignment.objects.filter(tags__id=course_tag_id)
+
+        user_count = get_usercount_within_course(course_tag_id)
         response = HttpResponse(content_type='text/csv')
         try:
             response['Content-Disposition'] = 'attachment; filename="trix-statistics.csv"'
@@ -89,11 +100,12 @@ class AssignmentStatsCsv(View):
                 csvwriter.writerow([assignment.title])
                 csvwriter.writerow([
                     _('Completed by their own'),
-                    "{} %".format(self._compute_stats(assignment, 'bymyself'))])
+                    "{} %".format(compute_stats_for_assignment(assignment, 'bymyself', user_count))])
                 csvwriter.writerow([
                     _('Completed with help'),
-                    "{} %".format(self._compute_stats(assignment, 'withhelp'))])
-                csvwriter.writerow([_('Not completed'), "{} %".format(self._compute_stats(assignment, 'notsolved'))])
+                    "{} %".format(compute_stats_for_assignment(assignment, 'withhelp', user_count))])
+                csvwriter.writerow([_('Not completed'), "{} %".format(
+                    compute_stats_for_assignment(assignment, 'notsolved', user_count))])
                 csvwriter.writerow('')
         except Exception, e:
             raise e
@@ -114,13 +126,16 @@ class StatisticsChartView(ListView):
 
     def get(self, request, *args, **kwargs):
         self.tag_id = kwargs['pk']
-        self.queryset = trix_models.Assignment.objects.filter(tags__id=kwargs['pk'])
         return super(StatisticsChartView, self).get(request, *args, **kwargs)
 
-    def get_context_data(self, *args, **kwargs):
-        context = super(StatisticsChartView, self).get_context_data(*args, **kwargs)
-        context['user_count'] = get_user_model().objects.all().count()
-        context['assignment_count'] = self.queryset.count()
+    def get_queryset(self):
+        return super(StatisticsChartView, self).get_queryset()\
+            .filter(tags__id=self.tag_id)
+
+    def get_context_data(self, **kwargs):
+        context = super(StatisticsChartView, self).get_context_data(**kwargs)
+        context['user_count'] = get_usercount_within_course(self.request.cradmin_role.course_tag_id)
+        context['assignment_count'] = self.get_queryset().count()
         context['tag_id'] = self.tag_id
         return context
 
