@@ -34,7 +34,9 @@ class AssignmentListViewBase(ListView):
         raise NotImplementedError()
 
     def _get_progress(self):
-        num_solved = models.HowSolved.objects.filter(assignment__in=self.get_queryset()).count()
+        how_solved = models.HowSolved.objects.filter(assignment__in=self.get_queryset())\
+            .filter(user=self.request.user.id)
+        num_solved = how_solved.count()
         num_total = self.get_queryset().count()
         if num_total == 0:
             percent = 0
