@@ -1,3 +1,4 @@
+from django.template import defaultfilters
 from django.utils.translation import ugettext_lazy as _
 from django.template.defaultfilters import truncatechars
 from django import forms
@@ -53,8 +54,18 @@ class TextIntroColumn(objecttable.PlainTextColumn):
         return truncatechars(assignment.text, 50)
 
 
+class LastUpdateDatetimeColumn(objecttable.PlainTextColumn):
+    modelfield = 'lastupdate_datetime'
+
+    def render_value(self, obj):
+        return defaultfilters.date(obj.lastupdate_datetime, 'SHORT_DATETIME_FORMAT')
+
+
 class TagsColumn(objecttable.PlainTextColumn):
     modelfield = 'tags'
+
+    def is_sortable(self):
+        return False
 
     def render_value(self, assignment):
         return ', '.join(tag.tag for tag in assignment.tags.all())
@@ -71,7 +82,14 @@ class AssignmentListView(AssignmentQuerysetForRoleMixin, objecttable.ObjectTable
     columns = [
         TitleColumn,
         TagsColumn,
-        TextIntroColumn
+        TextIntroColumn,
+        LastUpdateDatetimeColumn
+    ]
+    searchfields = [
+        'title',
+        'tags__tag',
+        'text',
+        'solution',
     ]
 
     def get_buttons(self):

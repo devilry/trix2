@@ -57,6 +57,11 @@ class PermalinkListView(PermalinkQuerysetForRoleMixin, objecttable.ObjectTableVi
         TagsColumn,
         DescriptionIntroColumn
     ]
+    searchfields = [
+        'title',
+        'tags__tag',
+        'description',
+    ]
 
     def get_buttons(self):
         app = self.request.cradmin_app
