@@ -7,7 +7,6 @@ Markdown==2.4
 pygments==1.6
 PyYAML==3.11
 
-django_cradmin==1.0.0-alpha.012
 # -e git://github.com/appressoas/django_cradmin.git#egg=django_cradmin
 
 -e .

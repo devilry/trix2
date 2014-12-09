@@ -8,6 +8,7 @@ from django.http import HttpResponse
 from django.http import HttpResponseBadRequest
 from django_cradmin import crapp
 from django_cradmin.viewhelpers import objecttable
+from django.utils.http import urlencode
 
 from trix.trix_core import models as trix_models
 import csv
@@ -183,11 +184,10 @@ class TagColumn(objecttable.SingleActionColumn):
     modelfield = 'tag'
 
     def get_actionurl(self, tag):
-        return '{}?tags={},{}'.format(
-            self.reverse_appurl('view'),
-            self.view.request.cradmin_role.course_tag.tag,
-            tag.tag
-        )
+        tags_string = u'{},{}'.format(self.view.request.cradmin_role.course_tag.tag, tag.tag)
+        return '{}?{}'.format(self.reverse_appurl('view'), urlencode({
+            'tags': tags_string
+        }))
 
 
 class AssignmentCountColumn(objecttable.PlainTextColumn):

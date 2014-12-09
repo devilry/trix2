@@ -22,7 +22,7 @@ setup(
         'django-extensions',
         'South>=0.8.4',
         'dj-database-url>=0.3.0',
-        'django_cradmin==1.0.0-alpha.012',
+        'django_cradmin==1.0.0-beta.001',
         'gunicorn',
     ],
     classifiers=[
