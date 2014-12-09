@@ -21,6 +21,7 @@
           tags = $scope.tagToAdd;
         }
         currentUrl.query.tags = tags;
+        delete currentUrl.query['page'];
         return $window.location.href = currentUrl.toString();
       };
     }
@@ -35,6 +36,7 @@
         tagsArray.splice(index, 1);
         tags = tagsArray.join(',');
         currentUrl.query.tags = tags;
+        delete currentUrl.query['page'];
         return $window.location.href = currentUrl.toString();
       };
     }

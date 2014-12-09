@@ -12,6 +12,7 @@ angular.module('trixStudent.assignments.controllers', [])
       else
         tags = $scope.tagToAdd
       currentUrl.query.tags = tags
+      delete currentUrl.query['page']
       $window.location.href = currentUrl.toString()
     return
 ])
@@ -27,6 +28,7 @@ angular.module('trixStudent.assignments.controllers', [])
       tagsArray.splice(index, 1)
       tags = tagsArray.join(',')
       currentUrl.query.tags = tags
+      delete currentUrl.query['page']
       $window.location.href = currentUrl.toString()
 ])
 
