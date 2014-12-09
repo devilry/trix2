@@ -41,7 +41,7 @@ class AssignmentListViewBase(ListView):
         if num_total == 0:
             percent = 0
         else:
-            percent = int(num_solved / float(num_total) * 100)
+            percent = round(num_solved / float(num_total) * 100, 0)
         return {
             'num_total': num_total,
             'num_solved': num_solved,
