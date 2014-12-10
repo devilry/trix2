@@ -1,5 +1,4 @@
 from django import template
-from django.contrib.auth import get_user_model
 
 from trix.trix_admin.views.statistics import compute_stats_for_assignment
 

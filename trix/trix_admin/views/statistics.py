@@ -216,7 +216,6 @@ class StatisticsView(objecttable.ObjectTableView):
             .exclude(tag=course.course_tag.tag)
 
 
-
 class App(crapp.App):
     appurls = [
         crapp.Url(r'^$', StatisticsView.as_view(), name=crapp.INDEXVIEW_NAME),
