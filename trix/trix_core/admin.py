@@ -6,6 +6,16 @@ from django.utils.translation import ugettext_lazy as _
 from trix.trix_core import models as coremodels
 
 
+def set_administrators(modeladmin, request, queryset):
+    queryset.update(is_admin=True)
+set_administrators.short_description = _("Give admin access to the selected users")
+
+
+def unset_administrators(modeladmin, request, queryset):
+    queryset.update(is_admin=False)
+unset_administrators.short_description = _("Remove admin access from the selected users")
+
+
 class UserAdmin(admin.ModelAdmin):
     list_display = [
         'email',
@@ -19,6 +29,7 @@ class UserAdmin(admin.ModelAdmin):
     ]
     fields = ['email', 'is_admin']
     readonly_fields = ['last_login']
+    actions = [set_administrators, unset_administrators]
 
 admin.site.register(coremodels.User, UserAdmin)
 

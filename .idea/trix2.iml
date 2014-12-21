@@ -11,11 +11,7 @@
     </facet>
   </component>
   <component name="NewModuleRootManager">
-    <content url="file://$MODULE_DIR$">
-      <excludeFolder url="file://$MODULE_DIR$/.tox" />
-      <excludeFolder url="file://$MODULE_DIR$/docs/_build" />
-      <excludeFolder url="file://$MODULE_DIR$/trix2.egg-info" />
-    </content>
+    <content url="file://$MODULE_DIR$/trix" />
     <orderEntry type="jdk" jdkName="Python 2.7.6 virtualenv at ~/.virtualenvs/trix2" jdkType="Python SDK" />
     <orderEntry type="sourceFolder" forTests="false" />
   </component>
@@ -23,6 +19,8 @@
     <option name="TEMPLATE_CONFIGURATION" value="Django" />
     <option name="TEMPLATE_FOLDERS">
       <list>
+        <option value="$MODULE_DIR$/trix/trix_admin/templates" />
+        <option value="$MODULE_DIR$/trix/trix_student/templates" />
         <option value="$MODULE_DIR$/trix/trix_student/templates" />
       </list>
     </option>
