@@ -7,16 +7,44 @@ msgid ""
 msgstr ""
 "Project-Id-Version: trix_core\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-07-02 22:05+0000\n"
-"PO-Revision-Date: 2014-07-03 00:06+0100\n"
-"Last-Translator: Espen Angell Kristiansen <post@espenak.net>\n"
+"POT-Creation-Date: 2014-12-21 21:38+0000\n"
+"PO-Revision-Date: 2014-12-21 22:43+0100\n"
+"Last-Translator: Tor Ivar Johansen <tor@appresso.no>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: nb\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 1.6.5\n"
+"X-Generator: Poedit 1.6.11\n"
+
+#: admin.py:11
+msgid "Give admin access to the selected users"
+msgstr "Gi administratortilgang til valgte brukere"
+
+#: admin.py:16
+msgid "Remove admin access from the selected users"
+msgstr "Fjern administratortilgang til valgte brukere"
+
+#: admin.py:66
+msgid "tag is in use"
+msgstr "tag er i bruk"
+
+#: admin.py:71
+msgid "Yes"
+msgstr "Ja"
+
+#: admin.py:72
+msgid "No"
+msgstr "Nei"
+
+#: admin.py:109
+msgid "Number of assignments"
+msgstr "Antall oppgaver"
+
+#: admin.py:114
+msgid "Is in use"
+msgstr "Er i bruk"
 
 #: models.py:40
 msgid "Is active?"
@@ -24,7 +52,7 @@ msgstr "Er aktiv?"
 
 #: models.py:41
 msgid "User is active? Inactive users can not log in."
-msgstr ""
+msgstr "Er brukeren aktiv? Inaktive brukere kan ikke logge inn"
 
 #: models.py:45
 msgid "Is admin?"
@@ -33,6 +61,8 @@ msgstr "Er admin?"
 #: models.py:46
 msgid "User is admin? Admins have full access to the admin UI."
 msgstr ""
+"Er brukeren administrator? Administratorer har full tilgang til "
+"admingrensesnittet"
 
 #: models.py:56
 msgid "User"
@@ -42,51 +72,51 @@ msgstr "Bruker"
 msgid "Users"
 msgstr "Brukere"
 
-#: models.py:138
+#: models.py:144
 msgid "No category"
 msgstr "Ingen kategori"
 
-#: models.py:139 models.py:191 models.py:280
+#: models.py:145 models.py:197 models.py:309
 msgid "Course"
 msgstr "Kurs"
 
-#: models.py:140
+#: models.py:146
 msgid "Period"
 msgstr "Semester"
 
-#: models.py:145
+#: models.py:151
 msgid "Tag"
 msgstr "Tag"
 
-#: models.py:146 models.py:228 models.py:283
+#: models.py:152 models.py:234 models.py:312
 msgid "Tags"
 msgstr "Tags"
 
-#: models.py:178 models.py:289
+#: models.py:184 models.py:318
 msgid "Description"
 msgstr "Beskrivelse"
 
-#: models.py:192
+#: models.py:198
 msgid "Courses"
 msgstr "Kurs"
 
-#: models.py:225 models.py:285
+#: models.py:231 models.py:314
 msgid "Title"
 msgstr "Tittel"
 
-#: models.py:230
+#: models.py:236
 msgid "Assignment text"
 msgstr "Oppgavetekst"
 
-#: models.py:231
+#: models.py:237
 msgid "Write the assignment here."
 msgstr "Skriv oppgaven her."
 
-#: models.py:234
+#: models.py:240
 msgid "Solution"
 msgstr "Løsning"
 
-#: models.py:235
+#: models.py:241
 msgid ""
 "If you want your students to be able to view a suggested solution, write the "
 "solution here."
@@ -94,26 +124,56 @@ msgstr ""
 "Hvis du vil at studentene skal kunne se et løsningsforslag, skriv løsningen "
 "her."
 
-#: models.py:240
+#: models.py:243
+msgid "Created"
+msgstr "Opprettet"
+
+#: models.py:246
+msgid "Last changed"
+msgstr "Sist modifisert"
+
+#: models.py:252
 msgid "Assignment"
 msgstr "Oppgave"
 
-#: models.py:241
+#: models.py:253
 msgid "Assignments"
 msgstr "Oppgaver"
 
-#: models.py:265
+#: models.py:294
 msgid "Solved by myself"
 msgstr "Løste på egen hånd"
 
-#: models.py:266
+#: models.py:295
 msgid "Solved with help"
 msgstr "Løste med hjelp"
 
-#: models.py:293
+#: models.py:322
 msgid "Permalink"
 msgstr "Permalink"
 
-#: models.py:294
+#: models.py:323
 msgid "Permalinks"
 msgstr "Permalinker"
+
+#: multiassignment_serialize.py:145
+msgid "Invalid value. Must be a list."
+msgstr "Ugyldig verdi. Må være en liste"
+
+#: multiassignment_serialize.py:148
+msgid "Invalid value in list. Must be a list of strings."
+msgstr "Ugyldig verdi i liste. Må være en liste av strenger"
+
+#: multiassignment_serialize.py:186
+#, python-format
+msgid "More than one assignment with \"id=%(id)s\"."
+msgstr "Fler enn en oppgave med \"id=%(id)s\"."
+
+#: multiassignment_serialize.py:199
+#, python-format
+msgid ""
+"One or more of the given IDs was not found among the assignments accessible "
+"by \"%(course_tag)s\"."
+msgstr ""
+"En eller flere av den gitte id ble ikke funnet blant oppgavene tilgjengelig "
+"via \"%(course_tag)s\"."
