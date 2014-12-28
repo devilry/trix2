@@ -239,7 +239,7 @@ class AssignmentMultiAddTagView(AssignmentQuerysetForRoleMixin, multiselect.Mult
 
     def form_valid(self, form):
         assignments = self.selected_objects
-        tag = form.cleaned_data['tag']
+        tag = trix_models.Tag.normalize_tag(form.cleaned_data['tag'])
         for assignment in assignments:
             if not assignment.tags.filter(tag=tag).exists():
                 assignment.tags.add(trix_models.Tag.objects.get_or_create(tag))
@@ -272,7 +272,7 @@ class AssignmentMultiRemoveTagView(AssignmentQuerysetForRoleMixin, multiselect.M
 
     def form_valid(self, form):
         assignments = self.selected_objects
-        tag = form.cleaned_data['tag']
+        tag = trix_models.Tag.normalize_tag(form.cleaned_data['tag'])
         for assignment in assignments:
             try:
                 tag = assignment.tags.filter(tag=tag).get()
