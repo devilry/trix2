@@ -7,6 +7,6 @@ Markdown==2.4
 pygments==1.6
 PyYAML==3.11
 
-# -e git://github.com/appressoas/django_cradmin.git#egg=django_cradmin
+#-e git://github.com/appressoas/django_cradmin.git#egg=django_cradmin
 
 -e .
