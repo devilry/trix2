@@ -1,0 +1,12 @@
+{% extends "trix_student/base.django.html" %}
+{% load i18n %}
+
+{% block title %}{{ assignment.title }}{% endblock title %}
+
+{% block header %}{% endblock header %}
+
+{% block body %}
+    <div class="container" style="padding-top: 40px;">
+        {% include "trix_student/include/assignment.django.html" with disable_howsolved_box=True disable_tags=True %}
+    </div>
+{% endblock body %}

@@ -22,7 +22,9 @@
     </head>
 
     <body>
-        {% include "trix_student/include/header.django.html" %}
+        {% block header %}
+            {% include "trix_student/include/header.django.html" %}
+        {% endblock header %}
         {% block not_signed_in_warning %}
             {% if not request.user.is_authenticated %}
                 <div class="alert alert-warning alert-edgetoedge alert-nomargin">

@@ -1,8 +1,10 @@
+from django.shortcuts import get_object_or_404
 from django.template import defaultfilters
 from django.utils.translation import ugettext_lazy as _
 from django.template.defaultfilters import truncatechars
 from django import forms
 from django import http
+from django.views.generic import TemplateView
 from django_cradmin.viewhelpers import objecttable
 from django_cradmin.viewhelpers import create
 from django_cradmin.viewhelpers import update
@@ -27,6 +29,9 @@ class TitleColumn(objecttable.MultiActionColumn):
             objecttable.Button(
                 label=_('Edit'),
                 url=self.reverse_appurl('edit', args=[assignment.id])),
+            objecttable.PagePreviewButton(
+                label=_('Preview'),
+                url=self.reverse_appurl('preview', args=[assignment.id])),
             objecttable.Button(
                 label=_('Delete'),
                 url=self.reverse_appurl('delete', args=[assignment.id]),
@@ -42,7 +47,7 @@ class TitleColumn(objecttable.MultiActionColumn):
                 url=reverse('trix_student_course', kwargs={'course_id': course.id}),
                 tags=u','.join(tags),
                 assignmentid=assignment.id)
-            buttons.insert(1, objecttable.Button(
+            buttons.insert(2, objecttable.Button(
                 label=_('View'),
                 url=view_url))
         return buttons
@@ -92,6 +97,7 @@ class AssignmentListView(AssignmentQuerysetForRoleMixin, objecttable.ObjectTable
         'text',
         'solution',
     ]
+    enable_previews = True
 
     def get_buttons(self):
         app = self.request.cradmin_app
@@ -116,8 +122,8 @@ class AssignmentListView(AssignmentQuerysetForRoleMixin, objecttable.ObjectTable
 class AssignmentCreateUpdateMixin(object):
     model = trix_models.Assignment
 
-    # def get_preview_url(self):
-    #     return reverse('lokalt_company_product_preview')
+    def get_preview_url(self):
+        return self.request.cradmin_app.reverse_appurl('preview')
 
     def get_field_layout(self):
         return [
@@ -135,12 +141,13 @@ class AssignmentCreateUpdateMixin(object):
         form.fields['solution'].widget = AceMarkdownWidget()
         return form
 
-    def save_object(self, form):
-        assignment = super(AssignmentCreateUpdateMixin, self).save_object(form)
-        # Replace the tags with the new tags
-        assignment.tags.clear()
-        for tag in form.cleaned_data['tags']:
-            assignment.tags.add(tag)
+    def save_object(self, form, commit=True):
+        assignment = super(AssignmentCreateUpdateMixin, self).save_object(form, commit=commit)
+        if commit:
+            # Replace the tags with the new tags
+            assignment.tags.clear()
+            for tag in form.cleaned_data['tags']:
+                assignment.tags.add(tag)
         return assignment
 
     def form_saved(self, assignment):
@@ -216,6 +223,24 @@ class AssignmentDeleteView(AssignmentQuerysetForRoleMixin, delete.DeleteView):
     model = trix_models.Assignment
 
 
+class PreviewAssignmentView(TemplateView):
+    template_name = 'trix_admin/assignments/preview.django.html'
+
+    def __get_page(self):
+        if self.kwargs['pk'] is None:
+            return AssignmentCreateView.get_preview_data(self.request)
+        else:
+            # NOTE: The queryset ensures only admins on the current site gains access.
+            course = self.request.cradmin_role
+            return get_object_or_404(trix_models.Assignment.objects.filter(tags=course.course_tag).distinct(),
+                                     pk=self.kwargs['pk'])
+
+    def get_context_data(self, **kwargs):
+        context = super(PreviewAssignmentView, self).get_context_data(**kwargs)
+        context['assignment'] = self.__get_page()
+        return context
+
+
 class App(crapp.App):
     appurls = [
         crapp.Url(
@@ -230,6 +255,10 @@ class App(crapp.App):
             r'^edit/(?P<pk>\d+)$',
             AssignmentUpdateView.as_view(),
             name="edit"),
+        crapp.Url(
+            r'^preview/(?P<pk>\d+)?$',
+            PreviewAssignmentView.as_view(),
+            name="preview"),
         crapp.Url(
             r'^multiedit$',
             AssignmentMultiEditView.as_view(),
