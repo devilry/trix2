@@ -116,6 +116,14 @@ class AssignmentListView(AssignmentQuerysetForRoleMixin, objecttable.ObjectTable
                 label=_('Edit'),
                 url=app.reverse_appurl('multiedit')
             ),
+            objecttable.MultiSelectAction(
+                label=_('Add tag'),
+                url=app.reverse_appurl('multiadd-tag')
+            ),
+            objecttable.MultiSelectAction(
+                label=_('Remove tag'),
+                url=app.reverse_appurl('multiremove-tag')
+            ),
         ]
 
 
@@ -216,6 +224,81 @@ class AssignmentMultiEditView(AssignmentQuerysetForRoleMixin, multiselect.MultiS
         ]
 
 
+class AssignmentMultiTagForm(forms.Form):
+    tag = forms.CharField(
+        required=True,
+        label=_('Tag'))
+
+
+class AssignmentMultiAddTagView(AssignmentQuerysetForRoleMixin, multiselect.MultiSelectFormView):
+    """
+    View used to add a tag to assignments.
+    """
+    form_class = AssignmentMultiTagForm
+    model = trix_models.Assignment
+
+    def form_valid(self, form):
+        assignments = self.selected_objects
+        tag = form.cleaned_data['tag']
+        for assignment in assignments:
+            if not assignment.tags.filter(tag=tag).exists():
+                assignment.tags.add(trix_models.Tag.objects.get_or_create(tag))
+
+        return http.HttpResponseRedirect(self.request.cradmin_app.reverse_appindexurl())
+
+    def get_pagetitle(self):
+        return _('tags on selected assignments')
+
+    def get_buttons(self):
+        return [
+            crispylayouts.PrimarySubmit('submit-save', _('Add tag'))
+        ]
+
+    def get_field_layout(self):
+        return [
+            layout.Fieldset(
+                _('Type in the tag you want to add to the selected assignments'),
+                'tag'
+            )
+        ]
+
+
+class AssignmentMultiRemoveTagView(AssignmentQuerysetForRoleMixin, multiselect.MultiSelectFormView):
+    """
+    View used to add a tag to assignments.
+    """
+    form_class = AssignmentMultiTagForm
+    model = trix_models.Assignment
+
+    def form_valid(self, form):
+        assignments = self.selected_objects
+        tag = form.cleaned_data['tag']
+        for assignment in assignments:
+            try:
+                tag = assignment.tags.filter(tag=tag).get()
+                assignment.tags.remove(tag)
+            except trix_models.Tag.DoesNotExist:
+                pass
+
+        return http.HttpResponseRedirect(self.request.cradmin_app.reverse_appindexurl())
+
+    def get_pagetitle(self):
+        return _('tags on selected assignments')
+
+    def get_buttons(self):
+        return [
+            crispylayouts.PrimarySubmit('submit-save', _('Delete tag'))
+        ]
+
+    def get_field_layout(self):
+        return [
+            layout.Fieldset(
+                _('Type in the tag you want to remove from the selected assignments'),
+                'tag'
+            )
+        ]
+
+
 class AssignmentDeleteView(AssignmentQuerysetForRoleMixin, delete.DeleteView):
     """
     View used to delete existing assignments.
@@ -263,6 +346,14 @@ class App(crapp.App):
             r'^multiedit$',
             AssignmentMultiEditView.as_view(),
             name="multiedit"),
+        crapp.Url(
+            r'^multiadd-tag$',
+            AssignmentMultiAddTagView.as_view(),
+            name="multiadd-tag"),
+        crapp.Url(
+            r'^multiremove-tag$',
+            AssignmentMultiRemoveTagView.as_view(),
+            name="multiremove-tag"),
         crapp.Url(
             r'^delete/(?P<pk>\d+)$',
             AssignmentDeleteView.as_view(),
