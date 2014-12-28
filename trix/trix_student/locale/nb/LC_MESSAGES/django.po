@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: trix_student\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-08-19 18:07+0000\n"
-"PO-Revision-Date: 2014-08-19 20:08+0100\n"
+"POT-Creation-Date: 2014-12-28 19:24+0000\n"
+"PO-Revision-Date: 2014-12-28 20:24+0100\n"
 "Last-Translator: Espen Angell Kristiansen <post@espenak.net>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: nb\n"
@@ -41,45 +41,23 @@ msgstr "Filtrer"
 msgid "Select a tag"
 msgstr "Velg en tag"
 
-#: templates/trix_student/assignment_list_base.django.html:82
-#: templates/trix_student/course.django.html:13
-#: templates/trix_student/permalink.django.html:11
-msgid "Edit"
-msgstr "Rediger"
+#: templates/trix_student/assignment_list_base.django.html:70
+msgid "Print"
+msgstr "Skriv ut"
 
-#: templates/trix_student/assignment_list_base.django.html:101
-msgid "How did you solve the assignment?"
-msgstr "Hvordan løste du oppgaven?"
-
-#: templates/trix_student/assignment_list_base.django.html:111
-msgid "On my own"
-msgstr "På egenhånd"
-
-#: templates/trix_student/assignment_list_base.django.html:120
-msgid "With help"
-msgstr "Med hjelp"
-
-#: templates/trix_student/assignment_list_base.django.html:129
-msgid "Not solved"
-msgstr "Ikke løst"
-
-#: templates/trix_student/assignment_list_base.django.html:135
-msgid "Saving..."
-msgstr "Lagrer..."
-
-#: templates/trix_student/assignment_list_base.django.html:145
-msgid "See solution"
-msgstr "Vis løsningsforslag"
+#: templates/trix_student/assignment_list_base.django.html:73
+msgid "Print this page"
+msgstr "Skriv ut denne siden"
 
 #: templates/trix_student/base.django.html:11
 msgid "Trix"
 msgstr "Trix"
 
-#: templates/trix_student/base.django.html:31
+#: templates/trix_student/base.django.html:33
 msgid "You are not authenticated."
 msgstr "Du er ikke logget inn."
 
-#: templates/trix_student/base.django.html:32
+#: templates/trix_student/base.django.html:34
 msgid ""
 "If you are not authenticated, you will not be able to keep track of your "
 "progress."
@@ -87,10 +65,16 @@ msgstr ""
 "Så lenge du ikke er logget inn går du glipp av muligheten for å holde styr "
 "på din egen progresjon."
 
-#: templates/trix_student/base.django.html:36
+#: templates/trix_student/base.django.html:38
 #: templates/trix_student/include/header.django.html:42
 msgid "Sign in"
 msgstr "Logg inn"
+
+#: templates/trix_student/course.django.html:13
+#: templates/trix_student/permalink.django.html:11
+#: templates/trix_student/include/assignment.django.html:15
+msgid "Edit"
+msgstr "Rediger"
 
 #: templates/trix_student/dashboard.django.html:3
 msgid "Trix - student"
@@ -128,6 +112,30 @@ msgstr "Liste over permalinker"
 msgid "All the permalinks created are listed below"
 msgstr "Under listes alle permalinker opp"
 
+#: templates/trix_student/include/assignment.django.html:38
+msgid "How did you solve the assignment?"
+msgstr "Hvordan løste du oppgaven?"
+
+#: templates/trix_student/include/assignment.django.html:48
+msgid "On my own"
+msgstr "På egenhånd"
+
+#: templates/trix_student/include/assignment.django.html:57
+msgid "With help"
+msgstr "Med hjelp"
+
+#: templates/trix_student/include/assignment.django.html:66
+msgid "Not solved"
+msgstr "Ikke løst"
+
+#: templates/trix_student/include/assignment.django.html:72
+msgid "Saving..."
+msgstr "Lagrer..."
+
+#: templates/trix_student/include/assignment.django.html:82
+msgid "See solution"
+msgstr "Vis løsningsforslag"
+
 #: templates/trix_student/include/header.django.html:12
 msgid "Toggle navigation"
 msgstr "Vis/sjul navigering"
@@ -140,15 +148,20 @@ msgstr "Administrer"
 msgid "Sign out"
 msgstr "Logg ut"
 
-#: templates/trix_student/include/pager.django.html:24
+#: templates/trix_student/include/pager.django.html:27
 msgid "Previous"
 msgstr "Forrige"
 
-#: templates/trix_student/include/pager.django.html:30
+#: templates/trix_student/include/pager.django.html:31
+#, python-format
+msgid "Page %(number)s of %(total)s"
+msgstr "Side %(number)s av %(total)s"
+
+#: templates/trix_student/include/pager.django.html:36
 msgid "Next"
 msgstr "Neste"
 
-#: views/common.py:108
+#: views/common.py:110
 msgid ""
 "You have completed {{ solvedPercentage }} percent of assignments matching "
 "the currently selected tags."

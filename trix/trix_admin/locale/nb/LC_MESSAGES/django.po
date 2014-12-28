@@ -7,16 +7,16 @@ msgid ""
 msgstr ""
 "Project-Id-Version: trix_admin\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-08-10 18:54+0000\n"
-"PO-Revision-Date: 2014-08-10 20:57+0100\n"
-"Last-Translator: Tor Ivar Johansen <tor@torjohansen.no>\n"
+"POT-Creation-Date: 2014-12-28 19:22+0000\n"
+"PO-Revision-Date: 2014-12-28 20:23+0100\n"
+"Last-Translator: Espen Angell Kristiansen <post@espenak.net>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: nb\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 1.5.4\n"
+"X-Generator: Poedit 1.6.5\n"
 
 #: cradmin.py:17
 msgid "Assignments"
@@ -43,7 +43,7 @@ msgstr "Trix"
 msgid "Aggregated statistics on how the assignments where solved"
 msgstr "Aggregert statistikk over hvordan oppgavene ble løst"
 
-#: templates/trix_admin/statistics.django.html:19
+#: templates/trix_admin/statistics.django.html:43
 msgid ""
 "The stats below show how many percentage of the total number of users that "
 "have completed the assignment by their own, with help or not completed it."
@@ -51,31 +51,31 @@ msgstr ""
 "Statistikken nedenfor viser hvor many prosent av det totale antall studenter "
 "som har klart oppgaven på egenhånd, med hjelp eller ikke løst den."
 
-#: templates/trix_admin/statistics.django.html:22
+#: templates/trix_admin/statistics.django.html:46
 msgid "Number of users:"
 msgstr "Antall brukere:"
 
-#: templates/trix_admin/statistics.django.html:23
+#: templates/trix_admin/statistics.django.html:47
 msgid "Number of assignments:"
 msgstr "Antall oppgaver:"
 
-#: templates/trix_admin/statistics.django.html:25
+#: templates/trix_admin/statistics.django.html:51
 msgid "Download csv file"
 msgstr "Last ned csv fil"
 
-#: templates/trix_admin/statistics.django.html:48 views/statistics.py:91
+#: templates/trix_admin/statistics.django.html:71 views/statistics.py:135
 msgid "Completed by their own"
 msgstr "Løst på egenhånd"
 
-#: templates/trix_admin/statistics.django.html:55 views/statistics.py:94
+#: templates/trix_admin/statistics.django.html:77 views/statistics.py:138
 msgid "Completed with help"
 msgstr "Løst med hjelp"
 
-#: templates/trix_admin/statistics.django.html:62 views/statistics.py:96
+#: templates/trix_admin/statistics.django.html:83 views/statistics.py:140
 msgid "Not completed"
 msgstr "Ikke løst"
 
-#: templates/trix_admin/statistics.django.html:72
+#: templates/trix_admin/statistics.django.html:88
 msgid "There was no assignments matching the choosen tag"
 msgstr "Det fantes ingen oppgaver som er merket med valgte tag"
 
@@ -91,51 +91,87 @@ msgstr "Valideringsfeil"
 msgid "In"
 msgstr "I"
 
-#: views/assignments.py:27 views/assignments.py:91 views/permalinks.py:27
+#: views/assignments.py:30 views/assignments.py:116 views/permalinks.py:27
 msgid "Edit"
 msgstr "Rediger"
 
-#: views/assignments.py:30 views/permalinks.py:33
+#: views/assignments.py:33
+msgid "Preview"
+msgstr "Forhåndsvis"
+
+#: views/assignments.py:36 views/permalinks.py:33
 msgid "Delete"
 msgstr "Slett"
 
-#: views/assignments.py:44 views/permalinks.py:30
+#: views/assignments.py:51 views/permalinks.py:30
 msgid "View"
 msgstr "Vis"
 
-#: views/assignments.py:81 views/permalinks.py:64
+#: views/assignments.py:106 views/permalinks.py:72
 msgid "Create"
 msgstr "Opprett"
 
-#: views/assignments.py:83
+#: views/assignments.py:108
 msgid "Show on website"
 msgstr "Vis på webside"
 
-#: views/assignments.py:106 views/permalinks.py:78
+#: views/assignments.py:120 views/assignments.py:254
+msgid "Add tag"
+msgstr "Legg til tag"
+
+#: views/assignments.py:124
+msgid "Remove tag"
+msgstr "Fjern tag"
+
+#: views/assignments.py:139 views/permalinks.py:86
 msgid "Organize"
 msgstr "Organiser"
 
-#: views/assignments.py:140
+#: views/assignments.py:182
 msgid "Assignment YAML"
 msgstr "Oppgaver YAML"
 
-#: views/assignments.py:176
+#: views/assignments.py:218
 msgid "Save"
 msgstr "Lagre"
 
-#: views/statistics.py:84
+#: views/assignments.py:230
+msgid "Tag"
+msgstr "Tag"
+
+#: views/assignments.py:250 views/assignments.py:286
+msgid "tags on selected assignments"
+msgstr "tags på valgte oppgaver"
+
+#: views/assignments.py:260
+msgid "Type in the tag you want to add to the selected assignments"
+msgstr "Skriv inn taggen du vil legge til på valgte oppgaver"
+
+#: views/assignments.py:290
+msgid "Delete tag"
+msgstr "Slett tag"
+
+#: views/assignments.py:296
+msgid "Type in the tag you want to remove from the selected assignments"
+msgstr "Skriv inn taggen du vil fjerne fra valgte oppgaver"
+
+#: views/statistics.py:128
 msgid ""
 "Simple statitics showing percentage share of how the assignments where solved"
 msgstr "Enkel statistikk som viser prosentvis del av hvordan oppgavene er løst"
 
-#: views/statistics.py:85
+#: views/statistics.py:129
 msgid "Total number of users"
 msgstr "Totalt antall brukere"
 
-#: views/statistics.py:87
+#: views/statistics.py:131
 msgid "Assignment title"
 msgstr "Oppgavetittel"
 
-#: views/statistics.py:87
+#: views/statistics.py:131
 msgid "Percentage"
 msgstr "Prosent"
+
+#: views/statistics.py:197
+msgid "Number of assignments"
+msgstr "Antall oppgaver"
