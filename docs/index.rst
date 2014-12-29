@@ -13,6 +13,7 @@ Documentation
    user/index
    sysadmin/index
    develop/index
+   administrator/index
 
 
 
