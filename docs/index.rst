@@ -11,6 +11,7 @@ Documentation
    :maxdepth: 1
 
    user/index
+   student/index
    sysadmin/index
    develop/index
    administrator/index

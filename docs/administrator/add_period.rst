@@ -14,4 +14,4 @@ To add a new period tag click the **Tags** item in the list.
 
 Click **Add Tag** in the upper right corner and then type the name of the tag along with the category *Period*
 
-The newly added period tag can then be defines as the active period on a course.
+The newly added period tag can then be defined as the active period on a course.
