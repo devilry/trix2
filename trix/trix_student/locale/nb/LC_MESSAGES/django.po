@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: trix_student\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-12-28 19:24+0000\n"
+"POT-Creation-Date: 2015-01-01 21:25+0000\n"
 "PO-Revision-Date: 2014-12-28 20:24+0100\n"
 "Last-Translator: Espen Angell Kristiansen <post@espenak.net>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -91,6 +91,25 @@ msgid ""
 msgstr ""
 "Trix er en læringsplattform for å hjelpe deg til å jobbe systematisk mot å "
 "nå læringsmålene i kurset ditt."
+
+#: templates/trix_student/dashboard.django.html:11
+msgid ""
+"Trix acts as an assignments wiki, where educational authors provide you with "
+"a selection of assignments. Here you can study and track your progress as "
+"you advance through the goals of your learning."
+msgstr ""
+
+#: templates/trix_student/dashboard.django.html:14
+msgid ""
+"Trix follows a simple tag structure where assignments are marked with "
+"informative tags. This along with filtering capabilities ensures a tailored "
+"selection of assignments perfectly suited to your personal level. Trix is a "
+"day to day learning tool as well as a preparatory tool for focused learning."
+msgstr ""
+
+#: templates/trix_student/dashboard.django.html:17
+msgid "Getting started"
+msgstr ""
 
 #: templates/trix_student/login.django.html:5
 msgid "Trix login"
