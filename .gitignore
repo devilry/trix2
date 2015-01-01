@@ -56,3 +56,7 @@ db.sqlite3
 # Ignore user-specific pycharm settings
 .idea/workspace.xml
 .idea/tasks.xml
+
+# OSX Files
+.DS_Store
+docs/.DS_Store
