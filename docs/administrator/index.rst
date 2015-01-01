@@ -8,5 +8,6 @@ Trix administrator documentation
 
    gettingstarted
    administer_course
+   add_period
    add_course
    add_admin

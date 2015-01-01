@@ -26,8 +26,10 @@ To create a new course tag click the **Add Tag** in the upper right corner.
 Type the name and set the category to **Course** and click save.
 
 Finally set the period tag by clicking the magnifier icon next to the **Active Period:** field.
-Choose an existing tag if it's already defined otherwise click **Add Tag** and type the info.
+Choose an existing tag if it's already defined otherwise click **Add Tag** [#periodtag]_ and type the info.
 
 .. image:: ../images/add_period_tag.png
 
 Click save.
+
+.. [#periodtag] A period is a tag with a special category that act as a period. The active period is just one of the defined period tags making it possible to easily switch between periods.
