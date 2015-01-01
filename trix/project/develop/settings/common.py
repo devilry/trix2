@@ -10,7 +10,7 @@ ROOT_URLCONF = 'trix.project.develop.urls'
 
 INSTALLED_APPS = list(INSTALLED_APPS) + [
     'django_dbdev',
-    'debug_toolbar',
+    #'debug_toolbar',
 ]
 
 

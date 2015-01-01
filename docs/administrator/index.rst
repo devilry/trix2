@@ -7,4 +7,6 @@ Trix administrator documentation
    :maxdepth: 2
 
    gettingstarted
+   administer_course
+   add_course
    add_admin
