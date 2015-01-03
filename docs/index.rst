@@ -13,7 +13,6 @@ User documentation
    student/index
    administrator/index
    superuser/index
-   sysadmin/index
 
 
 **********************************
@@ -23,7 +22,7 @@ System administrator documentation
 .. toctree::
    :maxdepth: 1
 
-   develop/index
+   sysadmin/index
 
 ***********************
 Developer documentation
