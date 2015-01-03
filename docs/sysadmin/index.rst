@@ -1,6 +1,6 @@
-###########################
-Trix sysadmin documentation
-###########################
+##################################
+System administrator documentation
+##################################
 
 .. toctree::
    :maxdepth: 2
