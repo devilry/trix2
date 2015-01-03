@@ -3,18 +3,27 @@ Trix2 documentation
 ###################
 
 
-*************
-Documentation
-*************
+******************
+User documentation
+******************
 
 .. toctree::
    :maxdepth: 1
 
    student/index
-   editor/index
    administrator/index
+   superuser/index
    sysadmin/index
 
+
+**********************************
+System administrator documentation
+**********************************
+
+.. toctree::
+   :maxdepth: 1
+
+   develop/index
 
 ***********************
 Developer documentation

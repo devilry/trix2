@@ -1,6 +1,6 @@
-##########################
-Trix student documentation
-##########################
+############
+Student docs
+############
 
 .. toctree::
    :maxdepth: 2
