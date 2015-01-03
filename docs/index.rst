@@ -10,12 +10,20 @@ Documentation
 .. toctree::
    :maxdepth: 1
 
-   user/index
    student/index
-   sysadmin/index
-   develop/index
+   editor/index
    administrator/index
+   sysadmin/index
 
+
+***********************
+Developer documentation
+***********************
+
+.. toctree::
+   :maxdepth: 1
+
+   develop/index
 
 
 ******************
