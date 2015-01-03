@@ -11,7 +11,12 @@
     </facet>
   </component>
   <component name="NewModuleRootManager">
-    <content url="file://$MODULE_DIR$/trix" />
+    <content url="file://$MODULE_DIR$">
+      <excludeFolder url="file://$MODULE_DIR$/.tox" />
+      <excludeFolder url="file://$MODULE_DIR$/dist" />
+      <excludeFolder url="file://$MODULE_DIR$/docs/_build" />
+      <excludeFolder url="file://$MODULE_DIR$/trix.egg-info" />
+    </content>
     <orderEntry type="jdk" jdkName="Python 2.7.6 virtualenv at ~/.virtualenvs/trix2" jdkType="Python SDK" />
     <orderEntry type="sourceFolder" forTests="false" />
   </component>
