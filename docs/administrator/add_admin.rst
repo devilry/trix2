@@ -15,5 +15,5 @@ and click the arrow button pointing in the opposite direction.
 
 When your administrator list is updated click the save button in the bottom right position of your browser window.
 
-.. [#tips] A little trick: To mark several users hold in the shift or control button on your keyboard and click on the users.
+.. [#tips] Tips: To mark several users hold in the Control(On Windows) / CMD(On Mac) button on your keyboard and click on the users.
 
