@@ -25,10 +25,16 @@ class Menu(crmenu.Menu):
             label=_('Statistics'),
             url=self.appindex_url('statistics'),
             icon='bar-chart-o')
+        if self.request.user.is_admin:
+            self.add(
+                label=_('Courses, users, ...'),
+                url=reverse('admin:index'),
+                icon='cog')
         self.add(
             label=_('Back to website'),
             url=reverse('trix_student_dashboard'),
             icon='arrow-left')
+
 
 
 class CrAdminInstance(crinstance.BaseCrAdminInstance):
