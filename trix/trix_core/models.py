@@ -42,8 +42,8 @@ class User(AbstractBaseUser):
 
     is_admin = models.BooleanField(
         default=False,
-        verbose_name=_('Is admin?'),
-        help_text=_('User is admin? Admins have full access to the admin UI.'))
+        verbose_name=_('Is superuser?'),
+        help_text=_('User is superuser? Superusers have full access to the admin UI.'))
 
     email = models.EmailField(max_length=250, blank=False, unique=True)
 

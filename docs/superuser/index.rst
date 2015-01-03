@@ -11,3 +11,4 @@ Superuser docs: Add/edit courses and users
    add_period
    add_course
    add_admin
+   addremove_superuser
