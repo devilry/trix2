@@ -34,32 +34,32 @@ class UserAdmin(admin.ModelAdmin):
 admin.site.register(coremodels.User, UserAdmin)
 
 
-class AssignmentAdmin(admin.ModelAdmin):
-    list_display = (
-        'title',
-        'get_tags',
-        'created_datetime',
-        'lastupdate_datetime',
-    )
-    search_fields = ['title', 'tags__tag']
-    filter_horizontal = ['tags']
-    list_filter = [
-        'created_datetime',
-        'lastupdate_datetime',
-        'tags',
-    ]
-
-    def get_tags(self, course):
-        return u','.join(tag.tag for tag in course.tags.all())
-    get_tags.short_description = 'Tags'
-
-    def get_queryset(self, request):
-        queryset = super(AssignmentAdmin, self).get_queryset(request)
-        queryset = queryset.prefetch_related('tags')
-        return queryset
-
-
-admin.site.register(coremodels.Assignment, AssignmentAdmin)
+# class AssignmentAdmin(admin.ModelAdmin):
+#     list_display = (
+#         'title',
+#         'get_tags',
+#         'created_datetime',
+#         'lastupdate_datetime',
+#     )
+#     search_fields = ['title', 'tags__tag']
+#     filter_horizontal = ['tags']
+#     list_filter = [
+#         'created_datetime',
+#         'lastupdate_datetime',
+#         'tags',
+#     ]
+#
+#     def get_tags(self, course):
+#         return u','.join(tag.tag for tag in course.tags.all())
+#     get_tags.short_description = 'Tags'
+#
+#     def get_queryset(self, request):
+#         queryset = super(AssignmentAdmin, self).get_queryset(request)
+#         queryset = queryset.prefetch_related('tags')
+#         return queryset
+#
+#
+# admin.site.register(coremodels.Assignment, AssignmentAdmin)
 
 
 class TagInUseFilter(admin.SimpleListFilter):
@@ -146,37 +146,37 @@ class CourseAdmin(admin.ModelAdmin):
 admin.site.register(coremodels.Course, CourseAdmin)
 
 
-class PermalinkAdmin(admin.ModelAdmin):
-    list_display = (
-        'course',
-        'title',
-        'get_tags',
-    )
-    search_fields = [
-        'tags__tag',
-        'title',
-        'description',
-        'course__course_tag__tag',
-    ]
-    filter_horizontal = ['tags']
-    raw_id_fields = ['course']
-    list_filter = [
-        'tags',
-    ]
+# class PermalinkAdmin(admin.ModelAdmin):
+#     list_display = (
+#         'course',
+#         'title',
+#         'get_tags',
+#     )
+#     search_fields = [
+#         'tags__tag',
+#         'title',
+#         'description',
+#         'course__course_tag__tag',
+#     ]
+#     filter_horizontal = ['tags']
+#     raw_id_fields = ['course']
+#     list_filter = [
+#         'tags',
+#     ]
+#
+#     def get_tags(self, permalink):
+#         return u','.join(tag.tag for tag in permalink.tags.all())
+#     get_tags.short_description = 'Tags'
+#
+#     def get_queryset(self, request):
+#         queryset = super(PermalinkAdmin, self).get_queryset(request)
+#         queryset = queryset\
+#             .select_related('course', 'course__course_tag')\
+#             .prefetch_related('tags')
+#         return queryset
 
-    def get_tags(self, permalink):
-        return u','.join(tag.tag for tag in permalink.tags.all())
-    get_tags.short_description = 'Tags'
 
-    def get_queryset(self, request):
-        queryset = super(PermalinkAdmin, self).get_queryset(request)
-        queryset = queryset\
-            .select_related('course', 'course__course_tag')\
-            .prefetch_related('tags')
-        return queryset
-
-
-admin.site.register(coremodels.Permalink, PermalinkAdmin)
+# admin.site.register(coremodels.Permalink, PermalinkAdmin)
 
 # Unregister auth.groups
 admin.site.unregister(Group)
