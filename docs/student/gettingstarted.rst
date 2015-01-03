@@ -17,7 +17,7 @@ Not solved
     This is the default status, meaning that you have not marked the assignment.
 
 With help
-    You may mark an assigments as *With help* when you have solved it with the help of others or with extra hint and tricks
+    You may mark an assigments as *With help* when you have solved it with the help of others or with extra hint and tips.
 
 On my own
     An assignments should be marked *On my own* when you completed it all by yourself. This is the highest degree of verification that the subject
@@ -25,9 +25,9 @@ On my own
 
 .. image:: ../images/course_view_logged_in.png
 
-The progress bar in the right side of the view tell in percentage how many of the selected assignments that have been solved on your own
+The progress bar in the right side of the view tell in percentage how many of the selected assignments that have been solved on your own.
 
-The selected tags lists the active tags that define the selection of assigments
+The selected tags lists the active tags that define the selection of assigments.
 
 You may also filter the selection by selecting tags that will narrow the number of assignments listed to the set that have all the selected tags.
 As an example a course is already defined by the authors with their *course* and *period* tags. Below this the authors may have marked a number of assignments with
