@@ -4,12 +4,12 @@
 Administer a course
 ###################
 
-After you haved logged in to the Trix system type
+After you haved logged in to the Trix, go to ``<domain-where-you-host-trix>/admin/``. So if trix is hosted at
+``trix.ifi.uio.no``, type in ``trix.ifi.uio.no/admin/`` in the address bar of your browser.
 
-    https://trix.ifi.uio.no/admin/
-
-in your location field. The page you will see lists every entity in the system
-that you can manage and edit. Be careful since every changes are stored directly in the database.
+The page you will see lists every entity in the system
+that you can manage and edit. Be careful since all changes
+are stored directly in the database.
 
 .. image:: ../images/djangoadmin_frontpage.png
 
