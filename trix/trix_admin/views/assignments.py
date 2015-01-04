@@ -1,3 +1,5 @@
+import re
+from django.core.exceptions import ValidationError
 from django.shortcuts import get_object_or_404
 from django.template import defaultfilters
 from django.utils.translation import ugettext_lazy as _
@@ -224,10 +226,16 @@ class AssignmentMultiEditView(AssignmentQuerysetForRoleMixin, multiselect.MultiS
         ]
 
 
+def validate_single_tag(value):
+    if not re.match(r'^(\w|[-])+$', value, re.UNICODE):
+        raise ValidationError(_('Tags can only contain letters, numbers, underscore (_) and hyphen (-).'))
+
+
 class AssignmentMultiTagForm(forms.Form):
     tag = forms.CharField(
         required=True,
-        label=_('Tag'))
+        label=_('Tag'),
+        validators=[validate_single_tag])
 
 
 class AssignmentMultiAddTagView(AssignmentQuerysetForRoleMixin, multiselect.MultiSelectFormView):
