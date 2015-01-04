@@ -1,3 +1,3 @@
 from .common import *
 
-LANGUAGE_CODE = 'en'
+LANGUAGE_CODE = 'nb'

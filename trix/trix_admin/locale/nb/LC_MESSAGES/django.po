@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: trix_admin\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-12-28 19:22+0000\n"
-"PO-Revision-Date: 2014-12-28 20:23+0100\n"
+"POT-Creation-Date: 2015-01-04 15:21+0000\n"
+"PO-Revision-Date: 2015-01-04 16:22+0100\n"
 "Last-Translator: Espen Angell Kristiansen <post@espenak.net>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: nb\n"
@@ -30,7 +30,11 @@ msgstr "Permalinker"
 msgid "Statistics"
 msgstr "Statistikk"
 
-#: cradmin.py:29
+#: cradmin.py:30
+msgid "Courses, users, ..."
+msgstr ""
+
+#: cradmin.py:34
 msgid "Back to website"
 msgstr "Tilbake til websiden"
 
@@ -91,67 +95,72 @@ msgstr "Valideringsfeil"
 msgid "In"
 msgstr "I"
 
-#: views/assignments.py:30 views/assignments.py:116 views/permalinks.py:27
+#: views/assignments.py:32 views/assignments.py:118 views/permalinks.py:27
 msgid "Edit"
 msgstr "Rediger"
 
-#: views/assignments.py:33
+#: views/assignments.py:35
 msgid "Preview"
 msgstr "Forhåndsvis"
 
-#: views/assignments.py:36 views/permalinks.py:33
+#: views/assignments.py:38 views/permalinks.py:33
 msgid "Delete"
 msgstr "Slett"
 
-#: views/assignments.py:51 views/permalinks.py:30
+#: views/assignments.py:53 views/permalinks.py:30
 msgid "View"
 msgstr "Vis"
 
-#: views/assignments.py:106 views/permalinks.py:72
+#: views/assignments.py:108 views/permalinks.py:72
 msgid "Create"
 msgstr "Opprett"
 
-#: views/assignments.py:108
+#: views/assignments.py:110
 msgid "Show on website"
 msgstr "Vis på webside"
 
-#: views/assignments.py:120 views/assignments.py:254
+#: views/assignments.py:122 views/assignments.py:262
 msgid "Add tag"
 msgstr "Legg til tag"
 
-#: views/assignments.py:124
+#: views/assignments.py:126
 msgid "Remove tag"
 msgstr "Fjern tag"
 
-#: views/assignments.py:139 views/permalinks.py:86
+#: views/assignments.py:141 views/permalinks.py:86
 msgid "Organize"
 msgstr "Organiser"
 
-#: views/assignments.py:182
+#: views/assignments.py:184
 msgid "Assignment YAML"
 msgstr "Oppgaver YAML"
 
-#: views/assignments.py:218
+#: views/assignments.py:220
 msgid "Save"
 msgstr "Lagre"
 
-#: views/assignments.py:230
+#: views/assignments.py:231
+msgid "Tags can only contain letters, numbers, underscore (_) and hyphen (-)."
+msgstr ""
+"Tags kan bare inneholde bokstaver, tall, understrek (_) og bindestrek (-)."
+
+#: views/assignments.py:237
 msgid "Tag"
 msgstr "Tag"
 
-#: views/assignments.py:250 views/assignments.py:286
+#: views/assignments.py:258 views/assignments.py:294
 msgid "tags on selected assignments"
 msgstr "tags på valgte oppgaver"
 
-#: views/assignments.py:260
+#: views/assignments.py:268
 msgid "Type in the tag you want to add to the selected assignments"
 msgstr "Skriv inn taggen du vil legge til på valgte oppgaver"
 
-#: views/assignments.py:290
+#: views/assignments.py:298
 msgid "Delete tag"
 msgstr "Slett tag"
 
-#: views/assignments.py:296
+#: views/assignments.py:304
 msgid "Type in the tag you want to remove from the selected assignments"
 msgstr "Skriv inn taggen du vil fjerne fra valgte oppgaver"
 
