@@ -4,7 +4,7 @@ execfile('trix/version.py')
 
 setup(
     name='trix',
-    description='Trix.',
+    description='Next generation Trix. Detailed task control and statistics app for better learning outcome.',
     version=__version__,   # noqa
     url='https://github.com/devilry/trix2',
     author='Tor Johansen, Espen Angell Kristiansen',
