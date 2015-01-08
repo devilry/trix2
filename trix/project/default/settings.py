@@ -117,3 +117,6 @@ TEMPLATE_CONTEXT_PROCESSORS = (
 
 # TRIX_LOGIN_MESSAGE = 'Logg inn med ditt UiO brukernavn og passord'
 # TRIX_LOGIN_IS_USERNAME = True
+
+TRIX_ADMIN_DOCUMENTATION_URL = 'http://trix2.readthedocs.org/'
+TRIX_ADMIN_DOCUMENTATION_LABEL = 'trix2.readthedocs.org'

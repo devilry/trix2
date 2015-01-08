@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: trix_admin\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-01-04 15:21+0000\n"
-"PO-Revision-Date: 2015-01-04 16:22+0100\n"
+"POT-Creation-Date: 2015-01-08 11:35+0000\n"
+"PO-Revision-Date: 2015-01-08 12:35+0100\n"
 "Last-Translator: Espen Angell Kristiansen <post@espenak.net>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: nb\n"
@@ -18,30 +18,52 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Poedit 1.6.5\n"
 
-#: cradmin.py:17
+#: cradmin.py:19
+msgid "Course overview"
+msgstr "Kursoversikt"
+
+#: cradmin.py:23
 msgid "Assignments"
 msgstr "Oppgaver"
 
-#: cradmin.py:21
+#: cradmin.py:27
 msgid "Permalinks"
 msgstr "Permalinker"
 
-#: cradmin.py:25 templates/trix_admin/statistics.django.html:11
+#: cradmin.py:31 templates/trix_admin/statistics.django.html:11
 msgid "Statistics"
 msgstr "Statistikk"
-
-#: cradmin.py:30
-msgid "Courses, users, ..."
-msgstr ""
-
-#: cradmin.py:34
-msgid "Back to website"
-msgstr "Tilbake til websiden"
 
 #: templates/trix_admin/frontpage.django.html:9
 #: templates/trix_admin/statistics.django.html:10
 msgid "Trix"
 msgstr "Trix"
+
+#: templates/trix_admin/roleselect.django.html:14
+msgid "Back to the website"
+msgstr "Tilbake til websiden"
+
+#: templates/trix_admin/roleselect.django.html:21
+msgid "Documentation"
+msgstr "Dokumentasjon"
+
+#: templates/trix_admin/roleselect.django.html:24
+msgid "Edit courses and users?"
+msgstr "Rediger kurs og brukere?"
+
+#: templates/trix_admin/roleselect.django.html:25
+msgid "Need to create/edit courses, change active semester or edit users?"
+msgstr ""
+"Trenger du å lage/redigere kurs, endre aktivt semester eller redigere "
+"brukere?"
+
+#: templates/trix_admin/roleselect.django.html:27
+msgid "Go to the superuser panel"
+msgstr "Gå til superbruker panelet"
+
+#: templates/trix_admin/roleselect.django.html:29
+msgid "You need to ask a superuser to grant you superuser access."
+msgstr "Du må be en superbruker om å gjøre deg til superbruker."
 
 #: templates/trix_admin/statistics.django.html:18
 msgid "Aggregated statistics on how the assignments where solved"
@@ -163,6 +185,10 @@ msgstr "Slett tag"
 #: views/assignments.py:304
 msgid "Type in the tag you want to remove from the selected assignments"
 msgstr "Skriv inn taggen du vil fjerne fra valgte oppgaver"
+
+#: views/roleselect.py:6
+msgid "Select a course to edit create/edit assignments"
+msgstr "Velg et kurs for å lage og redigere oppgaver"
 
 #: views/statistics.py:128
 msgid ""

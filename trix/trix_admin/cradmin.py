@@ -1,6 +1,8 @@
+from django.contrib.auth.decorators import login_required
 from django.utils.translation import ugettext_lazy as _
 from django_cradmin import crinstance, crmenu
 from django.core.urlresolvers import reverse
+from trix.trix_admin.views import roleselect
 
 from trix.trix_core.models import Course
 # from .views import dashboard
@@ -14,6 +16,10 @@ class Menu(crmenu.Menu):
         # self.add(label=_('Dashboard'), url=self.appindex_url('dashboard'),
         #     icon="home")
         self.add(
+            label=_('Course overview'),
+            url=self.cradmin_instance.roleselectview_url(),
+            icon='arrow-up')
+        self.add(
             label=_('Assignments'),
             url=self.appindex_url('assignments'),
             icon="database")
@@ -25,16 +31,6 @@ class Menu(crmenu.Menu):
             label=_('Statistics'),
             url=self.appindex_url('statistics'),
             icon='bar-chart-o')
-        if self.request.user.is_admin:
-            self.add(
-                label=_('Courses, users, ...'),
-                url=reverse('admin:index'),
-                icon='cog')
-        self.add(
-            label=_('Back to website'),
-            url=reverse('trix_student_dashboard'),
-            icon='arrow-left')
-
 
 
 class CrAdminInstance(crinstance.BaseCrAdminInstance):
@@ -63,3 +59,7 @@ class CrAdminInstance(crinstance.BaseCrAdminInstance):
         Remember that the role is a Course.
         """
         return role.course_tag.tag
+
+    @classmethod
+    def get_roleselect_view(cls):
+        return login_required(roleselect.TrixRoleSelectView.as_view())
