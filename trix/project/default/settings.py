@@ -120,3 +120,4 @@ TEMPLATE_CONTEXT_PROCESSORS = (
 
 TRIX_ADMIN_DOCUMENTATION_URL = 'http://trix2.readthedocs.org/'
 TRIX_ADMIN_DOCUMENTATION_LABEL = 'trix2.readthedocs.org'
+TRIX_STUDENT_GETTINGSTARTEDGUIDE_URL = 'http://trix2.readthedocs.org/en/latest/student/gettingstarted.html'
