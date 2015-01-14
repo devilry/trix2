@@ -1,6 +1,7 @@
 {% extends "django_cradmin/base.django.html" %}
 {% load i18n %}l
 {% load trix_admin_tags %}
+{% load cradmin_tags %}
 
 {% block content %}
     <div class="page-header">
@@ -46,7 +47,7 @@
                     <li>{% trans "Number of users:" %} {{ user_count }}</li>
                     <li>{% trans "Number of assignments:" %} {{ assignment_count }}</li>
                     {% if assignment_list.count  %}
-                        <li><a href="{% url 'trix_stats_ascsv' %}?tags={{ selected_tags_string }}">
+                        <li><a href="{% cradmin_appurl 'ascsv' %}?tags={{ selected_tags_string }}">
                             <span class="fa fa-download"></span>
                             {% trans "Download csv file" %}
                         </a></li>
