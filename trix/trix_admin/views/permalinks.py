@@ -93,6 +93,15 @@ class PermalinkCreateUpdateMixin(object):
         form.fields['tags'] = formfields.ManyToManyTagInputField(required=False)
         return form
 
+    def save_object(self, form, commit=True):
+        permalink = super(PermalinkCreateUpdateMixin, self).save_object(form, commit=commit)
+        if commit:
+            # Replace the tags with the new tags
+            permalink.tags.clear()
+            for tag in form.cleaned_data['tags']:
+                permalink.tags.add(tag)
+        return permalink
+
     def form_saved(self, permalink):
         course = self.request.cradmin_role
         if not permalink.tags.filter(tag=course.course_tag).exists():
