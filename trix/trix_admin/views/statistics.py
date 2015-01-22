@@ -220,4 +220,5 @@ class App(crapp.App):
     appurls = [
         crapp.Url(r'^$', StatisticsView.as_view(), name=crapp.INDEXVIEW_NAME),
         crapp.Url(r'^view$', StatisticsChartView.as_view(), name='view'),
+        crapp.Url(r'^ascsv$', AssignmentStatsCsv.as_view(), name='ascsv'),
     ]
