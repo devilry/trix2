@@ -3,7 +3,7 @@ from django.core.exceptions import ValidationError
 from django.shortcuts import get_object_or_404
 from django.template import defaultfilters
 from django.utils.translation import ugettext_lazy as _
-from django.template.defaultfilters import truncatechars
+from django.template.defaultfilters import truncatechars, urlencode
 from django import forms
 from django import http
 from django.views.generic import TemplateView
@@ -81,7 +81,7 @@ class TagsColumn(objecttable.PlainTextColumn):
 
 class AssignmentQuerysetForRoleMixin(object):
     def get_queryset_for_role(self, course):
-        return self.model.objects.filter(tags=course.course_tag)\
+        return self.model.objects.filter(tags=course.course_tag) \
             .prefetch_related('tags')
 
 
@@ -127,6 +127,21 @@ class AssignmentListView(AssignmentQuerysetForRoleMixin, objecttable.ObjectTable
                 url=app.reverse_appurl('multiremove-tag')
             ),
         ]
+
+    def _get_pager_extra_querystring(self):
+        """
+        Overriden to handle listencoded string i QueryDict
+        Base function does not handle multivalue QueryDict
+        Search for 'mengde' become [u'mengde'] and the pager fails
+        Need to user the builtin urlencode for QueryDict
+        """
+        querystring = self.request.GET.copy()
+        if 'page' in querystring:
+            del querystring['page']
+        if querystring:
+            return querystring.urlencode()
+        else:
+            return ''
 
 
 class AssignmentCreateUpdateMixin(object):
