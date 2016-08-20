@@ -61,3 +61,6 @@ db.sqlite3
 # OSX Files
 .DS_Store
 docs/.DS_Store
+
+# dbdev_tempdata
+dbdev_tempdata/
