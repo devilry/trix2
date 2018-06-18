@@ -1,6 +1,6 @@
 -r common.txt
 
-gunicorn==0.15.0
+gunicorn==19.8.1
 django-toolbelt
 
 # For search

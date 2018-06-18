@@ -1,7 +1,7 @@
 {% extends "trix_student/assignment_list_base.django.html" %}
 {% load i18n %}
 
-{% block pageheader %}
+{% block page-cover %}
     <div id="assignments-heading" class="page-header">
         <div class="container">
             {% if user_is_admin %}
@@ -17,4 +17,4 @@
             <p>{{ permalink.description }}</p>
         </div>
     </div>
-{% endblock pageheader %}
+{% endblock page-cover %}

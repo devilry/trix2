@@ -7,7 +7,7 @@ from django.utils.translation import ugettext as _
 from django.http import HttpResponse
 from django.http import HttpResponseBadRequest
 from django_cradmin import crapp
-from django_cradmin.viewhelpers import objecttable
+# from django_cradmin.viewhelpers import objecttable
 from django.utils.http import urlencode
 
 from trix.trix_core import models as trix_models
@@ -180,45 +180,45 @@ class StatisticsChartView(AssignmentStatsMixin, ListView):
         return context
 
 
-class TagColumn(objecttable.SingleActionColumn):
-    modelfield = 'tag'
-
-    def get_actionurl(self, tag):
-        tags_string = u'{},{}'.format(self.view.request.cradmin_role.course_tag.tag, tag.tag)
-        return '{}?{}'.format(self.reverse_appurl('view'), urlencode({
-            'tags': tags_string
-        }))
-
-
-class AssignmentCountColumn(objecttable.PlainTextColumn):
-    orderingfield = 'assignment__count'
-
-    def get_header(self):
-        return _('Number of assignments')
-
-    def render_value(self, tag):
-        return tag.assignment__count
+# class TagColumn(objecttable.SingleActionColumn):
+#     modelfield = 'tag'
+#
+#     def get_actionurl(self, tag):
+#         tags_string = u'{},{}'.format(self.view.request.cradmin_role.course_tag.tag, tag.tag)
+#         return '{}?{}'.format(self.reverse_appurl('view'), urlencode({
+#             'tags': tags_string
+#         }))
 
 
-class StatisticsView(objecttable.ObjectTableView):
-    model = trix_models.Tag
-    columns = [
-        TagColumn,
-        AssignmentCountColumn,
-    ]
-    searchfields = [
-        'tag'
-    ]
+# class AssignmentCountColumn(objecttable.PlainTextColumn):
+#     orderingfield = 'assignment__count'
+#
+#     def get_header(self):
+#         return _('Number of assignments')
+#
+#     def render_value(self, tag):
+#         return tag.assignment__count
 
-    def get_queryset_for_role(self, course):
-        return self.model.objects\
-            .annotate(Count('assignment', distinct=True))\
-            .exclude(tag=course.course_tag.tag)
+
+# class StatisticsView(objecttable.ObjectTableView):
+#     model = trix_models.Tag
+#     columns = [
+#         TagColumn,
+#         AssignmentCountColumn,
+#     ]
+#     searchfields = [
+#         'tag'
+#     ]
+    #
+    # def get_queryset_for_role(self, course):
+    #     return self.model.objects\
+    #         .annotate(Count('assignment', distinct=True))\
+    #         .exclude(tag=course.course_tag.tag)
 
 
 class App(crapp.App):
     appurls = [
-        crapp.Url(r'^$', StatisticsView.as_view(), name=crapp.INDEXVIEW_NAME),
+        # crapp.Url(r'^$', StatisticsView.as_view(), name=crapp.INDEXVIEW_NAME),
         crapp.Url(r'^view$', StatisticsChartView.as_view(), name='view'),
         crapp.Url(r'^ascsv$', AssignmentStatsCsv.as_view(), name='ascsv'),
     ]

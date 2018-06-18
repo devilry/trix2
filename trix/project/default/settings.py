@@ -38,7 +38,6 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django.contrib.admin',
-    'south',
     'django_extensions',
     'crispy_forms',
     'trix.trix_core',
@@ -113,6 +112,7 @@ TEMPLATE_CONTEXT_PROCESSORS = (
     "django.core.context_processors.tz",
     "django.core.context_processors.request",
     "django.contrib.messages.context_processors.messages",
+    "django_cradmin.context_processors.cradmin",
 )
 
 # TRIX_LOGIN_MESSAGE = 'Logg inn med ditt UiO brukernavn og passord'

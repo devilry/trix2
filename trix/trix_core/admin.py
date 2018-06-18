@@ -8,11 +8,15 @@ from trix.trix_core import models as coremodels
 
 def set_administrators(modeladmin, request, queryset):
     queryset.update(is_admin=True)
+
+
 set_administrators.short_description = _("Give admin access to the selected users")
 
 
 def unset_administrators(modeladmin, request, queryset):
     queryset.update(is_admin=False)
+
+
 unset_administrators.short_description = _("Remove admin access from the selected users")
 
 
@@ -30,6 +34,7 @@ class UserAdmin(admin.ModelAdmin):
     fields = ['email', 'is_admin']
     readonly_fields = ['last_login']
     actions = [set_administrators, unset_administrators]
+
 
 admin.site.register(coremodels.User, UserAdmin)
 
@@ -114,6 +119,7 @@ class TagAdmin(admin.ModelAdmin):
     is_in_use.short_description = _('Is in use')
     is_in_use.boolean = True
 
+
 admin.site.register(coremodels.Tag, TagAdmin)
 
 
@@ -142,6 +148,7 @@ class CourseAdmin(admin.ModelAdmin):
             .select_related('course_tag', 'active_period')\
             .prefetch_related('admins')
         return queryset
+
 
 admin.site.register(coremodels.Course, CourseAdmin)
 

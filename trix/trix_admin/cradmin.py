@@ -1,6 +1,6 @@
 from django.contrib.auth.decorators import login_required
 from django.utils.translation import ugettext_lazy as _
-from django_cradmin import crinstance, crmenu
+from django_cradmin import crinstance
 from django.core.urlresolvers import reverse
 from trix.trix_admin.views import roleselect
 
@@ -11,31 +11,8 @@ from .views import permalinks
 from .views import statistics
 
 
-class Menu(crmenu.Menu):
-    def build_menu(self):
-        # self.add(label=_('Dashboard'), url=self.appindex_url('dashboard'),
-        #     icon="home")
-        self.add(
-            label=_('Course overview'),
-            url=self.cradmin_instance.roleselectview_url(),
-            icon='arrow-up')
-        self.add(
-            label=_('Assignments'),
-            url=self.appindex_url('assignments'),
-            icon="database")
-        self.add(
-            label=_('Permalinks'),
-            url=self.appindex_url('permalinks'),
-            icon="link")
-        self.add(
-            label=_('Statistics'),
-            url=self.appindex_url('statistics'),
-            icon='bar-chart-o')
-
-
 class CrAdminInstance(crinstance.BaseCrAdminInstance):
     id = 'trix_courseadmin'
-    menuclass = Menu
     roleclass = Course
     rolefrontpage_appname = 'assignments'
 
@@ -59,6 +36,26 @@ class CrAdminInstance(crinstance.BaseCrAdminInstance):
         Remember that the role is a Course.
         """
         return role.course_tag.tag
+
+    def get_menu_item_renderables(self):
+        return [
+            crmenu.LinkItemRenderable(
+                label=_('Course overview'),
+                url=self.cradmin_instance.roleselectview_url(),
+                icon='arrow-up'),
+            crmenu.LinkItemRenderable(
+                label=_('Assignments'),
+                url=self.appindex_url('assignments'),
+                icon="database"),
+            crmenu.LinkItemRenderable(
+                label=_('Permalinks'),
+                url=self.appindex_url('permalinks'),
+                icon="link"),
+            crmenu.LinkItemRenderable(
+                label=_('Statistics'),
+                url=self.appindex_url('statistics'),
+                icon='bar-chart-o'),
+        ]
 
     @classmethod
     def get_roleselect_view(cls):
