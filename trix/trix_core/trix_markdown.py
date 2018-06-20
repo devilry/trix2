@@ -7,7 +7,7 @@ def assignment_markdown(inputmarkdown):
     """
     md = markdown.Markdown(
         output_format='html5',
-        safe_mode="escape",
+        safe_mode="escape",  # TODO replace with better way to escape
         extensions=[
             'codehilite',  # Syntax hilite code
             'fenced_code',  # Support github style code blocks

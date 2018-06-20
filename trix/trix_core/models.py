@@ -15,7 +15,7 @@ class TrixUserManager(BaseUserManager):
             raise ValueError('Users must have an email address')
 
         user = self.model(
-            email=TrixUserManager.normalize_email(email),
+            email=self.normalize_email(email),
         )
         user.set_password(password)
         user.save(using=self._db)
@@ -38,14 +38,20 @@ class User(AbstractBaseUser):
     is_active = models.BooleanField(
         default=True,
         verbose_name=_('Is active?'),
-        help_text=_('User is active? Inactive users can not log in.'))
+        help_text=_('User is active? Inactive users can not log in.')
+    )
 
     is_admin = models.BooleanField(
         default=False,
         verbose_name=_('Is superuser?'),
-        help_text=_('User is superuser? Superusers have full access to the admin UI.'))
+        help_text=_('User is superuser? Superusers have full access to the admin UI.')
+    )
 
-    email = models.EmailField(max_length=250, blank=False, unique=True)
+    email = models.EmailField(
+        max_length=255,
+        blank=False,
+        unique=True
+    )
 
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = []
@@ -57,6 +63,9 @@ class User(AbstractBaseUser):
         verbose_name_plural = _("Users")
 
     def __unicode__(self):
+        return self.displayname
+
+    def get_long_name(self):
         return self.displayname
 
     def get_short_name(self):
@@ -182,10 +191,14 @@ class Course(models.Model):
     admins = models.ManyToManyField(User, blank=True)
     description = models.TextField(
         verbose_name=_('Description'),
-        blank=True, null=False, default='')
+        blank=True,
+        null=False,
+        default='')
 
     #: TODO: Limit choices to ``c``-tags
-    course_tag = models.ForeignKey(Tag, related_name='course_set')
+    course_tag = models.ForeignKey(
+        Tag,
+        related_name='course_set')
 
     #: TODO: Limit choices to ``p``-tags
     active_period = models.ForeignKey(

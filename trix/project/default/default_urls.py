@@ -8,7 +8,7 @@ from trix.trix_student import urls
 admin.autodiscover()
 
 default_urls = [
-    url(r'^admin/', include(admin.site.urls)),
+    url(r'^admin/', admin.site.urls),
     url(r'^a/', include(CrAdminInstance.urls())),
     url(r'^', include(urls.urlpatterns)),
 ]

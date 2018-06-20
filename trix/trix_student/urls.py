@@ -1,8 +1,8 @@
 from django.conf.urls import url
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth import views as auth_views
 
 from trix.trix_student.views import login
-from trix.trix_student.views import logout
 from trix.trix_student.views import dashboard
 # from trix.trix_student.views import assignments
 from trix.trix_student.views import course
@@ -20,6 +20,12 @@ urlpatterns = [
     url('^permalink/(?P<permalink_id>\d+)$', permalink.PermalinkView.as_view(), name='trix_student_permalink'),
     url('^permalink/list/$', permalink.PermalinkListView.as_view(), name='trix_student_permalink_list_view'),
     # url(r'^statistics/ascsv$', AssignmentStatsCsv.as_view(), name='trix_stats_ascsv'),
-    url(r'^login$', login.loginview, name='trix-login'),
-    url(r'^logout$', logout.logoutview, name='trix-logout'),
+    url(r'^login$',
+        auth_views.login,
+        {'template_name': 'trix_student/login.django.html', 'authentication_form': login.TrixAuthenticationForm},
+        name='trix-login'),
+    url(r'^logout$',
+        auth_views.logout,
+        {'template_name': 'trix_student/logout.django.html'},
+        name='trix-logout'),
 ]
