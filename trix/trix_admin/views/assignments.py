@@ -15,7 +15,7 @@ from cradmin_legacy.viewhelpers import multiselect
 from cradmin_legacy import crispylayouts
 from cradmin_legacy import viewhelpers
 from cradmin_legacy import crapp
-from django.core.urlresolvers import reverse
+from django.urls import reverse
 from crispy_forms import layout
 from cradmin_legacy.acemarkdown.widgets import AceMarkdownWidget
 

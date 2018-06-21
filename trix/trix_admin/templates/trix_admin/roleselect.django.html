@@ -1,6 +1,7 @@
 {% extends "cradmin_legacy/roleselect.django.html" %}
 {% load i18n %}
 
+{% block title %}{% trans "Trix - Select course" %}{% endblock title %}
 {% block body %}
     <div class="container" style="margin-top: 20px;">
         <a href="{% url 'trix_student_dashboard' %}">

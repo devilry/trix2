@@ -1,4 +1,6 @@
 import markdown
+import bleach
+from django.utils.safestring import mark_safe
 
 
 def assignment_markdown(inputmarkdown):
@@ -7,14 +9,13 @@ def assignment_markdown(inputmarkdown):
     """
     md = markdown.Markdown(
         output_format='html5',
-        safe_mode="escape",  # TODO replace with better way to escape
         extensions=[
-            'codehilite',  # Syntax hilite code
-            'fenced_code',  # Support github style code blocks
-            'nl2br',  # Support github style newline handling
-            'sane_lists',  # Break into new ul/ol tag when the next line starts with another class of list indicator
-            'smart_strong',  # Do not let hello_world create an <em>,
-            'def_list',  # Support definition lists
-            'tables',  # Support tables
+            'markdown.extensions.codehilite',  # Syntax hilite code
+            'markdown.extensions.fenced_code',  # Support github style code blocks
+            'markdown.extensions.nl2br',  # Support github style newline handling
+            'markdown.extensions.sane_lists',  # Break into new ul/ol tag when the next line starts with another class of list indicator
+            'markdown.extensions.smart_strong',  # Do not let hello_world create an <em>,
+            'markdown.extensions.def_list',  # Support definition lists
+            'markdown.extensions.tables',  # Support tables
         ])
-    return md.convert(inputmarkdown)
+    return mark_safe(bleach.clean(md.convert(inputmarkdown)))

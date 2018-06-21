@@ -41,7 +41,7 @@ INSTALLED_APPS = [
     'cradmin_legacy',  # Important: Must come after trix_admin because of template overrides
 ]
 
-MIDDLEWARE_CLASSES = [
+MIDDLEWARE = [
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',

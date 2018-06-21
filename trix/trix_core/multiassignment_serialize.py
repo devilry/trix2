@@ -33,6 +33,7 @@ class MarkdownString(object):
         """
         return dumper.represent_scalar(u'tag:yaml.org,2002:str', data.unicode_object, style='|')
 
+
 yaml.SafeDumper.add_representer(MarkdownString, MarkdownString.representer)
 
 
@@ -53,6 +54,7 @@ class YamlMapOrderedDict(collections.OrderedDict):
             node_value = dumper.represent_data(item_value)
             value.append((node_key, node_value))
         return yaml.nodes.MappingNode(u'tag:yaml.org,2002:map', value)
+
 
 yaml.SafeDumper.add_representer(YamlMapOrderedDict, YamlMapOrderedDict.representer)
 

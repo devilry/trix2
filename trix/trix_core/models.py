@@ -61,7 +61,7 @@ class User(AbstractBaseUser):
     class Meta:
         verbose_name = _("User")
         verbose_name_plural = _("Users")
-        ordering = ['-email']
+        ordering = ['email']
 
     def __unicode__(self):
         return self.displayname
@@ -160,7 +160,7 @@ class Tag(models.Model):
     class Meta:
         verbose_name = _('Tag')
         verbose_name_plural = _('Tags')
-        ordering = ['-tag']
+        ordering = ['tag']
 
     def __unicode__(self):
         return self.tag
@@ -200,18 +200,20 @@ class Course(models.Model):
     #: TODO: Limit choices to ``c``-tags
     course_tag = models.ForeignKey(
         Tag,
-        related_name='course_set')
+        related_name='course_set',
+        on_delete=models.CASCADE)
 
     #: TODO: Limit choices to ``p``-tags
     active_period = models.ForeignKey(
         Tag,
         related_name='active_period_set',
-        null=True, blank=True)
+        null=True, blank=True,
+        on_delete=models.CASCADE)
 
     class Meta:
         verbose_name = _('Course')
         verbose_name_plural = _('Courses')
-        ordering = ['-course_tag']
+        ordering = ['course_tag']
 
     def __unicode__(self):
         return self.course_tag.tag
@@ -312,8 +314,8 @@ class HowSolved(models.Model):
         ]
     )
 
-    assignment = models.ForeignKey(Assignment)
-    user = models.ForeignKey(User)
+    assignment = models.ForeignKey(Assignment, on_delete=models.CASCADE)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
 
     def __unicode__(self):
         return self.howsolved
@@ -322,7 +324,8 @@ class HowSolved(models.Model):
 class Permalink(models.Model):
     course = models.ForeignKey(
         Course,
-        verbose_name=_('Course'))
+        verbose_name=_('Course'),
+        on_delete=models.CASCADE)
     tags = models.ManyToManyField(
         Tag,
         verbose_name=_('Tags'))
@@ -337,7 +340,7 @@ class Permalink(models.Model):
     class Meta:
         verbose_name = _('Permalink')
         verbose_name_plural = _('Permalinks')
-        ordering = ['-title']
+        ordering = ['title']
 
     def __unicode__(self):
         return self.title

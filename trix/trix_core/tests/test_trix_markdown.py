@@ -7,9 +7,9 @@ class TestTrixMarkdown(TestCase):
     def test_simple(self):
         self.assertEquals(
             trix_markdown.assignment_markdown('# Hello world\n'),
-            '<h1>Hello world</h1>')
+            '&lt;h1&gt;Hello world&lt;/h1&gt;')
 
     def test_nl2br(self):
         self.assertEquals(
             trix_markdown.assignment_markdown('Hello\nworld'),
-            '<p>Hello<br>\nworld</p>')
+            '&lt;p&gt;Hello&lt;br&gt;\nworld&lt;/p&gt;')
