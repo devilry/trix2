@@ -188,7 +188,7 @@ class AssignmentCreateView(AssignmentCreateUpdateMixin, viewhelpers.create.Creat
 
 class AssignmentUpdateView(AssignmentQuerysetForRoleMixin,
                            AssignmentCreateUpdateMixin,
-                           viewhelpers.update.UpdateRoleView):
+                           viewhelpers.update.UpdateView):
     """
     View used to edit existing assignments.
     """

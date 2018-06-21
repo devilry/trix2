@@ -117,7 +117,7 @@ class PermalinkCreateView(PermalinkCreateUpdateMixin, viewhelpers.create.CreateV
 
 class PermalinkUpdateView(PermalinkQuerysetForRoleMixin,
                           PermalinkCreateUpdateMixin,
-                          viewhelpers.update.UpdateRoleView):
+                          viewhelpers.update.UpdateView):
     """
     View used to create edit existing permalinks.
     """
