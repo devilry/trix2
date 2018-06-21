@@ -1,6 +1,6 @@
 from django.conf import settings
 from django.utils.translation import ugettext_lazy as _
-from django_cradmin.views import roleselect
+from cradmin_legacy.views import roleselect
 
 
 class TrixRoleSelectView(roleselect.RoleSelectView):

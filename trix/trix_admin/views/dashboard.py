@@ -1,6 +1,6 @@
 from django.views.generic import TemplateView
 
-from django_cradmin import crapp
+from cradmin_legacy import crapp
 
 
 class DashboardView(TemplateView):

@@ -3,7 +3,7 @@
 
 {% block title %}{% trans "Assignments" %}{% endblock title %}
 
-{% block page-cover %}
+{% block pageheader %}
     <div id="assignments-heading" class="page-header">
         <div class="container">
             {% if user_is_admin %}
@@ -20,4 +20,4 @@
             <p>{{ course.description }}</p>
         </div>
     </div>
-{% endblock page-cover %}
+{% endblock pageheader %}

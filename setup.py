@@ -21,7 +21,8 @@ setup(
         'PyYAML>=3.12',
         'django-extensions',
         'dj-database-url>=0.5.0',
-        'django_cradmin==5.2.2',
+        # 'django_cradmin==5.2.2',
+        'cradmin_legacy>=1.3.0a0',
         'gunicorn',
     ],
     classifiers=[

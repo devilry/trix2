@@ -1,12 +1,12 @@
 from django.core.urlresolvers import reverse
 from django.utils.translation import ugettext_lazy as _
 from django.template.defaultfilters import truncatechars
-# from django_cradmin.viewhelpers import objecttable
-# from django_cradmin.viewhelpers import create
-# from django_cradmin.viewhelpers import update
-# from django_cradmin.viewhelpers import delete
-from django_cradmin import viewhelpers
-from django_cradmin import crapp
+from cradmin_legacy.viewhelpers import objecttable
+from cradmin_legacy.viewhelpers import create
+from cradmin_legacy.viewhelpers import update
+from cradmin_legacy.viewhelpers import delete
+from cradmin_legacy import viewhelpers
+from cradmin_legacy import crapp
 from crispy_forms import layout
 
 from trix.trix_core import models as trix_models
@@ -19,59 +19,59 @@ class PermalinkQuerysetForRoleMixin(object):
             .prefetch_related('tags')
 
 
-# class TitleColumn(objecttable.MultiActionColumn):
-#     modelfield = 'title'
-#
-#     def get_buttons(self, permalink):
-#         return [
-#             objecttable.Button(
-#                 label=_('Edit'),
-#                 url=self.reverse_appurl('edit', args=[permalink.id])),
-#             objecttable.Button(
-#                 label=_('View'),
-#                 url=reverse('trix_student_permalink', args=[permalink.id])),
-#             objecttable.Button(
-#                 label=_('Delete'),
-#                 url=self.reverse_appurl('delete', args=[permalink.id]),
-#                 buttonclass="danger"),
-#         ]
+class TitleColumn(objecttable.MultiActionColumn):
+    modelfield = 'title'
+
+    def get_buttons(self, permalink):
+        return [
+            objecttable.Button(
+                label=_('Edit'),
+                url=self.reverse_appurl('edit', args=[permalink.id])),
+            objecttable.Button(
+                label=_('View'),
+                url=reverse('trix_student_permalink', args=[permalink.id])),
+            objecttable.Button(
+                label=_('Delete'),
+                url=self.reverse_appurl('delete', args=[permalink.id]),
+                buttonclass="danger"),
+        ]
 
 
-# class DescriptionIntroColumn(objecttable.PlainTextColumn):
-#     modelfield = 'description'
-#
-#     def render_value(self, permalink):
-#         return truncatechars(permalink.description, 50)
+class DescriptionIntroColumn(objecttable.PlainTextColumn):
+    modelfield = 'description'
+
+    def render_value(self, permalink):
+        return truncatechars(permalink.description, 50)
 
 
-# class TagsColumn(objecttable.PlainTextColumn):
-#     modelfield = 'tags'
-#
-#     def is_sortable(self):
-#         return False
-#
-#     def render_value(self, permalink):
-#         return ', '.join(tag.tag for tag in permalink.tags.all())
+class TagsColumn(objecttable.PlainTextColumn):
+    modelfield = 'tags'
+
+    def is_sortable(self):
+        return False
+
+    def render_value(self, permalink):
+        return ', '.join(tag.tag for tag in permalink.tags.all())
 
 
-# class PermalinkListView(PermalinkQuerysetForRoleMixin, objecttable.ObjectTableView):
-#     model = trix_models.Permalink
-#     columns = [
-#         TitleColumn,
-#         TagsColumn,
-#         DescriptionIntroColumn
-#     ]
-#     searchfields = [
-#         'title',
-#         'tags__tag',
-#         'description',
-#     ]
-#
-#     def get_buttons(self):
-#         app = self.request.cradmin_app
-#         return [
-#             objecttable.Button(_('Create'), url=app.reverse_appurl('create')),
-#         ]
+class PermalinkListView(PermalinkQuerysetForRoleMixin, objecttable.ObjectTableView):
+    model = trix_models.Permalink
+    columns = [
+        TitleColumn,
+        TagsColumn,
+        DescriptionIntroColumn
+    ]
+    searchfields = [
+        'title',
+        'tags__tag',
+        'description',
+    ]
+
+    def get_buttons(self):
+        app = self.request.cradmin_app
+        return [
+            objecttable.Button(label=_('Create'), url=app.reverse_appurl('create')),
+        ]
 
 
 class PermalinkCreateUpdateMixin(object):
@@ -109,19 +109,21 @@ class PermalinkCreateUpdateMixin(object):
             permalink.tags.add(course.course_tag)
 
 
-class PermalinkCreateView(PermalinkCreateUpdateMixin, viewhelpers.formview.WithinRoleCreateView):
+class PermalinkCreateView(PermalinkCreateUpdateMixin, viewhelpers.create.CreateView):
     """
     View used to create new permalinks.
     """
 
 
-class PermalinkUpdateView(PermalinkQuerysetForRoleMixin, PermalinkCreateUpdateMixin, viewhelpers.formview.WithinRoleUpdateView):
+class PermalinkUpdateView(PermalinkQuerysetForRoleMixin,
+                          PermalinkCreateUpdateMixin,
+                          viewhelpers.update.UpdateRoleView):
     """
     View used to create edit existing permalinks.
     """
 
 
-class PermalinkDeleteView(PermalinkQuerysetForRoleMixin, viewhelpers.formview.WithinRoleDeleteView):
+class PermalinkDeleteView(PermalinkQuerysetForRoleMixin, viewhelpers.delete.DeleteView):
     """
     View used to delete existing permalinks.
     """
@@ -130,10 +132,10 @@ class PermalinkDeleteView(PermalinkQuerysetForRoleMixin, viewhelpers.formview.Wi
 
 class App(crapp.App):
     appurls = [
-        # crapp.Url(
-        #     r'^$',
-        #     PermalinkListView.as_view(),
-        #     name=crapp.INDEXVIEW_NAME),
+        crapp.Url(
+            r'^$',
+            PermalinkListView.as_view(),
+            name=crapp.INDEXVIEW_NAME),
         crapp.Url(
             r'^create$',
             PermalinkCreateView.as_view(),

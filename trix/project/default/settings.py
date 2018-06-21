@@ -38,7 +38,7 @@ INSTALLED_APPS = [
     'trix.trix_core',
     'trix.trix_admin',
     'trix.trix_student',
-    'django_cradmin',  # Important: Must come after trix_admin because of template overrides
+    'cradmin_legacy',  # Important: Must come after trix_admin because of template overrides
 ]
 
 MIDDLEWARE_CLASSES = [
@@ -106,7 +106,7 @@ TEMPLATES = [
                 "django.template.context_processors.tz",
                 "django.template.context_processors.request",
                 "django.contrib.messages.context_processors.messages",
-                "django_cradmin.context_processors.cradmin",
+                "cradmin_legacy.context_processors.cradmin",
             ],
         },
     }
