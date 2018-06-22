@@ -4,7 +4,7 @@ from cradmin_legacy.views import roleselect
 
 
 class TrixRoleSelectView(roleselect.RoleSelectView):
-    pagetitle = _('Select a course to edit or create/edit assignments')
+    pagetitle = _('Select a course')
     template_name = 'trix_admin/roleselect.django.html'
     autoredirect_if_single_role = False
 

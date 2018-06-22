@@ -24,6 +24,11 @@ from trix.trix_core import multiassignment_serialize
 from trix.trix_admin import formfields
 
 
+def validate_single_tag(value):
+    if not re.match(r'^(\w|[-])+$', value, re.UNICODE):
+        raise ValidationError(_('Tags can only contain letters, numbers, underscore (_) and hyphen (-).'))
+
+
 class TitleColumn(objecttable.MultiActionColumn):
     modelfield = 'title'
 
@@ -240,11 +245,6 @@ class AssignmentMultiEditView(AssignmentQuerysetForRoleMixin, multiselect.MultiS
         return [
             layout.Div('data', css_class="cradmin-focusfield cradmin-focusfield-screenheight"),
         ]
-
-
-def validate_single_tag(value):
-    if not re.match(r'^(\w|[-])+$', value, re.UNICODE):
-        raise ValidationError(_('Tags can only contain letters, numbers, underscore (_) and hyphen (-).'))
 
 
 class AssignmentMultiTagForm(forms.Form):
