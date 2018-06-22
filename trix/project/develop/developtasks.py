@@ -61,9 +61,18 @@ def dump_to_db(ctx):
     """
     dump = _manage(ctx, 'dumpscript trix_core')
     with open(DUMPSCRIPT_DATAFILE, 'wb') as outfile:
-        outfile.write(dump + '\n')
+        outfile.write(dump.stdout + '\n')
 
 
+@task
+def run_tests(ctx):
+    """
+    Runs tests under test djangoenv.
+    """
+    _manage(ctx, 'test', env='test')
+
+
+# i18n tasks #
 @task
 def makemessages(ctx, langcode='nb'):
     """
