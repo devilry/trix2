@@ -1,5 +1,4 @@
-from fabric.api import task, local
-from fabric.context_managers import shell_env
+from invoke import task
 from os import remove
 from os.path import exists, join
 
@@ -9,23 +8,22 @@ DUMPSCRIPT_DATAFILE = join(
     'trix', 'project', 'develop', 'dumps', 'dev', 'data.py')
 
 
-def _manage(args, capture=False):
+def _manage(ctx, args, env='develop'):
     command = 'python manage.py {0} --traceback'.format(args)
-    return local(command, capture=capture)
+    return ctx.run(command, env={'DJANGOENV': env})
 
 
 @task
-def syncmigrate(djangoenv='develop'):
+def migrate(ctx):
     """
-    Runs the syncdb and migrate django management commands.
+    Runs the makemigrations and migrate django management commands.
     """
-    with shell_env(DJANGOENV=djangoenv):
-        _manage('syncdb --noinput')
-        _manage('migrate --noinput')
+    _manage(ctx, 'makemigrations --noinput')
+    _manage(ctx, 'migrate --noinput')
 
 
 @task
-def removedb():
+def removedb(ctx):
     """
     Remove the database.
     """
@@ -34,39 +32,59 @@ def removedb():
 
 
 @task
-def resetdb(djangoenv='develop'):
+def resetdb(ctx, env='develop'):
     """
-    Remove db.sqlite if it exists, and run the ``syncmigrate`` task.
+    Remove db.sqlite if it exists, and run the ``migrate`` task.
     """
-    if djangoenv == 'develop':
+    if env == 'develop':
         if exists(SQLITE_DATABASE):
             remove(SQLITE_DATABASE)
     else:
-        with shell_env(DJANGOENV=djangoenv):
-            _manage('dbdev_reinit')
-    syncmigrate(djangoenv)
+        # TODO fix so it works
+        _manage('dbdev_reinit')
+    migrate(ctx)
 
 
 @task
-def recreate_devdb(djangoenv='develop'):
+def recreate_devdb(ctx):
     """
     Recreate the test database.
     """
-    resetdb(djangoenv)
-    with shell_env(DJANGOENV=djangoenv):
-        _manage('runscript trix.project.develop.dumps.dev.data')
+    resetdb(ctx)
+    _manage(ctx, 'runscript trix.project.develop.dumps.dev.data')
 
 
 @task
-def dump_current_db_to_dumpscript_datafile():
+def dump_to_db(ctx):
     """
     Dump current db to the dumpscript dataset.
     """
-    dump = _manage('dumpscript trix_core', capture=True)
+    dump = _manage(ctx, 'dumpscript trix_core')
     with open(DUMPSCRIPT_DATAFILE, 'wb') as outfile:
         outfile.write(dump + '\n')
 
 
 @task
-def dump_devdb():
-    dump_current_db_to_dumpscript_datafile()
+def makemessages(ctx, langcode='nb'):
+    """
+    Runs makemessages for the given locale (default to nb).
+    """
+    _manage(ctx, 'makemessages -l {} -i "**/static/*"'.format(langcode))
+
+
+@task
+def jsmakemessages(ctx, langcode='nb'):
+    """
+    Runs makemessages for javascript in the given locale (default to nb).
+    """
+    _manage(ctx, 'makemessages -d djangojs -l {} -v3 '
+            '-i "**/static/**/node_modules/*" '
+            '-i "**/static/**/bower_components/**"'.format(langcode))
+
+
+@task
+def compilemessages(ctx):
+    """
+    Runs compilemessages.
+    """
+    _manage(ctx, 'compilemessages')
