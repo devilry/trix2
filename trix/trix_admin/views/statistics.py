@@ -125,7 +125,8 @@ class AssignmentStatsCsv(AssignmentStatsMixin, View):
         try:
             response['Content-Disposition'] = 'attachment; filename="trix-statistics.csv"'
             csvwriter = UnicodeWriter(response)  # csv.writer(response, dialect='excel')
-            csvwriter.writerow([_('Simple statistics showing percentage share of how the assignments where solved')])
+            csvwriter.writerow([_('Simple statistics showing percentage share of how the'
+                                  'assignments where solved')])
             csvwriter.writerow([_('Total number of users'), str(user_count)])
             csvwriter.writerow('')
             csvwriter.writerow([_('Assignment title'), _('Percentage')])
@@ -133,10 +134,14 @@ class AssignmentStatsCsv(AssignmentStatsMixin, View):
                 csvwriter.writerow([assignment.title])
                 csvwriter.writerow([
                     _('Completed by their own'),
-                    "{} %".format(compute_stats_for_assignment(assignment, 'bymyself', user_count))])
+                    "{} %".format(compute_stats_for_assignment(assignment,
+                                                               'bymyself',
+                                                               user_count))])
                 csvwriter.writerow([
                     _('Completed with help'),
-                    "{} %".format(compute_stats_for_assignment(assignment, 'withhelp', user_count))])
+                    "{} %".format(compute_stats_for_assignment(assignment,
+                                                               'withhelp',
+                                                               user_count))])
                 csvwriter.writerow([_('Not completed'), "{} %".format(
                     compute_stats_for_assignment(assignment, 'notsolved', user_count))])
                 csvwriter.writerow('')

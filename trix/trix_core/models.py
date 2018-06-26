@@ -127,13 +127,6 @@ class TagManager(models.Manager):
     def get_queryset(self):
         return TagQuerySet(self.model)
 
-    def get_or_create(self, tag):
-        try:
-            tag = Tag.objects.get(tag=tag)
-        except Tag.DoesNotExist:
-            tag = Tag.objects.create(tag=tag)
-        return tag
-
 
 class Tag(models.Model):
     """
@@ -148,7 +141,8 @@ class Tag(models.Model):
 
     category = models.CharField(
         max_length=1,
-        blank=True, null=False,
+        blank=True,
+        null=False,
         default='',
         choices=[
             ('', _('No category')),
@@ -178,6 +172,10 @@ class Tag(models.Model):
 
     @classmethod
     def split_commaseparated_tags(cls, commaseparatedtags):
+        """
+        Normalize and then split tags on commas and spaces.
+        Empty tags are removed.
+        """
         if commaseparatedtags.strip() == '':
             return []
         else:
@@ -207,8 +205,9 @@ class Course(models.Model):
     active_period = models.ForeignKey(
         Tag,
         related_name='active_period_set',
-        null=True, blank=True,
-        on_delete=models.CASCADE)
+        null=True,
+        blank=True,
+        on_delete=models.SET_NULL)
 
     class Meta:
         verbose_name = _('Course')
@@ -256,7 +255,8 @@ class Assignment(models.Model):
     solution = models.TextField(
         blank=True, null=False, default='',
         verbose_name=_('Solution'),
-        help_text=_('If you want your students to be able to view a suggested solution, write the solution here.'))
+        help_text=_('If you want your students to be able to view a suggested solution, write the'
+                    'solution here.'))
     created_datetime = models.DateTimeField(
         verbose_name=_('Created'),
         auto_now_add=True)
@@ -294,12 +294,6 @@ class Assignment(models.Model):
         self.text = self._normalize_text(self.text)
         self.solution = self._normalize_text(self.solution)
 
-    # def replace_tags(self, *tagstrings):
-    #     self.tags.clear()
-    #     for tagstring in tagstrings:
-    #         tag = Tag.objects.get_or_create(tagstring)
-    #         self.tags.add(tag)
-
 
 class HowSolved(models.Model):
     """
@@ -332,10 +326,14 @@ class Permalink(models.Model):
     title = models.CharField(
         verbose_name=_('Title'),
         max_length=255,
-        blank=True, null=False, default='')
+        blank=True,
+        null=False,
+        default='')
     description = models.TextField(
         verbose_name=_('Description'),
-        blank=True, null=False, default='')
+        blank=True,
+        null=False,
+        default='')
 
     class Meta:
         verbose_name = _('Permalink')

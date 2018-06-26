@@ -3,7 +3,6 @@ import json
 from django.views.generic import ListView
 from django import http
 from django.utils.translation import ugettext_lazy as _
-# from django import forms
 
 from trix.trix_core import models
 
@@ -107,7 +106,8 @@ class AssignmentListViewBase(ListView):
             context['assignment_list'])
 
         context['progresstext'] = _(
-            'You have completed {{ solvedPercentage }} percent of assignments matching the currently selected tags.')
+            'You have completed {{ solvedPercentage }} percent of assignments matching the'
+            'currently selected tags.')
         return context
 
     def get_all_available_assignments(self):

@@ -9,6 +9,7 @@ https://docs.djangoproject.com/en/1.11/ref/settings/
 """
 from os.path import join
 from os.path import dirname
+from trix.trix_admin import css_icon_map
 
 
 # The base directory with manage.py
@@ -114,4 +115,8 @@ TEMPLATES = [
 
 TRIX_ADMIN_DOCUMENTATION_URL = 'http://trix2.readthedocs.org/'
 TRIX_ADMIN_DOCUMENTATION_LABEL = 'trix2.readthedocs.org'
-TRIX_STUDENT_GETTINGSTARTEDGUIDE_URL = 'http://trix2.readthedocs.org/en/latest/student/gettingstarted.html'
+TRIX_STUDENT_GETTINGSTARTEDGUIDE_URL = 'http://trix2.readthedocs.org/en/latest/' \
+                                       'student/gettingstarted.html'
+
+# Used to update the icon map since the legacy version is outdated or does not include what we need.
+CRADMIN_LEGACY_CSS_ICON_MAP = css_icon_map.FONT_AWESOME

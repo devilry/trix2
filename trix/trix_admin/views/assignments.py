@@ -26,7 +26,8 @@ from trix.trix_admin import formfields
 
 def validate_single_tag(value):
     if not re.match(r'^(\w|[-])+$', value, re.UNICODE):
-        raise ValidationError(_('Tags can only contain letters, numbers, underscore (_) and hyphen (-).'))
+        raise ValidationError(_('Tags can only contain letters, numbers, underscore (_)'
+                                'and hyphen (-).'))
 
 
 class TitleColumn(objecttable.MultiActionColumn):
@@ -43,7 +44,7 @@ class TitleColumn(objecttable.MultiActionColumn):
             objecttable.Button(
                 label=_('Delete'),
                 url=self.reverse_appurl('delete', args=[assignment.id]),
-                buttonclass="danger"),
+                buttonclass="btn btn-danger btn-sm"),
         ]
 
         course = self.view.request.cradmin_role
@@ -269,7 +270,9 @@ class AssignmentMultiAddTagView(AssignmentQuerysetForRoleMixin, multiselect.Mult
         tag = trix_models.Tag.normalize_tag(form.cleaned_data['tag'])
         for assignment in assignments:
             if not assignment.tags.filter(tag=tag).exists():
-                assignment.tags.add(trix_models.Tag.objects.get_or_create(tag))
+                object, created = trix_models.Tag.objects.get_or_create(tag=tag,
+                                                                        defaults={'category': ''})
+                assignment.tags.add(object)
 
         return http.HttpResponseRedirect(self.request.cradmin_app.reverse_appindexurl())
 
@@ -342,7 +345,9 @@ class PreviewAssignmentView(TemplateView):
         else:
             # NOTE: The queryset ensures only admins on the current site gains access.
             course = self.request.cradmin_role
-            return get_object_or_404(trix_models.Assignment.objects.filter(tags=course.course_tag).distinct(),
+            return get_object_or_404(trix_models.Assignment.objects.filter(
+                                     tags=course.course_tag
+                                     ).distinct(),
                                      pk=self.kwargs['pk'])
 
     def get_context_data(self, **kwargs):

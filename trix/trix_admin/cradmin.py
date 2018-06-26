@@ -12,30 +12,44 @@ from .views import permalinks
 from .views import statistics
 
 
+class MenuItem(crmenu.MenuItem):
+    """
+    Extends default MenuItem with custom template.
+    """
+    template_name = 'trix_admin/menuitems.django.html'
+
+
 class Menu(crmenu.Menu):
+    """
+    Menu on left side in admin pages.
+    """
+
+    def get_menuitem_class(self):
+        """
+        Override with custom MenuItems
+        """
+        return MenuItem
+
     def build_menu(self):
-        # self.add(label=_('Dashboard'), url=self.appindex_url('dashboard'),
-        #     icon="home")
         self.add_menuitem(
             label=_('Course overview'),
             url=self.cradmin_instance.roleselectview_url(),
-            attributes={'icon': 'arrow-up'},
-            # icon='arrow-up')
+            extra_context_data={'icon': 'arrow-up'},
         )
         self.add_menuitem(
-            label=_('Assignments'),
+            label=('Assignments'),
             url=self.appindex_url('assignments'),
-            # icon="database")
+            extra_context_data={'icon': 'database'},
         )
         self.add_menuitem(
             label=_('Permalinks'),
             url=self.appindex_url('permalinks'),
-            # icon="link")
+            extra_context_data={'icon': 'link'}
         )
         self.add_menuitem(
             label=_('Statistics'),
             url=self.appindex_url('statistics'),
-            # icon='bar-chart-o')
+            extra_context_data={'icon': 'chart-bar'},
         )
 
 
@@ -46,7 +60,6 @@ class CrAdminInstance(crinstance.BaseCrAdminInstance):
     rolefrontpage_appname = 'assignments'
 
     apps = [
-        # ('dashboard', dashboard.App),
         ('assignments', assignments.App),
         ('permalinks', permalinks.App),
         ('statistics', statistics.App),
