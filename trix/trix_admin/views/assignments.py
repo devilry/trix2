@@ -1,11 +1,12 @@
 import re
+from django import forms
+from django import http
 from django.core.exceptions import ValidationError
 from django.shortcuts import get_object_or_404
 from django.template import defaultfilters
-from django.utils.translation import ugettext_lazy as _
 from django.template.defaultfilters import truncatechars, urlencode
-from django import forms
-from django import http
+from django.utils.translation import ugettext_lazy as _
+from django.urls import reverse
 from django.views.generic import TemplateView
 from cradmin_legacy.viewhelpers import objecttable
 from cradmin_legacy.viewhelpers import create
@@ -15,7 +16,6 @@ from cradmin_legacy.viewhelpers import multiselect
 from cradmin_legacy import crispylayouts
 from cradmin_legacy import viewhelpers
 from cradmin_legacy import crapp
-from django.urls import reverse
 from crispy_forms import layout
 from cradmin_legacy.acemarkdown.widgets import AceMarkdownWidget
 
@@ -156,6 +156,9 @@ class AssignmentCreateUpdateMixin(object):
         return self.request.cradmin_app.reverse_appurl('preview')
 
     def get_field_layout(self):
+        """
+        Sets the layout using crispy forms
+        """
         return [
             layout.Div('title', css_class="cradmin-focusfield cradmin-focusfield-lg"),
             layout.Fieldset(_('Organize'), 'tags'),

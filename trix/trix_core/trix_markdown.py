@@ -18,4 +18,5 @@ def assignment_markdown(inputmarkdown):
             'markdown.extensions.def_list',  # Support definition lists
             'markdown.extensions.tables',  # Support tables
         ])
-    return mark_safe(bleach.clean(md.convert(inputmarkdown)))
+    return mark_safe(md.convert(inputmarkdown))
+    # mark_safe(bleach.clean(md.convert(inputmarkdown), tags=['p']))
