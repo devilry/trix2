@@ -6,7 +6,6 @@ from trix.trix_admin.views import roleselect
 from cradmin_legacy import crmenu
 
 from trix.trix_core.models import Course
-# from .views import dashboard
 from .views import assignments
 from .views import permalinks
 from .views import statistics
@@ -23,10 +22,13 @@ class Menu(crmenu.Menu):
     """
     Menu on left side in admin pages.
     """
+    template_name = 'trix_admin/menu.django.html'
+    # Icon on top of the menu, mapped in 'css_icon_map.py'
+    menuicon = 'wrench'
 
     def get_menuitem_class(self):
         """
-        Override with custom MenuItems
+        Override with custom MenuItems to add icons
         """
         return MenuItem
 
