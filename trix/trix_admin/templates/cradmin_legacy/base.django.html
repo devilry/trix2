@@ -1,0 +1,9 @@
+{% extends "cradmin_legacy/base.django.html" %}
+{% load static %}
+{% load i18n %}
+
+{% block messages %}
+    <div class="trix-message-container">
+        {% include "cradmin_legacy/include/messages.django.html" %}
+    </div>
+{% endblock messages %}
