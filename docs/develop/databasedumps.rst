@@ -34,7 +34,7 @@ After importing the test data, you will have some new users. Login to the Django
     user: super@example.com
     password: asdf
 
-and select Users to list all users. The password of all users are ``test``.
+and select Users to list all users. The password of all other users are ``test``.
 
 
 
