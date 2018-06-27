@@ -1,0 +1,239 @@
+/**
+* Custom styles and overrides for cradmin_legacy styles to revert to old look for the admin pages
+**/
+
+html,
+body {
+    height: 100%;
+}
+
+body {
+    color: #666;
+    background-color: #E6E6E6;
+}
+
+/**
+* Main assignment and permalink pages
+**/
+
+#cradmin_legacy_contentwrapper,
+#cradmin_legacy_contentwrapper .container {
+    width: 100%;
+}
+
+.cradmin-legacy-page-header-outer {
+    // padding: 20px 0 20px 0;
+    margin: 0;
+    padding: 40px 0;
+
+    .container {
+        width: 100%;
+        padding-left: 0;
+        padding-right: 0;
+        margin: 0;
+    }
+}
+
+.container {
+    margin: auto;
+    padding: 0;
+
+    .cradmin-legacy-page-header-inner {
+        padding-left: 40px;
+    }
+}
+
+.objecttableview-buttons-and-search-box {
+    margin-bottom: 0;
+    background: @navbar-inverse-bg;
+    padding-left: 39px;
+    padding-bottom: 20px;
+}
+
+.objecttableview-global-buttons {
+    text-align: left !important;
+
+    .btn {
+        background-color: @navbar-inverse-bg;
+        border-color: #224d68;
+        color: #fff;
+        transition: background-color 0.3s ease;
+    }
+
+    .btn:hover {
+        background-color: #224d68;
+        color: #fff;
+        border-color: #224d68;
+    }
+}
+
+.input-group-btn {
+    .btn {
+        background-color: @navbar-inverse-bg;
+        border-color: #224d68;
+        color: #fff;
+        transition: background-color 0.3s ease;
+    }
+
+    .btn:hover {
+        background-color: #224d68;
+        color: #fff;
+        border-color: #224d68;
+    }
+}
+
+.form-control:focus {
+    background: #fff;
+    border-color: #fff;
+}
+
+.objecttableview-multiselectcolumn {
+    padding: 8px;
+}
+
+@media (min-width: 992px) {
+    .objecttableview-multiselectcolumn {
+        padding-left: 50px !important;
+    }
+}
+
+.btn-default {
+    color: @navbar-inverse-bg;
+}
+
+/* Pad first column in permalinks 40px */
+.table.table.cradmin-legacy-table thead th:first-child,
+.table.table.cradmin-legacy-table tbody td:first-child {
+    padding-left: 40px;
+}
+
+
+/**
+* Create task and permalink pages
+**/
+
+.trix-focusfield label,
+.trix-focusfield-small label {
+    display: block;
+    margin: 0;
+    background: #dcdcdc;
+    border: none;
+    font-size: 14px;
+    line-height: 22px;
+    padding: 10px 50px;
+    text-transform: uppercase;
+    font-weight: bold;
+}
+
+.trix-focusfield .form-group {
+    margin-bottom: 0;
+    background-color: #E6E6E6;
+
+    .controls {
+        position: relative;
+        overflow: auto;
+    }
+}
+
+.trix-focusfield .controls .textinput,
+.trix-focusfield .controls .textarea  {
+    max-width: 60%;
+    border-right: 1px dashed #ccc;
+    border: none;
+    outline: none;
+    border-radius: 0;
+    margin: 0;
+    padding: 40px 50px !important;
+    background-color: #fff;
+    height: auto;
+    font-size: 24px;
+    text-align: left;
+}
+
+.trix-focusfield .controls .textarea {
+    font-size: @font-size-base;
+}
+
+#id_tags {
+    font-size: 20px;
+}
+
+.trix-focusfield .controls .textinput:focus,
+.trix-focusfield .controls .textarea:focus {
+    background-color: #e1edf4;
+    box-shadow: none;
+}
+
+.cradmin-div-styled-as-textarea {
+    width: 60%;
+    border-right: 1px dashed #ccc;
+    padding: 40px 50px;
+    float: left;
+}
+
+.controls .help-block {
+    float: right;
+    width: 35%;
+    display: block;
+    text-align: left;
+    margin: 2% 0;
+}
+
+.cradmin-focus {
+    background-color: #e1edf4;
+}
+
+.ace_content {
+    margin: 7px 2px !important;
+}
+
+/* Submit row */
+.cradmin_legacy_submitrow {
+    width: auto;
+    left: 20%;
+    right: auto;
+    position: fixed;
+    z-index: 10000;
+    bottom: 0px;
+    background-color: @trixstaff-bg;
+    padding: 10px 24px 0px 24px;
+    border-radius: 4px 4px 0 0;
+    margin: 0;
+    text-align: center;
+
+    .btn {
+        margin-left: 3px;
+        margin-right: 3px;
+    }
+}
+
+
+/**
+* Statistic pages
+**/
+
+.container .cradmin-searchform {
+    width: 100%;
+    background: @navbar-inverse-bg;
+
+    .input-group {
+        float:right;
+        padding: 0px 40px 20px 0px;
+        margin-bottom: 0;
+        background: @navbar-inverse-bg;
+
+        .form-control {
+            max-width: 250px;
+            float: right;
+        }
+    }
+}
+
+
+/**
+* Preview page
+**/
+.cradmin-legacy-floating-fullsize-iframe-wrapper .cradmin-legacy-floating-fullsize-content
+.cradmin-legacy-floating-fullsize-iframe-inner iframe {
+    height: 100% !important;
+}

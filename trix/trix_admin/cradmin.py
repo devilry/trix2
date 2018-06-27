@@ -39,7 +39,7 @@ class Menu(crmenu.Menu):
             extra_context_data={'icon': 'arrow-up'},
         )
         self.add_menuitem(
-            label=('Assignments'),
+            label=_('Assignments'),
             url=self.appindex_url('assignments'),
             extra_context_data={'icon': 'database'},
         )

@@ -19,6 +19,7 @@ def migrate(ctx):
     Runs the makemigrations and migrate django management commands.
     """
     _manage(ctx, 'makemigrations --noinput')
+    _manage(ctx, 'makemigrations --noinput trix_core')
     _manage(ctx, 'migrate --noinput')
 
 

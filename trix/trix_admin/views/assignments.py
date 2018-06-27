@@ -161,10 +161,10 @@ class AssignmentCreateUpdateMixin(object):
         Sets the layout using crispy forms
         """
         return [
-            layout.Div('title', css_class="cradmin-focusfield cradmin-focusfield-lg"),
-            layout.Fieldset(_('Organize'), 'tags'),
-            layout.Div('text', css_class="cradmin-focusfield"),
-            layout.Div('solution', css_class="cradmin-focusfield"),
+            layout.Div('title', css_class="trix-focusfield"),
+            layout.Div('tags', css_class="trix-focusfield"),
+            layout.Div('text', css_class="trix-focusfield"),
+            layout.Div('solution', css_class="trix-focusfield"),
         ]
 
     def get_form(self, *args, **kwargs):
@@ -334,6 +334,7 @@ class AssignmentDeleteView(AssignmentQuerysetForRoleMixin, viewhelpers.delete.De
     View used to delete existing assignments.
     """
     model = trix_models.Assignment
+    template_name = "trix_admin/delete.django.html"
 
 
 class PreviewAssignmentView(TemplateView):

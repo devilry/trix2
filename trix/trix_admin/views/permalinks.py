@@ -33,7 +33,7 @@ class TitleColumn(objecttable.MultiActionColumn):
             objecttable.Button(
                 label=_('Delete'),
                 url=self.reverse_appurl('delete', args=[permalink.id]),
-                buttonclass="danger"),
+                buttonclass="btn btn-sm btn-danger"),
         ]
 
 
@@ -78,15 +78,12 @@ class PermalinkCreateUpdateMixin(object):
     model = trix_models.Permalink
     roleid_field = 'course'
 
-    # def get_preview_url(self):
-    #     return reverse('lokalt_company_product_preview')
-
     def get_field_layout(self):
         return [
-            layout.Div('title', css_class="cradmin-focusfield cradmin-focusfield-lg"),
-            layout.Fieldset(_('Organize'), 'tags'),
-            layout.Div('description', css_class="cradmin-focusfield"),
-
+            layout.Div('title', css_class="trix-focusfield"),
+            # layout.Fieldset(_('Organize'), 'tags'),
+            layout.Div('tags', css_class="trix-focusfield"),
+            layout.Div('description', css_class="trix-focusfield"),
         ]
 
     def get_form(self, *args, **kwargs):

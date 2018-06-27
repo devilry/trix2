@@ -106,7 +106,7 @@ class AssignmentListViewBase(ListView):
             context['assignment_list'])
 
         context['progresstext'] = _(
-            'You have completed {{ solvedPercentage }} percent of assignments matching the'
+            'You have completed {{ solvedPercentage }} percent of assignments matching the '
             'currently selected tags.')
         return context
 

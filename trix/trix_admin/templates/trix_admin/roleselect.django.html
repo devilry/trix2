@@ -1,12 +1,12 @@
 {% extends "cradmin_legacy/roleselect.django.html" %}
 {% load i18n %}
 
-{% block title %}{% trans "Trix - Select course" %}{% endblock title %}
+{% block title %}{% trans "Select course" %}{% endblock title %}
 {% block body %}
     <div class="container" style="margin-top: 20px;">
         <a href="{% url 'trix_student_dashboard' %}">
             <span class="fa fa-arrow-left"></span>
-            {% trans "Back to the website" %}
+            {% trans "Back to the frontpage" %}
         </a>
     </div>
 
@@ -17,7 +17,7 @@
         <a href="{{ TRIX_ADMIN_DOCUMENTATION_URL }}">{{ TRIX_ADMIN_DOCUMENTATION_LABEL }}</a>
 
         <h2>{% trans "Edit courses and users?" %}</h2>
-        <p>{% trans "Need to create/edit courses, change active semester or edit users?" %}
+        <p>{% trans "Need to create/edit courses, change active semester, or edit users?" %}
             {% if user.is_admin %}
                 <a href="{% url 'admin:index' %}">{% trans "Go to the superuser panel" %}</a>.
             {% else %}

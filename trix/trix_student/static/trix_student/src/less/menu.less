@@ -1,8 +1,46 @@
-.menuicon {
-    display: block !important;
-    text-align: center;
-    padding-top: 25px;
-    padding-bottom: 30px;
-    font-size: 70px !important;
-    color: #111;
+/**
+* Admin page menu style
+**/
+
+.trix-menuicon {
+    display: none !important;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+@media (min-width: 992px) {
+    .trix-menuicon {
+        display: block !important;
+        text-align: center;
+        padding-top: 25px;
+        padding-bottom: 30px;
+        font-size: 70px !important;
+        color: #111;
+        border-color: #444444;
+        border-style: solid;
+        border-width: 0 0 1px 0;
+    }
+}
+
+.cradmin-legacy-menu-item {
+    position: relative;
+    display: block;
+    color: #aaa;
+    text-transform: uppercase;
+    font-size: 14px;
+    padding: 5px 0 5px 35px;
+    border-color: #444;
+    border-style: solid;
+    border-width: 0 0 1px 0;
+    transition: color 0.3s ease;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+
+    a .fa {
+        font-size: 20px;
+        position: absolute;
+        left: 15px;
+    }
 }

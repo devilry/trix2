@@ -255,7 +255,7 @@ class Assignment(models.Model):
     solution = models.TextField(
         blank=True, null=False, default='',
         verbose_name=_('Solution'),
-        help_text=_('If you want your students to be able to view a suggested solution, write the'
+        help_text=_('If you want your students to be able to view a suggested solution, write the '
                     'solution here.'))
     created_datetime = models.DateTimeField(
         verbose_name=_('Created'),

@@ -3,19 +3,21 @@
 {% load trix_admin_tags %}
 {% load cradmin_legacy_tags %}
 
-{% block content %}
-    <div class="page-header">
-        <div class="container-fluid">
-            <span class="fa fa-bar-chart-o"></span>
-            <h1>
-                {% trans "Trix" %}:
-                <strong>{% trans "Statistics" %}</strong>
-            </h1>
-        </div>
+{% block title %}{% trans "Statistics" %}{% endblock %}
+
+{% block pageheader-inner %}
+    <div class="trix-page-header">
+        <i class="fa fa-bar-chart-o"></i>
+        <h1>
+            {% trans "Trix" %}:
+            <strong>{% trans "Statistics" %}</strong>
+        </h1>
     </div>
-    
-    <div class="page-sub-header">    
-        <div class="container-fluid">
+{% endblock pageheader-inner %}
+
+{% block content %}
+    <div class="trix-page-sub-header">
+        <div class="trix-container-fluid">
             <h1>{% trans "Aggregated statistics on how the assignments where solved" %}</h1>
             <p>
                 {% for tag in selected_tags_list %}
@@ -52,13 +54,13 @@
                             {% trans "Download csv file" %}
                         </a></li>
                     {% endif %}
-                    
+
                 </ul>
             </div>
         </div>
     </div>
 
-    <div class="container-fluid">
+    <div class="trix-container-fluid">
         {% for assignment in assignment_list %}
             <div class="assignment-info">
                 <h2>{{ assignment }}</h2>
@@ -91,34 +93,5 @@
 
     {% include "trix_student/include/pager.django.html" %}
     </div>
-
-    {% comment %}
-        
-    <div class="container-fluid">
-        <div class="alert alert-success">
-            <h4>{% trans "Solved by their own" %} {{ bymyself_percent }}%</h4>
-            <div class="progress">
-              <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="{{ bymyself_percent }}" aria-valuemin="0" aria-valuemax="100" style="width: {{ bymyself_percent }}%">
-              </div>
-            </div>
-        </div>
-        <div class="alert alert-warning">
-            <h4>{% trans "Solved with help" %} {{ withhelp_percent }}%</h4>
-            <div class="progress">
-              <div class="progress-bar progress-bar-warning" role="progressbar" aria-valuenow="{{ withhelp_percent }}" aria-valuemin="0" aria-valuemax="100" style="width: {{ withhelp_percent }}%">
-              </div>
-            </div>
-        </div>
-        <div class="alert alert-info">
-            <h4>{% trans "Not solved" %} {{ notsolved_percent }}%</h4>
-            <div class="progress">
-              <div class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="{{ notsolved_percent }}" aria-valuemin="0" aria-valuemax="100" style="width: {{ notsolved_percent }}%">
-              </div>
-            </div>
-        </div>
-    </div>
-    {% endcomment %}
-
-
 
 {% endblock content %}
