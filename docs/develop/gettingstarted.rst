@@ -12,9 +12,9 @@ Install the following:
 #. PIP_
 #. VirtualEnv_
 #. virtualenvwrapper_
+#. gettext for Django translations
 #. nodejs and npm for our clientside stuff
 .. #. libjpeg, liblcms1, libfreetype6 and zlib for the required format support in Pillow
-.. #. gettext for Django translations
 
 
 Install the system packages on OSX with Homebrew
@@ -23,7 +23,7 @@ Install the system packages on OSX with Homebrew
 
     $ brew install npm nodejs
 
-You will also have to add gettext to your path if you want to be able to update translation strings. You can eighter run ``brew link gettext --force``, or add ``/usr/local/Cellar/gettext/SOMETHING/bin/`` to your path.
+You will also have to add gettext to your path if you want to be able to update translation strings. You can either run ``brew link gettext --force``, or add ``/usr/local/Cellar/gettext/SOMETHING/bin/`` to your path.
 
 
 Install the system packages on Ubuntu
@@ -54,6 +54,21 @@ Create a virtualenv (an isolated Python environment)::
 Install the development requirements::
 
     $ pip install -r requirements/develop.txt
+
+
+Run npm install (include -g if you want global)::
+
+    $ inv npm-install
+
+
+Run bower install::
+
+    $ inv bower-install
+
+
+Finally build the static files::
+
+    $ inv grunt-build
 
 
 *****************

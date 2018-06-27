@@ -73,6 +73,46 @@ def run_tests(ctx):
     _manage(ctx, 'test', env='test')
 
 
+# Static tasks #
+@task
+def npm_install(ctx, gbl=False):
+    """
+    Run npm install
+    """
+    with ctx.cd('trix/trix_student/static/trix_student'):
+        if (gbl):
+            ctx.run('npm install -g')
+        else:
+            ctx.run('npm install')
+
+
+@task
+def bower_install(ctx):
+    """
+    Run bower install
+    """
+    with ctx.cd('trix/trix_student/static/trix_student'):
+        ctx.run('bower install')
+
+
+@task
+def grunt_build(ctx):
+    """
+    Run grunt build
+    """
+    with ctx.cd('trix/trix_student/static/trix_student'):
+        ctx.run('grunt build')
+
+
+@task
+def grunt_watch(ctx):
+    """
+    Run grunt watch
+    """
+    with ctx.cd('trix/trix_student/static/trix_student'):
+        ctx.run('grunt watch')
+
+
 # i18n tasks #
 @task
 def makemessages(ctx, langcode='nb'):
