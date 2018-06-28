@@ -32,7 +32,7 @@ Users in the test database
 After importing the test data, you will have some new users. Login to the Django admin UI (http://localhost:8000/admin/) with::
 
     user: super@example.com
-    password: asdf
+    password: test
 
 and select Users to list all users. The password of all other users are ``test``.
 

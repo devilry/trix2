@@ -119,62 +119,72 @@ body {
 * Create task and permalink pages
 **/
 
-.trix-focusfield label,
-.trix-focusfield-small label {
-    display: block;
-    margin: 0;
-    background: #dcdcdc;
-    border: none;
-    font-size: 14px;
-    line-height: 22px;
-    padding: 10px 50px;
-    text-transform: uppercase;
-    font-weight: bold;
-}
-
-.trix-focusfield .form-group {
-    margin-bottom: 0;
-    background-color: #E6E6E6;
-
-    .controls {
-        position: relative;
-        overflow: auto;
+.trix-focusfield {
+    label {
+        display: block;
+        margin: 0;
+        background: #dcdcdc;
+        border: none;
+        font-size: 14px;
+        line-height: 22px;
+        padding: 10px 50px;
+        text-transform: uppercase;
+        font-weight: bold;
     }
-}
 
-.trix-focusfield .controls .textinput,
-.trix-focusfield .controls .textarea  {
-    max-width: 60%;
-    border-right: 1px dashed #ccc;
-    border: none;
-    outline: none;
-    border-radius: 0;
-    margin: 0;
-    padding: 40px 50px !important;
-    background-color: #fff;
-    height: auto;
-    font-size: 24px;
-    text-align: left;
-}
+    .form-group {
+        margin-bottom: 0;
+        background-color: #E6E6E6;
 
-.trix-focusfield .controls .textarea {
-    font-size: @font-size-base;
+        .controls {
+            position: relative;
+            overflow: auto;
+        }
+    }
+
+    .controls .textinput,
+    .controls .textarea,
+    .controls .select  {
+        max-width: 60%;
+        border-right: 1px dashed #ccc;
+        border: none;
+        outline: none;
+        border-radius: 0;
+        margin: 0;
+        padding: 40px 50px;
+        background-color: #fff;
+        height: auto;
+        font-size: 24px;
+        text-align: left;
+    }
+
+    // Override previous
+    .controls .select {
+        padding: 10px 0px 10px 50px;
+        font-size: @font-size-base;
+    }
+
+    .controls .textarea {
+        font-size: @font-size-base;
+    }
+
+    .controls .textinput:focus,
+    .controls .textarea:focus {
+        background-color: #e1edf4;
+        box-shadow: none;
+    }
+
+
 }
 
 #id_tags {
     font-size: 20px;
 }
 
-.trix-focusfield .controls .textinput:focus,
-.trix-focusfield .controls .textarea:focus {
-    background-color: #e1edf4;
-    box-shadow: none;
-}
-
 .cradmin-div-styled-as-textarea {
     width: 60%;
     border-right: 1px dashed #ccc;
-    padding: 40px 50px;
+    padding: 20px 50px 40px 50px;
     float: left;
 }
 
@@ -192,6 +202,10 @@ body {
 
 .ace_content {
     margin: 7px 2px !important;
+}
+
+.btn-toolbar .btn-group .btn {
+    color: @navbar-inverse-bg;
 }
 
 /* Submit row */
@@ -216,7 +230,6 @@ body {
 
     .form-control {
         margin: 5px 15px 10px 15px;
-
     }
 }
 

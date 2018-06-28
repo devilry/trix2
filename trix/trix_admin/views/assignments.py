@@ -163,6 +163,7 @@ class AssignmentCreateUpdateMixin(object):
         return [
             layout.Div('title', css_class="trix-focusfield"),
             layout.Div('tags', css_class="trix-focusfield"),
+            layout.Div('hidden', css_class="trix-focusfield"),
             layout.Div('text', css_class="trix-focusfield"),
             layout.Div('solution', css_class="trix-focusfield"),
         ]
@@ -247,6 +248,7 @@ class AssignmentMultiEditView(AssignmentQuerysetForRoleMixin, multiselect.MultiS
 
     def get_field_layout(self):
         return [
+            # TODO update to own custom css
             layout.Div('data', css_class="cradmin-focusfield cradmin-focusfield-screenheight"),
         ]
 
