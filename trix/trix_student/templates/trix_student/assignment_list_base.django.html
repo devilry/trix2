@@ -78,6 +78,8 @@
                 {% include "trix_student/include/pager.django.html" with pager_extraclass="pager-no-topmargin hidden-xs" %}
                 {% for assignment, howsolved in assignmentlist_with_howsolved %}
                     {% include "trix_student/include/assignment.django.html" %}
+                {% empty %}
+                    <h2>No assignments found</h2>
                 {% endfor %}
                 {% include "trix_student/include/pager.django.html" %}
             </div>
