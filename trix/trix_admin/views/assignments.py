@@ -189,7 +189,7 @@ class AssignmentCreateUpdateMixin(object):
             assignment.tags.add(course.course_tag)
 
 
-class AssignmentCreateView(AssignmentCreateUpdateMixin, viewhelpers.create.CreateView):
+class AssignmentCreateView(AssignmentCreateUpdateMixin, create.CreateView):
     """
     View used to create new assignments.
     """
@@ -197,7 +197,7 @@ class AssignmentCreateView(AssignmentCreateUpdateMixin, viewhelpers.create.Creat
 
 class AssignmentUpdateView(AssignmentQuerysetForRoleMixin,
                            AssignmentCreateUpdateMixin,
-                           viewhelpers.update.UpdateView):
+                           update.UpdateView):
     """
     View used to edit existing assignments.
     """
@@ -247,6 +247,7 @@ class AssignmentMultiEditView(AssignmentQuerysetForRoleMixin, multiselect.MultiS
 
     def get_field_layout(self):
         return [
+            # TODO update to own custom css
             layout.Div('data', css_class="cradmin-focusfield cradmin-focusfield-screenheight"),
         ]
 
@@ -329,7 +330,7 @@ class AssignmentMultiRemoveTagView(AssignmentQuerysetForRoleMixin, multiselect.M
         ]
 
 
-class AssignmentDeleteView(AssignmentQuerysetForRoleMixin, viewhelpers.delete.DeleteView):
+class AssignmentDeleteView(AssignmentQuerysetForRoleMixin, delete.DeleteView):
     """
     View used to delete existing assignments.
     """
