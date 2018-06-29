@@ -2,6 +2,7 @@ import re
 from django import forms
 from django import http
 from django.core.exceptions import ValidationError
+from django.core import serializers
 from django.shortcuts import get_object_or_404
 from django.template import defaultfilters
 from django.template.defaultfilters import truncatechars, urlencode
@@ -17,6 +18,7 @@ from cradmin_legacy import crispylayouts
 from cradmin_legacy import viewhelpers
 from cradmin_legacy import crapp
 from crispy_forms import layout
+from crispy_forms.utils import flatatt
 from cradmin_legacy.acemarkdown.widgets import AceMarkdownWidget
 
 from trix.trix_core import models as trix_models
@@ -168,8 +170,8 @@ class AssignmentCreateUpdateMixin(object):
             layout.Div('solution', css_class="trix-focusfield"),
         ]
 
-    def get_form(self, *args, **kwargs):
-        form = super(AssignmentCreateUpdateMixin, self).get_form(*args, **kwargs)
+    def get_form(self, form_class=None):
+        form = super(AssignmentCreateUpdateMixin, self).get_form(form_class)
         form.fields['tags'] = formfields.ManyToManyTagInputField(required=False)
         form.fields['text'].widget = AceMarkdownWidget()
         form.fields['solution'].widget = AceMarkdownWidget()
@@ -189,11 +191,27 @@ class AssignmentCreateUpdateMixin(object):
         if not assignment.tags.filter(tag=course.course_tag).exists():
             assignment.tags.add(course.course_tag)
 
+    def get_buttons(self):
+        """
+        Update the buttons to disable form validations since we use our own valdiation and text.
+        """
+        buttons = super(AssignmentCreateUpdateMixin, self).get_buttons()
+        for button in buttons:
+            button.flat_attrs = flatatt({'formnovalidate': True}) + button.flat_attrs
+        return buttons
 
-class AssignmentCreateView(AssignmentCreateUpdateMixin, viewhelpers.create.CreateView):
+
+class AssignmentCreateView(AssignmentCreateUpdateMixin,
+                           viewhelpers.create.CreateView):
     """
     View used to create new assignments.
     """
+
+    def serialize_preview(self, form):
+        """
+        Override this to use commit=True, this fixes previewing unsaved assignments.
+        """
+        return serializers.serialize('json', [self.save_object(form, commit=True)])
 
 
 class AssignmentUpdateView(AssignmentQuerysetForRoleMixin,

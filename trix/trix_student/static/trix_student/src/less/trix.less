@@ -156,6 +156,7 @@ body {
         height: auto;
         font-size: 24px;
         text-align: left;
+        float:left;
     }
 
     // Override previous
@@ -259,10 +260,26 @@ body {
 /**
 * Preview page
 **/
-.cradmin-legacy-floating-fullsize-iframe-wrapper .cradmin-legacy-floating-fullsize-content
+
+.cradmin-legacy-floating-fullsize-iframe-wrapper {
+    overflow: auto;
+}
+
+.cradmin-legacy-floating-fullsize-iframe-closebutton {
+    width: 20% !important;
+    float: right;
+    left: auto !important;
+}
+
+.cradmin-legacy-floating-fullsize-content {
+    width: 80% !important;
+    float: left;
+}
+
 .cradmin-legacy-floating-fullsize-iframe-inner iframe {
     height: 100% !important;
 }
+
 
 /**
 * Message container
