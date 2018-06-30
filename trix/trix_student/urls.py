@@ -1,3 +1,4 @@
+from django.conf import settings
 from django.conf.urls import url
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import views as auth_views
@@ -27,11 +28,7 @@ urlpatterns = [
         permalink.PermalinkListView.as_view(),
         name='trix_student_permalink_list_view'),
     # url(r'^statistics/ascsv$', AssignmentStatsCsv.as_view(), name='trix_stats_ascsv'),
-    url(r'^login$',
-        auth_views.login,
-        {'template_name': 'trix_student/login.django.html',
-         'authentication_form': login.TrixAuthenticationForm},
-        name='trix-login'),
+    url(r'^login$', login.TrixLoginView.as_view(), name='trix-login'),
     url(r'^logout$',
         auth_views.logout,
         {'template_name': 'trix_student/logout.django.html'},
