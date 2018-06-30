@@ -38,12 +38,15 @@ class TrixAuthenticationForm(AuthenticationForm):
         try:
             cleaned_data = super(TrixAuthenticationForm, self).clean()
         except forms.ValidationError as e:
-            username_or_email = "email"
             if TRIX_LOGIN_IS_USERNAME:
-                username_or_email = "username"
-            raise forms.ValidationError(
-                _("Please enter a correct " + username_or_email + " and password. Note that both "
-                  "fields are case-sensitive."))
+                raise forms.ValidationError(
+                    _("Please enter username and password. Note that both fields are "
+                      "case-sensitive."))
+            else:
+                raise forms.ValidationError(
+                    _("Please enter a correct email and password. Note that both fields are "
+                      "case-sensitive.")
+                )
 
         return cleaned_data
 
