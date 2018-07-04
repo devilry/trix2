@@ -195,19 +195,23 @@ class Course(models.Model):
         null=False,
         default='')
 
-    #: TODO: Limit choices to ``c``-tags
     course_tag = models.ForeignKey(
         Tag,
         related_name='course_set',
-        on_delete=models.CASCADE)
+        on_delete=models.CASCADE,
+        limit_choices_to={
+            'category': 'c'
+        })
 
-    #: TODO: Limit choices to ``p``-tags
     active_period = models.ForeignKey(
         Tag,
         related_name='active_period_set',
         null=True,
         blank=True,
-        on_delete=models.SET_NULL)
+        on_delete=models.SET_NULL,
+        limit_choices_to={
+            'category': 'p'
+        })
 
     class Meta:
         verbose_name = _('Course')
