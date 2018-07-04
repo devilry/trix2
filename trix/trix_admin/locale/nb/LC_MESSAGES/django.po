@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: trix_admin\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-06-28 13:37+0200\n"
+"POT-Creation-Date: 2018-06-30 10:44+0200\n"
 "PO-Revision-Date: 2015-01-08 12:35+0100\n"
 "Last-Translator: Espen Angell Kristiansen <post@espenak.net>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -55,7 +55,7 @@ msgstr "Valideringsfeil"
 msgid "In"
 msgstr "I"
 
-#: trix/trix_admin/templates/trix_admin/delete.django.html:13
+#: trix/trix_admin/templates/trix_admin/delete.django.html:18
 msgid "Cancel"
 msgstr "Avbryt"
 
@@ -175,11 +175,11 @@ msgstr "Legg til tag"
 msgid "Remove tag"
 msgstr "Fjern tag"
 
-#: trix/trix_admin/views/assignments.py:210
+#: trix/trix_admin/views/assignments.py:209
 msgid "Assignment YAML"
 msgstr "Oppgaver YAML"
 
-#: trix/trix_admin/views/assignments.py:246
+#: trix/trix_admin/views/assignments.py:245
 msgid "Save"
 msgstr "Lagre"
 

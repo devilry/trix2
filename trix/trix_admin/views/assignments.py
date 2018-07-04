@@ -200,9 +200,7 @@ class AssignmentCreateUpdateMixin(object):
             button.flat_attrs = flatatt({'formnovalidate': True}) + button.flat_attrs
         return buttons
 
-
-class AssignmentCreateView(AssignmentCreateUpdateMixin,
-                           viewhelpers.create.CreateView):
+class AssignmentCreateView(AssignmentCreateUpdateMixin, create.CreateView):
     """
     View used to create new assignments.
     """
@@ -216,7 +214,7 @@ class AssignmentCreateView(AssignmentCreateUpdateMixin,
 
 class AssignmentUpdateView(AssignmentQuerysetForRoleMixin,
                            AssignmentCreateUpdateMixin,
-                           viewhelpers.update.UpdateView):
+                           update.UpdateView):
     """
     View used to edit existing assignments.
     """
@@ -349,7 +347,7 @@ class AssignmentMultiRemoveTagView(AssignmentQuerysetForRoleMixin, multiselect.M
         ]
 
 
-class AssignmentDeleteView(AssignmentQuerysetForRoleMixin, viewhelpers.delete.DeleteView):
+class AssignmentDeleteView(AssignmentQuerysetForRoleMixin, delete.DeleteView):
     """
     View used to delete existing assignments.
     """

@@ -42,15 +42,17 @@ body {
     }
 }
 
+.objecttableview-global-buttons,
 .objecttableview-buttons-and-search-box {
     margin-bottom: 0;
     background: @navbar-inverse-bg;
-    padding-left: 39px;
-    padding-bottom: 20px;
+    padding: 0px;
 }
 
 .objecttableview-global-buttons {
-    text-align: left !important;
+    text-align: left;
+    padding-left: 39px;
+    padding-bottom: 20px;
 
     .btn {
         background-color: @navbar-inverse-bg;
@@ -64,6 +66,13 @@ body {
         color: #fff;
         border-color: #224d68;
     }
+}
+
+.cradmin-legacy-objecttable-no-items-message {
+    font-size: 24px;
+    color: #666;
+    text-align: center;
+    padding-top: 50px;
 }
 
 .input-group-btn {
@@ -114,11 +123,17 @@ body {
     padding-left: 40px;
 }
 
+.trix-pageheader-icon {
+    font-size: 42px !important;
+    margin-right: 8px;
+    margin-left: -1px;
+    vertical-align: middle;
+}
+
 
 /**
 * Create task and permalink pages
 **/
-
 .trix-focusfield {
     label {
         display: block;
@@ -143,8 +158,7 @@ body {
     }
 
     .controls .textinput,
-    .controls .textarea,
-    .controls .select  {
+    .controls .textarea {
         max-width: 60%;
         border-right: 1px dashed #ccc;
         border: none;
@@ -156,13 +170,6 @@ body {
         height: auto;
         font-size: 24px;
         text-align: left;
-        float:left;
-    }
-
-    // Override previous
-    .controls .select {
-        padding: 10px 0px 10px 50px;
-        font-size: @font-size-base;
     }
 
     .controls .textarea {
@@ -174,8 +181,6 @@ body {
         background-color: #e1edf4;
         box-shadow: none;
     }
-
-
 }
 
 #id_tags {
@@ -218,15 +223,13 @@ body {
     z-index: 10000;
     bottom: 0px;
     background-color: @trixstaff-bg;
-    padding: 10px 24px 0px 24px;
+    padding: 10px 12px 5px 12px;
     border-radius: 4px 4px 0 0;
     margin: 0;
     text-align: center;
 
     .btn {
-        margin-left: 3px;
-        margin-right: 3px;
-        margin-top: 5px;
+        margin: 5px 2px 5px 2px;
     }
 
     .form-control {
