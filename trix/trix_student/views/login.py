@@ -20,6 +20,7 @@ class TrixAuthenticationForm(AuthenticationForm):
     """
     Custom authentication form using crispy form helper.
     """
+    username = forms.CharField(max_length=254, label=USERNAME_LABEL)
 
     def __init__(self, request=None, *args, **kwargs):
         super(TrixAuthenticationForm, self).__init__(request, *args, **kwargs)
