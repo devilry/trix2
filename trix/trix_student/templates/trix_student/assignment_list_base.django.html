@@ -46,7 +46,7 @@
                     {% endfor %}
                     {% if selected_tags %}
                         {% for tag in selected_tags %}
-                            <button type="button" class="btn btn-primary btn-sm"
+                            <button type="button" class="btn btn-sm {% if '-'|first in tag %}trix-btn-neg{% else %}btn-primary{% endif %}"
                                     ng-click="removeTag('{{ tag }}')">
                                 {{ tag }}
                                 <span class="fa fa-times"></span>
