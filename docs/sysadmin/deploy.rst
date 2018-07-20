@@ -75,6 +75,35 @@ Trix is configured through a ``trix_settings.py`` file. Start by copying the fol
     DEBUG = False
     TEMPLATE_DEBUG = DEBUG
 
+****
+LDAP
+****
+To enable LDAP authenication, ``trix_settings.py`` would need to include an authenication backend 
+with LDAP support, the URI for the LDAP server and its DN template, and possiblely some customizing
+to adjust for how the usernames are stored in Trix's database.
+
+As an example, the settings for UiO would need to adjust for the LDAP username not being a full 
+email adresse by overwriting ``ldap_to_django_username()`` and ``django_to_ldap_username()`` 
+functions of ``django_auth_ldap.backend.LDAPBackend``.
+
+Add the following to you ``trix_settings.py`` file (but adjust the DN template)::
+
+    AUTHENTICATION_BACKENDS = [
+        'trix_uio_ldap_auth.TrixUioLDAPBackend',
+    ]
+    AUTH_LDAP_SERVER_URI = 'ldaps://ldap.uio.no'
+    AUTH_LDAP_USER_DN_TEMPLATE = 'uid=hei,cn=people,dc=uio,dc=no'
+
+Create a ``trix_uio_ldap_auth.py`` as follows (but adjust the email suffix)::
+
+    from django_auth_ldap.backend import LDAPBackend
+    
+    class TrixUioLDAPBackend(LDAPBackend):
+        def ldap_to_django_username(self, username):
+            return u'{}@example.com'.format(username)
+        
+        def django_to_ldap_username(self, username):
+            return username.split('@')[0]
 
 ******************
 Make sure it works
