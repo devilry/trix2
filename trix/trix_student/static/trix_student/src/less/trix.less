@@ -158,7 +158,8 @@ body {
     }
 
     .controls .textinput,
-    .controls .textarea {
+    .controls .textarea,
+    .controls .select {
         max-width: 60%;
         border-right: 1px dashed #ccc;
         border: none;
@@ -170,9 +171,15 @@ body {
         height: auto;
         font-size: 24px;
         text-align: left;
+        float: left;
     }
 
     .controls .textarea {
+        font-size: @font-size-base;
+    }
+
+    .controls .select {
+        padding: 10px 0px 10px 50px;
         font-size: @font-size-base;
     }
 
