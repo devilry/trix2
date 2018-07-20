@@ -8,7 +8,7 @@ angular.module('trixStudent.assignments.controllers', [])
       currentUrl = new Url()
       tags = currentUrl.query.tags
       if tags? and tags != ''
-        tags = '#{tags},#{$scope.tagToAdd}'
+        tags = tags + ',' + $scope.tagToAdd
       else
         tags = $scope.tagToAdd
       currentUrl.query.tags = tags

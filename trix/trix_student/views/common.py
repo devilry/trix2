@@ -30,10 +30,16 @@ class AssignmentListViewBase(ListView):
         return assignments
 
     def _get_progress(self):
-        how_solved = models.HowSolved.objects.filter(assignment__in=self.get_queryset())\
+        """
+        Gets the progress a user has made. Hidden tasks are not counted unless user is an admin.
+        """
+        assignments = self.get_queryset()
+        if (not self.request.user.is_admin):
+            assignments = assignments.exclude(hidden=True)
+        how_solved = models.HowSolved.objects.filter(assignment__in=assignments)\
             .filter(user=self.request.user.id)
         num_solved = how_solved.count()
-        num_total = self.get_queryset().count()
+        num_total = assignments.count()
         if num_total == 0:
             percent = 0
         else:

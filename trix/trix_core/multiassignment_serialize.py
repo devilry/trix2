@@ -72,6 +72,7 @@ def serialize(assignments):
             ('id', assignment.id),
             ('title', assignment.title),
             ('tags', [tag.tag for tag in assignment.tags.all()]),
+            ('hidden', assignment.hidden),
             ('text', MarkdownString(assignment.text)),
         ])
         if assignment.solution:

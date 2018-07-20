@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: trix_core\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-06-27 17:53+0200\n"
+"POT-Creation-Date: 2018-06-30 10:44+0200\n"
 "PO-Revision-Date: 2014-12-21 22:43+0100\n"
 "Last-Translator: Tor Ivar Johansen <tor@appresso.no>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -30,11 +30,11 @@ msgstr "Fjern administratortilgang til valgte brukere"
 msgid "tag is in use"
 msgstr "tag er i bruk"
 
-#: trix/trix_core/admin.py:76
+#: trix/trix_core/admin.py:76 trix/trix_core/models.py:266
 msgid "Yes"
 msgstr "Ja"
 
-#: trix/trix_core/admin.py:77
+#: trix/trix_core/admin.py:77 trix/trix_core/models.py:266
 msgid "No"
 msgstr "Nei"
 
@@ -79,7 +79,7 @@ msgid "No category"
 msgstr "Ingen kategori"
 
 #: trix/trix_core/models.py:149 trix/trix_core/models.py:213
-#: trix/trix_core/models.py:321
+#: trix/trix_core/models.py:326
 msgid "Course"
 msgstr "Kurs"
 
@@ -92,11 +92,11 @@ msgid "Tag"
 msgstr "Tag"
 
 #: trix/trix_core/models.py:156 trix/trix_core/models.py:251
-#: trix/trix_core/models.py:325
+#: trix/trix_core/models.py:330
 msgid "Tags"
 msgstr "Tags"
 
-#: trix/trix_core/models.py:193 trix/trix_core/models.py:333
+#: trix/trix_core/models.py:193 trix/trix_core/models.py:338
 msgid "Description"
 msgstr "Beskrivelse"
 
@@ -104,7 +104,7 @@ msgstr "Beskrivelse"
 msgid "Courses"
 msgstr "Kurs"
 
-#: trix/trix_core/models.py:248 trix/trix_core/models.py:327
+#: trix/trix_core/models.py:248 trix/trix_core/models.py:332
 msgid "Title"
 msgstr "Tittel"
 
@@ -137,26 +137,30 @@ msgid "Last changed"
 msgstr "Sist modifisert"
 
 #: trix/trix_core/models.py:270
+msgid "Hide assignment from students"
+msgstr "Skjul oppgaven for studenter"
+
+#: trix/trix_core/models.py:275
 msgid "Assignment"
 msgstr "Oppgave"
 
-#: trix/trix_core/models.py:271
+#: trix/trix_core/models.py:276
 msgid "Assignments"
 msgstr "Oppgaver"
 
-#: trix/trix_core/models.py:306
+#: trix/trix_core/models.py:311
 msgid "Solved by myself"
 msgstr "Løste på egen hånd"
 
-#: trix/trix_core/models.py:307
+#: trix/trix_core/models.py:312
 msgid "Solved with help"
 msgstr "Løste med hjelp"
 
-#: trix/trix_core/models.py:339
+#: trix/trix_core/models.py:344
 msgid "Permalink"
 msgstr "Permalink"
 
-#: trix/trix_core/models.py:340
+#: trix/trix_core/models.py:345
 msgid "Permalinks"
 msgstr "Permalinker"
 

@@ -14,7 +14,9 @@ class HowSolvedForm(forms.ModelForm):
 
 
 class HowsolvedView(View):
-    """docstring for UpdateHowSolvedView"""
+    """
+    View of how the assignment was solved.
+    """
     http_method_names = ['post', 'delete']
 
     def _bad_request_response(self, data):
