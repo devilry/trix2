@@ -1,3 +1,4 @@
+from django import forms
 from django.contrib import admin
 from django.contrib.auth.models import Group
 from django.db.models import Count, Q
@@ -92,6 +93,14 @@ class TagInUseFilter(admin.SimpleListFilter):
             )
 
 
+class TagAdminForm(forms.ModelForm):
+    def clean_tag(self):
+        tag = self.cleaned_data['tag']
+        tag = coremodels.Tag.split_commaseparated_tags(tag)
+        self.cleaned_data['tag'] = tag[0]
+        return self.cleaned_data['tag']
+
+
 class TagAdmin(admin.ModelAdmin):
     search_fields = ['tag']
     list_display = [
@@ -101,6 +110,7 @@ class TagAdmin(admin.ModelAdmin):
         'is_in_use'
     ]
     list_filter = [TagInUseFilter]
+    form = TagAdminForm
 
     def get_queryset(self, request):
         return super(TagAdmin, self).get_queryset(request)\
@@ -128,7 +138,6 @@ class CourseAdmin(admin.ModelAdmin):
         'course_tag',
         'active_period',
         'get_admins',
-
     )
     search_fields = [
         'course_tag__tag',
@@ -139,7 +148,7 @@ class CourseAdmin(admin.ModelAdmin):
     raw_id_fields = ['course_tag', 'active_period']
 
     def get_admins(self, course):
-        return u','.join(unicode(user) for user in course.admins.all())
+        return u', '.join(unicode(user) for user in course.admins.all())
     get_admins.short_description = 'Admins'
 
     def get_queryset(self, request):
