@@ -79,7 +79,8 @@ Trix is configured through a ``trix_settings.py`` file. Start by copying the fol
 LDAP
 ****
 To enable LDAP authenication, ``trix_settings.py`` would need to include an authenication backend 
-with LDAP support, the URI for the LDAP server and its DN template, and possiblely some customizing
+with LDAP support, the URI for the LDAP server and its DN template, and possiblely some 
+`customization <https://django-auth-ldap.readthedocs.io/en/latest/authentication.html#customizing-authentication>`_ 
 to adjust for how the usernames are stored in Trix's database.
 
 As an example, the settings for UiO would need to adjust for the LDAP username not being a full 
