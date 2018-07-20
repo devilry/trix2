@@ -190,7 +190,7 @@ body {
 .cradmin-div-styled-as-textarea {
     width: 60%;
     border-right: 1px dashed #ccc;
-    padding: 40px 50px;
+    padding: 20px 50px 40px 50px;
     float: left;
 }
 
@@ -208,6 +208,10 @@ body {
 
 .ace_content {
     margin: 7px 2px !important;
+}
+
+.btn-toolbar .btn-group .btn {
+    color: @navbar-inverse-bg;
 }
 
 /* Submit row */
@@ -259,10 +263,26 @@ body {
 /**
 * Preview page
 **/
-.cradmin-legacy-floating-fullsize-iframe-wrapper .cradmin-legacy-floating-fullsize-content
+
+.cradmin-legacy-floating-fullsize-iframe-wrapper {
+    overflow: auto;
+}
+
+.cradmin-legacy-floating-fullsize-iframe-closebutton {
+    width: 20% !important;
+    float: right;
+    left: auto !important;
+}
+
+.cradmin-legacy-floating-fullsize-content {
+    width: 80% !important;
+    float: left;
+}
+
 .cradmin-legacy-floating-fullsize-iframe-inner iframe {
     height: 100% !important;
 }
+
 
 /**
 * Message container

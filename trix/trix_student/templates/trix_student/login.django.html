@@ -5,6 +5,12 @@
 {% block title %}{% trans "login" %}{% endblock title %}
 
 {% block not_signed_in_warning %}{% endblock %}
+{% comment %}
+Remove the login icon since it will include the current url, creating a messy url that redirects
+to the login page over and over.
+{% endcomment %}
+{% block header %}{% include "trix_student/include/header.django.html" with remove_login='True' %}{% endblock %}
+
 {% block body %}
     <div class="page-header">
         <div class="container">

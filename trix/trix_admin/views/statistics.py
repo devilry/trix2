@@ -190,7 +190,7 @@ class TagColumn(objecttable.SingleActionColumn):
 
     def get_actionurl(self, tag):
         tags_string = u'{},{}'.format(self.view.request.cradmin_role.course_tag.tag, tag.tag)
-        return '{}?{}'.format(self.reverse_appurl('view'), urlencode({
+        return '{}?{}'.format(self.reverse_appurl(''), urlencode({
             'tags': tags_string
         }))
 
@@ -223,7 +223,7 @@ class StatisticsView(objecttable.ObjectTableView):
 
 class App(crapp.App):
     appurls = [
-        crapp.Url(r'^$', StatisticsView.as_view(), name=crapp.INDEXVIEW_NAME),
-        crapp.Url(r'^view$', StatisticsChartView.as_view(), name='view'),
+        # crapp.Url(r'^$', StatisticsView.as_view(), name=crapp.INDEXVIEW_NAME),
+        crapp.Url(r'^$', StatisticsChartView.as_view(), name=crapp.INDEXVIEW_NAME),
         crapp.Url(r'^ascsv$', AssignmentStatsCsv.as_view(), name='ascsv'),
     ]
