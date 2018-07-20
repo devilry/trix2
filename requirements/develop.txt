@@ -1,33 +1,33 @@
 -r common.txt
 
 # For automating development tasks
-fabric==1.8.3
+invoke==1.0.0
 
 # For test/CI automation
-flake8==2.2.2
-tox==1.7.2
+flake8==3.5.0
+tox==3.0.0
 
 # Required by sphinx
-Jinja2==2.7.2
-Sphinx==1.2.2
-sphinxcontrib-napoleon==0.2.7
-sphinx_rtd_theme==0.1.6
+Jinja2==2.10
+Sphinx==1.7.5
+sphinxcontrib-napoleon==0.6.1
+sphinx_rtd_theme==0.4.0
 
 # Easier to work with databases during development
-django_dbdev==0.9.1
-sh==1.09
+django_dbdev==1.2.1
+sh==1.12.14
 
 # Better Django shell and other utils for development
-ipython==2.0.0
-
-# Needed for django-extentions
-#python-dateutil==2.2
+ipython==5.7.0
 
 # For mocking tests
-mock==1.0.1
+mock==2.0.0
 
 # For debugging
-django-debug-toolbar==1.2.1
+django-debug-toolbar==1.9.1
 
 # Postgres
-psycopg2==2.6
+psycopg2==2.7.5
+
+# For cradmin
+ievv-opensource==5.4.0

@@ -33,6 +33,7 @@ class MarkdownString(object):
         """
         return dumper.represent_scalar(u'tag:yaml.org,2002:str', data.unicode_object, style='|')
 
+
 yaml.SafeDumper.add_representer(MarkdownString, MarkdownString.representer)
 
 
@@ -53,6 +54,7 @@ class YamlMapOrderedDict(collections.OrderedDict):
             node_value = dumper.represent_data(item_value)
             value.append((node_key, node_value))
         return yaml.nodes.MappingNode(u'tag:yaml.org,2002:map', value)
+
 
 yaml.SafeDumper.add_representer(YamlMapOrderedDict, YamlMapOrderedDict.representer)
 
@@ -145,7 +147,8 @@ class ListField(forms.Field):
             raise ValidationError(_('Invalid value. Must be a list.'), code='invalid')
         for item in value:
             if not isinstance(item, basestring):
-                raise ValidationError(_('Invalid value in list. Must be a list of strings.'), code='invalid')
+                raise ValidationError(_('Invalid value in list. Must be a list of strings.'),
+                                      code='invalid')
 
 
 class AssignmentDataForm(forms.ModelForm):
@@ -183,7 +186,8 @@ class Deserializer(object):
             if 'id' in assignmentdict:
                 if assignmentdict['id'] in self.deserialized_assignments_with_id:
                     raise DeserializerDuplicateIdError(
-                        _('More than one assignment with "id=%(id)s".') % {'id': assignmentdict['id']})
+                        _('More than one assignment with "id=%(id)s".') %
+                        {'id': assignmentdict['id']})
                 else:
                     self.deserialized_assignments_with_id[assignmentdict['id']] = assignmentdict
             else:

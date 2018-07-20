@@ -15,7 +15,7 @@ class TrixUserManager(BaseUserManager):
             raise ValueError('Users must have an email address')
 
         user = self.model(
-            email=TrixUserManager.normalize_email(email),
+            email=self.normalize_email(email),
         )
         user.set_password(password)
         user.save(using=self._db)
@@ -38,14 +38,20 @@ class User(AbstractBaseUser):
     is_active = models.BooleanField(
         default=True,
         verbose_name=_('Is active?'),
-        help_text=_('User is active? Inactive users can not log in.'))
+        help_text=_('User is active? Inactive users can not log in.')
+    )
 
     is_admin = models.BooleanField(
         default=False,
         verbose_name=_('Is superuser?'),
-        help_text=_('User is superuser? Superusers have full access to the admin UI.'))
+        help_text=_('User is superuser? Superusers have full access to the admin UI.')
+    )
 
-    email = models.EmailField(max_length=250, blank=False, unique=True)
+    email = models.EmailField(
+        max_length=255,
+        blank=False,
+        unique=True
+    )
 
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = []
@@ -55,8 +61,12 @@ class User(AbstractBaseUser):
     class Meta:
         verbose_name = _("User")
         verbose_name_plural = _("Users")
+        ordering = ['email']
 
     def __unicode__(self):
+        return self.displayname
+
+    def get_long_name(self):
         return self.displayname
 
     def get_short_name(self):
@@ -117,13 +127,6 @@ class TagManager(models.Manager):
     def get_queryset(self):
         return TagQuerySet(self.model)
 
-    def get_or_create(self, tag):
-        try:
-            tag = Tag.objects.get(tag=tag)
-        except Tag.DoesNotExist:
-            tag = Tag.objects.create(tag=tag)
-        return tag
-
 
 class Tag(models.Model):
     """
@@ -138,7 +141,8 @@ class Tag(models.Model):
 
     category = models.CharField(
         max_length=1,
-        blank=True, null=False,
+        blank=True,
+        null=False,
         default='',
         choices=[
             ('', _('No category')),
@@ -150,6 +154,7 @@ class Tag(models.Model):
     class Meta:
         verbose_name = _('Tag')
         verbose_name_plural = _('Tags')
+        ordering = ['tag']
 
     def __unicode__(self):
         return self.tag
@@ -167,6 +172,10 @@ class Tag(models.Model):
 
     @classmethod
     def split_commaseparated_tags(cls, commaseparatedtags):
+        """
+        Normalize and then split tags on commas and spaces.
+        Empty tags are removed.
+        """
         if commaseparatedtags.strip() == '':
             return []
         else:
@@ -182,20 +191,28 @@ class Course(models.Model):
     admins = models.ManyToManyField(User, blank=True)
     description = models.TextField(
         verbose_name=_('Description'),
-        blank=True, null=False, default='')
+        blank=True,
+        null=False,
+        default='')
 
     #: TODO: Limit choices to ``c``-tags
-    course_tag = models.ForeignKey(Tag, related_name='course_set')
+    course_tag = models.ForeignKey(
+        Tag,
+        related_name='course_set',
+        on_delete=models.CASCADE)
 
     #: TODO: Limit choices to ``p``-tags
     active_period = models.ForeignKey(
         Tag,
         related_name='active_period_set',
-        null=True, blank=True)
+        null=True,
+        blank=True,
+        on_delete=models.SET_NULL)
 
     class Meta:
         verbose_name = _('Course')
         verbose_name_plural = _('Courses')
+        ordering = ['course_tag']
 
     def __unicode__(self):
         return self.course_tag.tag
@@ -238,7 +255,8 @@ class Assignment(models.Model):
     solution = models.TextField(
         blank=True, null=False, default='',
         verbose_name=_('Solution'),
-        help_text=_('If you want your students to be able to view a suggested solution, write the solution here.'))
+        help_text=_('If you want your students to be able to view a suggested solution, write the '
+                    'solution here.'))
     created_datetime = models.DateTimeField(
         verbose_name=_('Created'),
         auto_now_add=True)
@@ -276,12 +294,6 @@ class Assignment(models.Model):
         self.text = self._normalize_text(self.text)
         self.solution = self._normalize_text(self.solution)
 
-    # def replace_tags(self, *tagstrings):
-    #     self.tags.clear()
-    #     for tagstring in tagstrings:
-    #         tag = Tag.objects.get_or_create(tagstring)
-    #         self.tags.add(tag)
-
 
 class HowSolved(models.Model):
     """
@@ -296,8 +308,8 @@ class HowSolved(models.Model):
         ]
     )
 
-    assignment = models.ForeignKey(Assignment)
-    user = models.ForeignKey(User)
+    assignment = models.ForeignKey(Assignment, on_delete=models.CASCADE)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
 
     def __unicode__(self):
         return self.howsolved
@@ -306,21 +318,27 @@ class HowSolved(models.Model):
 class Permalink(models.Model):
     course = models.ForeignKey(
         Course,
-        verbose_name=_('Course'))
+        verbose_name=_('Course'),
+        on_delete=models.CASCADE)
     tags = models.ManyToManyField(
         Tag,
         verbose_name=_('Tags'))
     title = models.CharField(
         verbose_name=_('Title'),
         max_length=255,
-        blank=True, null=False, default='')
+        blank=True,
+        null=False,
+        default='')
     description = models.TextField(
         verbose_name=_('Description'),
-        blank=True, null=False, default='')
+        blank=True,
+        null=False,
+        default='')
 
     class Meta:
         verbose_name = _('Permalink')
         verbose_name_plural = _('Permalinks')
+        ordering = ['title']
 
     def __unicode__(self):
         return self.title

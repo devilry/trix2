@@ -6,8 +6,8 @@ from django.contrib.auth import get_user_model
 from django.utils.translation import ugettext as _
 from django.http import HttpResponse
 from django.http import HttpResponseBadRequest
-from django_cradmin import crapp
-from django_cradmin.viewhelpers import objecttable
+from cradmin_legacy import crapp
+from cradmin_legacy.viewhelpers import objecttable
 from django.utils.http import urlencode
 
 from trix.trix_core import models as trix_models
@@ -125,7 +125,8 @@ class AssignmentStatsCsv(AssignmentStatsMixin, View):
         try:
             response['Content-Disposition'] = 'attachment; filename="trix-statistics.csv"'
             csvwriter = UnicodeWriter(response)  # csv.writer(response, dialect='excel')
-            csvwriter.writerow([_('Simple statitics showing percentage share of how the assignments where solved')])
+            csvwriter.writerow([_('Simple statistics showing percentage share of how the '
+                                  'assignments where solved')])
             csvwriter.writerow([_('Total number of users'), str(user_count)])
             csvwriter.writerow('')
             csvwriter.writerow([_('Assignment title'), _('Percentage')])
@@ -133,10 +134,14 @@ class AssignmentStatsCsv(AssignmentStatsMixin, View):
                 csvwriter.writerow([assignment.title])
                 csvwriter.writerow([
                     _('Completed by their own'),
-                    "{} %".format(compute_stats_for_assignment(assignment, 'bymyself', user_count))])
+                    "{} %".format(compute_stats_for_assignment(assignment,
+                                                               'bymyself',
+                                                               user_count))])
                 csvwriter.writerow([
                     _('Completed with help'),
-                    "{} %".format(compute_stats_for_assignment(assignment, 'withhelp', user_count))])
+                    "{} %".format(compute_stats_for_assignment(assignment,
+                                                               'withhelp',
+                                                               user_count))])
                 csvwriter.writerow([_('Not completed'), "{} %".format(
                     compute_stats_for_assignment(assignment, 'notsolved', user_count))])
                 csvwriter.writerow('')
@@ -185,7 +190,7 @@ class TagColumn(objecttable.SingleActionColumn):
 
     def get_actionurl(self, tag):
         tags_string = u'{},{}'.format(self.view.request.cradmin_role.course_tag.tag, tag.tag)
-        return '{}?{}'.format(self.reverse_appurl('view'), urlencode({
+        return '{}?{}'.format(self.reverse_appurl(''), urlencode({
             'tags': tags_string
         }))
 
@@ -218,7 +223,7 @@ class StatisticsView(objecttable.ObjectTableView):
 
 class App(crapp.App):
     appurls = [
-        crapp.Url(r'^$', StatisticsView.as_view(), name=crapp.INDEXVIEW_NAME),
-        crapp.Url(r'^view$', StatisticsChartView.as_view(), name='view'),
+        # crapp.Url(r'^$', StatisticsView.as_view(), name=crapp.INDEXVIEW_NAME),
+        crapp.Url(r'^$', StatisticsChartView.as_view(), name=crapp.INDEXVIEW_NAME),
         crapp.Url(r'^ascsv$', AssignmentStatsCsv.as_view(), name='ascsv'),
     ]

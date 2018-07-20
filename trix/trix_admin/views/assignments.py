@@ -1,26 +1,33 @@
 import re
+from django import forms
+from django import http
 from django.core.exceptions import ValidationError
 from django.shortcuts import get_object_or_404
 from django.template import defaultfilters
-from django.utils.translation import ugettext_lazy as _
 from django.template.defaultfilters import truncatechars, urlencode
-from django import forms
-from django import http
+from django.utils.translation import ugettext_lazy as _
+from django.urls import reverse
 from django.views.generic import TemplateView
-from django_cradmin.viewhelpers import objecttable
-from django_cradmin.viewhelpers import create
-from django_cradmin.viewhelpers import update
-from django_cradmin.viewhelpers import delete
-from django_cradmin.viewhelpers import multiselect
-from django_cradmin import crispylayouts
-from django_cradmin import crapp
-from django.core.urlresolvers import reverse
+from cradmin_legacy.viewhelpers import objecttable
+from cradmin_legacy.viewhelpers import create
+from cradmin_legacy.viewhelpers import update
+from cradmin_legacy.viewhelpers import delete
+from cradmin_legacy.viewhelpers import multiselect
+from cradmin_legacy import crispylayouts
+from cradmin_legacy import viewhelpers
+from cradmin_legacy import crapp
 from crispy_forms import layout
-from django_cradmin.acemarkdown.widgets import AceMarkdownWidget
+from cradmin_legacy.acemarkdown.widgets import AceMarkdownWidget
 
 from trix.trix_core import models as trix_models
 from trix.trix_core import multiassignment_serialize
 from trix.trix_admin import formfields
+
+
+def validate_single_tag(value):
+    if not re.match(r'^(\w|[-])+$', value, re.UNICODE):
+        raise ValidationError(_('Tags can only contain letters, numbers, underscore (_)'
+                                'and hyphen (-).'))
 
 
 class TitleColumn(objecttable.MultiActionColumn):
@@ -37,7 +44,7 @@ class TitleColumn(objecttable.MultiActionColumn):
             objecttable.Button(
                 label=_('Delete'),
                 url=self.reverse_appurl('delete', args=[assignment.id]),
-                buttonclass="danger"),
+                buttonclass="btn btn-danger btn-sm"),
         ]
 
         course = self.view.request.cradmin_role
@@ -105,10 +112,9 @@ class AssignmentListView(AssignmentQuerysetForRoleMixin, objecttable.ObjectTable
         app = self.request.cradmin_app
         course = self.request.cradmin_role
         return [
-            objecttable.Button(_('Create'), url=app.reverse_appurl('create')),
-            objecttable.Button(
-                _('Show on website'),
-                url=reverse('trix_student_course', kwargs={'course_id': course.id})),
+            objecttable.Button(app.reverse_appurl('create'), label=_('Create')),
+            objecttable.Button(reverse('trix_student_course', kwargs={'course_id': course.id}),
+                               label=_('Show on website')),
         ]
 
     def get_multiselect_actions(self):
@@ -151,12 +157,14 @@ class AssignmentCreateUpdateMixin(object):
         return self.request.cradmin_app.reverse_appurl('preview')
 
     def get_field_layout(self):
+        """
+        Sets the layout using crispy forms
+        """
         return [
-            layout.Div('title', css_class="cradmin-focusfield cradmin-focusfield-lg"),
-            layout.Fieldset(_('Organize'), 'tags'),
-            layout.Div('text', css_class="cradmin-focusfield"),
-            layout.Div('solution', css_class="cradmin-focusfield"),
-
+            layout.Div('title', css_class="trix-focusfield"),
+            layout.Div('tags', css_class="trix-focusfield"),
+            layout.Div('text', css_class="trix-focusfield"),
+            layout.Div('solution', css_class="trix-focusfield"),
         ]
 
     def get_form(self, *args, **kwargs):
@@ -187,7 +195,9 @@ class AssignmentCreateView(AssignmentCreateUpdateMixin, create.CreateView):
     """
 
 
-class AssignmentUpdateView(AssignmentQuerysetForRoleMixin, AssignmentCreateUpdateMixin, update.UpdateView):
+class AssignmentUpdateView(AssignmentQuerysetForRoleMixin,
+                           AssignmentCreateUpdateMixin,
+                           update.UpdateView):
     """
     View used to edit existing assignments.
     """
@@ -237,13 +247,9 @@ class AssignmentMultiEditView(AssignmentQuerysetForRoleMixin, multiselect.MultiS
 
     def get_field_layout(self):
         return [
+            # TODO update to own custom css
             layout.Div('data', css_class="cradmin-focusfield cradmin-focusfield-screenheight"),
         ]
-
-
-def validate_single_tag(value):
-    if not re.match(r'^(\w|[-])+$', value, re.UNICODE):
-        raise ValidationError(_('Tags can only contain letters, numbers, underscore (_) and hyphen (-).'))
 
 
 class AssignmentMultiTagForm(forms.Form):
@@ -265,7 +271,9 @@ class AssignmentMultiAddTagView(AssignmentQuerysetForRoleMixin, multiselect.Mult
         tag = trix_models.Tag.normalize_tag(form.cleaned_data['tag'])
         for assignment in assignments:
             if not assignment.tags.filter(tag=tag).exists():
-                assignment.tags.add(trix_models.Tag.objects.get_or_create(tag))
+                object, created = trix_models.Tag.objects.get_or_create(tag=tag,
+                                                                        defaults={'category': ''})
+                assignment.tags.add(object)
 
         return http.HttpResponseRedirect(self.request.cradmin_app.reverse_appindexurl())
 
@@ -327,6 +335,7 @@ class AssignmentDeleteView(AssignmentQuerysetForRoleMixin, delete.DeleteView):
     View used to delete existing assignments.
     """
     model = trix_models.Assignment
+    template_name = "trix_admin/delete.django.html"
 
 
 class PreviewAssignmentView(TemplateView):
@@ -338,7 +347,9 @@ class PreviewAssignmentView(TemplateView):
         else:
             # NOTE: The queryset ensures only admins on the current site gains access.
             course = self.request.cradmin_role
-            return get_object_or_404(trix_models.Assignment.objects.filter(tags=course.course_tag).distinct(),
+            return get_object_or_404(trix_models.Assignment.objects.filter(
+                                     tags=course.course_tag
+                                     ).distinct(),
                                      pk=self.kwargs['pk'])
 
     def get_context_data(self, **kwargs):

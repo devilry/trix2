@@ -1,36 +1,58 @@
 from django.contrib.auth.decorators import login_required
 from django.utils.translation import ugettext_lazy as _
-from django_cradmin import crinstance, crmenu
+from cradmin_legacy import crinstance
 from django.core.urlresolvers import reverse
 from trix.trix_admin.views import roleselect
+from cradmin_legacy import crmenu
 
 from trix.trix_core.models import Course
-# from .views import dashboard
 from .views import assignments
 from .views import permalinks
 from .views import statistics
 
 
+class MenuItem(crmenu.MenuItem):
+    """
+    Extends default MenuItem with custom template.
+    """
+    template_name = 'trix_admin/menuitems.django.html'
+
+
 class Menu(crmenu.Menu):
+    """
+    Menu on left side in admin pages.
+    """
+    template_name = 'trix_admin/menu.django.html'
+    # Icon on top of the menu, mapped in 'css_icon_map.py'
+    menuicon = 'wrench'
+
+    def get_menuitem_class(self):
+        """
+        Override with custom MenuItems to add icons
+        """
+        return MenuItem
+
     def build_menu(self):
-        # self.add(label=_('Dashboard'), url=self.appindex_url('dashboard'),
-        #     icon="home")
-        self.add(
+        self.add_menuitem(
             label=_('Course overview'),
             url=self.cradmin_instance.roleselectview_url(),
-            icon='arrow-up')
-        self.add(
+            extra_context_data={'icon': 'arrow-up'},
+        )
+        self.add_menuitem(
             label=_('Assignments'),
             url=self.appindex_url('assignments'),
-            icon="database")
-        self.add(
+            extra_context_data={'icon': 'database'},
+        )
+        self.add_menuitem(
             label=_('Permalinks'),
             url=self.appindex_url('permalinks'),
-            icon="link")
-        self.add(
+            extra_context_data={'icon': 'link'}
+        )
+        self.add_menuitem(
             label=_('Statistics'),
             url=self.appindex_url('statistics'),
-            icon='bar-chart-o')
+            extra_context_data={'icon': 'chart-bar'},
+        )
 
 
 class CrAdminInstance(crinstance.BaseCrAdminInstance):
@@ -40,7 +62,6 @@ class CrAdminInstance(crinstance.BaseCrAdminInstance):
     rolefrontpage_appname = 'assignments'
 
     apps = [
-        # ('dashboard', dashboard.App),
         ('assignments', assignments.App),
         ('permalinks', permalinks.App),
         ('statistics', statistics.App),

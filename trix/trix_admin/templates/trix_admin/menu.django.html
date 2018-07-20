@@ -1,0 +1,7 @@
+{% extends "cradmin_legacy/menu.django.html" %}
+{% load cradmin_legacy_icon_tags %}
+
+{% block pre-menu %}
+{# Gets the icon for the top of the menu #}
+<i class="trix-menuicon {% cradmin_icon request.cradmin_instance.get_menu.menuicon %}"></i>
+{% endblock pre-menu %}

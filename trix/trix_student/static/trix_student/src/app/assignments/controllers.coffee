@@ -8,7 +8,7 @@ angular.module('trixStudent.assignments.controllers', [])
       currentUrl = new Url()
       tags = currentUrl.query.tags
       if tags? and tags != ''
-        tags = "#{tags},#{$scope.tagToAdd}"
+        tags = '#{tags},#{$scope.tagToAdd}'
       else
         tags = $scope.tagToAdd
       currentUrl.query.tags = tags
@@ -62,7 +62,7 @@ angular.module('trixStudent.assignments.controllers', [])
       return
 
     $scope._getApiUrl = ->
-      return "/assignment/howsolved/#{$scope.assignment_id}"
+      return '/assignment/howsolved/' + $scope.assignment_id
 
     $scope._showError = (message) ->
       # TODO: Use bootstrap modal and a scope variable
@@ -83,11 +83,9 @@ angular.module('trixStudent.assignments.controllers', [])
 
     $scope.solvedOnMyOwn = ->
       $scope._updateHowSolved('bymyself')
-      # $scope.howsolved = 'bymyself'
 
     $scope.solvedWithHelp = ->
       $scope._updateHowSolved('withhelp')
-      # $scope.howsolved = 'withhelp'
 
     $scope.notSolved = ->
       $scope.saving = true
@@ -126,7 +124,6 @@ angular.module('trixStudent.assignments.controllers', [])
             $scope.progressBarClass = ''
         .error (data) ->
           console.error('Failed to load progress:', data)
-    # $scope._loadProgress()
 
     unbindProgressChanged = $rootScope.$on 'assignments.progressChanged', ->
       $scope._loadProgress()

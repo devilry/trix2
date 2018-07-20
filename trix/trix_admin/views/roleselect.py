@@ -1,10 +1,10 @@
 from django.conf import settings
 from django.utils.translation import ugettext_lazy as _
-from django_cradmin.views import roleselect
+from cradmin_legacy.views import roleselect
 
 
 class TrixRoleSelectView(roleselect.RoleSelectView):
-    pagetitle=_('Select a course to edit create/edit assignments')
+    pagetitle = _('Select a course')
     template_name = 'trix_admin/roleselect.django.html'
     autoredirect_if_single_role = False
 

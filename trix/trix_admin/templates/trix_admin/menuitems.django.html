@@ -1,0 +1,7 @@
+{% extends "cradmin_legacy/menuitem.django.html" %}
+{% load cradmin_legacy_icon_tags %}
+
+{% block link-label %}
+    <span class="{% cradmin_icon menuitem.extra_context_data.icon %}"></span>
+    {{ menuitem.label }}
+{% endblock %}

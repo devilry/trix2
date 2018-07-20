@@ -2,21 +2,21 @@
 Django settings for mgp project.
 
 For more information on this file, see
-https://docs.djangoproject.com/en/1.6/topics/settings/
+https://docs.djangoproject.com/en/1.11/topics/settings/
 
 For the full list of settings and their values, see
-https://docs.djangoproject.com/en/1.6/ref/settings/
+https://docs.djangoproject.com/en/1.11/ref/settings/
 """
 from os.path import join
 from os.path import dirname
+from trix.trix_admin import css_icon_map
 
 
-# The /REPOROOT directory
-REPOROOT_DIR = dirname(dirname(dirname(dirname(__file__))))
-
+# The base directory with manage.py
+BASE_DIR = dirname(dirname(dirname(dirname(__file__))))
 
 # Quick-start development settings - unsuitable for production
-# See https://docs.djangoproject.com/en/1.6/howto/deployment/checklist/
+# See https://docs.djangoproject.com/en/1.11/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = '(%a+ly@5m4g6fl2yhc2(i#cfz+x&_$uyh9o8%z6srhk)-)yzm('
@@ -24,13 +24,9 @@ SECRET_KEY = '(%a+ly@5m4g6fl2yhc2(i#cfz+x&_$uyh9o8%z6srhk)-)yzm('
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-TEMPLATE_DEBUG = True
-
 ALLOWED_HOSTS = []
 
-
 # Application definition
-
 INSTALLED_APPS = [
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -38,16 +34,15 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django.contrib.admin',
-    'south',
     'django_extensions',
     'crispy_forms',
     'trix.trix_core',
     'trix.trix_admin',
     'trix.trix_student',
-    'django_cradmin',  # Important: Must come after trix_admin because of template overrides
+    'cradmin_legacy',  # Important: Must come after trix_admin because of template overrides
 ]
 
-MIDDLEWARE_CLASSES = [
+MIDDLEWARE = [
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -58,20 +53,18 @@ MIDDLEWARE_CLASSES = [
 
 
 # Database
-# https://docs.djangoproject.com/en/1.6/ref/settings/#databases
-
+# https://docs.djangoproject.com/en/1.11/ref/settings/#databases
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': join(REPOROOT_DIR, 'db.sqlite3'),
+        'NAME': join(BASE_DIR, 'db.sqlite3'),
     }
 }
 
 # Internationalization
-# https://docs.djangoproject.com/en/1.6/topics/i18n/
-
+# https://docs.djangoproject.com/en/1.11/topics/i18n/
 LANGUAGE_CODE = 'en-us'
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'Europe/Oslo'
 USE_I18N = True
 USE_L10N = True
 USE_TZ = True
@@ -84,8 +77,9 @@ STATIC_URL = '/static/'
 # Custom authentication model
 AUTH_USER_MODEL = 'trix_core.User'
 
-# Redirect logins to the frontpage by default
+# Redirect logins and logouts to the frontpage by default
 LOGIN_REDIRECT_URL = '/'
+LOGOUT_REDIRECT_URL = '/'
 
 LOGIN_URL = '/login'
 LOGOUT_URL = '/logout'
@@ -93,31 +87,36 @@ LOGOUT_URL = '/logout'
 # Use bootstrap3 template pack to django-crispy-forms.
 CRISPY_TEMPLATE_PACK = 'bootstrap3'
 
-# Configuration for django-rest-framework
-# REST_FRAMEWORK = {
-#     'DEFAULT_AUTHENTICATION_CLASSES': (
-#         'rest_framework.authentication.BasicAuthentication',
-#         'rest_framework.authentication.SessionAuthentication',
-#     )
-# }
+MEDIA_ROOT = join(BASE_DIR, 'media')
 
-MEDIA_ROOT = join(REPOROOT_DIR, 'media')
-
-
-TEMPLATE_CONTEXT_PROCESSORS = (
-    "django.contrib.auth.context_processors.auth",
-    "django.core.context_processors.debug",
-    "django.core.context_processors.i18n",
-    "django.core.context_processors.media",
-    "django.core.context_processors.static",
-    "django.core.context_processors.tz",
-    "django.core.context_processors.request",
-    "django.contrib.messages.context_processors.messages",
-)
-
-# TRIX_LOGIN_MESSAGE = 'Logg inn med ditt UiO brukernavn og passord'
-# TRIX_LOGIN_IS_USERNAME = True
+TEMPLATES = [
+    {
+        'BACKEND': 'django.template.backends.django.DjangoTemplates',
+        'DIRS': [
+            # Insert TEMPLATE_DIRS here
+        ],
+        'APP_DIRS': True,
+        'OPTIONS': {
+            'debug': True,
+            'context_processors': [
+                "django.contrib.auth.context_processors.auth",
+                "django.template.context_processors.debug",
+                "django.template.context_processors.i18n",
+                "django.template.context_processors.media",
+                "django.template.context_processors.static",
+                "django.template.context_processors.tz",
+                "django.template.context_processors.request",
+                "django.contrib.messages.context_processors.messages",
+                "cradmin_legacy.context_processors.cradmin",
+            ],
+        },
+    }
+]
 
 TRIX_ADMIN_DOCUMENTATION_URL = 'http://trix2.readthedocs.org/'
 TRIX_ADMIN_DOCUMENTATION_LABEL = 'trix2.readthedocs.org'
-TRIX_STUDENT_GETTINGSTARTEDGUIDE_URL = 'http://trix2.readthedocs.org/en/latest/student/gettingstarted.html'
+TRIX_STUDENT_GETTINGSTARTEDGUIDE_URL = 'http://trix2.readthedocs.org/en/latest/' \
+                                       'student/gettingstarted.html'
+
+# Used to update the icon map since the legacy version is outdated or does not include what we need.
+CRADMIN_LEGACY_CSS_ICON_MAP = css_icon_map.FONT_AWESOME

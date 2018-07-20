@@ -1,6 +1,8 @@
 {% extends "trix_student/base.django.html" %}
 {% load crispy_forms_tags %}
+{% load i18n %}
 
+{% block title %}{% trans "logout" %}{% endblock title %}
 {% block body %}
     <div class="page-header">
         <div class="container">
@@ -8,7 +10,7 @@
         </div>
     </div>
     <div class="container">
-        <p>Du er nå logget ut. <a href="{% url 'trix_student_dashboard' %}">Gå til forsiden</a>.</p>
+        <p>{% trans "You are now logged out" %}.
+            <a href="{% url 'trix_student_dashboard' %}">{% trans "Go to the frontpage" %}.</a></p>
     </div>
-    
-{% endblock %}
+{% endblock body %}

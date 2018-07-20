@@ -7,11 +7,21 @@ module.exports = (grunt) ->
 
   vendorfiles = {
     fonts: [
-      'bower_components/fontawesome/fonts/FontAwesome.otf'
-      'bower_components/fontawesome/fonts/fontawesome-webfont.eot'
-      'bower_components/fontawesome/fonts/fontawesome-webfont.svg'
-      'bower_components/fontawesome/fonts/fontawesome-webfont.ttf'
-      'bower_components/fontawesome/fonts/fontawesome-webfont.woff'
+      'bower_components/components-font-awesome/webfonts/fa-brands-400.eot'
+      'bower_components/components-font-awesome/webfonts/fa-brands-400.svg'
+      'bower_components/components-font-awesome/webfonts/fa-brands-400.ttf'
+      'bower_components/components-font-awesome/webfonts/fa-brands-400.woff'
+      'bower_components/components-font-awesome/webfonts/fa-brands-400.woff2'
+      'bower_components/components-font-awesome/webfonts/fa-regular-400.eot'
+      'bower_components/components-font-awesome/webfonts/fa-regular-400.svg'
+      'bower_components/components-font-awesome/webfonts/fa-regular-400.ttf'
+      'bower_components/components-font-awesome/webfonts/fa-regular-400.woff'
+      'bower_components/components-font-awesome/webfonts/fa-regular-400.woff2'
+      'bower_components/components-font-awesome/webfonts/fa-solid-900.eot'
+      'bower_components/components-font-awesome/webfonts/fa-solid-900.svg'
+      'bower_components/components-font-awesome/webfonts/fa-solid-900.ttf'
+      'bower_components/components-font-awesome/webfonts/fa-solid-900.woff'
+      'bower_components/components-font-awesome/webfonts/fa-solid-900.woff2'
     ]
     js: [
       'bower_components/angular/angular.min.js'

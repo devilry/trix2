@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: trix_admin\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-01-08 11:35+0000\n"
+"POT-Creation-Date: 2018-06-30 10:44+0200\n"
 "PO-Revision-Date: 2015-01-08 12:35+0100\n"
 "Last-Translator: Espen Angell Kristiansen <post@espenak.net>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,58 +18,82 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Poedit 1.6.5\n"
 
-#: cradmin.py:19
+#: trix/trix_admin/cradmin.py:37
 msgid "Course overview"
 msgstr "Kursoversikt"
 
-#: cradmin.py:23
+#: trix/trix_admin/cradmin.py:42
+#, fuzzy
+#| msgid "Assignment YAML"
 msgid "Assignments"
-msgstr "Oppgaver"
+msgstr "Oppgaver YAML"
 
-#: cradmin.py:27
+#: trix/trix_admin/cradmin.py:47
 msgid "Permalinks"
 msgstr "Permalinker"
 
-#: cradmin.py:31 templates/trix_admin/statistics.django.html:11
+#: trix/trix_admin/cradmin.py:52
+#: trix/trix_admin/templates/trix_admin/statistics.django.html:6
+#: trix/trix_admin/templates/trix_admin/statistics.django.html:13
 msgid "Statistics"
 msgstr "Statistikk"
 
-#: templates/trix_admin/frontpage.django.html:9
-#: templates/trix_admin/statistics.django.html:10
+#: trix/trix_admin/templates/cradmin_legacy/standalone-base.django.html:5
+#: trix/trix_admin/templates/trix_admin/statistics.django.html:12
 msgid "Trix"
 msgstr "Trix"
 
-#: templates/trix_admin/roleselect.django.html:14
-msgid "Back to the website"
-msgstr "Tilbake til websiden"
+#: trix/trix_admin/templates/trix_admin/assignments/multiedit.django.html:8
+msgid "Error"
+msgstr "Feil"
 
-#: templates/trix_admin/roleselect.django.html:21
+#: trix/trix_admin/templates/trix_admin/assignments/multiedit.django.html:12
+msgid "Validation errors"
+msgstr "Valideringsfeil"
+
+#: trix/trix_admin/templates/trix_admin/assignments/multiedit.django.html:14
+msgid "In"
+msgstr "I"
+
+#: trix/trix_admin/templates/trix_admin/delete.django.html:18
+msgid "Cancel"
+msgstr "Avbryt"
+
+#: trix/trix_admin/templates/trix_admin/roleselect.django.html:4
+msgid "Select course"
+msgstr "Velg et kurs"
+
+#: trix/trix_admin/templates/trix_admin/roleselect.django.html:9
+msgid "Back to the frontpage"
+msgstr "Tilbake til forsiden"
+
+#: trix/trix_admin/templates/trix_admin/roleselect.django.html:16
 msgid "Documentation"
 msgstr "Dokumentasjon"
 
-#: templates/trix_admin/roleselect.django.html:24
+#: trix/trix_admin/templates/trix_admin/roleselect.django.html:19
 msgid "Edit courses and users?"
 msgstr "Rediger kurs og brukere?"
 
-#: templates/trix_admin/roleselect.django.html:25
-msgid "Need to create/edit courses, change active semester or edit users?"
+#: trix/trix_admin/templates/trix_admin/roleselect.django.html:20
+msgid "Need to create/edit courses, change active semester, or edit users?"
 msgstr ""
-"Trenger du å lage/redigere kurs, endre aktivt semester eller redigere "
+"Trenger du å lage/redigere kurs, endre aktivt semester, eller redigere "
 "brukere?"
 
-#: templates/trix_admin/roleselect.django.html:27
+#: trix/trix_admin/templates/trix_admin/roleselect.django.html:22
 msgid "Go to the superuser panel"
 msgstr "Gå til superbruker panelet"
 
-#: templates/trix_admin/roleselect.django.html:29
+#: trix/trix_admin/templates/trix_admin/roleselect.django.html:24
 msgid "You need to ask a superuser to grant you superuser access."
 msgstr "Du må be en superbruker om å gjøre deg til superbruker."
 
-#: templates/trix_admin/statistics.django.html:18
+#: trix/trix_admin/templates/trix_admin/statistics.django.html:21
 msgid "Aggregated statistics on how the assignments where solved"
 msgstr "Aggregert statistikk over hvordan oppgavene ble løst"
 
-#: templates/trix_admin/statistics.django.html:43
+#: trix/trix_admin/templates/trix_admin/statistics.django.html:46
 msgid ""
 "The stats below show how many percentage of the total number of users that "
 "have completed the assignment by their own, with help or not completed it."
@@ -77,136 +101,131 @@ msgstr ""
 "Statistikken nedenfor viser hvor many prosent av det totale antall studenter "
 "som har klart oppgaven på egenhånd, med hjelp eller ikke løst den."
 
-#: templates/trix_admin/statistics.django.html:46
+#: trix/trix_admin/templates/trix_admin/statistics.django.html:49
 msgid "Number of users:"
 msgstr "Antall brukere:"
 
-#: templates/trix_admin/statistics.django.html:47
+#: trix/trix_admin/templates/trix_admin/statistics.django.html:50
 msgid "Number of assignments:"
 msgstr "Antall oppgaver:"
 
-#: templates/trix_admin/statistics.django.html:51
+#: trix/trix_admin/templates/trix_admin/statistics.django.html:54
 msgid "Download csv file"
 msgstr "Last ned csv fil"
 
-#: templates/trix_admin/statistics.django.html:71 views/statistics.py:135
+#: trix/trix_admin/templates/trix_admin/statistics.django.html:74
+#: trix/trix_admin/views/statistics.py:136
 msgid "Completed by their own"
 msgstr "Løst på egenhånd"
 
-#: templates/trix_admin/statistics.django.html:77 views/statistics.py:138
+#: trix/trix_admin/templates/trix_admin/statistics.django.html:80
+#: trix/trix_admin/views/statistics.py:141
 msgid "Completed with help"
 msgstr "Løst med hjelp"
 
-#: templates/trix_admin/statistics.django.html:83 views/statistics.py:140
+#: trix/trix_admin/templates/trix_admin/statistics.django.html:86
+#: trix/trix_admin/views/statistics.py:145
 msgid "Not completed"
 msgstr "Ikke løst"
 
-#: templates/trix_admin/statistics.django.html:88
+#: trix/trix_admin/templates/trix_admin/statistics.django.html:91
 msgid "There was no assignments matching the choosen tag"
 msgstr "Det fantes ingen oppgaver som er merket med valgte tag"
 
-#: templates/trix_admin/assignments/multiedit.django.html:8
-msgid "Error"
-msgstr "Feil"
-
-#: templates/trix_admin/assignments/multiedit.django.html:12
-msgid "Validation errors"
-msgstr "Valideringsfeil"
-
-#: templates/trix_admin/assignments/multiedit.django.html:14
-msgid "In"
-msgstr "I"
-
-#: views/assignments.py:32 views/assignments.py:118 views/permalinks.py:27
-msgid "Edit"
-msgstr "Rediger"
-
-#: views/assignments.py:35
-msgid "Preview"
-msgstr "Forhåndsvis"
-
-#: views/assignments.py:38 views/permalinks.py:33
-msgid "Delete"
-msgstr "Slett"
-
-#: views/assignments.py:53 views/permalinks.py:30
-msgid "View"
-msgstr "Vis"
-
-#: views/assignments.py:108 views/permalinks.py:72
-msgid "Create"
-msgstr "Opprett"
-
-#: views/assignments.py:110
-msgid "Show on website"
-msgstr "Vis på webside"
-
-#: views/assignments.py:122 views/assignments.py:262
-msgid "Add tag"
-msgstr "Legg til tag"
-
-#: views/assignments.py:126
-msgid "Remove tag"
-msgstr "Fjern tag"
-
-#: views/assignments.py:141 views/permalinks.py:86
-msgid "Organize"
-msgstr "Organiser"
-
-#: views/assignments.py:184
-msgid "Assignment YAML"
-msgstr "Oppgaver YAML"
-
-#: views/assignments.py:220
-msgid "Save"
-msgstr "Lagre"
-
-#: views/assignments.py:231
-msgid "Tags can only contain letters, numbers, underscore (_) and hyphen (-)."
+#: trix/trix_admin/views/assignments.py:29
+msgid "Tags can only contain letters, numbers, underscore (_)and hyphen (-)."
 msgstr ""
 "Tags kan bare inneholde bokstaver, tall, understrek (_) og bindestrek (-)."
 
-#: views/assignments.py:237
+#: trix/trix_admin/views/assignments.py:39
+#: trix/trix_admin/views/assignments.py:124
+#: trix/trix_admin/views/permalinks.py:28
+msgid "Edit"
+msgstr "Rediger"
+
+#: trix/trix_admin/views/assignments.py:42
+msgid "Preview"
+msgstr "Forhåndsvis"
+
+#: trix/trix_admin/views/assignments.py:45
+#: trix/trix_admin/views/permalinks.py:34
+msgid "Delete"
+msgstr "Slett"
+
+#: trix/trix_admin/views/assignments.py:60
+#: trix/trix_admin/views/permalinks.py:31
+msgid "View"
+msgstr "Vis"
+
+#: trix/trix_admin/views/assignments.py:115
+#: trix/trix_admin/views/permalinks.py:73
+msgid "Create"
+msgstr "Opprett"
+
+#: trix/trix_admin/views/assignments.py:117
+msgid "Show on website"
+msgstr "Vis på nettsiden"
+
+#: trix/trix_admin/views/assignments.py:128
+#: trix/trix_admin/views/assignments.py:285
+msgid "Add tag"
+msgstr "Legg til tag"
+
+#: trix/trix_admin/views/assignments.py:132
+msgid "Remove tag"
+msgstr "Fjern tag"
+
+#: trix/trix_admin/views/assignments.py:209
+msgid "Assignment YAML"
+msgstr "Oppgaver YAML"
+
+#: trix/trix_admin/views/assignments.py:245
+msgid "Save"
+msgstr "Lagre"
+
+#: trix/trix_admin/views/assignments.py:258
 msgid "Tag"
 msgstr "Tag"
 
-#: views/assignments.py:258 views/assignments.py:294
+#: trix/trix_admin/views/assignments.py:281
+#: trix/trix_admin/views/assignments.py:317
 msgid "tags on selected assignments"
 msgstr "tags på valgte oppgaver"
 
-#: views/assignments.py:268
+#: trix/trix_admin/views/assignments.py:291
 msgid "Type in the tag you want to add to the selected assignments"
 msgstr "Skriv inn taggen du vil legge til på valgte oppgaver"
 
-#: views/assignments.py:298
+#: trix/trix_admin/views/assignments.py:321
 msgid "Delete tag"
 msgstr "Slett tag"
 
-#: views/assignments.py:304
+#: trix/trix_admin/views/assignments.py:327
 msgid "Type in the tag you want to remove from the selected assignments"
 msgstr "Skriv inn taggen du vil fjerne fra valgte oppgaver"
 
-#: views/roleselect.py:6
-msgid "Select a course to edit create/edit assignments"
-msgstr "Velg et kurs for å lage og redigere oppgaver"
+#: trix/trix_admin/views/roleselect.py:7
+msgid "Select a course"
+msgstr "Velg et kurs"
 
-#: views/statistics.py:128
+#: trix/trix_admin/views/statistics.py:128
 msgid ""
-"Simple statitics showing percentage share of how the assignments where solved"
+"Simple statistics showing percentage share of how the assignments where "
+"solved"
 msgstr "Enkel statistikk som viser prosentvis del av hvordan oppgavene er løst"
 
-#: views/statistics.py:129
+#: trix/trix_admin/views/statistics.py:130
 msgid "Total number of users"
 msgstr "Totalt antall brukere"
 
-#: views/statistics.py:131
+#: trix/trix_admin/views/statistics.py:132
 msgid "Assignment title"
 msgstr "Oppgavetittel"
 
-#: views/statistics.py:131
+#: trix/trix_admin/views/statistics.py:132
 msgid "Percentage"
 msgstr "Prosent"
 
-#: views/statistics.py:197
+#: trix/trix_admin/views/statistics.py:202
 msgid "Number of assignments"
 msgstr "Antall oppgaver"

@@ -1,6 +1,6 @@
 import json
 from django.test import TestCase
-from django.core.urlresolvers import reverse
+from django.urls import reverse
 
 from trix.project.develop.testhelpers.user import create_user
 from trix.project.develop.testhelpers.login import LoginTestCaseMixin

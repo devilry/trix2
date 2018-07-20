@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: trix_core\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-12-21 21:38+0000\n"
+"POT-Creation-Date: 2018-06-30 10:44+0200\n"
 "PO-Revision-Date: 2014-12-21 22:43+0100\n"
 "Last-Translator: Tor Ivar Johansen <tor@appresso.no>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,105 +18,109 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Poedit 1.6.11\n"
 
-#: admin.py:11
+#: trix/trix_core/admin.py:13
 msgid "Give admin access to the selected users"
 msgstr "Gi administratortilgang til valgte brukere"
 
-#: admin.py:16
+#: trix/trix_core/admin.py:20
 msgid "Remove admin access from the selected users"
 msgstr "Fjern administratortilgang til valgte brukere"
 
-#: admin.py:66
+#: trix/trix_core/admin.py:71
 msgid "tag is in use"
 msgstr "tag er i bruk"
 
-#: admin.py:71
+#: trix/trix_core/admin.py:76
 msgid "Yes"
 msgstr "Ja"
 
-#: admin.py:72
+#: trix/trix_core/admin.py:77
 msgid "No"
 msgstr "Nei"
 
-#: admin.py:109
+#: trix/trix_core/admin.py:114
 msgid "Number of assignments"
 msgstr "Antall oppgaver"
 
-#: admin.py:114
+#: trix/trix_core/admin.py:119
 msgid "Is in use"
 msgstr "Er i bruk"
 
-#: models.py:40
+#: trix/trix_core/models.py:40
 msgid "Is active?"
 msgstr "Er aktiv?"
 
-#: models.py:41
+#: trix/trix_core/models.py:41
 msgid "User is active? Inactive users can not log in."
 msgstr "Er brukeren aktiv? Inaktive brukere kan ikke logge inn"
 
-#: models.py:45
-msgid "Is admin?"
-msgstr "Er admin?"
+#: trix/trix_core/models.py:46
+msgid "Is superuser?"
+msgstr "Er superbruker?"
 
-#: models.py:46
-msgid "User is admin? Admins have full access to the admin UI."
+#: trix/trix_core/models.py:47
+#, fuzzy
+#| msgid "User is admin? Admins have full access to the admin UI."
+msgid "User is superuser? Superusers have full access to the admin UI."
 msgstr ""
 "Er brukeren administrator? Administratorer har full tilgang til "
 "admingrensesnittet"
 
-#: models.py:56
+#: trix/trix_core/models.py:62
 msgid "User"
 msgstr "Bruker"
 
-#: models.py:57
+#: trix/trix_core/models.py:63
 msgid "Users"
 msgstr "Brukere"
 
-#: models.py:144
+#: trix/trix_core/models.py:148
 msgid "No category"
 msgstr "Ingen kategori"
 
-#: models.py:145 models.py:197 models.py:309
+#: trix/trix_core/models.py:149 trix/trix_core/models.py:213
+#: trix/trix_core/models.py:321
 msgid "Course"
 msgstr "Kurs"
 
-#: models.py:146
+#: trix/trix_core/models.py:150
 msgid "Period"
 msgstr "Semester"
 
-#: models.py:151
+#: trix/trix_core/models.py:155
 msgid "Tag"
 msgstr "Tag"
 
-#: models.py:152 models.py:234 models.py:312
+#: trix/trix_core/models.py:156 trix/trix_core/models.py:251
+#: trix/trix_core/models.py:325
 msgid "Tags"
 msgstr "Tags"
 
-#: models.py:184 models.py:318
+#: trix/trix_core/models.py:193 trix/trix_core/models.py:333
 msgid "Description"
 msgstr "Beskrivelse"
 
-#: models.py:198
+#: trix/trix_core/models.py:214
 msgid "Courses"
 msgstr "Kurs"
 
-#: models.py:231 models.py:314
+#: trix/trix_core/models.py:248 trix/trix_core/models.py:327
 msgid "Title"
 msgstr "Tittel"
 
-#: models.py:236
+#: trix/trix_core/models.py:253
 msgid "Assignment text"
 msgstr "Oppgavetekst"
 
-#: models.py:237
+#: trix/trix_core/models.py:254
 msgid "Write the assignment here."
 msgstr "Skriv oppgaven her."
 
-#: models.py:240
+#: trix/trix_core/models.py:257
 msgid "Solution"
 msgstr "Løsning"
 
-#: models.py:241
+#: trix/trix_core/models.py:258
 msgid ""
 "If you want your students to be able to view a suggested solution, write the "
 "solution here."
@@ -124,56 +128,59 @@ msgstr ""
 "Hvis du vil at studentene skal kunne se et løsningsforslag, skriv løsningen "
 "her."
 
-#: models.py:243
+#: trix/trix_core/models.py:261
 msgid "Created"
 msgstr "Opprettet"
 
-#: models.py:246
+#: trix/trix_core/models.py:264
 msgid "Last changed"
 msgstr "Sist modifisert"
 
-#: models.py:252
+#: trix/trix_core/models.py:270
 msgid "Assignment"
 msgstr "Oppgave"
 
-#: models.py:253
+#: trix/trix_core/models.py:271
 msgid "Assignments"
 msgstr "Oppgaver"
 
-#: models.py:294
+#: trix/trix_core/models.py:306
 msgid "Solved by myself"
 msgstr "Løste på egen hånd"
 
-#: models.py:295
+#: trix/trix_core/models.py:307
 msgid "Solved with help"
 msgstr "Løste med hjelp"
 
-#: models.py:322
+#: trix/trix_core/models.py:339
 msgid "Permalink"
 msgstr "Permalink"
 
-#: models.py:323
+#: trix/trix_core/models.py:340
 msgid "Permalinks"
 msgstr "Permalinker"
 
-#: multiassignment_serialize.py:145
+#: trix/trix_core/multiassignment_serialize.py:147
 msgid "Invalid value. Must be a list."
 msgstr "Ugyldig verdi. Må være en liste"
 
-#: multiassignment_serialize.py:148
+#: trix/trix_core/multiassignment_serialize.py:150
 msgid "Invalid value in list. Must be a list of strings."
 msgstr "Ugyldig verdi i liste. Må være en liste av strenger"
 
-#: multiassignment_serialize.py:186
+#: trix/trix_core/multiassignment_serialize.py:189
 #, python-format
 msgid "More than one assignment with \"id=%(id)s\"."
-msgstr "Fler enn en oppgave med \"id=%(id)s\"."
+msgstr "Flere enn en oppgave med \"id=%(id)s\"."
 
-#: multiassignment_serialize.py:199
+#: trix/trix_core/multiassignment_serialize.py:203
 #, python-format
 msgid ""
 "One or more of the given IDs was not found among the assignments accessible "
 "by \"%(course_tag)s\"."
 msgstr ""
-"En eller flere av den gitte id ble ikke funnet blant oppgavene tilgjengelig "
-"via \"%(course_tag)s\"."
+"En eller flere av den gitte IDen ble ikke funnet blant oppgavene "
+"tilgjengelig via \"%(course_tag)s\"."
+
+#~ msgid "Is admin?"
+#~ msgstr "Er admin?"

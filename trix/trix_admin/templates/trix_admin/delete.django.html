@@ -1,0 +1,22 @@
+{% extends "cradmin_legacy/viewhelpers/delete.django.html" %}
+{% load i18n %}
+
+{% block heading %}
+    <i class="fa fa-trash-o trix-pageheader-icon"></i>
+    {{ block.super }}
+{% endblock heading %}
+
+{% block delete-form %}
+    <form action="{{ request.build_absolute_uri }}" method="post" class="cradmin-legacy-form">{% csrf_token %}
+    <div class="trix-delete-container">
+        {% block deletequestion %}
+            <div>
+                <p>{{ confirm_message }}</p>
+            </div>
+        {% endblock deletequestion %}
+        <button type="submit" class="btn btn-danger">{{ delete_button_label }}</button>
+        <a class="btn btn-cancel" cradmin-legacy-back>{% trans "Cancel" %}</a>
+    </div>
+</form>
+
+{% endblock delete-form %}

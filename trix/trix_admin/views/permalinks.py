@@ -1,11 +1,12 @@
 from django.core.urlresolvers import reverse
 from django.utils.translation import ugettext_lazy as _
 from django.template.defaultfilters import truncatechars
-from django_cradmin.viewhelpers import objecttable
-from django_cradmin.viewhelpers import create
-from django_cradmin.viewhelpers import update
-from django_cradmin.viewhelpers import delete
-from django_cradmin import crapp
+from cradmin_legacy.viewhelpers import objecttable
+from cradmin_legacy.viewhelpers import create
+from cradmin_legacy.viewhelpers import update
+from cradmin_legacy.viewhelpers import delete
+from cradmin_legacy import viewhelpers
+from cradmin_legacy import crapp
 from crispy_forms import layout
 
 from trix.trix_core import models as trix_models
@@ -32,7 +33,7 @@ class TitleColumn(objecttable.MultiActionColumn):
             objecttable.Button(
                 label=_('Delete'),
                 url=self.reverse_appurl('delete', args=[permalink.id]),
-                buttonclass="danger"),
+                buttonclass="btn btn-sm btn-danger"),
         ]
 
 
@@ -69,7 +70,7 @@ class PermalinkListView(PermalinkQuerysetForRoleMixin, objecttable.ObjectTableVi
     def get_buttons(self):
         app = self.request.cradmin_app
         return [
-            objecttable.Button(_('Create'), url=app.reverse_appurl('create')),
+            objecttable.Button(label=_('Create'), url=app.reverse_appurl('create')),
         ]
 
 
@@ -77,15 +78,12 @@ class PermalinkCreateUpdateMixin(object):
     model = trix_models.Permalink
     roleid_field = 'course'
 
-    # def get_preview_url(self):
-    #     return reverse('lokalt_company_product_preview')
-
     def get_field_layout(self):
         return [
-            layout.Div('title', css_class="cradmin-focusfield cradmin-focusfield-lg"),
-            layout.Fieldset(_('Organize'), 'tags'),
-            layout.Div('description', css_class="cradmin-focusfield"),
-
+            layout.Div('title', css_class="trix-focusfield"),
+            # layout.Fieldset(_('Organize'), 'tags'),
+            layout.Div('tags', css_class="trix-focusfield"),
+            layout.Div('description', css_class="trix-focusfield"),
         ]
 
     def get_form(self, *args, **kwargs):
@@ -108,19 +106,21 @@ class PermalinkCreateUpdateMixin(object):
             permalink.tags.add(course.course_tag)
 
 
-class PermalinkCreateView(PermalinkCreateUpdateMixin, create.CreateView):
+class PermalinkCreateView(PermalinkCreateUpdateMixin, viewhelpers.create.CreateView):
     """
     View used to create new permalinks.
     """
 
 
-class PermalinkUpdateView(PermalinkQuerysetForRoleMixin, PermalinkCreateUpdateMixin, update.UpdateView):
+class PermalinkUpdateView(PermalinkQuerysetForRoleMixin,
+                          PermalinkCreateUpdateMixin,
+                          viewhelpers.update.UpdateView):
     """
     View used to create edit existing permalinks.
     """
 
 
-class PermalinkDeleteView(PermalinkQuerysetForRoleMixin, delete.DeleteView):
+class PermalinkDeleteView(PermalinkQuerysetForRoleMixin, viewhelpers.delete.DeleteView):
     """
     View used to delete existing permalinks.
     """

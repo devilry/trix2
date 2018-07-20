@@ -2,24 +2,17 @@
 {% load crispy_forms_tags %}
 {% load i18n %}
 
-{% block title %}{% trans "Trix login" %}{% endblock title %}
+{% block title %}{% trans "login" %}{% endblock title %}
 
 {% block not_signed_in_warning %}{% endblock %}
 {% block body %}
-
     <div class="page-header">
         <div class="container">
             <h1>{% trans "Log in" %}</h1>
-            {% if TRIX_LOGIN_MESSAGE %}
-                <p class="lead">
-                    {{ TRIX_LOGIN_MESSAGE }}
-                </p>
-            {% endif %}
-
         </div>
     </div>
 
     <div class="container">
         {% crispy form form.helper %}
     </div>
-{% endblock %}
+{% endblock body %}

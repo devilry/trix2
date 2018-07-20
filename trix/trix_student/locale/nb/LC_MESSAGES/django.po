@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: trix_student\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-01-03 16:39+0000\n"
+"POT-Creation-Date: 2018-07-17 16:56+0200\n"
 "PO-Revision-Date: 2015-01-03 17:40+0100\n"
 "Last-Translator: Espen Angell Kristiansen <post@espenak.net>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,46 +18,46 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Poedit 1.6.5\n"
 
-#: templates/trix_student/assignment_list_base.django.html:5
-#: templates/trix_student/assignments.django.html:3
-#: templates/trix_student/assignments.django.html:8
-#: templates/trix_student/course.django.html:4
+#: trix/trix_student/templates/trix_student/assignment_list_base.django.html:5
+#: trix/trix_student/templates/trix_student/assignments.django.html:3
+#: trix/trix_student/templates/trix_student/assignments.django.html:8
+#: trix/trix_student/templates/trix_student/course.django.html:4
 msgid "Assignments"
 msgstr "Oppgaver"
 
-#: templates/trix_student/assignment_list_base.django.html:20
+#: trix/trix_student/templates/trix_student/assignment_list_base.django.html:20
 msgid "Loading progress..."
 msgstr "Laster progresjon..."
 
-#: templates/trix_student/assignment_list_base.django.html:43
+#: trix/trix_student/templates/trix_student/assignment_list_base.django.html:43
 msgid "Selected tags"
 msgstr "Valgte tags"
 
-#: templates/trix_student/assignment_list_base.django.html:59
+#: trix/trix_student/templates/trix_student/assignment_list_base.django.html:59
 msgid "Filter"
 msgstr "Filtrer"
 
-#: templates/trix_student/assignment_list_base.django.html:61
+#: trix/trix_student/templates/trix_student/assignment_list_base.django.html:61
 msgid "Select a tag"
 msgstr "Velg en tag"
 
-#: templates/trix_student/assignment_list_base.django.html:70
+#: trix/trix_student/templates/trix_student/assignment_list_base.django.html:70
 msgid "Print"
 msgstr "Skriv ut"
 
-#: templates/trix_student/assignment_list_base.django.html:73
+#: trix/trix_student/templates/trix_student/assignment_list_base.django.html:73
 msgid "Print this page"
 msgstr "Skriv ut denne siden"
 
-#: templates/trix_student/base.django.html:11
+#: trix/trix_student/templates/trix_student/base.django.html:11
 msgid "Trix"
 msgstr "Trix"
 
-#: templates/trix_student/base.django.html:33
+#: trix/trix_student/templates/trix_student/base.django.html:33
 msgid "You are not authenticated."
 msgstr "Du er ikke logget inn."
 
-#: templates/trix_student/base.django.html:34
+#: trix/trix_student/templates/trix_student/base.django.html:34
 msgid ""
 "If you are not authenticated, you will not be able to keep track of your "
 "progress."
@@ -65,26 +65,26 @@ msgstr ""
 "Så lenge du ikke er logget inn går du glipp av muligheten for å holde styr "
 "på din egen progresjon."
 
-#: templates/trix_student/base.django.html:38
-#: templates/trix_student/include/header.django.html:42
+#: trix/trix_student/templates/trix_student/base.django.html:38
+#: trix/trix_student/templates/trix_student/include/header.django.html:40
 msgid "Sign in"
 msgstr "Logg inn"
 
-#: templates/trix_student/course.django.html:13
-#: templates/trix_student/permalink.django.html:11
-#: templates/trix_student/include/assignment.django.html:15
+#: trix/trix_student/templates/trix_student/course.django.html:13
+#: trix/trix_student/templates/trix_student/include/assignment.django.html:15
+#: trix/trix_student/templates/trix_student/permalink.django.html:11
 msgid "Edit"
 msgstr "Rediger"
 
-#: templates/trix_student/dashboard.django.html:3
-msgid "Trix - student"
-msgstr "Trix - student"
+#: trix/trix_student/templates/trix_student/dashboard.django.html:3
+msgid "Frontpage"
+msgstr "Forside"
 
-#: templates/trix_student/dashboard.django.html:8
+#: trix/trix_student/templates/trix_student/dashboard.django.html:8
 msgid "Welcome to Trix"
 msgstr "Velkommen til Trix"
 
-#: templates/trix_student/dashboard.django.html:9
+#: trix/trix_student/templates/trix_student/dashboard.django.html:9
 msgid ""
 "Trix is a teaching platform to help you work more systematic towards your "
 "goal, resulting in a better learning outcome."
@@ -92,7 +92,7 @@ msgstr ""
 "Trix er en læringsplattform for å hjelpe deg til å jobbe systematisk mot å "
 "nå læringsmålene i kurset ditt."
 
-#: templates/trix_student/dashboard.django.html:11
+#: trix/trix_student/templates/trix_student/dashboard.django.html:11
 msgid ""
 "Trix acts as an assignments wiki, where educational authors provide you with "
 "a selection of assignments. Here you can study and track your progress as "
@@ -102,7 +102,7 @@ msgstr ""
 "pedagogisk utplukk av oppgaver kan følge og holde styr på din egen "
 "progresjon på veien mot oppnåelse av dine læringsmål."
 
-#: templates/trix_student/dashboard.django.html:14
+#: trix/trix_student/templates/trix_student/dashboard.django.html:14
 msgid ""
 "Trix follows a simple tag structure where assignments are marked with "
 "informative tags. This along with filtering capabilities ensures a tailored "
@@ -115,116 +115,122 @@ msgstr ""
 "nivå. Trix er et verktøy du kan bruke underveis i en læringsprosess samt et "
 "forberedende verktøy for fokusert læring."
 
-#: templates/trix_student/dashboard.django.html:17
-msgid "For more informataion"
+#: trix/trix_student/templates/trix_student/dashboard.django.html:17
+msgid "For more information"
 msgstr "For mer informasjon"
 
-#: templates/trix_student/dashboard.django.html:17
+#: trix/trix_student/templates/trix_student/dashboard.django.html:17
 msgid "read the getting started guide"
 msgstr "les kom igang guiden"
 
-#: templates/trix_student/login.django.html:5
-msgid "Trix login"
-msgstr "Logg inn i Trix"
-
-#: templates/trix_student/login.django.html:12 views/login.py:26
-msgid "Log in"
-msgstr "Logg inn"
-
-#: templates/trix_student/permalink_list.django.html:3
-msgid "Trix - permalink"
-msgstr "Trix - permalink"
-
-#: templates/trix_student/permalink_list.django.html:8
-msgid "Permalink list"
-msgstr "Liste over permalinker"
-
-#: templates/trix_student/permalink_list.django.html:9
-msgid "All the permalinks created are listed below"
-msgstr "Under listes alle permalinker opp"
-
-#: templates/trix_student/include/assignment.django.html:38
+#: trix/trix_student/templates/trix_student/include/assignment.django.html:38
 msgid "How did you solve the assignment?"
 msgstr "Hvordan løste du oppgaven?"
 
-#: templates/trix_student/include/assignment.django.html:48
+#: trix/trix_student/templates/trix_student/include/assignment.django.html:48
 msgid "On my own"
 msgstr "På egenhånd"
 
-#: templates/trix_student/include/assignment.django.html:57
+#: trix/trix_student/templates/trix_student/include/assignment.django.html:57
 msgid "With help"
 msgstr "Med hjelp"
 
-#: templates/trix_student/include/assignment.django.html:66
+#: trix/trix_student/templates/trix_student/include/assignment.django.html:66
 msgid "Not solved"
 msgstr "Ikke løst"
 
-#: templates/trix_student/include/assignment.django.html:72
+#: trix/trix_student/templates/trix_student/include/assignment.django.html:72
 msgid "Saving..."
 msgstr "Lagrer..."
 
-#: templates/trix_student/include/assignment.django.html:82
+#: trix/trix_student/templates/trix_student/include/assignment.django.html:82
 msgid "See solution"
 msgstr "Vis løsningsforslag"
 
-#: templates/trix_student/include/header.django.html:12
+#: trix/trix_student/templates/trix_student/include/header.django.html:11
 msgid "Toggle navigation"
-msgstr "Vis/sjul navigering"
+msgstr "Vis/skjul navigering"
 
-#: templates/trix_student/include/header.django.html:28
+#: trix/trix_student/templates/trix_student/include/header.django.html:26
 msgid "Administer"
 msgstr "Administrer"
 
-#: templates/trix_student/include/header.django.html:37
+#: trix/trix_student/templates/trix_student/include/header.django.html:35
 msgid "Sign out"
 msgstr "Logg ut"
 
-#: templates/trix_student/include/pager.django.html:27
+#: trix/trix_student/templates/trix_student/include/pager.django.html:27
 msgid "Previous"
 msgstr "Forrige"
 
-#: templates/trix_student/include/pager.django.html:31
+#: trix/trix_student/templates/trix_student/include/pager.django.html:31
 #, python-format
 msgid "Page %(number)s of %(total)s"
 msgstr "Side %(number)s av %(total)s"
 
-#: templates/trix_student/include/pager.django.html:36
+#: trix/trix_student/templates/trix_student/include/pager.django.html:36
 msgid "Next"
 msgstr "Neste"
 
-#: views/common.py:110
+#: trix/trix_student/templates/trix_student/login.django.html:5
+msgid "login"
+msgstr "logg inn"
+
+#: trix/trix_student/templates/trix_student/login.django.html:11
+#: trix/trix_student/views/login.py:29
+msgid "Log in"
+msgstr "Logg inn"
+
+#: trix/trix_student/templates/trix_student/logout.django.html:5
+msgid "logout"
+msgstr "logg ut"
+
+#: trix/trix_student/templates/trix_student/logout.django.html:13
+msgid "You are now logged out"
+msgstr "Du er nå logget ut"
+
+#: trix/trix_student/templates/trix_student/logout.django.html:14
+msgid "Go to the frontpage"
+msgstr "Gå til forsiden"
+
+#: trix/trix_student/templates/trix_student/permalink_list.django.html:3
+msgid "Trix - permalink"
+msgstr "Trix - permalink"
+
+#: trix/trix_student/templates/trix_student/permalink_list.django.html:8
+msgid "Permalink list"
+msgstr "Liste over permalinker"
+
+#: trix/trix_student/templates/trix_student/permalink_list.django.html:9
+msgid "All the permalinks created are listed below"
+msgstr "Under listes alle permalinker opp"
+
+#: trix/trix_student/views/common.py:109
 msgid ""
 "You have completed {{ solvedPercentage }} percent of assignments matching "
 "the currently selected tags."
 msgstr ""
 "Du har fullført {{ solvedPercentage }}% av oppgavene med de valgte taggene."
 
-#: views/login.py:15
+#: trix/trix_student/views/login.py:14
 msgid "Email"
-msgstr "Epost"
+msgstr "E-post"
 
-#: views/login.py:17
+#: trix/trix_student/views/login.py:16
 msgid "Username"
 msgstr "Brukernavn"
 
-#: views/login.py:45
+#: trix/trix_student/views/login.py:44
 msgid ""
-"Please enter a correct username and password. Note that both fields are be "
-"case-sensitive."
+"Please enter username and password. Note that both fields are case-sensitive."
 msgstr ""
-"Venligst skriv inn et gyldig brukernavn og passord. Begge feltene skiller "
+"Vennligst skriv inn et gyldig brukernavn og passord. Begge feltene skiller "
 "mellom store og små bokstaver."
 
-#: views/login.py:48
+#: trix/trix_student/views/login.py:48
 msgid ""
-"Please enter a correct email and password. Note that both fields are be case-"
+"Please enter a correct email and password. Note that both fields are case-"
 "sensitive."
 msgstr ""
-"Venligst skriv inn en gyldig epostaddresse og passord. Begge feltene skiller "
-"mellom store og små bokstaver."
-
-#~ msgid "Permalinks"
-#~ msgstr "Permalinker"
-
-#~ msgid "Course list"
-#~ msgstr "Kursliste"
+"Vennligst skriv inn en gyldig e-postaddresse og passord. Begge feltene "
+"skiller mellom store og små bokstaver."

@@ -1,6 +1,5 @@
 {% load i18n %}
 {% load static %}
-{% load url from future %}
 
 <nav id="trix_header" class="navbar navbar-default navbar-static-top navbar-inverse" role="navigation">
     <div class="container">
@@ -17,14 +16,13 @@
             <a class="navbar-brand" href="{% url 'trix_student_dashboard' %}">
                 Trix
             </a>
-
         </div>
         <div class="collapse navbar-collapse navbar-responsive-collapse" collapse="trixNavigationCollapse">
             <ul class="nav navbar-nav navbar-right">
                 {% if request.user.is_authenticated and request.user.is_admin_on_anything %}
                     <li>
                         <a href="/a/">
-                            <span class="fa fa-cog"></span>
+                            <span class="fas fa-cog"></span>
                             {% trans "Administer" %}
                         </a>
                     </li>
@@ -33,12 +31,12 @@
                 <li>
                     {% if request.user.is_authenticated %}
                         <a href="{% url 'trix-logout' %}">
-                            <span class="fa fa-sign-out"></span>
+                            <span class="fas fa-sign-out-alt"></span>
                             {% trans "Sign out" %}
                         </a>
                     {% else %}
                         <a href="{% url 'trix-login' %}">
-                            <span class="fa fa-sign-in"></span>
+                            <span class="fas fa-sign-in-alt"></span>
                             {% trans "Sign in" %}
                         </a>
                     {% endif %}
