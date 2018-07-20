@@ -267,6 +267,11 @@ class Assignment(models.Model):
     lastupdate_datetime = models.DateTimeField(
         verbose_name=_('Last changed'),
         auto_now=True)
+    HIDDEN_CHOICES = [(True, _('Yes')), (False, _('No'))]
+    hidden = models.NullBooleanField(
+        choices=HIDDEN_CHOICES,
+        default=False,
+        verbose_name=_('Hide assignment from students'))
 
     objects = AssignmentManager()
 

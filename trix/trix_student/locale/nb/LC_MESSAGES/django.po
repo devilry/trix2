@@ -205,7 +205,7 @@ msgstr "Liste over permalinker"
 msgid "All the permalinks created are listed below"
 msgstr "Under listes alle permalinker opp"
 
-#: trix/trix_student/views/common.py:109
+#: trix/trix_student/views/common.py:115
 msgid ""
 "You have completed {{ solvedPercentage }} percent of assignments matching "
 "the currently selected tags."
