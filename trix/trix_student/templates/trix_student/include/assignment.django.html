@@ -8,7 +8,7 @@
             assignment_id='{{ assignment.id }}';
             howsolved='{{ howsolved }}';
         ">
-    {% if user_is_admin %}
+    {% if user_is_admin and course.id %}
         <a href="{% url 'trix_courseadmin-assignments-edit' course.id assignment.id %}?{{ urlencoded_success_url }}"
                 class="btn btn-trix-admin pull-right trix-no-print">
             <span class="fa fa-edit"></span>
@@ -16,7 +16,9 @@
         </a>
     {% endif %}
     <h2 id="assignment-{{ assignment.id }}">
-        {{ assignment }}
+        <a href="{% url 'trix_assignments_view' assignment.id %}" style="color:black;">
+            {{ assignment }}
+        </a>
     </h2>
 
     {% if not disable_tags %}

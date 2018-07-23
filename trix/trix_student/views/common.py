@@ -29,9 +29,6 @@ class AssignmentListViewBase(ListView):
         assignments = assignments.order_by('title')
         return assignments
 
-    def _get_user_is_admin(self):
-        raise NotImplementedError()
-
     def _get_progress(self):
         """
         Gets the progress a user has made. Hidden tasks are not counted unless user is an admin.
@@ -115,6 +112,9 @@ class AssignmentListViewBase(ListView):
             'You have completed {{ solvedPercentage }} percent of assignments matching the '
             'currently selected tags.')
         return context
+
+    def _get_user_is_admin(self):
+        raise NotImplementedError()
 
     def get_all_available_assignments(self):
         raise NotImplementedError()

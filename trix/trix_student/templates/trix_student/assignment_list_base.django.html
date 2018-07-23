@@ -11,7 +11,7 @@
     <div class="container">
         <div class="row">
             <div id="assignments-taggingbox" class="col-sm-3 col-sm-push-9 col-md-3 col-md-push-9">
-                {% if request.user.is_authenticated %}
+                {% if request.user.is_authenticated and assignmentlist_with_howsolved %}
                     <div ng-controller="AssignmentListProgressController"
                             class="assignments-progressbox"
                             ng-cloak>
@@ -80,6 +80,8 @@
                     {% if assignment.hidden is False or assignment.hidden is None or user_is_admin %}
                         {% include "trix_student/include/assignment.django.html" %}
                     {% endif %}
+                    {% empty %}
+                        <h2>No assignments found</h2>
                 {% endfor %}
                 {% include "trix_student/include/pager.django.html" %}
             </div>
