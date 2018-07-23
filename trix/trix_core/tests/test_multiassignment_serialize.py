@@ -60,6 +60,7 @@ text: Testtext
             ('id: {}\n'
              'title: A title\n'
              'tags: []\n'
+             'hidden: false\n'
              'text: |-\n'
              '  A text\n').format(assignment.id)
         )
@@ -76,6 +77,7 @@ text: Testtext
             ('id: {}\n'
              'title: A title\n'
              'tags: [testtag, testtag2]\n'
+             'hidden: false\n'
              'text: |-\n'
              '  A text\n').format(assignment.id)
         )
@@ -91,6 +93,7 @@ text: Testtext
             ('id: {}\n'
              'title: A title\n'
              'tags: []\n'
+             'hidden: false\n'
              'text: |-\n'
              '  A text\n'
              'solution: |-\n'
@@ -111,12 +114,14 @@ text: Testtext
             ('id: {}\n'
              'title: A1\n'
              'tags: []\n'
+             'hidden: false\n'
              'text: |-\n'
              '  text1\n'
              '---\n'
              'id: {}\n'
              'title: A2\n'
              'tags: []\n'
+             'hidden: false\n'
              'text: |-\n'
              '  text2\n'
              ).format(assignment1.id, assignment2.id)
