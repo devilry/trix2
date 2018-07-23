@@ -200,6 +200,7 @@ class AssignmentCreateUpdateMixin(object):
             button.flat_attrs = flatatt({'formnovalidate': True}) + button.flat_attrs
         return buttons
 
+
 class AssignmentCreateView(AssignmentCreateUpdateMixin, create.CreateView):
     """
     View used to create new assignments.

@@ -1,23 +1,11 @@
-{% extends "trix_student/base.django.html" %}
+{% extends "trix_student/assignment_list_base.django.html" %}
 {% load i18n %}
 {% block title %}{% trans "Assignments" %}{% endblock title %}
 
-{% block body %}
-    <div class="container">
-        <div class="page-header">
+{% block pageheader %}
+    <div id="assignments-heading" class="page-header">
+        <div class="container">
             <h1>{% trans "Assignments" %}</h1>
         </div>
     </div>
-
-    <div class="container">
-        <div class="assignment-list">
-            {% for assignment in object_list %}
-                <h1>{{ assignment.title }}</h1>
-                <p class="assignment-text"> {{ assignment.text }}</p>
-                <p class="assignment-solution"> {{ assignment.solution }}</p>
-            {% empty %}
-                <h2>No assigments for the chosen tags</h2>
-            {% endfor %}
-        </div>
-    </div>
-{% endblock body %}
+{% endblock pageheader %}
