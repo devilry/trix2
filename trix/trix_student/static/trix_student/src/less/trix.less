@@ -15,14 +15,22 @@ body {
 * Main assignment and permalink pages
 **/
 
-#cradmin_legacy_contentwrapper,
-#cradmin_legacy_contentwrapper .container {
+#cradmin_legacy_contentwrapper {
     width: 100%;
+
+    .container {
+        width: 100%;
+        padding: 0;
+
+        > .objecttableview-global-buttons {
+            width: 100%;
+            padding-left: 39px;
+        }
+    }
 }
 
 .cradmin-legacy-page-header-outer {
-    // padding: 20px 0 20px 0;
-    margin: 0;
+    margin: 0 0 -1px 0;
     padding: 40px 0 10px 0;
 
     .container {
@@ -35,7 +43,7 @@ body {
 
 .container {
     margin: auto;
-    padding: 0;
+    padding: 0 15px;
 
     .cradmin-legacy-page-header-inner {
         padding-left: 40px;
@@ -46,12 +54,15 @@ body {
 .objecttableview-buttons-and-search-box {
     margin-bottom: 0;
     background: @navbar-inverse-bg;
-    padding: 0px;
+    overflow: auto;
+    width: 100%;
 }
 
 .objecttableview-global-buttons {
-    text-align: left;
-    padding-left: 39px;
+    text-align: left !important;
+    width: 50%;
+    float: left;
+    padding-left: 29px;
     padding-bottom: 20px;
 
     .btn {
@@ -250,7 +261,8 @@ body {
 **/
 
 .container .cradmin-searchform {
-    width: 100%;
+    width: 50%;
+    float: right;
     background: @navbar-inverse-bg;
 
     .input-group {

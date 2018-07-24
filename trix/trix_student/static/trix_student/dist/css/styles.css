@@ -8745,12 +8745,19 @@ body {
 /**
 * Main assignment and permalink pages
 **/
-#cradmin_legacy_contentwrapper,
-#cradmin_legacy_contentwrapper .container {
+#cradmin_legacy_contentwrapper {
   width: 100%;
 }
+#cradmin_legacy_contentwrapper .container {
+  width: 100%;
+  padding: 0;
+}
+#cradmin_legacy_contentwrapper .container > .objecttableview-global-buttons {
+  width: 100%;
+  padding-left: 39px;
+}
 .cradmin-legacy-page-header-outer {
-  margin: 0;
+  margin: 0 0 -1px 0;
   padding: 40px 0 10px 0;
 }
 .cradmin-legacy-page-header-outer .container {
@@ -8761,7 +8768,7 @@ body {
 }
 .container {
   margin: auto;
-  padding: 0;
+  padding: 0 15px;
 }
 .container .cradmin-legacy-page-header-inner {
   padding-left: 40px;
@@ -8770,11 +8777,14 @@ body {
 .objecttableview-buttons-and-search-box {
   margin-bottom: 0;
   background: #377CA8;
-  padding: 0px;
+  overflow: auto;
+  width: 100%;
 }
 .objecttableview-global-buttons {
-  text-align: left;
-  padding-left: 39px;
+  text-align: left !important;
+  width: 50%;
+  float: left;
+  padding-left: 29px;
   padding-bottom: 20px;
 }
 .objecttableview-global-buttons .btn {
@@ -8936,7 +8946,8 @@ body {
 * Statistic pages
 **/
 .container .cradmin-searchform {
-  width: 100%;
+  width: 50%;
+  float: right;
   background: #377CA8;
 }
 .container .cradmin-searchform .input-group {
