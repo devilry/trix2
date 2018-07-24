@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: trix_student\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-07-17 16:56+0200\n"
+"POT-Creation-Date: 2018-07-24 18:43+0200\n"
 "PO-Revision-Date: 2015-01-03 17:40+0100\n"
 "Last-Translator: Espen Angell Kristiansen <post@espenak.net>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -34,6 +34,9 @@ msgid "Selected tags"
 msgstr "Valgte tags"
 
 #: trix/trix_student/templates/trix_student/assignment_list_base.django.html:59
+#: trix/trix_student/templates/trix_student/include/tag_filter.django.html:4
+#: trix/trix_student/templates/trix_student/include/tag_filter.django.html:14
+#: trix/trix_student/views/tag_search.py:18
 msgid "Filter"
 msgstr "Filtrer"
 
@@ -66,7 +69,7 @@ msgstr ""
 "på din egen progresjon."
 
 #: trix/trix_student/templates/trix_student/base.django.html:38
-#: trix/trix_student/templates/trix_student/include/header.django.html:40
+#: trix/trix_student/templates/trix_student/include/header.django.html:41
 msgid "Sign in"
 msgstr "Logg inn"
 
@@ -123,27 +126,27 @@ msgstr "For mer informasjon"
 msgid "read the getting started guide"
 msgstr "les kom igang guiden"
 
-#: trix/trix_student/templates/trix_student/include/assignment.django.html:38
+#: trix/trix_student/templates/trix_student/include/assignment.django.html:40
 msgid "How did you solve the assignment?"
 msgstr "Hvordan løste du oppgaven?"
 
-#: trix/trix_student/templates/trix_student/include/assignment.django.html:48
+#: trix/trix_student/templates/trix_student/include/assignment.django.html:50
 msgid "On my own"
 msgstr "På egenhånd"
 
-#: trix/trix_student/templates/trix_student/include/assignment.django.html:57
+#: trix/trix_student/templates/trix_student/include/assignment.django.html:59
 msgid "With help"
 msgstr "Med hjelp"
 
-#: trix/trix_student/templates/trix_student/include/assignment.django.html:66
+#: trix/trix_student/templates/trix_student/include/assignment.django.html:68
 msgid "Not solved"
 msgstr "Ikke løst"
 
-#: trix/trix_student/templates/trix_student/include/assignment.django.html:72
+#: trix/trix_student/templates/trix_student/include/assignment.django.html:74
 msgid "Saving..."
 msgstr "Lagrer..."
 
-#: trix/trix_student/templates/trix_student/include/assignment.django.html:82
+#: trix/trix_student/templates/trix_student/include/assignment.django.html:84
 msgid "See solution"
 msgstr "Vis løsningsforslag"
 
@@ -155,7 +158,7 @@ msgstr "Vis/skjul navigering"
 msgid "Administer"
 msgstr "Administrer"
 
-#: trix/trix_student/templates/trix_student/include/header.django.html:35
+#: trix/trix_student/templates/trix_student/include/header.django.html:36
 msgid "Sign out"
 msgstr "Logg ut"
 
@@ -176,7 +179,7 @@ msgstr "Neste"
 msgid "login"
 msgstr "logg inn"
 
-#: trix/trix_student/templates/trix_student/login.django.html:11
+#: trix/trix_student/templates/trix_student/login.django.html:17
 #: trix/trix_student/views/login.py:29
 msgid "Log in"
 msgstr "Logg inn"
@@ -205,7 +208,7 @@ msgstr "Liste over permalinker"
 msgid "All the permalinks created are listed below"
 msgstr "Under listes alle permalinker opp"
 
-#: trix/trix_student/views/common.py:115
+#: trix/trix_student/views/common.py:112
 msgid ""
 "You have completed {{ solvedPercentage }} percent of assignments matching "
 "the currently selected tags."
