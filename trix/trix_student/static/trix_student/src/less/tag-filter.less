@@ -21,17 +21,39 @@
 }
 
 .trix-btn-neg {
-    background-color: #FF0700;
-    border-color: #FF6763;
+    background-color: #f44336;
+    border-color: #e44336;
     color: #fff;
 
     &:hover {
-        background-color: #C50500;
-        border-color: #9B0400;
+        background-color: #d44336;
+        border-color: #d44336;
+        color: #fff;
+    }
+
+    &:focus {
+        outline-color: #c30000;
         color: #fff;
     }
 }
 
 .trix-filter-list {
     display: block;
+}
+
+.trix-neg {
+    margin: 10px 0 10px;
+    overflow: auto;
+}
+
+.trix-neg-label {
+    float: left;
+}
+
+.trix-neg-btn {
+    float: right;
+    width: 16px;
+    height: 16px;
+    margin-top: 3px !important;
+    margin-bottom: 5px !important;
 }
