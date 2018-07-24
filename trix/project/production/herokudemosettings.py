@@ -2,6 +2,7 @@
 Settings for the Heroku demo.
 """
 from .settings import *
+import os
 
 
 BASE_DIR = os.path.dirname(

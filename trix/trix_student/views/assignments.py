@@ -1,5 +1,3 @@
-from django.views.generic import ListView
-
 from trix.trix_core import models
 from trix.trix_student.views.common import AssignmentListViewBase
 
