@@ -59,12 +59,12 @@ class AssignmentListViewBase(ListView):
     def _get_selectable_tags(self):
         already_selected_tags = self.get_already_selected_tags() + self.selected_tags
 
-        tags = models.Tag.objects\
-            .filter(assignment__in=self.get_queryset())\
-            .exclude(tag__in=already_selected_tags)\
-            .order_by('tag')\
-            .distinct()\
-            .values_list('tag', flat=True)
+        tags = (models.Tag.objects
+                .filter(assignment__in=self.get_queryset())
+                .exclude(tag__in=already_selected_tags)
+                .order_by('tag')
+                .distinct()
+                .values_list('tag', flat=True))
         return tags
 
     def _get_selected_tags(self):
