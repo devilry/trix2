@@ -52,33 +52,29 @@ class UnicodeWriter:
 
 def compute_stats_for_assignment(assignment, howsolved_filter, user_count):
     if user_count == 0:
-        return 0
+        return {'percent': 0, 'count': 0}
 
     if howsolved_filter == 'bymyself':
-        numerator = assignment.howsolved_set.\
-            filter(howsolved='bymyself').count()
+        numerator = assignment.howsolved_set.filter(howsolved='bymyself').count()
     elif howsolved_filter == 'withhelp':
-        numerator = assignment.howsolved_set.\
-            filter(howsolved='withhelp').count()
+        numerator = assignment.howsolved_set.filter(howsolved='withhelp').count()
     else:  # Not solved
-        bymyself_count = assignment.howsolved_set.\
-            filter(howsolved='bymyself').count()
-        withhelp_count = assignment.howsolved_set.\
-            filter(howsolved='withhelp').count()
+        bymyself_count = assignment.howsolved_set.filter(howsolved='bymyself').count()
+        withhelp_count = assignment.howsolved_set.filter(howsolved='withhelp').count()
         numerator = user_count - (bymyself_count + withhelp_count)
 
     percentage = numerator / float(user_count) * 100
-    return percentage
+    return {'percent': percentage, 'count': numerator}
 
 
 def get_usercount_within_assignments(assignments):
-    user_ids = HowSolved.objects\
-        .filter(assignment__in=assignments)\
-        .values_list('user_id', flat=True)
-    user_count = get_user_model().objects\
-        .filter(id__in=user_ids)\
-        .distinct()\
-        .count()
+    user_ids = (HowSolved.objects
+                .filter(assignment__in=assignments)
+                .values_list('user_id', flat=True))
+    user_count = (get_user_model().objects
+                  .filter(id__in=user_ids)
+                  .distinct()
+                  .count())
     return user_count
 
 
@@ -124,26 +120,32 @@ class AssignmentStatsCsv(AssignmentStatsMixin, View):
         response = HttpResponse(content_type='text/csv')
         try:
             response['Content-Disposition'] = 'attachment; filename="trix-statistics.csv"'
-            csvwriter = UnicodeWriter(response)  # csv.writer(response, dialect='excel')
+            csvwriter = UnicodeWriter(response, encoding="utf-16")
             csvwriter.writerow([_('Simple statistics showing percentage share of how the '
                                   'assignments where solved')])
             csvwriter.writerow([_('Total number of users'), str(user_count)])
             csvwriter.writerow('')
-            csvwriter.writerow([_('Assignment title'), _('Percentage')])
+            csvwriter.writerow([_('Assignment title'), _('Percentage'), _('Number')])
             for assignment in assignmentqueryset:
                 csvwriter.writerow([assignment.title])
+                bymyself = compute_stats_for_assignment(assignment,
+                                                        'bymyself',
+                                                        user_count)
                 csvwriter.writerow([
                     _('Completed by their own'),
-                    "{} %".format(compute_stats_for_assignment(assignment,
-                                                               'bymyself',
-                                                               user_count))])
+                    "{} %".format(bymyself['percent']),
+                    "{}".format(bymyself['count'])])
+                withhelp = compute_stats_for_assignment(assignment,
+                                                        'withhelp',
+                                                        user_count)
                 csvwriter.writerow([
                     _('Completed with help'),
-                    "{} %".format(compute_stats_for_assignment(assignment,
-                                                               'withhelp',
-                                                               user_count))])
-                csvwriter.writerow([_('Not completed'), "{} %".format(
-                    compute_stats_for_assignment(assignment, 'notsolved', user_count))])
+                    "{} %".format(withhelp['percent']),
+                    "{}".format(withhelp['count'])])
+                notsolved = compute_stats_for_assignment(assignment, 'notsolved', user_count)
+                csvwriter.writerow([_('Not completed'),
+                                    "{} %".format(notsolved['percent']),
+                                    "{}".format(notsolved['count'])])
                 csvwriter.writerow('')
         except Exception, e:
             raise e
@@ -166,12 +168,12 @@ class StatisticsChartView(AssignmentStatsMixin, ListView):
         return super(StatisticsChartView, self).get(request, *args, **kwargs)
 
     def _get_selectable_tags(self):
-        tags = trix_models.Tag.objects\
-            .filter(assignment__in=self.get_queryset())\
-            .exclude(tag__in=self.tags)\
-            .order_by('tag')\
-            .distinct()\
-            .values_list('tag', flat=True)
+        tags = (trix_models.Tag.objects
+                .filter(assignment__in=self.get_queryset())
+                .exclude(tag__in=self.tags)
+                .order_by('tag')
+                .distinct()
+                .values_list('tag', flat=True))
         return tags
 
     def get_context_data(self, **kwargs):

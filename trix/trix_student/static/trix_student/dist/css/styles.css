@@ -8798,18 +8798,24 @@ fieldset[disabled] .btn-trix-admin.active {
   margin-top: 0;
   color: #fff;
   overflow: auto;
+  padding-bottom: 20px;
 }
 .trix-page-header .fa {
   float: left;
   margin: 10px;
+  font-size: 24px;
 }
 .trix-page-header h1 {
   float: left;
+  margin-top: 6px !important;
+}
+.trix-page-sub-header {
+  border-bottom: 1px dashed #ccc;
 }
 .trix-container-fluid {
   margin-right: auto;
   margin-left: auto;
-  padding-left: 50px;
+  padding-left: 40px;
   padding-right: 15px;
 }
 .trix-tag-filter-form {

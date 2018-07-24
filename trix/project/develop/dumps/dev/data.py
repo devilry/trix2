@@ -133,7 +133,7 @@ def import_data():
     from trix.trix_core.models import User
 
     trix_core_user_1 = User()
-    trix_core_user_1.password = u'pbkdf2_sha256$36000$AysffjVZXEj2$lVTa0/kh6g+GIMAHtTtWdQoxjxTCj+hboQp1/WUsZUY='
+    trix_core_user_1.password = u'pbkdf2_sha256$36000$A06YnJMfBkOf$GfNTYyEe7K54bCw6LUoWdm6TEiJZy67wa63VoH1p/7A='
     trix_core_user_1.last_login = None
     trix_core_user_1.is_active = True
     trix_core_user_1.is_admin = False
@@ -141,7 +141,7 @@ def import_data():
     trix_core_user_1 = importer.save_or_locate(trix_core_user_1)
 
     trix_core_user_2 = User()
-    trix_core_user_2.password = u'pbkdf2_sha256$36000$AysffjVZXEj2$lVTa0/kh6g+GIMAHtTtWdQoxjxTCj+hboQp1/WUsZUY='
+    trix_core_user_2.password = u'pbkdf2_sha256$36000$A06YnJMfBkOf$GfNTYyEe7K54bCw6LUoWdm6TEiJZy67wa63VoH1p/7A='
     trix_core_user_2.last_login = dateutil.parser.parse("2018-06-22T14:23:20.206980+00:00")
     trix_core_user_2.is_active = True
     trix_core_user_2.is_admin = False
@@ -149,7 +149,7 @@ def import_data():
     trix_core_user_2 = importer.save_or_locate(trix_core_user_2)
 
     trix_core_user_3 = User()
-    trix_core_user_3.password = u'pbkdf2_sha256$36000$AysffjVZXEj2$lVTa0/kh6g+GIMAHtTtWdQoxjxTCj+hboQp1/WUsZUY='
+    trix_core_user_3.password = u'pbkdf2_sha256$36000$A06YnJMfBkOf$GfNTYyEe7K54bCw6LUoWdm6TEiJZy67wa63VoH1p/7A='
     trix_core_user_3.last_login = None
     trix_core_user_3.is_active = True
     trix_core_user_3.is_admin = False
@@ -157,7 +157,7 @@ def import_data():
     trix_core_user_3 = importer.save_or_locate(trix_core_user_3)
 
     trix_core_user_4 = User()
-    trix_core_user_4.password = u'pbkdf2_sha256$36000$AysffjVZXEj2$lVTa0/kh6g+GIMAHtTtWdQoxjxTCj+hboQp1/WUsZUY='
+    trix_core_user_4.password = u'pbkdf2_sha256$36000$A06YnJMfBkOf$GfNTYyEe7K54bCw6LUoWdm6TEiJZy67wa63VoH1p/7A='
     trix_core_user_4.last_login = None
     trix_core_user_4.is_active = True
     trix_core_user_4.is_admin = False
@@ -165,8 +165,8 @@ def import_data():
     trix_core_user_4 = importer.save_or_locate(trix_core_user_4)
 
     trix_core_user_5 = User()
-    trix_core_user_5.password = u'pbkdf2_sha256$36000$ZSQYPsmFqiej$Ex/ZlGq3cFhbZxkmIuWxxAlDjldThLbTPf85sl3bEAc='
-    trix_core_user_5.last_login = dateutil.parser.parse("2018-06-22T14:24:58.004910+00:00")
+    trix_core_user_5.password = u'pbkdf2_sha256$36000$A06YnJMfBkOf$GfNTYyEe7K54bCw6LUoWdm6TEiJZy67wa63VoH1p/7A='
+    trix_core_user_5.last_login = dateutil.parser.parse("2018-07-24T15:57:40.308794+00:00")
     trix_core_user_5.is_active = True
     trix_core_user_5.is_admin = True
     trix_core_user_5.email = u'super@example.com'
@@ -177,19 +177,24 @@ def import_data():
     from trix.trix_core.models import Tag
 
     trix_core_tag_1 = Tag()
-    trix_core_tag_1.tag = u'spring18'
-    trix_core_tag_1.category = u'p'
+    trix_core_tag_1.tag = u'hidden'
+    trix_core_tag_1.category = u''
     trix_core_tag_1 = importer.save_or_locate(trix_core_tag_1)
 
     trix_core_tag_2 = Tag()
-    trix_core_tag_2.tag = u'test'
-    trix_core_tag_2.category = u''
+    trix_core_tag_2.tag = u'spring18'
+    trix_core_tag_2.category = u'p'
     trix_core_tag_2 = importer.save_or_locate(trix_core_tag_2)
 
     trix_core_tag_3 = Tag()
-    trix_core_tag_3.tag = u'test01'
-    trix_core_tag_3.category = u'c'
+    trix_core_tag_3.tag = u'test'
+    trix_core_tag_3.category = u''
     trix_core_tag_3 = importer.save_or_locate(trix_core_tag_3)
+
+    trix_core_tag_4 = Tag()
+    trix_core_tag_4.tag = u'test01'
+    trix_core_tag_4.category = u'c'
+    trix_core_tag_4 = importer.save_or_locate(trix_core_tag_4)
 
     # Processing model: trix.trix_core.models.Course
 
@@ -197,8 +202,8 @@ def import_data():
 
     trix_core_course_1 = Course()
     trix_core_course_1.description = u'This is a test course.'
-    trix_core_course_1.course_tag = trix_core_tag_3
-    trix_core_course_1.active_period = trix_core_tag_1
+    trix_core_course_1.course_tag = trix_core_tag_4
+    trix_core_course_1.active_period = trix_core_tag_2
     trix_core_course_1 = importer.save_or_locate(trix_core_course_1)
 
     trix_core_course_1.admins.add(trix_core_user_1)
@@ -212,25 +217,66 @@ def import_data():
     from trix.trix_core.models import Assignment
 
     trix_core_assignment_1 = Assignment()
-    trix_core_assignment_1.title = u'Task'
-    trix_core_assignment_1.text = u'This is the first task.'
-    trix_core_assignment_1.solution = u'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean cursus magna et nulla vehicula sagittis. Aliquam malesuada risus ex, ac rutrum dolor condimentum eu. Maecenas nec mi porta, cursus quam sit amet, vehicula libero. Nullam id neque vestibulum, efficitur libero non, lobortis metus. Donec egestas, turpis non euismod volutpat, turpis libero euismod lorem, aliquam porta nisi erat ac ligula. Aenean condimentum nibh a purus pharetra ultricies. Suspendisse eleifend mauris non nibh fermentum aliquet. Integer placerat ex nec finibus vestibulum. Vestibulum tempus, lectus nec consequat faucibus, nulla lorem condimentum nisi, id dapibus turpis magna in dui. Aenean vulputate non dolor a volutpat. Integer mattis, nibh at consequat euismod, diam tortor tincidunt lorem, ut mattis quam sapien ac augue. Nulla enim nulla, bibendum id auctor vel, mollis sit amet nulla.'
-    trix_core_assignment_1.created_datetime = dateutil.parser.parse("2018-06-22T14:27:04.719799+00:00")
-    trix_core_assignment_1.lastupdate_datetime = dateutil.parser.parse("2018-06-22T14:31:33.291029+00:00")
+    trix_core_assignment_1.title = u'Just a task'
+    trix_core_assignment_1.text = u'Not actually hidden.'
+    trix_core_assignment_1.solution = u''
+    trix_core_assignment_1.created_datetime = dateutil.parser.parse("2018-07-24T15:56:03.875504+00:00")
+    trix_core_assignment_1.lastupdate_datetime = dateutil.parser.parse("2018-07-24T15:56:03.875542+00:00")
+    trix_core_assignment_1.hidden = False
     trix_core_assignment_1 = importer.save_or_locate(trix_core_assignment_1)
 
     trix_core_assignment_1.tags.add(trix_core_tag_1)
     trix_core_assignment_1.tags.add(trix_core_tag_2)
-    trix_core_assignment_1.tags.add(trix_core_tag_3)
+    trix_core_assignment_1.tags.add(trix_core_tag_4)
+
+    trix_core_assignment_2 = Assignment()
+    trix_core_assignment_2.title = u'Hidden Task'
+    trix_core_assignment_2.text = u'This task is hidden from users.'
+    trix_core_assignment_2.solution = u''
+    trix_core_assignment_2.created_datetime = dateutil.parser.parse("2018-07-24T15:40:17.486936+00:00")
+    trix_core_assignment_2.lastupdate_datetime = dateutil.parser.parse("2018-07-24T15:40:17.486973+00:00")
+    trix_core_assignment_2.hidden = True
+    trix_core_assignment_2 = importer.save_or_locate(trix_core_assignment_2)
+
+    trix_core_assignment_2.tags.add(trix_core_tag_1)
+    trix_core_assignment_2.tags.add(trix_core_tag_2)
+    trix_core_assignment_2.tags.add(trix_core_tag_3)
+    trix_core_assignment_2.tags.add(trix_core_tag_4)
+
+    trix_core_assignment_3 = Assignment()
+    trix_core_assignment_3.title = u'Task'
+    trix_core_assignment_3.text = u'This is the first task.'
+    trix_core_assignment_3.solution = u'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean cursus magna et nulla vehicula sagittis. Aliquam malesuada risus ex, ac rutrum dolor condimentum eu. Maecenas nec mi porta, cursus quam sit amet, vehicula libero. Nullam id neque vestibulum, efficitur libero non, lobortis metus. Donec egestas, turpis non euismod volutpat, turpis libero euismod lorem, aliquam porta nisi erat ac ligula. Aenean condimentum nibh a purus pharetra ultricies. Suspendisse eleifend mauris non nibh fermentum aliquet. Integer placerat ex nec finibus vestibulum. Vestibulum tempus, lectus nec consequat faucibus, nulla lorem condimentum nisi, id dapibus turpis magna in dui. Aenean vulputate non dolor a volutpat. Integer mattis, nibh at consequat euismod, diam tortor tincidunt lorem, ut mattis quam sapien ac augue. Nulla enim nulla, bibendum id auctor vel, mollis sit amet nulla.'
+    trix_core_assignment_3.created_datetime = dateutil.parser.parse("2018-07-24T15:39:36.655921+00:00")
+    trix_core_assignment_3.lastupdate_datetime = dateutil.parser.parse("2018-07-24T15:39:36.655953+00:00")
+    trix_core_assignment_3.hidden = False
+    trix_core_assignment_3 = importer.save_or_locate(trix_core_assignment_3)
+
+    trix_core_assignment_3.tags.add(trix_core_tag_2)
+    trix_core_assignment_3.tags.add(trix_core_tag_3)
+    trix_core_assignment_3.tags.add(trix_core_tag_4)
 
     # Processing model: trix.trix_core.models.HowSolved
 
     from trix.trix_core.models import HowSolved
 
+    trix_core_howsolved_1 = HowSolved()
+    trix_core_howsolved_1.howsolved = u'bymyself'
+    trix_core_howsolved_1.assignment = trix_core_assignment_2
+    trix_core_howsolved_1.user = trix_core_user_5
+    trix_core_howsolved_1 = importer.save_or_locate(trix_core_howsolved_1)
 
     # Processing model: trix.trix_core.models.Permalink
 
     from trix.trix_core.models import Permalink
 
+    trix_core_permalink_1 = Permalink()
+    trix_core_permalink_1.course = trix_core_course_1
+    trix_core_permalink_1.title = u'Link to some assignments'
+    trix_core_permalink_1.description = u'First permalink'
+    trix_core_permalink_1 = importer.save_or_locate(trix_core_permalink_1)
+
+    trix_core_permalink_1.tags.add(trix_core_tag_3)
+    trix_core_permalink_1.tags.add(trix_core_tag_4)
 
 

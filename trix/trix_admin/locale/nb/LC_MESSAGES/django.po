@@ -23,10 +23,8 @@ msgid "Course overview"
 msgstr "Kursoversikt"
 
 #: trix/trix_admin/cradmin.py:42
-#, fuzzy
-#| msgid "Assignment YAML"
 msgid "Assignments"
-msgstr "Oppgaver YAML"
+msgstr "Oppgaver"
 
 #: trix/trix_admin/cradmin.py:47
 msgid "Permalinks"
@@ -141,8 +139,7 @@ msgstr "Det fantes ingen oppgaver som er merket med valgte tag"
 
 #: trix/trix_admin/views/assignments.py:32
 msgid "Tags can only contain letters, numbers, underscore (_)and hyphen (-)."
-msgstr ""
-"Tags kan bare inneholde bokstaver, tall, understrek (_) og bindestrek (-)."
+msgstr "Tags kan bare inneholde bokstaver, tall, understrek (_) og bindestrek (-)."
 
 #: trix/trix_admin/views/assignments.py:42
 #: trix/trix_admin/views/assignments.py:127
@@ -215,24 +212,28 @@ msgstr "Skriv inn taggen du vil fjerne fra valgte oppgaver"
 msgid "Select a course"
 msgstr "Velg et kurs"
 
-#: trix/trix_admin/views/statistics.py:128
+#: trix/trix_admin/views/statistics.py:124
 msgid ""
 "Simple statistics showing percentage share of how the assignments where "
 "solved"
-msgstr "Enkel statistikk som viser prosentvis del av hvordan oppgavene er løst"
+msgstr "Enkel statistikk som viser prosentvis hvordan oppgavene er løst"
 
-#: trix/trix_admin/views/statistics.py:130
+#: trix/trix_admin/views/statistics.py:126
 msgid "Total number of users"
 msgstr "Totalt antall brukere"
 
-#: trix/trix_admin/views/statistics.py:132
+#: trix/trix_admin/views/statistics.py:128
 msgid "Assignment title"
 msgstr "Oppgavetittel"
 
-#: trix/trix_admin/views/statistics.py:132
+#: trix/trix_admin/views/statistics.py:128
 msgid "Percentage"
 msgstr "Prosent"
 
-#: trix/trix_admin/views/statistics.py:202
+#: trix/trix_admin/views/statistics.py:128
+msgid "Number"
+msgstr "Antall"
+
+#: trix/trix_admin/views/statistics.py:204
 msgid "Number of assignments"
 msgstr "Antall oppgaver"
