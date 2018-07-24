@@ -5,7 +5,6 @@ from cradmin_legacy.viewhelpers import objecttable
 from cradmin_legacy.viewhelpers import create
 from cradmin_legacy.viewhelpers import update
 from cradmin_legacy.viewhelpers import delete
-from cradmin_legacy import viewhelpers
 from cradmin_legacy import crapp
 from crispy_forms import layout
 
@@ -106,7 +105,7 @@ class PermalinkCreateUpdateMixin(object):
             permalink.tags.add(course.course_tag)
 
 
-class PermalinkCreateView(PermalinkCreateUpdateMixin, viewhelpers.create.CreateView):
+class PermalinkCreateView(PermalinkCreateUpdateMixin, create.CreateView):
     """
     View used to create new permalinks.
     """
@@ -114,13 +113,13 @@ class PermalinkCreateView(PermalinkCreateUpdateMixin, viewhelpers.create.CreateV
 
 class PermalinkUpdateView(PermalinkQuerysetForRoleMixin,
                           PermalinkCreateUpdateMixin,
-                          viewhelpers.update.UpdateView):
+                          update.UpdateView):
     """
     View used to create edit existing permalinks.
     """
 
 
-class PermalinkDeleteView(PermalinkQuerysetForRoleMixin, viewhelpers.delete.DeleteView):
+class PermalinkDeleteView(PermalinkQuerysetForRoleMixin, delete.DeleteView):
     """
     View used to delete existing permalinks.
     """
