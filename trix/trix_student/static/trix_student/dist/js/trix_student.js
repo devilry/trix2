@@ -17,11 +17,15 @@
     function($scope,
     $window) {
       $scope.tagToAdd = '';
+      $scope.negative = false;
       $scope.addTag = function() {
         var currentUrl,
     tags;
         currentUrl = new Url();
         tags = currentUrl.query.tags;
+        if ($scope.negative) {
+          $scope.tagToAdd = '-' + $scope.tagToAdd;
+        }
         if ((tags != null) && tags !== '') {
           tags = tags + ',' + $scope.tagToAdd;
         } else {

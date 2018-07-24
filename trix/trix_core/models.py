@@ -168,7 +168,7 @@ class Tag(models.Model):
             - Replace all whitespace with a single space.
             - Strip all whitespace at both ends.
         """
-        return re.sub(r'\s+', ' ', tag.strip().lower())
+        return re.sub(r'\s+', ' ', tag.strip().lower().lstrip('-'))
 
     @classmethod
     def split_commaseparated_tags(cls, commaseparatedtags):
