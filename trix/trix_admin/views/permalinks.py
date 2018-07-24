@@ -125,6 +125,7 @@ class PermalinkDeleteView(PermalinkQuerysetForRoleMixin, viewhelpers.delete.Dele
     View used to delete existing permalinks.
     """
     model = trix_models.Permalink
+    template_name = "trix_admin/delete.django.html"
 
 
 class App(crapp.App):
