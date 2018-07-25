@@ -12,6 +12,25 @@ body {
 }
 
 /**
+* Choose course page
+*/
+
+.cradmin-legacy-focusedpage-wrapper-inner .page-header {
+    text-align: center;
+}
+
+.trix-roleselect .cradmin-legacy-focusedpage-wrapper {
+    width: 66%;
+    margin-top: 40px;
+}
+
+@media(max-width: 992px) {
+    .trix-roleselect .cradmin-legacy-focusedpage-wrapper {
+        width: 100%;
+    }
+}
+
+/**
 * Main assignment and permalink pages
 **/
 
@@ -185,6 +204,15 @@ body {
         float: left;
     }
 
+    @media(max-width: 992px) {
+        .controls .textinput,
+        .controls .textarea,
+        .controls .select {
+            max-width: 100%;
+            border-right: none;
+        }
+    }
+
     .controls .textarea {
         font-size: @font-size-base;
     }
@@ -212,6 +240,17 @@ body {
     float: left;
 }
 
+.cradmin-acemarkdown .ace_editor {
+    height: 500px;
+}
+
+@media(max-width: 992px) {
+    .cradmin-div-styled-as-textarea {
+        width: 100%;
+        border-right: none;
+    }
+}
+
 .controls .help-block {
     float: right;
     width: 35%;
@@ -220,12 +259,14 @@ body {
     margin: 2% 0;
 }
 
-.cradmin-focus {
-    background-color: #e1edf4;
+@media(max-width: 992px) {
+    .controls .help-block {
+        display: none;
+    }
 }
 
-.ace_content {
-    margin: 7px 2px !important;
+.cradmin-focus {
+    background-color: #e1edf4;
 }
 
 .btn-toolbar .btn-group .btn {

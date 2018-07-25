@@ -1,1 +1,1 @@
-from trix.project.develop.developtasks import *
+from trix.project.develop.developtasks import *     # noqa

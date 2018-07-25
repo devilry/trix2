@@ -1,8 +1,9 @@
 """
 Common development settings.
 """
-from trix.project.default.settings import *
-from django_dbdev.backends.postgres import DBSETTINGS
+from trix.project.default.settings import *             # noqa
+from trix.project.default.settings import INSTALLED_APPS, MIDDLEWARE
+# from django_dbdev.backends.postgres import DBSETTINGS
 
 DEBUG = True
 ROOT_URLCONF = 'trix.project.develop.urls'
@@ -23,3 +24,6 @@ EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 MIDDLEWARE += [
     'debug_toolbar.middleware.DebugToolbarMiddleware',
 ]
+
+# For testing collectstatic
+STATIC_ROOT = 'staticfiles'

@@ -1,5 +1,5 @@
-from trix.project.default.settings import *
-
+from trix.project.default.settings import *     # noqa
+from trix.project.default.settings import INSTALLED_APPS
 
 ROOT_URLCONF = 'trix.project.production.urls'
 
