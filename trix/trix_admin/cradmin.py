@@ -1,7 +1,6 @@
 from django.contrib.auth.decorators import login_required
 from django.utils.translation import ugettext_lazy as _
 from cradmin_legacy import crinstance
-from django.core.urlresolvers import reverse
 from trix.trix_admin.views import roleselect
 from cradmin_legacy import crmenu
 

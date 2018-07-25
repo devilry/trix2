@@ -1,5 +1,7 @@
 {% extends "cradmin_legacy/roleselect.django.html" %}
 {% load i18n %}
+{% load cradmin_legacy_tags %}
+
 
 {% block title %}{% trans "Select course" %}{% endblock title %}
 {% block body %}
@@ -10,7 +12,9 @@
         </a>
     </div>
 
-    {{ block.super }}
+    <div class="trix-roleselect">
+        {{ block.super }}
+    </div>
 
     <div class="container" style="margin-top: 40px;">
         <h2>{% trans "Documentation" %}</h2>

@@ -1,4 +1,4 @@
-from .common import *
+from .common import *           # noqa
 
 # We test against the english original text
 LANGUAGE_CODE = 'en'
