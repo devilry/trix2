@@ -12,7 +12,7 @@ Importing the test data
 ***********************
 The easiest method of importing the test database is to use the ``recreate_devdb`` Invoke task::
 
-    $ inv recreate_devdb
+    $ inv recreate-devdb
 
 .. warning:: This will destroy your current database.
 
@@ -45,10 +45,14 @@ To add new data, you just need to do add data to the database manually, or progr
 
 Adding data manually (I.E.: Using the Django admin UI)
 ======================================================
-To add data manually, you should first run the ``recreate_devdb`` management
+To add data manually, you should first run the ``recreate-devdb`` management
 command to make sure you start out with the current up-to-date dataset. Then you
 can use the web-UI or the Django shell to add data. Finally, run::
 
+    $ inv dump-to-db
+
+which is short for::
+    
     $ python manage.py dumpscript trix_core > trix/project/develop/dumps/dev/data.py
 
 
