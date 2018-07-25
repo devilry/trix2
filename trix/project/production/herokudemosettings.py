@@ -1,7 +1,8 @@
 """
 Settings for the Heroku demo.
 """
-from .settings import *
+from .settings import *     # noqa
+import os
 
 
 BASE_DIR = os.path.dirname(

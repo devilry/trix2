@@ -2,7 +2,6 @@ from django import forms
 from django.conf import settings
 from django.core.urlresolvers import reverse
 from django.contrib.auth.forms import AuthenticationForm
-# from django.contrib.auth.views import login
 from django.contrib.auth.views import LoginView
 from django.utils.translation import ugettext_lazy as _
 from crispy_forms.helper import FormHelper
@@ -38,7 +37,7 @@ class TrixAuthenticationForm(AuthenticationForm):
         """
         try:
             cleaned_data = super(TrixAuthenticationForm, self).clean()
-        except forms.ValidationError as e:
+        except forms.ValidationError:
             if TRIX_LOGIN_IS_USERNAME:
                 raise forms.ValidationError(
                     _("Please enter username and password. Note that both fields are "

@@ -5,7 +5,7 @@ from django.core.exceptions import ValidationError
 from django.core import serializers
 from django.shortcuts import get_object_or_404
 from django.template import defaultfilters
-from django.template.defaultfilters import truncatechars, urlencode
+from django.template.defaultfilters import truncatechars
 from django.utils.translation import ugettext_lazy as _
 from django.urls import reverse
 from django.views.generic import TemplateView
@@ -15,7 +15,6 @@ from cradmin_legacy.viewhelpers import update
 from cradmin_legacy.viewhelpers import delete
 from cradmin_legacy.viewhelpers import multiselect
 from cradmin_legacy import crispylayouts
-from cradmin_legacy import viewhelpers
 from cradmin_legacy import crapp
 from crispy_forms import layout
 from crispy_forms.utils import flatatt

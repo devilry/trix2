@@ -1,5 +1,4 @@
 from django.views.generic import ListView
-# from django import forms
 from django.shortcuts import get_object_or_404
 
 from trix.trix_core import models

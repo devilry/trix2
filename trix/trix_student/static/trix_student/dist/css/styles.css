@@ -13,9 +13,9 @@
   }
 }
 .fa-border {
-  border-radius: .1em;
+  border-radius: 0.1em;
   border: solid 0.08em #eee;
-  padding: .2em .25em .15em;
+  padding: 0.2em 0.25em 0.15em;
 }
 .fa-pull-left {
   float: left;
@@ -28,14 +28,14 @@
 .far.fa-pull-left,
 .fal.fa-pull-left,
 .fab.fa-pull-left {
-  margin-right: .3em;
+  margin-right: 0.3em;
 }
 .fa.fa-pull-right,
 .fas.fa-pull-right,
 .far.fa-pull-right,
 .fal.fa-pull-right,
 .fab.fa-pull-right {
-  margin-left: .3em;
+  margin-left: 0.3em;
 }
 .fa,
 .fas,
@@ -2502,10 +2502,10 @@
   vertical-align: -0.0667em;
 }
 .fa-xs {
-  font-size: .75em;
+  font-size: 0.75em;
 }
 .fa-sm {
-  font-size: .875em;
+  font-size: 0.875em;
 }
 .fa-1x {
   font-size: 1em;
@@ -3433,13 +3433,71 @@ pre code {
   margin-left: -15px;
   margin-right: -15px;
 }
-.col-xs-1, .col-sm-1, .col-md-1, .col-lg-1, .col-xs-2, .col-sm-2, .col-md-2, .col-lg-2, .col-xs-3, .col-sm-3, .col-md-3, .col-lg-3, .col-xs-4, .col-sm-4, .col-md-4, .col-lg-4, .col-xs-5, .col-sm-5, .col-md-5, .col-lg-5, .col-xs-6, .col-sm-6, .col-md-6, .col-lg-6, .col-xs-7, .col-sm-7, .col-md-7, .col-lg-7, .col-xs-8, .col-sm-8, .col-md-8, .col-lg-8, .col-xs-9, .col-sm-9, .col-md-9, .col-lg-9, .col-xs-10, .col-sm-10, .col-md-10, .col-lg-10, .col-xs-11, .col-sm-11, .col-md-11, .col-lg-11, .col-xs-12, .col-sm-12, .col-md-12, .col-lg-12 {
+.col-xs-1,
+.col-sm-1,
+.col-md-1,
+.col-lg-1,
+.col-xs-2,
+.col-sm-2,
+.col-md-2,
+.col-lg-2,
+.col-xs-3,
+.col-sm-3,
+.col-md-3,
+.col-lg-3,
+.col-xs-4,
+.col-sm-4,
+.col-md-4,
+.col-lg-4,
+.col-xs-5,
+.col-sm-5,
+.col-md-5,
+.col-lg-5,
+.col-xs-6,
+.col-sm-6,
+.col-md-6,
+.col-lg-6,
+.col-xs-7,
+.col-sm-7,
+.col-md-7,
+.col-lg-7,
+.col-xs-8,
+.col-sm-8,
+.col-md-8,
+.col-lg-8,
+.col-xs-9,
+.col-sm-9,
+.col-md-9,
+.col-lg-9,
+.col-xs-10,
+.col-sm-10,
+.col-md-10,
+.col-lg-10,
+.col-xs-11,
+.col-sm-11,
+.col-md-11,
+.col-lg-11,
+.col-xs-12,
+.col-sm-12,
+.col-md-12,
+.col-lg-12 {
   position: relative;
   min-height: 1px;
   padding-left: 15px;
   padding-right: 15px;
 }
-.col-xs-1, .col-xs-2, .col-xs-3, .col-xs-4, .col-xs-5, .col-xs-6, .col-xs-7, .col-xs-8, .col-xs-9, .col-xs-10, .col-xs-11, .col-xs-12 {
+.col-xs-1,
+.col-xs-2,
+.col-xs-3,
+.col-xs-4,
+.col-xs-5,
+.col-xs-6,
+.col-xs-7,
+.col-xs-8,
+.col-xs-9,
+.col-xs-10,
+.col-xs-11,
+.col-xs-12 {
   float: left;
 }
 .col-xs-12 {
@@ -3596,7 +3654,18 @@ pre code {
   margin-left: 0%;
 }
 @media (min-width: 768px) {
-  .col-sm-1, .col-sm-2, .col-sm-3, .col-sm-4, .col-sm-5, .col-sm-6, .col-sm-7, .col-sm-8, .col-sm-9, .col-sm-10, .col-sm-11, .col-sm-12 {
+  .col-sm-1,
+  .col-sm-2,
+  .col-sm-3,
+  .col-sm-4,
+  .col-sm-5,
+  .col-sm-6,
+  .col-sm-7,
+  .col-sm-8,
+  .col-sm-9,
+  .col-sm-10,
+  .col-sm-11,
+  .col-sm-12 {
     float: left;
   }
   .col-sm-12 {
@@ -3754,7 +3823,18 @@ pre code {
   }
 }
 @media (min-width: 992px) {
-  .col-md-1, .col-md-2, .col-md-3, .col-md-4, .col-md-5, .col-md-6, .col-md-7, .col-md-8, .col-md-9, .col-md-10, .col-md-11, .col-md-12 {
+  .col-md-1,
+  .col-md-2,
+  .col-md-3,
+  .col-md-4,
+  .col-md-5,
+  .col-md-6,
+  .col-md-7,
+  .col-md-8,
+  .col-md-9,
+  .col-md-10,
+  .col-md-11,
+  .col-md-12 {
     float: left;
   }
   .col-md-12 {
@@ -3912,7 +3992,18 @@ pre code {
   }
 }
 @media (min-width: 1200px) {
-  .col-lg-1, .col-lg-2, .col-lg-3, .col-lg-4, .col-lg-5, .col-lg-6, .col-lg-7, .col-lg-8, .col-lg-9, .col-lg-10, .col-lg-11, .col-lg-12 {
+  .col-lg-1,
+  .col-lg-2,
+  .col-lg-3,
+  .col-lg-4,
+  .col-lg-5,
+  .col-lg-6,
+  .col-lg-7,
+  .col-lg-8,
+  .col-lg-9,
+  .col-lg-10,
+  .col-lg-11,
+  .col-lg-12 {
     float: left;
   }
   .col-lg-12 {
@@ -6927,7 +7018,7 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
 }
 .label {
   display: inline;
-  padding: .2em .6em .3em;
+  padding: 0.2em 0.6em 0.3em;
   font-size: 75%;
   font-weight: bold;
   line-height: 1;
@@ -6935,7 +7026,7 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
   text-align: center;
   white-space: nowrap;
   vertical-align: baseline;
-  border-radius: .25em;
+  border-radius: 0.25em;
 }
 .label[href]:hover,
 .label[href]:focus {
@@ -8743,14 +8834,36 @@ body {
   background-color: #E6E6E6;
 }
 /**
+* Choose course page
+*/
+.cradmin-legacy-focusedpage-wrapper-inner .page-header {
+  text-align: center;
+}
+.trix-roleselect .cradmin-legacy-focusedpage-wrapper {
+  width: 66%;
+  margin-top: 40px;
+}
+@media (max-width: 992px) {
+  .trix-roleselect .cradmin-legacy-focusedpage-wrapper {
+    width: 100%;
+  }
+}
+/**
 * Main assignment and permalink pages
 **/
-#cradmin_legacy_contentwrapper,
-#cradmin_legacy_contentwrapper .container {
+#cradmin_legacy_contentwrapper {
   width: 100%;
 }
+#cradmin_legacy_contentwrapper .container {
+  width: 100%;
+  padding: 0;
+}
+#cradmin_legacy_contentwrapper .container > .objecttableview-global-buttons {
+  width: 100%;
+  padding-left: 39px;
+}
 .cradmin-legacy-page-header-outer {
-  margin: 0;
+  margin: 0 0 -1px 0;
   padding: 40px 0 10px 0;
 }
 .cradmin-legacy-page-header-outer .container {
@@ -8761,7 +8874,7 @@ body {
 }
 .container {
   margin: auto;
-  padding: 0;
+  padding: 0 15px;
 }
 .container .cradmin-legacy-page-header-inner {
   padding-left: 40px;
@@ -8770,11 +8883,14 @@ body {
 .objecttableview-buttons-and-search-box {
   margin-bottom: 0;
   background: #377CA8;
-  padding: 0px;
+  overflow: auto;
+  width: 100%;
 }
 .objecttableview-global-buttons {
-  text-align: left;
-  padding-left: 39px;
+  text-align: left !important;
+  width: 50%;
+  float: left;
+  padding-left: 29px;
   padding-bottom: 20px;
 }
 .objecttableview-global-buttons .btn {
@@ -8875,6 +8991,14 @@ body {
   text-align: left;
   float: left;
 }
+@media (max-width: 992px) {
+  .trix-focusfield .controls .textinput,
+  .trix-focusfield .controls .textarea,
+  .trix-focusfield .controls .select {
+    max-width: 100%;
+    border-right: none;
+  }
+}
 .trix-focusfield .controls .textarea {
   font-size: 16px;
 }
@@ -8896,6 +9020,15 @@ body {
   padding: 20px 50px 40px 50px;
   float: left;
 }
+.cradmin-acemarkdown .ace_editor {
+  height: 500px;
+}
+@media (max-width: 992px) {
+  .cradmin-div-styled-as-textarea {
+    width: 100%;
+    border-right: none;
+  }
+}
 .controls .help-block {
   float: right;
   width: 35%;
@@ -8903,11 +9036,13 @@ body {
   text-align: left;
   margin: 2% 0;
 }
+@media (max-width: 992px) {
+  .controls .help-block {
+    display: none;
+  }
+}
 .cradmin-focus {
   background-color: #e1edf4;
-}
-.ace_content {
-  margin: 7px 2px !important;
 }
 .btn-toolbar .btn-group .btn {
   color: #377CA8;
@@ -8936,7 +9071,8 @@ body {
 * Statistic pages
 **/
 .container .cradmin-searchform {
-  width: 100%;
+  width: 50%;
+  float: right;
   background: #377CA8;
 }
 .container .cradmin-searchform .input-group {
