@@ -10,11 +10,10 @@ from cradmin_legacy import crapp
 from cradmin_legacy.viewhelpers import objecttable
 from django.utils.http import urlencode
 
-from trix.trix_core import models as trix_models
 import csv
 import codecs
 import cStringIO
-from trix.trix_core.models import HowSolved
+from trix.trix_core import models as trix_models
 
 
 class UnicodeWriter:
@@ -68,7 +67,7 @@ def compute_stats_for_assignment(assignment, howsolved_filter, user_count):
 
 
 def get_usercount_within_assignments(assignments):
-    user_ids = (HowSolved.objects
+    user_ids = (trix_models.HowSolved.objects
                 .filter(assignment__in=assignments)
                 .values_list('user_id', flat=True))
     user_count = (get_user_model().objects
@@ -225,7 +224,6 @@ class StatisticsView(objecttable.ObjectTableView):
 
 class App(crapp.App):
     appurls = [
-        # crapp.Url(r'^$', StatisticsView.as_view(), name=crapp.INDEXVIEW_NAME),
         crapp.Url(r'^$', StatisticsChartView.as_view(), name=crapp.INDEXVIEW_NAME),
         crapp.Url(r'^ascsv$', AssignmentStatsCsv.as_view(), name='ascsv'),
     ]
