@@ -1,7 +1,7 @@
 import urllib
 import json
-from django.views.generic import ListView
 from django import http
+from django.views.generic import ListView
 from django.utils.translation import ugettext_lazy as _
 
 from trix.trix_core import models
@@ -24,8 +24,15 @@ class AssignmentListViewBase(ListView):
     def get_queryset(self):
         assignments = self.get_all_available_assignments()
         if self.selected_tags:
-            for tagstring in self.selected_tags:
-                assignments = assignments.filter(tags__tag=tagstring)
+            exclude_list = [tag.lstrip('-') for tag in self.selected_tags if tag.startswith('-')]
+            filter_list = [tag for tag in self.selected_tags if not tag.startswith('-')]
+            if filter_list:
+                # Get only assignments which match exactly the tags in the list
+                assignments = reduce(lambda qs, pk: qs.filter(tags__tag=pk),
+                                     filter_list, assignments)
+            if exclude_list:
+                # Exclude any assignment that has an excluded tag
+                assignments = assignments.exclude(tags__tag__in=exclude_list)
         assignments = assignments.order_by('title')
         return assignments
 

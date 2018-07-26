@@ -46,7 +46,7 @@
                     {% endfor %}
                     {% if selected_tags %}
                         {% for tag in selected_tags %}
-                            <button type="button" class="btn btn-primary btn-sm"
+                            <button type="button" class="btn btn-sm {% if '-'|first in tag %}trix-btn-neg{% else %}btn-primary{% endif %}"
                                     ng-click="removeTag('{{ tag }}')">
                                 {{ tag }}
                                 <span class="fa fa-times"></span>
@@ -57,6 +57,10 @@
                 {% if selectable_tags %}
                     <form ng-controller="AddTagCtrl" class="trix-no-print">
                         <h3>{% trans "Filter" %}:</h3>
+                        <div class="trix-neg">
+                            <label class="trix-neg-label">{% trans "Filter out" %}:</label>
+                            <input class="trix-neg-btn" type="checkbox" ng-model="negative">
+                        </div>
                         <select ng-model="tagToAdd" ng-change="addTag()">
                             <option value="" selected>-- {% trans "Select a tag" %} --</option>
                             {% for tag in selectable_tags %}
@@ -81,7 +85,7 @@
                         {% include "trix_student/include/assignment.django.html" %}
                     {% endif %}
                     {% empty %}
-                        <h2>No assignments found</h2>
+                        <h2>{% trans "No assignments found" %}</h2>
                 {% endfor %}
                 {% include "trix_student/include/pager.django.html" %}
             </div>
