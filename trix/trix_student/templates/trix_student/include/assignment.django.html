@@ -31,7 +31,7 @@
         </div>
     {% endif %}
 
-    <section class="trix-assignmenttext  trix-markdownarticle">
+    <section class="trix-assignmenttext  trix-markdownarticle" ng-non-bindable>
         {% trix_assignment_markdown assignment.text %}
     </section>
     {% if request.user.is_authenticated and not disable_howsolved_box %}
