@@ -41,24 +41,16 @@ msgid "Filter"
 msgstr "Filtrer"
 
 #: trix/trix_student/templates/trix_student/assignment_list_base.django.html:61
-msgid "Filter out"
-msgstr "Filtrer ut"
-
-#: trix/trix_student/templates/trix_student/assignment_list_base.django.html:65
 msgid "Select a tag"
 msgstr "Velg en tag"
 
-#: trix/trix_student/templates/trix_student/assignment_list_base.django.html:74
+#: trix/trix_student/templates/trix_student/assignment_list_base.django.html:70
 msgid "Print"
 msgstr "Skriv ut"
 
-#: trix/trix_student/templates/trix_student/assignment_list_base.django.html:77
+#: trix/trix_student/templates/trix_student/assignment_list_base.django.html:73
 msgid "Print this page"
 msgstr "Skriv ut denne siden"
-
-#: trix/trix_student/templates/trix_student/assignment_list_base.django.html:88
-msgid "No assignments found"
-msgstr "Ingen oppgaver funnet"
 
 #: trix/trix_student/templates/trix_student/base.django.html:11
 msgid "Trix"
@@ -216,7 +208,7 @@ msgstr "Liste over permalinker"
 msgid "All the permalinks created are listed below"
 msgstr "Under listes alle permalinker opp"
 
-#: trix/trix_student/views/common.py:119
+#: trix/trix_student/views/common.py:112
 msgid ""
 "You have completed {{ solvedPercentage }} percent of assignments matching "
 "the currently selected tags."
