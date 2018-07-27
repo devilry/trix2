@@ -8888,11 +8888,19 @@ body {
   text-align: center;
 }
 .trix-roleselect .cradmin-legacy-focusedpage-wrapper {
-  width: 66%;
+  width: 65%;
   margin-top: 40px;
 }
 @media (max-width: 992px) {
   .trix-roleselect .cradmin-legacy-focusedpage-wrapper {
+    width: 100%;
+  }
+}
+.trix-roleselect-container {
+  width: 66%;
+}
+@media (max-width: 992px) {
+  .trix-roleselect-container {
     width: 100%;
   }
 }
