@@ -99,16 +99,16 @@ class AssignmentStatsMixin(object):
             tags.append(course_tag)
         return tags
 
-    def get_order_list(self):
+    def get_sort_list(self):
         order_list = self.request.GET.get('ordering')
         if order_list:
-            ordering = []
+            sort_list = []
             for order in order_list.split(','):
                 order = order.strip()
-                ordering.append(order)
+                sort_list.append(order)
         else:
-            ordering = []
-        return ordering
+            sort_list = []
+        return sort_list
 
     def get_queryset(self):
         queryset = super(AssignmentStatsMixin, self).get_queryset()
@@ -178,7 +178,7 @@ class StatisticsChartView(AssignmentStatsMixin, ListView):
 
     def get(self, request, *args, **kwargs):
         self.tags = self.get_tags(self.request.cradmin_role.course_tag.tag)
-        self.order_list = self.get_order_list()
+        self.sort_list = self.get_sort_list()
         return super(StatisticsChartView, self).get(request, *args, **kwargs)
 
     def _get_selectable_tags(self):
@@ -198,11 +198,10 @@ class StatisticsChartView(AssignmentStatsMixin, ListView):
         context['selected_tags_list'] = self.tags
         context['selectable_tags_list'] = self._get_selectable_tags()
         context['course_tag'] = self.request.cradmin_role.course_tag.tag
-        context['order_list'] = ','.join(self.order_list)
-        context['selectable_order_list'] = [('Title', 'title'),
-                                            ('Date created', 'created_datetime'),
-                                            ('Last updated', 'lastupdate_datetime'),
-                                            ('How solved', 'howsolved')]
+        context['sort_list'] = ','.join(self.sort_list)
+        context['selectable_sort_list'] = [(_('Title'), 'title'),
+                                            (_('Date created'), 'created_datetime'),
+                                            (_('Last updated'), 'lastupdate_datetime')]
         return context
 
     def get_ordering(self):
