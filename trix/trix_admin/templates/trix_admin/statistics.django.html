@@ -62,6 +62,24 @@
                 </ul>
             </div>
         </div>
+        <div class="trix-div-sort-buttons">
+            {% for name, order in selectable_order_list %}
+                <span class="btn trix-sort-button">
+                    {% order_in_use order order_list as is_negative %}
+                    <a href="?ordering="
+                    style="float: left;{% if order not in order_list %}visibility:hidden;{% endif %}">
+                        <span class="fa fa-times"></span>
+                    </a>
+                    <a class="btn btn-link"
+                        href="?ordering={% if is_negative %}-{% endif %}{{ order }}">
+                        {{ name }}
+                    </a>
+                    <span class="fa {% if is_negative %}fa-arrow-up{% else %}fa-arrow-down{% endif %}"
+                        {% if order not in order_list %}style="visibility:hidden;"{% endif %}>
+                    </span>
+                </span>
+            {% endfor %}
+        </div>
     </div>
 
     <div class="trix-container-fluid">

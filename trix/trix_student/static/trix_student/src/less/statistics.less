@@ -33,3 +33,47 @@
     padding-left: 40px;
     padding-right: 15px;
 }
+
+.trix-div-sort-buttons {
+    overflow: auto;
+    background: #efefef;
+    width: 100%;
+    padding-left: 30px;
+    padding-right: 30px;
+    margin: 20px 0 0 0 ;
+    display: flex;
+    align-items: center;
+}
+
+.trix-sort-button {
+    height: 36px;
+    width: 200px;
+    margin: 10px;
+    margin-left: auto;
+    margin-right: auto;
+
+    > .btn {
+        padding: 0 2px;
+        margin: 0;
+        text-decoration: none;
+        width: 80%;
+    }
+
+    > .fa {
+        padding: 0;
+        padding-top: 2px;
+        margin: 0;
+        float: right;
+    }
+
+}
+
+@media(max-width: 992px) {
+    .trix-div-sort-buttons {
+        display: block;
+    }
+
+    .trix-sort-button {
+        width: 100%;
+    }
+}

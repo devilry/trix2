@@ -19,3 +19,10 @@ def cut_tag_preserve(tags, tag):
     tag_list = tags[:]
     tag_list.remove(tag)
     return ",".join(tag_list)
+
+
+@register.simple_tag
+def order_in_use(order, order_list):
+    if order in order_list and '-' + order not in order_list:
+        return True
+    return False

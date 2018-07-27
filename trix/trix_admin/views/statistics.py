@@ -9,6 +9,7 @@ from django.http import HttpResponseBadRequest
 from cradmin_legacy import crapp
 from cradmin_legacy.viewhelpers import objecttable
 from django.utils.http import urlencode
+from django.core.exceptions import FieldError
 
 import csv
 import codecs
@@ -98,8 +99,19 @@ class AssignmentStatsMixin(object):
             tags.append(course_tag)
         return tags
 
+    def get_order_list(self):
+        order_list = self.request.GET.get('ordering')
+        if order_list:
+            ordering = []
+            for order in order_list.split(','):
+                order = order.strip()
+                ordering.append(order)
+        else:
+            ordering = []
+        return ordering
+
     def get_queryset(self):
-        queryset = trix_models.Assignment.objects.all()
+        queryset = super(AssignmentStatsMixin, self).get_queryset()
         for tagstring in self.tags:
             queryset = queryset.filter(tags__tag=tagstring)
         return queryset
@@ -117,9 +129,11 @@ class AssignmentStatsCsv(AssignmentStatsMixin, View):
 
         user_count = get_usercount_within_assignments(assignmentqueryset)
         response = HttpResponse(content_type='text/csv')
+        csv.register_dialect('semicolons', delimiter=';')
+
         try:
             response['Content-Disposition'] = 'attachment; filename="trix-statistics.csv"'
-            csvwriter = UnicodeWriter(response, encoding="utf-16")
+            csvwriter = UnicodeWriter(response, dialect='semicolons', encoding="utf-8")
             csvwriter.writerow([_('Simple statistics showing percentage share of how the '
                                   'assignments where solved')])
             csvwriter.writerow([_('Total number of users'), str(user_count)])
@@ -132,18 +146,18 @@ class AssignmentStatsCsv(AssignmentStatsMixin, View):
                                                         user_count)
                 csvwriter.writerow([
                     _('Completed by their own'),
-                    "{} %".format(bymyself['percent']),
+                    "{}%".format(bymyself['percent']),
                     "{}".format(bymyself['count'])])
                 withhelp = compute_stats_for_assignment(assignment,
                                                         'withhelp',
                                                         user_count)
                 csvwriter.writerow([
                     _('Completed with help'),
-                    "{} %".format(withhelp['percent']),
+                    "{}%".format(withhelp['percent']),
                     "{}".format(withhelp['count'])])
                 notsolved = compute_stats_for_assignment(assignment, 'notsolved', user_count)
                 csvwriter.writerow([_('Not completed'),
-                                    "{} %".format(notsolved['percent']),
+                                    "{}%".format(notsolved['percent']),
                                     "{}".format(notsolved['count'])])
                 csvwriter.writerow('')
         except Exception, e:
@@ -164,6 +178,7 @@ class StatisticsChartView(AssignmentStatsMixin, ListView):
 
     def get(self, request, *args, **kwargs):
         self.tags = self.get_tags(self.request.cradmin_role.course_tag.tag)
+        self.order_list = self.get_order_list()
         return super(StatisticsChartView, self).get(request, *args, **kwargs)
 
     def _get_selectable_tags(self):
@@ -183,7 +198,23 @@ class StatisticsChartView(AssignmentStatsMixin, ListView):
         context['selected_tags_list'] = self.tags
         context['selectable_tags_list'] = self._get_selectable_tags()
         context['course_tag'] = self.request.cradmin_role.course_tag.tag
+        context['order_list'] = ','.join(self.order_list)
+        context['selectable_order_list'] = [('Title', 'title'),
+                                            ('Date created', 'created_datetime'),
+                                            ('Last updated', 'lastupdate_datetime'),
+                                            ('How solved', 'howsolved')]
         return context
+
+    def get_ordering(self):
+        ordering = self.request.GET.get('ordering', None)
+        if ordering is not None:
+            ordering = ordering.split(',')
+            for order in ordering:
+                try:
+                    str(self.model.objects.order_by(order))
+                except FieldError:
+                    return None
+        return ordering
 
 
 class TagColumn(objecttable.SingleActionColumn):
