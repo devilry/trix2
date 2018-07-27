@@ -8811,6 +8811,9 @@ fieldset[disabled] .btn-trix-admin.active {
 }
 .trix-page-sub-header {
   border-bottom: 1px dashed #ccc;
+  background: #eee;
+  display: inline-block;
+  width: 100%;
 }
 .trix-container-fluid {
   margin-right: auto;
@@ -8820,13 +8823,14 @@ fieldset[disabled] .btn-trix-admin.active {
 }
 .trix-div-sort-buttons {
   overflow: auto;
-  background: #efefef;
+  background: #eee;
   width: 100%;
   padding-left: 30px;
   padding-right: 30px;
   margin: 20px 0 0 0 ;
   display: flex;
   align-items: center;
+  border-top: 1px dashed #ccc;
 }
 .trix-sort-button {
   height: 36px;
@@ -8834,6 +8838,8 @@ fieldset[disabled] .btn-trix-admin.active {
   margin: 10px;
   margin-left: auto;
   margin-right: auto;
+  border-right: 1px dashed #ccc;
+  border-left: 1px dashed #ccc;
 }
 .trix-sort-button > .btn {
   padding: 0 2px;
