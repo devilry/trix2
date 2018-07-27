@@ -71,7 +71,7 @@
                         <span class="fa fa-times"></span>
                     </a>
                     <a class="btn btn-link"
-                        href="?ordering={% if is_negative %}-{% endif %}{{ order }}">
+                        href="?{% url_replace 'ordering' order|reverse_sort:is_negative %}">
                         {{ name }}
                     </a>
                     <span class="fa {% if is_negative %}fa-arrow-up{% else %}fa-arrow-down{% endif %}"

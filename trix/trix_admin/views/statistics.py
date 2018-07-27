@@ -200,8 +200,8 @@ class StatisticsChartView(AssignmentStatsMixin, ListView):
         context['course_tag'] = self.request.cradmin_role.course_tag.tag
         context['sort_list'] = ','.join(self.sort_list)
         context['selectable_sort_list'] = [(_('Title'), 'title'),
-                                            (_('Date created'), 'created_datetime'),
-                                            (_('Last updated'), 'lastupdate_datetime')]
+                                           (_('Date created'), 'created_datetime'),
+                                           (_('Last updated'), 'lastupdate_datetime')]
         return context
 
     def get_ordering(self):
