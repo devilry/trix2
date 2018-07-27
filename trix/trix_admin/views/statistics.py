@@ -9,12 +9,12 @@ from django.http import HttpResponseBadRequest
 from cradmin_legacy import crapp
 from cradmin_legacy.viewhelpers import objecttable
 from django.utils.http import urlencode
+from django.core.exceptions import FieldError
 
-from trix.trix_core import models as trix_models
 import csv
 import codecs
 import cStringIO
-from trix.trix_core.models import HowSolved
+from trix.trix_core import models as trix_models
 
 
 class UnicodeWriter:
@@ -52,33 +52,29 @@ class UnicodeWriter:
 
 def compute_stats_for_assignment(assignment, howsolved_filter, user_count):
     if user_count == 0:
-        return 0
+        return {'percent': 0, 'count': 0}
 
     if howsolved_filter == 'bymyself':
-        numerator = assignment.howsolved_set.\
-            filter(howsolved='bymyself').count()
+        numerator = assignment.howsolved_set.filter(howsolved='bymyself').count()
     elif howsolved_filter == 'withhelp':
-        numerator = assignment.howsolved_set.\
-            filter(howsolved='withhelp').count()
+        numerator = assignment.howsolved_set.filter(howsolved='withhelp').count()
     else:  # Not solved
-        bymyself_count = assignment.howsolved_set.\
-            filter(howsolved='bymyself').count()
-        withhelp_count = assignment.howsolved_set.\
-            filter(howsolved='withhelp').count()
+        bymyself_count = assignment.howsolved_set.filter(howsolved='bymyself').count()
+        withhelp_count = assignment.howsolved_set.filter(howsolved='withhelp').count()
         numerator = user_count - (bymyself_count + withhelp_count)
 
     percentage = numerator / float(user_count) * 100
-    return percentage
+    return {'percent': percentage, 'count': numerator}
 
 
 def get_usercount_within_assignments(assignments):
-    user_ids = HowSolved.objects\
-        .filter(assignment__in=assignments)\
-        .values_list('user_id', flat=True)
-    user_count = get_user_model().objects\
-        .filter(id__in=user_ids)\
-        .distinct()\
-        .count()
+    user_ids = (trix_models.HowSolved.objects
+                .filter(assignment__in=assignments)
+                .values_list('user_id', flat=True))
+    user_count = (get_user_model().objects
+                  .filter(id__in=user_ids)
+                  .distinct()
+                  .count())
     return user_count
 
 
@@ -103,8 +99,19 @@ class AssignmentStatsMixin(object):
             tags.append(course_tag)
         return tags
 
+    def get_sort_list(self):
+        order_list = self.request.GET.get('ordering')
+        if order_list:
+            sort_list = []
+            for order in order_list.split(','):
+                order = order.strip()
+                sort_list.append(order)
+        else:
+            sort_list = []
+        return sort_list
+
     def get_queryset(self):
-        queryset = trix_models.Assignment.objects.all()
+        queryset = super(AssignmentStatsMixin, self).get_queryset()
         for tagstring in self.tags:
             queryset = queryset.filter(tags__tag=tagstring)
         return queryset
@@ -122,28 +129,36 @@ class AssignmentStatsCsv(AssignmentStatsMixin, View):
 
         user_count = get_usercount_within_assignments(assignmentqueryset)
         response = HttpResponse(content_type='text/csv')
+        csv.register_dialect('semicolons', delimiter=';')
+
         try:
             response['Content-Disposition'] = 'attachment; filename="trix-statistics.csv"'
-            csvwriter = UnicodeWriter(response)  # csv.writer(response, dialect='excel')
+            csvwriter = UnicodeWriter(response, dialect='semicolons', encoding="utf-8")
             csvwriter.writerow([_('Simple statistics showing percentage share of how the '
                                   'assignments where solved')])
             csvwriter.writerow([_('Total number of users'), str(user_count)])
             csvwriter.writerow('')
-            csvwriter.writerow([_('Assignment title'), _('Percentage')])
+            csvwriter.writerow([_('Assignment title'), _('Percentage'), _('Number')])
             for assignment in assignmentqueryset:
                 csvwriter.writerow([assignment.title])
+                bymyself = compute_stats_for_assignment(assignment,
+                                                        'bymyself',
+                                                        user_count)
                 csvwriter.writerow([
                     _('Completed by their own'),
-                    "{} %".format(compute_stats_for_assignment(assignment,
-                                                               'bymyself',
-                                                               user_count))])
+                    "{}%".format(bymyself['percent']),
+                    "{}".format(bymyself['count'])])
+                withhelp = compute_stats_for_assignment(assignment,
+                                                        'withhelp',
+                                                        user_count)
                 csvwriter.writerow([
                     _('Completed with help'),
-                    "{} %".format(compute_stats_for_assignment(assignment,
-                                                               'withhelp',
-                                                               user_count))])
-                csvwriter.writerow([_('Not completed'), "{} %".format(
-                    compute_stats_for_assignment(assignment, 'notsolved', user_count))])
+                    "{}%".format(withhelp['percent']),
+                    "{}".format(withhelp['count'])])
+                notsolved = compute_stats_for_assignment(assignment, 'notsolved', user_count)
+                csvwriter.writerow([_('Not completed'),
+                                    "{}%".format(notsolved['percent']),
+                                    "{}".format(notsolved['count'])])
                 csvwriter.writerow('')
         except Exception, e:
             raise e
@@ -163,15 +178,16 @@ class StatisticsChartView(AssignmentStatsMixin, ListView):
 
     def get(self, request, *args, **kwargs):
         self.tags = self.get_tags(self.request.cradmin_role.course_tag.tag)
+        self.sort_list = self.get_sort_list()
         return super(StatisticsChartView, self).get(request, *args, **kwargs)
 
     def _get_selectable_tags(self):
-        tags = trix_models.Tag.objects\
-            .filter(assignment__in=self.get_queryset())\
-            .exclude(tag__in=self.tags)\
-            .order_by('tag')\
-            .distinct()\
-            .values_list('tag', flat=True)
+        tags = (trix_models.Tag.objects
+                .filter(assignment__in=self.get_queryset())
+                .exclude(tag__in=self.tags)
+                .order_by('tag')
+                .distinct()
+                .values_list('tag', flat=True))
         return tags
 
     def get_context_data(self, **kwargs):
@@ -182,7 +198,22 @@ class StatisticsChartView(AssignmentStatsMixin, ListView):
         context['selected_tags_list'] = self.tags
         context['selectable_tags_list'] = self._get_selectable_tags()
         context['course_tag'] = self.request.cradmin_role.course_tag.tag
+        context['sort_list'] = ','.join(self.sort_list)
+        context['selectable_sort_list'] = [(_('Title'), 'title'),
+                                           (_('Date created'), 'created_datetime'),
+                                           (_('Last updated'), 'lastupdate_datetime')]
         return context
+
+    def get_ordering(self):
+        ordering = self.request.GET.get('ordering', None)
+        if ordering is not None:
+            ordering = ordering.split(',')
+            for order in ordering:
+                try:
+                    str(self.model.objects.order_by(order))
+                except FieldError:
+                    return None
+        return ordering
 
 
 class TagColumn(objecttable.SingleActionColumn):
@@ -223,7 +254,6 @@ class StatisticsView(objecttable.ObjectTableView):
 
 class App(crapp.App):
     appurls = [
-        # crapp.Url(r'^$', StatisticsView.as_view(), name=crapp.INDEXVIEW_NAME),
         crapp.Url(r'^$', StatisticsChartView.as_view(), name=crapp.INDEXVIEW_NAME),
         crapp.Url(r'^ascsv$', AssignmentStatsCsv.as_view(), name='ascsv'),
     ]
