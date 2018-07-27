@@ -66,7 +66,7 @@
             {% for name, order in selectable_sort_list %}
                 <span class="btn trix-sort-button">
                     {% order_in_use order sort_list as is_negative %}
-                    <a href="?ordering="
+                    <a href="?{% url_replace 'ordering' '' %}"
                     style="float: left;{% if order not in sort_list %}visibility:hidden;{% endif %}">
                         <span class="fa fa-times"></span>
                     </a>

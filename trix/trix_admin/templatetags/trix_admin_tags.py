@@ -33,9 +33,14 @@ def reverse_sort(order, is_negative):
     return '-' + order if is_negative else order
 
 
-# https://stackoverflow.com/questions/5755150/altering-one-query-parameter-in-a-url-django#17068299
 @register.simple_tag(takes_context=True)
 def url_replace(context, field, value):
     dict_ = context['request'].GET.copy()
-    dict_[field] = value
+    if value == '' or value is None:
+        try:
+            del dict_[field]
+        except KeyError:
+            pass
+    else:
+        dict_[field] = value
     return dict_.urlencode()
