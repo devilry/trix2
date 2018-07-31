@@ -8,6 +8,7 @@ from trix.trix_student.views import assignments
 from trix.trix_student.views import course
 from trix.trix_student.views import howsolved
 from trix.trix_student.views import permalink
+from trix.trix_student.views import users
 
 
 urlpatterns = [
@@ -27,6 +28,9 @@ urlpatterns = [
     url('^permalink/list/$',
         permalink.PermalinkListView.as_view(),
         name='trix_student_permalink_list_view'),
+    url('^user/$',
+        users.ProfilePageView.as_view(),
+        name='profile-page'),
     url(r'^login$', login.TrixLoginView.as_view(), name='trix-login'),
     url(r'^logout$',
         auth_views.logout,

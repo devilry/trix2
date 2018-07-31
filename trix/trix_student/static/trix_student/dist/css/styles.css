@@ -8544,6 +8544,9 @@ nav#trix_header {
   border: none;
   margin-bottom: 0;
 }
+.trix-nav-links {
+  float: left;
+}
 .page-header {
   background: #f4f4f4;
   margin-top: 0;
