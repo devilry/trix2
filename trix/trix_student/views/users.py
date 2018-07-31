@@ -28,7 +28,3 @@ class ProfilePageView(LoginRequiredMixin, ListView):
             return _('Administrator for ') + courses_string
         else:
             return _('Student')
-
-    # def get_queryset(self):
-    #     howsolved = models.HowSolved.objects.all()
-    #     return howsolved
