@@ -8663,7 +8663,8 @@ fieldset[disabled] .btn-trix-admin.active {
 .trix-assignment {
   margin-top: 30px;
   margin-bottom: 30px;
-  padding: 15px 20px;
+  padding: 20px;
+  border-radius: 4px;
   font-size: 18px;
 }
 @media (min-width: 768px) {
@@ -8693,7 +8694,7 @@ fieldset[disabled] .btn-trix-admin.active {
   margin-left: 10px;
 }
 .trix-assignment .trix-assignmentsolution {
-  margin-top: 10px;
+  margin-top: 20px;
 }
 .trix-assignment .trix-assignmentsolution .trix-assignmentsolutionexpander {
   cursor: pointer;
@@ -9217,6 +9218,43 @@ body {
 .trix-message-container {
   background-color: #377CA8;
   display: none;
+}
+/**
+* Styles for printing
+**/
+@media print {
+  body {
+    background: white;
+    font-size: 12pt;
+  }
+  a[href]:after {
+    content: none !important;
+  }
+  .container > h1,
+  .container > p {
+    text-align: center;
+  }
+  .page-header {
+    margin-bottom: 0;
+    padding-bottom: 20px;
+    border-bottom: 1px solid #aaa;
+  }
+  .trix-assignment {
+    background-color: white;
+    padding: 0;
+    border-bottom: 1px solid #bbb;
+  }
+  .assignment-tags > button {
+    border: 0;
+  }
+  .trix-markdownarticle {
+    height: auto !important;
+    display: block !important;
+    border: 0 !important;
+  }
+  .collapse {
+    display: block;
+  }
 }
 .codehilite {
   /* Comment */

@@ -35,7 +35,7 @@
         {% trix_assignment_markdown assignment.text %}
     </section>
     {% if request.user.is_authenticated and not disable_howsolved_box %}
-        <div class="trix-assignmenthowsolved" ng-cloak>
+        <div class="trix-assignmenthowsolved trix-no-print" ng-cloak>
             <p>
                 {% trans "How did you solve the assignment?" %}
             </p>
@@ -82,7 +82,7 @@
                     class="trix-assignmentsolutionexpander"
                     ng-class="{'active': isVisible}">
                 {% trans "See solution" %}
-                <span class="fa" ng-class="{
+                <span class="fa trix-no-print" ng-class="{
                     'fa-angle-right': !isVisible,
                     'fa-angle-down': isVisible
                 }"></span>
