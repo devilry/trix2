@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: trix_student\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-07-27 13:46+0200\n"
+"POT-Creation-Date: 2018-07-31 15:19+0200\n"
 "PO-Revision-Date: 2015-01-03 17:40+0100\n"
 "Last-Translator: Espen Angell Kristiansen <post@espenak.net>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -76,7 +76,7 @@ msgstr ""
 "på din egen progresjon."
 
 #: trix/trix_student/templates/trix_student/base.django.html:38
-#: trix/trix_student/templates/trix_student/include/header.django.html:41
+#: trix/trix_student/templates/trix_student/include/header.django.html:47
 msgid "Sign in"
 msgstr "Logg inn"
 
@@ -161,11 +161,15 @@ msgstr "Vis løsningsforslag"
 msgid "Toggle navigation"
 msgstr "Vis/skjul navigering"
 
-#: trix/trix_student/templates/trix_student/include/header.django.html:26
+#: trix/trix_student/templates/trix_student/include/header.django.html:27
 msgid "Administer"
 msgstr "Administrer"
 
-#: trix/trix_student/templates/trix_student/include/header.django.html:36
+#: trix/trix_student/templates/trix_student/include/header.django.html:32
+msgid "Profile"
+msgstr ""
+
+#: trix/trix_student/templates/trix_student/include/header.django.html:42
 msgid "Sign out"
 msgstr "Logg ut"
 
@@ -215,16 +219,35 @@ msgstr "Liste over permalinker"
 msgid "All the permalinks created are listed below"
 msgstr "Under listes alle permalinker opp"
 
+#: trix/trix_student/templates/trix_student/users.django.html:6
+#, fuzzy
+#| msgid "Username"
+msgid "User"
+msgstr "Brukernavn"
+
+#: trix/trix_student/templates/trix_student/users.django.html:11
+msgid "Account overview"
+msgstr "Kontooversikt"
+
+#: trix/trix_student/templates/trix_student/users.django.html:12
+#: trix/trix_student/views/login.py:13
+msgid "Email"
+msgstr "E-post"
+
+#: trix/trix_student/templates/trix_student/users.django.html:14
+msgid "Last login"
+msgstr "Sist innlogget"
+
+#: trix/trix_student/templates/trix_student/users.django.html:16
+msgid "Role"
+msgstr "Rolle"
+
 #: trix/trix_student/views/common.py:119
 msgid ""
 "You have completed {{ solvedPercentage }} percent of assignments matching "
 "the currently selected tags."
 msgstr ""
 "Du har fullført {{ solvedPercentage }}% av oppgavene med de valgte taggene."
-
-#: trix/trix_student/views/login.py:13
-msgid "Email"
-msgstr "E-post"
 
 #: trix/trix_student/views/login.py:15
 msgid "Username"
@@ -244,3 +267,15 @@ msgid ""
 msgstr ""
 "Vennligst skriv inn en gyldig e-postaddresse og passord. Begge feltene "
 "skiller mellom store og små bokstaver."
+
+#: trix/trix_student/views/users.py:24
+msgid "Superuser"
+msgstr "Superbruker"
+
+#: trix/trix_student/views/users.py:28
+msgid "Administrator for "
+msgstr "Administrator for"
+
+#: trix/trix_student/views/users.py:30
+msgid "Student"
+msgstr "Student"

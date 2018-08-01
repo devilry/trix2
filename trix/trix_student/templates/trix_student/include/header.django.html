@@ -19,11 +19,17 @@
         </div>
         <div class="collapse navbar-collapse navbar-responsive-collapse" collapse="trixNavigationCollapse">
             <ul class="nav navbar-nav navbar-right">
-                {% if request.user.is_authenticated and request.user.is_admin_on_anything %}
-                    <li>
-                        <a href="/a/">
+                {% if request.user.is_authenticated %}
+                    <li style="display: inline">
+                    {% if request.user.is_admin %}
+                        <a href="/a/" class="trix-nav-links">
                             <span class="fas fa-cog"></span>
                             {% trans "Administer" %}
+                        </a>
+                    {% endif %}
+                        <a href='/user/' class="trix-nav-links">
+                            <span class="fa fa-user"></span>
+                            {% trans "Profile" %}
                         </a>
                     </li>
                 {% endif %}

@@ -1,0 +1,31 @@
+{% extends 'trix_student/base.django.html' %}
+{% load i18n %}
+
+{% block not_signed_in_warning %}{% endblock %}
+
+{% block title %}{% trans "User" %}{% endblock %}
+
+{% block body %}
+<div class="page-header">
+    <div class="container">
+        <h1>{% trans "Account overview" %}</h3>
+        <h3>{% trans "Email" %}</h3>
+        <p>{{ user }}</p>
+        <h3>{% trans "Last login" %}</h3>
+        <p>{{ user.last_login }}</p>
+        <h3>{% trans "Role" %}</h3>
+        <p>{{ user_role }}</p>
+    </div>
+</div>
+{% comment %}
+TODO: List assignments that the user has solved
+<div class="container">
+    {% include "trix_student/include/pager.django.html" with pager_extraclass="pager-no-topmargin hidden-xs" %}
+    {% for item in solved_assignments %}
+        <h3>{{ item.assignment }}</h3>
+        <p>{{ item.howsolved }}</p>
+    {% endfor %}
+    {% include "trix_student/include/pager.django.html" %}
+</div>
+{% endcomment %}
+{% endblock body %}
