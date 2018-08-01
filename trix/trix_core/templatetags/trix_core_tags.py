@@ -16,3 +16,21 @@ def trix_assignment_markdown(inputmarkdown):
         {% trix_assignment_markdown "Hello world" %}
     """
     return trix_markdown.assignment_markdown(inputmarkdown)
+
+
+@register.simple_tag(takes_context=True)
+def url_replace(context, field, value):
+    dict_ = context['request'].GET.copy()
+    if value == '' or value is None:
+        try:
+            del dict_[field]
+        except KeyError:
+            pass
+    else:
+        dict_[field] = value
+    print(dict_)
+    return dict_.urlencode()
+
+@register.filter
+def add_string_list(string_list, item):
+    return string_list + ',' + item

@@ -17,12 +17,18 @@
             Extra css class(es) to add to the pager in addition to ``.pager``.
 {% endcomment %}
 {% load i18n %}
+{% load trix_core_tags %}
 
 {% if is_paginated %}
     <div class="container-fluid pager-container">
         <ul class="pager {{ pager_extraclass }}">
             <li class="previous {% if not page_obj.has_previous %}disabled{% endif %}">
-                <a href="?page={% if page_obj.has_previous %}{{ page_obj.previous_page_number }}{% else %}1{% endif %}&amp;{{ extra_querystring }}">
+                {# <a href="?page={% if page_obj.has_previous %}{{ page_obj.previous_page_number }}{% else %}first{% endif %}"> #}
+                {% if page_obj.has_previous %}
+                    <a href="?{% url_replace 'page' page_obj.previous_page_number %}">
+                {% else %}
+                    <a href="?{% url_replace 'page' '1' %}">
+                {% endif %}
                     <i class="fa fa-chevron-left"></i>
                     <span class="sr-only">{% trans "Previous" %}</span>
                 </a>
@@ -31,7 +37,11 @@
                 {% blocktrans with number=page_obj.number total=page_obj.paginator.num_pages %}Page {{ number }} of {{ total }}{% endblocktrans %}
             </li>
             <li class="next {% if not page_obj.has_next %}disabled{% endif %}">
-                <a href="?page={% if page_obj.has_next %}{{ page_obj.next_page_number }}{% else %}last{% endif %}&amp;{{ extra_querystring }}">
+                {% if page_obj.has_next %}
+                    <a href="?{% url_replace 'page' page_obj.next_page_number %}">
+                {% else %}
+                    <a href="?{% url_replace 'page' 'last' %}">
+                {% endif %}
                     <i class="fa fa-chevron-right"></i>
                     <span class="sr-only">{% trans "Next" %}</span>
                 </a>

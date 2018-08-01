@@ -1,5 +1,6 @@
 {% extends "cradmin_legacy/base.django.html" %}
-{% load i18n %}l
+{% load i18n %}
+{% load trix_core_tags %}
 {% load trix_admin_tags %}
 {% load cradmin_legacy_tags %}
 
@@ -24,7 +25,7 @@
                             {% if tag == course_tag %}
                                 disabled
                             {% else %}
-                                href="?tags={{ selected_tags_list | cut_tag_preserve:tag }}"
+                                href="?{% url_replace 'tags' selected_tags_list|cut_tag_preserve:tag %}"
                             {% endif %}>
                         {% if tag != course_tag %}
                             <span class="fa fa-times"></span>
@@ -34,14 +35,12 @@
                 {% endfor %}
                 {% for tag in selectable_tags_list %}
                     <a class="btn btn-link"
-                            href="?tags={{ selected_tags_string }},{{ tag }}">
+                            href="?{% url_replace 'tags' selected_tags_string|add_string_list:tag %}">
                         <span class="fa fa-plus"></span>
                         {{ tag }}
                     </a>
                 {% endfor %}
-
             </p>
-
             <p>
                 {% blocktrans %}
                 The stats below show how many percentage of the total number of users that
