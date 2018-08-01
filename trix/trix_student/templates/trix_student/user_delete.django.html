@@ -1,0 +1,26 @@
+{% extends 'trix_student/users.django.html' %}
+{% load i18n %}
+
+{% block body %}
+    <div class="page-header">
+        <div class="container">
+            <div class="trix-user-text">
+                <h1>{% trans "Delete user" %}</h1>
+                <p>
+                {% blocktrans %}
+                    Are you sure you want to delete {{ object }}? This cannot be undone!
+                    All progress will be deleted and cannot be recovered.
+                {% endblocktrans %}
+                </p>
+            </div>
+            <form action="" method="post">{% csrf_token %}
+                <div class="trix-user-button">
+                    <button type="submit" class="btn btn-danger">{% trans "Delete" %}</button>
+                    <a class="btn btn-cancel" href="{% url 'trix_profile_page' %}">
+                        {% trans "Cancel" %}
+                    </a>
+                </div>
+            </form>
+        </div>
+    </div>
+{% endblock %}

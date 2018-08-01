@@ -48,7 +48,7 @@
                 {% if not remove_login %}
                 <li>
                     {% if request.user.is_authenticated %}
-                        <a href="{% url 'trix-logout' %}?next={{ request.get_full_path | urlencode }}">
+                        <a href="{% url 'trix_logout' %}?next={{ request.get_full_path | urlencode }}">
                             <span class="fas fa-sign-out-alt"></span>
                             {% trans "Sign out" %}
                         </a>

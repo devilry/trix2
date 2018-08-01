@@ -1,6 +1,9 @@
-from django.views.generic import ListView
+from django.views.generic import ListView, DeleteView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.utils.translation import ugettext_lazy as _
+from django.shortcuts import get_object_or_404
+from django.http import Http404
+from django.urls import reverse_lazy
 
 from trix.trix_core import models
 
@@ -8,7 +11,6 @@ from trix.trix_core import models
 class ProfilePageView(LoginRequiredMixin, ListView):
     template_name = 'trix_student/users.django.html'
     model = models.HowSolved
-    paginate_by = 2
 
     def get_context_data(self):
         context = super(ProfilePageView, self).get_context_data()
@@ -28,3 +30,15 @@ class ProfilePageView(LoginRequiredMixin, ListView):
             return _('Administrator for ') + courses_string
         else:
             return _('Student')
+
+
+class UserDeleteView(LoginRequiredMixin, DeleteView):
+    template_name = 'trix_student/user_delete.django.html'
+    model = models.User
+    success_url = reverse_lazy('trix_student_dashboard')
+
+    def get_object(self, queryset=None):
+        user = super(UserDeleteView, self).get_object()
+        if not user.id == self.request.user.id:
+            raise Http404
+        return user
