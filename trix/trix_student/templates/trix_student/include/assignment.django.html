@@ -87,7 +87,7 @@
                     'fa-angle-down': isVisible
                 }"></span>
             </a>
-            <section class="trix-markdownarticle" collapse="!isVisible">
+            <section class="trix-markdownarticle" ng-class="{'collapse': !isVisible}">
                 {% trix_assignment_markdown assignment.solution %}
             </section>
         </section>

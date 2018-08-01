@@ -5,6 +5,13 @@ angular.module('trixStudent', [
   'trixStudent.assignments.controllers'
 ])
 
+.config([
+    '$httpProvider'
+    ($httpProvider) ->
+        $httpProvider.defaults.xsrfHeaderName = 'X-CSRFToken'
+        $httpProvider.defaults.xsrfCookieName = 'csrftoken'
+        ])
+
 .run([
   '$http', '$cookies'
   ($http, $cookies) ->

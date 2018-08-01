@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: trix_admin\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-07-31 15:19+0200\n"
+"POT-Creation-Date: 2018-08-01 17:36+0200\n"
 "PO-Revision-Date: 2015-01-08 12:35+0100\n"
 "Last-Translator: Espen Angell Kristiansen <post@espenak.net>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,21 +18,25 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Poedit 1.6.5\n"
 
-#: trix/trix_admin/cradmin.py:36
+#: trix/trix_admin/cradmin.py:37
+msgid "Frontpage"
+msgstr ""
+
+#: trix/trix_admin/cradmin.py:42
 msgid "Course overview"
 msgstr "Kursoversikt"
 
-#: trix/trix_admin/cradmin.py:41
+#: trix/trix_admin/cradmin.py:47
 msgid "Assignments"
 msgstr "Oppgaver"
 
-#: trix/trix_admin/cradmin.py:46
+#: trix/trix_admin/cradmin.py:52
 msgid "Permalinks"
 msgstr "Permalinker"
 
-#: trix/trix_admin/cradmin.py:51
-#: trix/trix_admin/templates/trix_admin/statistics.django.html:6
-#: trix/trix_admin/templates/trix_admin/statistics.django.html:12
+#: trix/trix_admin/cradmin.py:57
+#: trix/trix_admin/templates/trix_admin/statistics.django.html:7
+#: trix/trix_admin/templates/trix_admin/statistics.django.html:13
 msgid "Statistics"
 msgstr "Statistikk"
 
@@ -86,11 +90,11 @@ msgstr "Gå til superbruker panelet"
 msgid "You need to ask a superuser to grant you superuser access."
 msgstr "Du må be en superbruker om å gjøre deg til superbruker."
 
-#: trix/trix_admin/templates/trix_admin/statistics.django.html:20
+#: trix/trix_admin/templates/trix_admin/statistics.django.html:21
 msgid "Aggregated statistics on how the assignments where solved"
 msgstr "Aggregert statistikk over hvordan oppgavene ble løst"
 
-#: trix/trix_admin/templates/trix_admin/statistics.django.html:46
+#: trix/trix_admin/templates/trix_admin/statistics.django.html:45
 msgid ""
 "\n"
 "                The stats below show how many percentage of the total number "
@@ -104,34 +108,34 @@ msgstr ""
 "som har løst oppgaven på egenhånd, med hjelp, eller ikke løst den.\n"
 "               "
 
-#: trix/trix_admin/templates/trix_admin/statistics.django.html:53
+#: trix/trix_admin/templates/trix_admin/statistics.django.html:52
 msgid "Number of users:"
 msgstr "Antall brukere:"
 
-#: trix/trix_admin/templates/trix_admin/statistics.django.html:54
+#: trix/trix_admin/templates/trix_admin/statistics.django.html:53
 msgid "Number of assignments:"
 msgstr "Antall oppgaver:"
 
-#: trix/trix_admin/templates/trix_admin/statistics.django.html:58
+#: trix/trix_admin/templates/trix_admin/statistics.django.html:57
 msgid "Download csv file"
 msgstr "Last ned csv fil"
 
-#: trix/trix_admin/templates/trix_admin/statistics.django.html:93
+#: trix/trix_admin/templates/trix_admin/statistics.django.html:92
 #: trix/trix_admin/views/statistics.py:148
 msgid "Completed by their own"
 msgstr "Løst på egenhånd"
 
-#: trix/trix_admin/templates/trix_admin/statistics.django.html:99
+#: trix/trix_admin/templates/trix_admin/statistics.django.html:98
 #: trix/trix_admin/views/statistics.py:155
 msgid "Completed with help"
 msgstr "Løst med hjelp"
 
-#: trix/trix_admin/templates/trix_admin/statistics.django.html:105
+#: trix/trix_admin/templates/trix_admin/statistics.django.html:104
 #: trix/trix_admin/views/statistics.py:159
 msgid "Not completed"
 msgstr "Ikke løst"
 
-#: trix/trix_admin/templates/trix_admin/statistics.django.html:111
+#: trix/trix_admin/templates/trix_admin/statistics.django.html:110
 msgid "There was no assignments matching the choosen tag"
 msgstr "Det fantes ingen oppgaver som er merket med valgte tag"
 

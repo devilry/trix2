@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: trix_student\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-07-31 15:19+0200\n"
+"POT-Creation-Date: 2018-08-01 17:36+0200\n"
 "PO-Revision-Date: 2015-01-03 17:40+0100\n"
 "Last-Translator: Espen Angell Kristiansen <post@espenak.net>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -76,7 +76,7 @@ msgstr ""
 "på din egen progresjon."
 
 #: trix/trix_student/templates/trix_student/base.django.html:38
-#: trix/trix_student/templates/trix_student/include/header.django.html:47
+#: trix/trix_student/templates/trix_student/include/header.django.html:53
 msgid "Sign in"
 msgstr "Logg inn"
 
@@ -162,27 +162,31 @@ msgid "Toggle navigation"
 msgstr "Vis/skjul navigering"
 
 #: trix/trix_student/templates/trix_student/include/header.django.html:27
+msgid "Superuser panel"
+msgstr "Superbruker panel"
+
+#: trix/trix_student/templates/trix_student/include/header.django.html:33
 msgid "Administer"
 msgstr "Administrer"
 
-#: trix/trix_student/templates/trix_student/include/header.django.html:32
+#: trix/trix_student/templates/trix_student/include/header.django.html:38
 msgid "Profile"
-msgstr ""
+msgstr "Profil"
 
-#: trix/trix_student/templates/trix_student/include/header.django.html:42
+#: trix/trix_student/templates/trix_student/include/header.django.html:48
 msgid "Sign out"
 msgstr "Logg ut"
 
-#: trix/trix_student/templates/trix_student/include/pager.django.html:27
+#: trix/trix_student/templates/trix_student/include/pager.django.html:33
 msgid "Previous"
 msgstr "Forrige"
 
-#: trix/trix_student/templates/trix_student/include/pager.django.html:31
+#: trix/trix_student/templates/trix_student/include/pager.django.html:37
 #, python-format
 msgid "Page %(number)s of %(total)s"
 msgstr "Side %(number)s av %(total)s"
 
-#: trix/trix_student/templates/trix_student/include/pager.django.html:36
+#: trix/trix_student/templates/trix_student/include/pager.django.html:46
 msgid "Next"
 msgstr "Neste"
 
@@ -230,15 +234,19 @@ msgid "Account overview"
 msgstr "Kontooversikt"
 
 #: trix/trix_student/templates/trix_student/users.django.html:12
+msgid "Name"
+msgstr ""
+
+#: trix/trix_student/templates/trix_student/users.django.html:14
 #: trix/trix_student/views/login.py:13
 msgid "Email"
 msgstr "E-post"
 
-#: trix/trix_student/templates/trix_student/users.django.html:14
+#: trix/trix_student/templates/trix_student/users.django.html:16
 msgid "Last login"
 msgstr "Sist innlogget"
 
-#: trix/trix_student/templates/trix_student/users.django.html:16
+#: trix/trix_student/templates/trix_student/users.django.html:18
 msgid "Role"
 msgstr "Rolle"
 
@@ -274,7 +282,7 @@ msgstr "Superbruker"
 
 #: trix/trix_student/views/users.py:28
 msgid "Administrator for "
-msgstr "Administrator for"
+msgstr "Administrator for "
 
 #: trix/trix_student/views/users.py:30
 msgid "Student"

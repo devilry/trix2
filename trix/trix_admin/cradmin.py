@@ -1,9 +1,10 @@
 from django.contrib.auth.decorators import login_required
 from django.utils.translation import ugettext_lazy as _
+from django.urls import reverse
 from cradmin_legacy import crinstance
-from trix.trix_admin.views import roleselect
 from cradmin_legacy import crmenu
 
+from trix.trix_admin.views import roleselect
 from trix.trix_core.models import Course
 from .views import assignments
 from .views import permalinks
@@ -32,6 +33,11 @@ class Menu(crmenu.Menu):
         return MenuItem
 
     def build_menu(self):
+        self.add_menuitem(
+            label=_('Frontpage'),
+            url=reverse('trix_student_dashboard'),
+            extra_context_data={'icon': 'home'}
+        )
         self.add_menuitem(
             label=_('Course overview'),
             url=self.cradmin_instance.roleselectview_url(),

@@ -78,10 +78,11 @@ angular.module('trixStudent.assignments.controllers', [])
         howsolved: howsolved
       }
       $http.post($scope._getApiUrl(), data)
-        .success (data) ->
+        .then (response) ->
           $scope.saving = false
-          $scope.howsolved = data.howsolved
-        .error (data) ->
+          $scope.howsolved = response.data.howsolved
+        .catch (response) ->
+          console.log response
           $scope._showError('An error occurred!')
 
     $scope.solvedOnMyOwn = ->
@@ -93,11 +94,11 @@ angular.module('trixStudent.assignments.controllers', [])
     $scope.notSolved = ->
       $scope.saving = true
       $http.delete($scope._getApiUrl())
-        .success (data) ->
+        .then (response) ->
           $scope.saving = false
           $scope.howsolved = null
-        .error (data, status) ->
-          if status == 404  # Handle 404 just like 200
+        .catch (response) ->
+          if reponse.status == 404  # Handle 404 just like 200
             $scope.saving = false
             $scope.howsolved = null
           else
@@ -114,9 +115,9 @@ angular.module('trixStudent.assignments.controllers', [])
     $scope._loadProgress = ->
       $scope.loading = true
       $http.get(apiUrl.toString())
-        .success (data) ->
+        .then (response) ->
           $scope.loading = false
-          $scope.solvedPercentage = data.percent
+          $scope.solvedPercentage = response.data.percent
           if $scope.solvedPercentage > 1 and $scope.solvedPercentage < 20
             $scope.progressBarClass = 'progress-bar-danger'
           else if $scope.solvedPercentage < 45
@@ -125,8 +126,8 @@ angular.module('trixStudent.assignments.controllers', [])
             $scope.progressBarClass = 'progress-bar-success'
           else
             $scope.progressBarClass = ''
-        .error (data) ->
-          console.error('Failed to load progress:', data)
+        .catch (response) ->
+          console.error('Failed to load progress:', reponse.statusText)
 
     unbindProgressChanged = $rootScope.$on 'assignments.progressChanged', ->
       $scope._loadProgress()

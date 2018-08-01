@@ -7,7 +7,7 @@ angular.module('trixStudent.directives', [])
       'checked': '=trixAriaChecked'
     }
     controller: ($scope) ->
-      
+
     link: (scope, element, attrs) ->
       updateAriaChecked = ->
         if scope.checked
@@ -17,7 +17,6 @@ angular.module('trixStudent.directives', [])
 
       updateAriaChecked()
       scope.$watch attrs.trixAriaChecked, (newValue, oldValue) ->
-        # console.log 'Changed!', newValue
         updateAriaChecked()
 
       return

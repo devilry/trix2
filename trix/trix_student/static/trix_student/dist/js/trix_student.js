@@ -1,5 +1,11 @@
 (function() {
-  angular.module('trixStudent', ['ngCookies', 'ui.bootstrap', 'trixStudent.directives', 'trixStudent.assignments.controllers']).run([
+  angular.module('trixStudent', ['ngCookies', 'ui.bootstrap', 'trixStudent.directives', 'trixStudent.assignments.controllers']).config([
+    '$httpProvider',
+    function($httpProvider) {
+      $httpProvider.defaults.xsrfHeaderName = 'X-CSRFToken';
+      return $httpProvider.defaults.xsrfCookieName = 'csrftoken';
+    }
+  ]).run([
     '$http',
     '$cookies',
     function($http,
@@ -104,10 +110,11 @@
           howsolved: howsolved
         };
         return $http.post($scope._getApiUrl(),
-    data).success(function(data) {
+    data).then(function(response) {
           $scope.saving = false;
-          return $scope.howsolved = data.howsolved;
-        }).error(function(data) {
+          return $scope.howsolved = response.data.howsolved;
+        }).catch(function(response) {
+          console.log(response);
           return $scope._showError('An error occurred!');
         });
       };
@@ -119,12 +126,11 @@
       };
       return $scope.notSolved = function() {
         $scope.saving = true;
-        return $http.delete($scope._getApiUrl()).success(function(data) {
+        return $http.delete($scope._getApiUrl()).then(function(response) {
           $scope.saving = false;
           return $scope.howsolved = null;
-        }).error(function(data,
-    status) {
-          if (status === 404) { // Handle 404 just like 200
+        }).catch(function(response) {
+          if (reponse.status === 404) { // Handle 404 just like 200
             $scope.saving = false;
             return $scope.howsolved = null;
           } else {
@@ -147,9 +153,9 @@
       apiUrl.query.progressjson = '1';
       $scope._loadProgress = function() {
         $scope.loading = true;
-        return $http.get(apiUrl.toString()).success(function(data) {
+        return $http.get(apiUrl.toString()).then(function(response) {
           $scope.loading = false;
-          $scope.solvedPercentage = data.percent;
+          $scope.solvedPercentage = response.data.percent;
           if ($scope.solvedPercentage > 1 && $scope.solvedPercentage < 20) {
             return $scope.progressBarClass = 'progress-bar-danger';
           } else if ($scope.solvedPercentage < 45) {
@@ -159,9 +165,9 @@
           } else {
             return $scope.progressBarClass = '';
           }
-        }).error(function(data) {
+        }).catch(function(response) {
           return console.error('Failed to load progress:',
-    data);
+    reponse.statusText);
         });
       };
       unbindProgressChanged = $rootScope.$on('assignments.progressChanged',
@@ -194,7 +200,6 @@
         };
         updateAriaChecked();
         scope.$watch(attrs.trixAriaChecked, function(newValue, oldValue) {
-          // console.log 'Changed!', newValue
           return updateAriaChecked();
         });
       }
