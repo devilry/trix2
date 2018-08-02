@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: trix_student\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-07-31 15:19+0200\n"
+"POT-Creation-Date: 2018-08-01 19:59+0200\n"
 "PO-Revision-Date: 2015-01-03 17:40+0100\n"
 "Last-Translator: Espen Angell Kristiansen <post@espenak.net>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -76,7 +76,7 @@ msgstr ""
 "på din egen progresjon."
 
 #: trix/trix_student/templates/trix_student/base.django.html:38
-#: trix/trix_student/templates/trix_student/include/header.django.html:47
+#: trix/trix_student/templates/trix_student/include/header.django.html:58
 msgid "Sign in"
 msgstr "Logg inn"
 
@@ -133,27 +133,31 @@ msgstr "For mer informasjon"
 msgid "read the getting started guide"
 msgstr "les kom igang guiden"
 
-#: trix/trix_student/templates/trix_student/include/assignment.django.html:40
+#: trix/trix_student/templates/trix_student/include/assignment.django.html:23
+msgid "Hidden assignment"
+msgstr "Skjult oppgave"
+
+#: trix/trix_student/templates/trix_student/include/assignment.django.html:43
 msgid "How did you solve the assignment?"
 msgstr "Hvordan løste du oppgaven?"
 
-#: trix/trix_student/templates/trix_student/include/assignment.django.html:50
+#: trix/trix_student/templates/trix_student/include/assignment.django.html:53
 msgid "On my own"
 msgstr "På egenhånd"
 
-#: trix/trix_student/templates/trix_student/include/assignment.django.html:59
+#: trix/trix_student/templates/trix_student/include/assignment.django.html:62
 msgid "With help"
 msgstr "Med hjelp"
 
-#: trix/trix_student/templates/trix_student/include/assignment.django.html:68
+#: trix/trix_student/templates/trix_student/include/assignment.django.html:71
 msgid "Not solved"
 msgstr "Ikke løst"
 
-#: trix/trix_student/templates/trix_student/include/assignment.django.html:74
+#: trix/trix_student/templates/trix_student/include/assignment.django.html:77
 msgid "Saving..."
 msgstr "Lagrer..."
 
-#: trix/trix_student/templates/trix_student/include/assignment.django.html:84
+#: trix/trix_student/templates/trix_student/include/assignment.django.html:87
 msgid "See solution"
 msgstr "Vis løsningsforslag"
 
@@ -161,28 +165,33 @@ msgstr "Vis løsningsforslag"
 msgid "Toggle navigation"
 msgstr "Vis/skjul navigering"
 
-#: trix/trix_student/templates/trix_student/include/header.django.html:27
+#: trix/trix_student/templates/trix_student/include/header.django.html:28
+#: trix/trix_student/views/users.py:24
+msgid "Superuser"
+msgstr "Superbruker"
+
+#: trix/trix_student/templates/trix_student/include/header.django.html:36
 msgid "Administer"
 msgstr "Administrer"
 
-#: trix/trix_student/templates/trix_student/include/header.django.html:32
+#: trix/trix_student/templates/trix_student/include/header.django.html:43
 msgid "Profile"
-msgstr ""
+msgstr "Profil"
 
-#: trix/trix_student/templates/trix_student/include/header.django.html:42
+#: trix/trix_student/templates/trix_student/include/header.django.html:53
 msgid "Sign out"
 msgstr "Logg ut"
 
-#: trix/trix_student/templates/trix_student/include/pager.django.html:27
+#: trix/trix_student/templates/trix_student/include/pager.django.html:33
 msgid "Previous"
 msgstr "Forrige"
 
-#: trix/trix_student/templates/trix_student/include/pager.django.html:31
+#: trix/trix_student/templates/trix_student/include/pager.django.html:37
 #, python-format
 msgid "Page %(number)s of %(total)s"
 msgstr "Side %(number)s av %(total)s"
 
-#: trix/trix_student/templates/trix_student/include/pager.django.html:36
+#: trix/trix_student/templates/trix_student/include/pager.django.html:46
 msgid "Next"
 msgstr "Neste"
 
@@ -268,14 +277,13 @@ msgstr ""
 "Vennligst skriv inn en gyldig e-postaddresse og passord. Begge feltene "
 "skiller mellom store og små bokstaver."
 
-#: trix/trix_student/views/users.py:24
-msgid "Superuser"
-msgstr "Superbruker"
-
 #: trix/trix_student/views/users.py:28
 msgid "Administrator for "
-msgstr "Administrator for"
+msgstr "Administrator for "
 
 #: trix/trix_student/views/users.py:30
 msgid "Student"
 msgstr "Student"
+
+#~ msgid "Superuser panel"
+#~ msgstr "Superbruker panel"

@@ -6,5 +6,6 @@ css_icon_map.FONT_AWESOME.update({'arrow-up': 'fa fa-arrow-up',
                                   'database': 'fa fa-database',
                                   'link': 'fa fa-link',
                                   'chart-bar': 'fa fa-chart-bar',
+                                  'home': 'fa fa-home',
                                   'wrench': 'fa fa-wrench'})
 FONT_AWESOME = css_icon_map.FONT_AWESOME

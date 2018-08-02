@@ -1,7 +1,7 @@
 {% load i18n %}
 {% load trix_core_tags %}
 
-<section class="trix-assignment"
+<section class="trix-assignment {% if assignment.hidden %}trix-assignment-hidden{% endif %}"
         ng-controller="AssignmentCtrl"
         ng-class="boxClass"
         ng-init="
@@ -19,6 +19,9 @@
         <a href="{% url 'trix_assignments_view' assignment.id %}" style="color:black;">
             {{ assignment }}
         </a>
+        {% if assignment.hidden %}
+            <span class="fa fa-eye-slash" style="font-size: 24px;" title="{% trans 'Hidden assignment' %}"></span>
+        {% endif %}
     </h2>
 
     {% if not disable_tags %}
@@ -87,7 +90,7 @@
                     'fa-angle-down': isVisible
                 }"></span>
             </a>
-            <section class="trix-markdownarticle" collapse="!isVisible">
+            <section class="trix-markdownarticle" ng-class="{'collapse': !isVisible}">
                 {% trix_assignment_markdown assignment.solution %}
             </section>
         </section>

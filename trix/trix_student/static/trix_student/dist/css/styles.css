@@ -8544,9 +8544,6 @@ nav#trix_header {
   border: none;
   margin-bottom: 0;
 }
-.trix-nav-links {
-  float: left;
-}
 .page-header {
   background: #f4f4f4;
   margin-top: 0;
@@ -8704,6 +8701,9 @@ fieldset[disabled] .btn-trix-admin.active {
   padding: 20px;
   margin-top: 5px;
   border: 1px solid #eee;
+}
+.trix-assignment-hidden {
+  background: repeating-linear-gradient(-45deg, #ccc, #ccc 1px, transparent 1px, transparent 60px);
 }
 #assignments-taggingbox .assignments-progressbox {
   min-height: 80px;

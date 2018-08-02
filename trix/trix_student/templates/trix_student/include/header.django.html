@@ -17,17 +17,28 @@
                 Trix
             </a>
         </div>
-        <div class="collapse navbar-collapse navbar-responsive-collapse" collapse="trixNavigationCollapse">
+        <div class="collapse navbar-collapse navbar-responsive-collapse"
+                ng-class="{'collapse': trixNavigationCollapse}">
             <ul class="nav navbar-nav navbar-right">
                 {% if request.user.is_authenticated %}
-                    <li style="display: inline">
                     {% if request.user.is_admin %}
-                        <a href="/a/" class="trix-nav-links">
+                    <li>
+                        <a href="/admin/">
+                            <span class="fas fa-cogs"></span>
+                            {% trans "Superuser" %}
+                        </a>
+                    </li>
+                    {% endif %}
+                    {% if request.user.is_admin_on_anything %}
+                    <li>
+                        <a href="/a/">
                             <span class="fas fa-cog"></span>
                             {% trans "Administer" %}
                         </a>
+                    </li>
                     {% endif %}
-                        <a href='/user/' class="trix-nav-links">
+                    <li>
+                        <a href='/user/'>
                             <span class="fa fa-user"></span>
                             {% trans "Profile" %}
                         </a>
