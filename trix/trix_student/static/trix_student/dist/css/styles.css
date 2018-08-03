@@ -9218,6 +9218,16 @@ body {
   display: none;
 }
 /**
+* Errors
+**/
+.trix-error {
+  text-align: center;
+}
+.trix-error > h1,
+.trix-error > p {
+  padding-bottom: 20px;
+}
+/**
 * Styles for printing
 **/
 @media print {

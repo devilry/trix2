@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: trix_admin\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-08-01 19:59+0200\n"
+"POT-Creation-Date: 2018-08-03 19:26+0200\n"
 "PO-Revision-Date: 2015-01-08 12:35+0100\n"
 "Last-Translator: Espen Angell Kristiansen <post@espenak.net>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -211,7 +211,7 @@ msgstr "Slett tag"
 msgid "Type in the tag you want to remove from the selected assignments"
 msgstr "Skriv inn taggen du vil fjerne fra valgte oppgaver"
 
-#: trix/trix_admin/views/roleselect.py:7
+#: trix/trix_admin/views/roleselect.py:9
 msgid "Select a course"
 msgstr "Velg et kurs"
 
@@ -237,18 +237,18 @@ msgstr "Prosent"
 msgid "Number"
 msgstr "Antall"
 
-#: trix/trix_admin/views/statistics.py:202
+#: trix/trix_admin/views/statistics.py:208
 msgid "Title"
 msgstr "Tittel"
 
-#: trix/trix_admin/views/statistics.py:203
+#: trix/trix_admin/views/statistics.py:209
 msgid "Date created"
 msgstr "Dato opprettet"
 
-#: trix/trix_admin/views/statistics.py:204
+#: trix/trix_admin/views/statistics.py:210
 msgid "Last updated"
 msgstr "Sist oppdatert"
 
-#: trix/trix_admin/views/statistics.py:233
+#: trix/trix_admin/views/statistics.py:239
 msgid "Number of assignments"
 msgstr "Antall oppgaver"
