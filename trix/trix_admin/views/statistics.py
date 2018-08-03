@@ -133,7 +133,7 @@ class AssignmentStatsCsv(AssignmentStatsMixin, View):
 
         try:
             response['Content-Disposition'] = 'attachment; filename="trix-statistics.csv"'
-            csvwriter = UnicodeWriter(response, dialect='semicolons', encoding="utf-8")
+            csvwriter = UnicodeWriter(response, dialect='semicolons', encoding="utf-16")
             csvwriter.writerow([_('Simple statistics showing percentage share of how the '
                                   'assignments where solved')])
             csvwriter.writerow([_('Total number of users'), str(user_count)])
@@ -163,6 +163,12 @@ class AssignmentStatsCsv(AssignmentStatsMixin, View):
         except Exception, e:
             raise e
         return response
+
+    def get_queryset(self):
+        queryset = trix_models.Assignment.objects.all().order_by('title')
+        for tagstring in self.tags:
+            queryset = queryset.filter(tags__tag=tagstring)
+        return queryset
 
 
 class StatisticsChartView(AssignmentStatsMixin, ListView):

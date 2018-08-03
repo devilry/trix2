@@ -83,14 +83,15 @@ body {
 .objecttableview-buttons-and-search-box {
     margin-bottom: 0;
     background: @navbar-inverse-bg;
-    overflow: auto;
+    display: flex;
+    justify-content: space-between;
+    flex-direction: row;
     width: 100%;
 }
 
 .objecttableview-global-buttons {
     text-align: left !important;
-    width: 50%;
-    float: left;
+    display: block;
     padding-left: 29px;
     padding-bottom: 20px;
 
@@ -105,6 +106,25 @@ body {
         background-color: #224d68;
         color: #fff;
         border-color: #224d68;
+    }
+}
+
+.container .cradmin-searchform {
+    display: flex;
+    padding-right: 0;
+    justify-content: flex-end;
+    width: 500px;
+    background: @navbar-inverse-bg;
+
+    .input-group {
+        margin-left: 20px;
+        margin-right: 20px;
+        margin-bottom: 0;
+        background: @navbar-inverse-bg;
+
+        .form-control {
+            max-width: 250px;
+        }
     }
 }
 
@@ -157,6 +177,24 @@ body {
     }
 }
 
+@media (max-width: 500px) {
+    .cradmin-legacy-table {
+        & > thead tr th:nth-child(4),
+        & > tbody tr td:nth-child(4) {
+            display: none;
+        }
+    }
+}
+
+@media (max-width: 425px) {
+    .cradmin-legacy-table {
+        & > thead tr th:nth-child(3),
+        & > tbody tr td:nth-child(3) {
+            display: none;
+        }
+    }
+}
+
 /* Pad first column in permalinks 40px */
 .table.table.cradmin-legacy-table thead th:first-child,
 .table.table.cradmin-legacy-table tbody td:first-child {
@@ -192,8 +230,8 @@ body {
         background-color: #E6E6E6;
 
         .controls {
-            position: relative;
-            overflow: auto;
+            display: flex;
+            justify-content: space-between;
         }
     }
 
@@ -211,7 +249,6 @@ body {
         height: auto;
         font-size: 24px;
         text-align: left;
-        float: left;
     }
 
     @media(max-width: 992px) {
@@ -247,7 +284,6 @@ body {
     width: 60%;
     border-right: 1px dashed #ccc;
     padding: 20px 50px 40px 50px;
-    float: left;
 }
 
 .cradmin-acemarkdown .ace_editor {
@@ -262,11 +298,10 @@ body {
 }
 
 .controls .help-block {
-    float: right;
     width: 35%;
-    display: block;
+    margin-right: 10px;
     text-align: left;
-    margin: 2% 0;
+    margin: 20px 10px;
 }
 
 @media(max-width: 992px) {
@@ -296,9 +331,13 @@ body {
     border-radius: 4px 4px 0 0;
     margin: 0;
     text-align: center;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    max-width: 100%;
 
     .btn {
-        margin: 5px 2px 5px 2px;
+        margin: 0 2px 5px 2px;
     }
 
     .form-control {
@@ -306,29 +345,16 @@ body {
     }
 }
 
+@media (max-width: 992px) {
+    .cradmin_legacy_submitrow {
+        left: 0;
+        right: 0;
 
-/**
-* Statistic pages
-**/
-
-.container .cradmin-searchform {
-    width: 50%;
-    float: right;
-    background: @navbar-inverse-bg;
-
-    .input-group {
-        float:right;
-        padding: 0px 40px 20px 0px;
-        margin-bottom: 0;
-        background: @navbar-inverse-bg;
-
-        .form-control {
-            max-width: 250px;
-            float: right;
+        .btn {
+            margin: 2px 0;
         }
     }
 }
-
 
 /**
 * Preview page
@@ -339,13 +365,13 @@ body {
 }
 
 .cradmin-legacy-floating-fullsize-iframe-closebutton {
-    width: 20% !important;
+    width: 10% !important;
     float: right;
     left: auto !important;
 }
 
 .cradmin-legacy-floating-fullsize-content {
-    width: 80% !important;
+    width: 90% !important;
     float: left;
 }
 
