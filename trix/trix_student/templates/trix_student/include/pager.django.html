@@ -23,7 +23,6 @@
     <div class="container-fluid pager-container">
         <ul class="pager {{ pager_extraclass }}">
             <li class="previous {% if not page_obj.has_previous %}disabled{% endif %}">
-                {# <a href="?page={% if page_obj.has_previous %}{{ page_obj.previous_page_number }}{% else %}first{% endif %}"> #}
                 {% if page_obj.has_previous %}
                     <a href="?{% url_replace 'page' page_obj.previous_page_number %}">
                 {% else %}

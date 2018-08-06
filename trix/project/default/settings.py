@@ -46,6 +46,7 @@ MIDDLEWARE = [
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
+    'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
@@ -69,6 +70,8 @@ USE_I18N = True
 USE_L10N = True
 USE_TZ = True
 
+# https://docs.djangoproject.com/en/1.11/ref/clickjacking/
+# X_FRAME_OPTIONS = 'DENY'
 
 # Setup static files to be served at /s/.
 # - Gives us short urls for angular apps (I.E.: /s/v1/).

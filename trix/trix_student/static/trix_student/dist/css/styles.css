@@ -8801,16 +8801,15 @@ fieldset[disabled] .btn-trix-admin.active {
   background: #377ca8;
   margin-top: 0;
   color: #fff;
-  overflow: auto;
+  display: flex;
+  justify-content: flex-start;
   padding-bottom: 20px;
 }
 .trix-page-header .fa {
-  float: left;
   margin: 10px;
   font-size: 24px;
 }
 .trix-page-header h1 {
-  float: left;
   margin-top: 6px !important;
 }
 .trix-page-sub-header {
@@ -8844,18 +8843,19 @@ fieldset[disabled] .btn-trix-admin.active {
   margin-right: auto;
   border-right: 1px dashed #ccc;
   border-left: 1px dashed #ccc;
+  display: flex;
+  justify-content: space-between;
 }
 .trix-sort-button > .btn {
   padding: 0 2px;
   margin: 0;
   text-decoration: none;
-  width: 80%;
+  width: 100%;
 }
 .trix-sort-button > .fa {
   padding: 0;
   padding-top: 2px;
   margin: 0;
-  float: right;
 }
 @media (max-width: 992px) {
   .trix-div-sort-buttons {
@@ -8864,23 +8864,6 @@ fieldset[disabled] .btn-trix-admin.active {
   .trix-sort-button {
     width: 100%;
   }
-}
-.trix-tag-filter-form {
-  width: 200px;
-  height: 100px;
-}
-.trix-tag-filter-div {
-  overflow: auto;
-}
-.trix-tag-filter-input {
-  max-width: 130px;
-  margin: 5px 0;
-  float: left;
-  padding-left: 5px;
-}
-.trix-tag-filter-submit {
-  float: left;
-  margin: 5px;
 }
 .trix-btn-neg {
   background-color: #f44336;
@@ -8896,18 +8879,12 @@ fieldset[disabled] .btn-trix-admin.active {
   outline-color: #c30000;
   color: #fff;
 }
-.trix-filter-list {
-  display: block;
-}
 .trix-neg {
   margin: 10px 0 10px;
-  overflow: auto;
+  display: flex;
+  justify-content: space-between;
 }
-.trix-neg-label {
-  float: left;
-}
-.trix-neg-btn {
-  float: right;
+.trix-neg > input {
   width: 16px;
   height: 16px;
   margin-top: 3px !important;
@@ -8992,13 +8969,14 @@ body {
 .objecttableview-buttons-and-search-box {
   margin-bottom: 0;
   background: #377CA8;
-  overflow: auto;
+  display: flex;
+  justify-content: space-between;
+  flex-direction: row;
   width: 100%;
 }
 .objecttableview-global-buttons {
   text-align: left !important;
-  width: 50%;
-  float: left;
+  display: block;
   padding-left: 29px;
   padding-bottom: 20px;
 }
@@ -9012,6 +8990,22 @@ body {
   background-color: #224d68;
   color: #fff;
   border-color: #224d68;
+}
+.container .cradmin-searchform {
+  display: flex;
+  padding-right: 0;
+  justify-content: flex-end;
+  width: 500px;
+  background: #377CA8;
+}
+.container .cradmin-searchform .input-group {
+  margin-left: 20px;
+  margin-right: 20px;
+  margin-bottom: 0;
+  background: #377CA8;
+}
+.container .cradmin-searchform .input-group .form-control {
+  max-width: 250px;
 }
 .cradmin-legacy-objecttable-no-items-message {
   font-size: 24px;
@@ -9051,6 +9045,18 @@ body {
 .cradmin-legacy-table .btn-danger {
   color: #fff;
 }
+@media (max-width: 500px) {
+  .cradmin-legacy-table > thead tr th:nth-child(4),
+  .cradmin-legacy-table > tbody tr td:nth-child(4) {
+    display: none;
+  }
+}
+@media (max-width: 425px) {
+  .cradmin-legacy-table > thead tr th:nth-child(3),
+  .cradmin-legacy-table > tbody tr td:nth-child(3) {
+    display: none;
+  }
+}
 /* Pad first column in permalinks 40px */
 .table.table.cradmin-legacy-table thead th:first-child,
 .table.table.cradmin-legacy-table tbody td:first-child {
@@ -9081,8 +9087,8 @@ body {
   background-color: #E6E6E6;
 }
 .trix-focusfield .form-group .controls {
-  position: relative;
-  overflow: auto;
+  display: flex;
+  justify-content: space-between;
 }
 .trix-focusfield .controls .textinput,
 .trix-focusfield .controls .textarea,
@@ -9098,7 +9104,6 @@ body {
   height: auto;
   font-size: 24px;
   text-align: left;
-  float: left;
 }
 @media (max-width: 992px) {
   .trix-focusfield .controls .textinput,
@@ -9127,7 +9132,6 @@ body {
   width: 60%;
   border-right: 1px dashed #ccc;
   padding: 20px 50px 40px 50px;
-  float: left;
 }
 .cradmin-acemarkdown .ace_editor {
   height: 500px;
@@ -9139,11 +9143,10 @@ body {
   }
 }
 .controls .help-block {
-  float: right;
   width: 35%;
-  display: block;
+  margin-right: 10px;
   text-align: left;
-  margin: 2% 0;
+  margin: 20px 10px;
 }
 @media (max-width: 992px) {
   .controls .help-block {
@@ -9169,30 +9172,25 @@ body {
   border-radius: 4px 4px 0 0;
   margin: 0;
   text-align: center;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  max-width: 100%;
 }
 .cradmin_legacy_submitrow .btn {
-  margin: 5px 2px 5px 2px;
+  margin: 0 2px 5px 2px;
 }
 .cradmin_legacy_submitrow .form-control {
   margin: 5px 15px 10px 15px;
 }
-/**
-* Statistic pages
-**/
-.container .cradmin-searchform {
-  width: 50%;
-  float: right;
-  background: #377CA8;
-}
-.container .cradmin-searchform .input-group {
-  float: right;
-  padding: 0px 40px 20px 0px;
-  margin-bottom: 0;
-  background: #377CA8;
-}
-.container .cradmin-searchform .input-group .form-control {
-  max-width: 250px;
-  float: right;
+@media (max-width: 992px) {
+  .cradmin_legacy_submitrow {
+    left: 0;
+    right: 0;
+  }
+  .cradmin_legacy_submitrow .btn {
+    margin: 2px 0;
+  }
 }
 /**
 * Preview page
@@ -9201,12 +9199,12 @@ body {
   overflow: auto;
 }
 .cradmin-legacy-floating-fullsize-iframe-closebutton {
-  width: 20% !important;
+  width: 10% !important;
   float: right;
   left: auto !important;
 }
 .cradmin-legacy-floating-fullsize-content {
-  width: 80% !important;
+  width: 90% !important;
   float: left;
 }
 .cradmin-legacy-floating-fullsize-iframe-inner iframe {
@@ -9218,6 +9216,16 @@ body {
 .trix-message-container {
   background-color: #377CA8;
   display: none;
+}
+/**
+* Errors
+**/
+.trix-error {
+  text-align: center;
+}
+.trix-error > h1,
+.trix-error > p {
+  padding-bottom: 20px;
 }
 /**
 * Styles for printing

@@ -4,7 +4,6 @@ from trix.project.default.settings import INSTALLED_APPS
 ROOT_URLCONF = 'trix.project.production.urls'
 
 DEBUG = False
-TEMPLATE_DEBUG = False
 LANGUAGE_CODE = 'nb'
 
 # Database

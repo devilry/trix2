@@ -58,8 +58,8 @@
                     <form ng-controller="AddTagCtrl" class="trix-no-print">
                         <h3>{% trans "Filter" %}:</h3>
                         <div class="trix-neg">
-                            <label class="trix-neg-label">{% trans "Filter out" %}:</label>
-                            <input class="trix-neg-btn" type="checkbox" ng-model="negative">
+                            <label>{% trans "Filter out" %}:</label>
+                            <input type="checkbox" ng-model="negative">
                         </div>
                         <select ng-model="tagToAdd" ng-change="addTag()">
                             <option value="" selected>-- {% trans "Select a tag" %} --</option>
