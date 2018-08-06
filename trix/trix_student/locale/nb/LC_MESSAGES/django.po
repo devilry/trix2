@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: trix_student\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-08-01 19:08+0200\n"
+"POT-Creation-Date: 2018-08-06 13:12+0200\n"
 "PO-Revision-Date: 2015-01-03 17:40+0100\n"
 "Last-Translator: Espen Angell Kristiansen <post@espenak.net>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,6 +17,22 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Poedit 1.6.5\n"
+
+#: trix/trix_student/templates/400.html:11
+msgid "Bad request!"
+msgstr "Dårlig forespørsel!"
+
+#: trix/trix_student/templates/403.html:11
+msgid "You do not have access to this page!"
+msgstr "Du har ikke tilgang til denne siden!"
+
+#: trix/trix_student/templates/404.html:11
+msgid "The page could not be found!"
+msgstr "Fant ikke siden!"
+
+#: trix/trix_student/templates/500.html:11
+msgid "Something went wrong!"
+msgstr "Noe gikk galt!"
 
 #: trix/trix_student/templates/trix_student/assignment_list_base.django.html:5
 #: trix/trix_student/templates/trix_student/assignments.django.html:3
@@ -38,8 +54,6 @@ msgid "Filter"
 msgstr "Filtrer"
 
 #: trix/trix_student/templates/trix_student/assignment_list_base.django.html:61
-#, fuzzy
-#| msgid "Filter"
 msgid "Filter out"
 msgstr "Filtrer"
 
@@ -79,6 +93,7 @@ msgstr ""
 #: trix/trix_student/templates/trix_student/include/header.django.html:58
 msgid "Sign in"
 msgstr "Logg inn"
+#~ msgstr "Superbruker panel"
 
 #: trix/trix_student/templates/trix_student/course.django.html:13
 #: trix/trix_student/templates/trix_student/include/assignment.django.html:15
@@ -120,7 +135,7 @@ msgid ""
 "day to day learning tool as well as a preparatory tool for focused learning."
 msgstr ""
 "Trix består av en enkel tagstruktur hvor hver oppgave er merket med "
-"informative tags. Dette sammen med muligheter for å kunne filtrere på tager "
+"informative tags. Dette sammen med muligheter for å kunne filtrere på tagger "
 "sørger for et skreddersydd utplukk av oppgaver tilpasset ditt personlige "
 "nivå. Trix er et verktøy du kan bruke underveis i en læringsprosess samt et "
 "forberedende verktøy for fokusert læring."
@@ -133,27 +148,31 @@ msgstr "For mer informasjon"
 msgid "read the getting started guide"
 msgstr "les kom igang guiden"
 
-#: trix/trix_student/templates/trix_student/include/assignment.django.html:40
+#: trix/trix_student/templates/trix_student/include/assignment.django.html:23
+msgid "Hidden assignment"
+msgstr "Skjult oppgave"
+
+#: trix/trix_student/templates/trix_student/include/assignment.django.html:43
 msgid "How did you solve the assignment?"
 msgstr "Hvordan løste du oppgaven?"
 
-#: trix/trix_student/templates/trix_student/include/assignment.django.html:50
+#: trix/trix_student/templates/trix_student/include/assignment.django.html:53
 msgid "On my own"
 msgstr "På egenhånd"
 
-#: trix/trix_student/templates/trix_student/include/assignment.django.html:59
+#: trix/trix_student/templates/trix_student/include/assignment.django.html:62
 msgid "With help"
 msgstr "Med hjelp"
 
-#: trix/trix_student/templates/trix_student/include/assignment.django.html:68
+#: trix/trix_student/templates/trix_student/include/assignment.django.html:71
 msgid "Not solved"
 msgstr "Ikke løst"
 
-#: trix/trix_student/templates/trix_student/include/assignment.django.html:74
+#: trix/trix_student/templates/trix_student/include/assignment.django.html:77
 msgid "Saving..."
 msgstr "Lagrer..."
 
-#: trix/trix_student/templates/trix_student/include/assignment.django.html:84
+#: trix/trix_student/templates/trix_student/include/assignment.django.html:87
 msgid "See solution"
 msgstr "Vis løsningsforslag"
 
@@ -178,16 +197,16 @@ msgstr "Profil"
 msgid "Sign out"
 msgstr "Logg ut"
 
-#: trix/trix_student/templates/trix_student/include/pager.django.html:33
+#: trix/trix_student/templates/trix_student/include/pager.django.html:32
 msgid "Previous"
 msgstr "Forrige"
 
-#: trix/trix_student/templates/trix_student/include/pager.django.html:37
+#: trix/trix_student/templates/trix_student/include/pager.django.html:36
 #, python-format
 msgid "Page %(number)s of %(total)s"
 msgstr "Side %(number)s av %(total)s"
 
-#: trix/trix_student/templates/trix_student/include/pager.django.html:46
+#: trix/trix_student/templates/trix_student/include/pager.django.html:45
 msgid "Next"
 msgstr "Neste"
 
@@ -238,9 +257,10 @@ msgid ""
 "                "
 msgstr ""
 "\n"
-"                    Er du sikker på at du vil slette %(object)s? Dette kan ikke "
-"angres!\n"
-"                    All progresjon vil bli slettet og kan ikke gjennopprettes.\n"
+"                    Er du sikker på at du vil slette %(object)s? Dette kan "
+"ikke angres!\n"
+"                    All progresjon vil bli slettet og kan ikke "
+"gjennopprettes.\n"
 "                "
 
 #: trix/trix_student/templates/trix_student/user_delete.django.html:18
@@ -252,8 +272,6 @@ msgid "Cancel"
 msgstr "Avbryt"
 
 #: trix/trix_student/templates/trix_student/users.django.html:6
-#, fuzzy
-#| msgid "Username"
 msgid "User"
 msgstr "Brukernavn"
 
@@ -311,6 +329,3 @@ msgstr "Administrator for "
 #: trix/trix_student/views/users.py:32
 msgid "Student"
 msgstr "Student"
-
-#~ msgid "Superuser panel"
-#~ msgstr "Superbruker panel"

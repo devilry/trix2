@@ -2,13 +2,8 @@ from django.conf.urls import url
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import views as auth_views
 
-from trix.trix_student.views import login
-from trix.trix_student.views import dashboard
-from trix.trix_student.views import assignments
-from trix.trix_student.views import course
-from trix.trix_student.views import howsolved
-from trix.trix_student.views import permalink
-from trix.trix_student.views import users
+from trix.trix_student.views import login, dashboard, assignments, course,\
+    howsolved, permalink, users
 
 
 urlpatterns = [

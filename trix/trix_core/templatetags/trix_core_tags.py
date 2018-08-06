@@ -28,8 +28,8 @@ def url_replace(context, field, value):
             pass
     else:
         dict_[field] = value
-    print(dict_)
     return dict_.urlencode()
+
 
 @register.filter
 def add_string_list(string_list, item):

@@ -1,0 +1,15 @@
+{% extends "trix_student/base.django.html" %}
+{% load i18n %}
+
+{% block title %}404{% endblock %}
+
+{% block body %}
+    <div class="page-header">
+        <div class="container">
+            <div class="trix-error">
+                <h1>404</h1>
+                <p>{% trans "The page could not be found!" %}</p>
+            </div>
+        </div>
+    </div>
+{% endblock %}

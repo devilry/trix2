@@ -1,0 +1,15 @@
+{% extends "trix_student/base.django.html" %}
+{% load i18n %}
+
+{% block title %}400{% endblock %}
+
+{% block body %}
+    <div class="page-header">
+        <div class="container">
+            <div class="trix-error">
+                <h1>400</h1>
+                <p>{% trans "Bad request!" %}</p>
+            </div>
+        </div>
+    </div>
+{% endblock %}
