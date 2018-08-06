@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: trix_admin\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-08-03 19:26+0200\n"
+"POT-Creation-Date: 2018-08-06 13:12+0200\n"
 "PO-Revision-Date: 2015-01-08 12:35+0100\n"
 "Last-Translator: Espen Angell Kristiansen <post@espenak.net>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -20,7 +20,7 @@ msgstr ""
 
 #: trix/trix_admin/cradmin.py:37
 msgid "Frontpage"
-msgstr ""
+msgstr "Forside"
 
 #: trix/trix_admin/cradmin.py:42
 msgid "Course overview"
@@ -104,7 +104,7 @@ msgid ""
 "                "
 msgstr ""
 "\n"
-"Statistikken nedenfor hvis hvor mange prosent av det totale antall brukere "
+"Statistikken nedenfor viser hvor mange prosent av det totale antall brukere "
 "som har løst oppgaven på egenhånd, med hjelp, eller ikke løst den.\n"
 "               "
 
@@ -136,7 +136,7 @@ msgid "Not completed"
 msgstr "Ikke løst"
 
 #: trix/trix_admin/templates/trix_admin/statistics.django.html:110
-msgid "There was no assignments matching the choosen tag"
+msgid "There was no assignments matching the chosen tag"
 msgstr "Det fantes ingen oppgaver som er merket med valgte tag"
 
 #: trix/trix_admin/views/assignments.py:30

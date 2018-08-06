@@ -9264,6 +9264,19 @@ body {
     display: block;
   }
 }
+/**
+* Styles for the profile page.
+**/
+.trix-user-buttons {
+  margin-top: 80px;
+}
+.trix-user-text > h1,
+.trix-user-text > p {
+  margin-bottom: 50px;
+}
+.trix-user-text > p {
+  font-size: 1.1em;
+}
 .codehilite {
   /* Comment */
   /* Error */

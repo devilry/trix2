@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: trix_student\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-08-03 19:26+0200\n"
+"POT-Creation-Date: 2018-08-06 13:12+0200\n"
 "PO-Revision-Date: 2015-01-03 17:40+0100\n"
 "Last-Translator: Espen Angell Kristiansen <post@espenak.net>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -93,6 +93,7 @@ msgstr ""
 #: trix/trix_student/templates/trix_student/include/header.django.html:58
 msgid "Sign in"
 msgstr "Logg inn"
+#~ msgstr "Superbruker panel"
 
 #: trix/trix_student/templates/trix_student/course.django.html:13
 #: trix/trix_student/templates/trix_student/include/assignment.django.html:15
@@ -134,7 +135,7 @@ msgid ""
 "day to day learning tool as well as a preparatory tool for focused learning."
 msgstr ""
 "Trix består av en enkel tagstruktur hvor hver oppgave er merket med "
-"informative tags. Dette sammen med muligheter for å kunne filtrere på tager "
+"informative tags. Dette sammen med muligheter for å kunne filtrere på tagger "
 "sørger for et skreddersydd utplukk av oppgaver tilpasset ditt personlige "
 "nivå. Trix er et verktøy du kan bruke underveis i en læringsprosess samt et "
 "forberedende verktøy for fokusert læring."
@@ -180,7 +181,7 @@ msgid "Toggle navigation"
 msgstr "Vis/skjul navigering"
 
 #: trix/trix_student/templates/trix_student/include/header.django.html:28
-#: trix/trix_student/views/users.py:24
+#: trix/trix_student/views/users.py:26
 msgid "Superuser"
 msgstr "Superbruker"
 
@@ -242,26 +243,58 @@ msgstr "Liste over permalinker"
 msgid "All the permalinks created are listed below"
 msgstr "Under listes alle permalinker opp"
 
+#: trix/trix_student/templates/trix_student/user_delete.django.html:8
+msgid "Delete user"
+msgstr "Slett bruker"
+
+#: trix/trix_student/templates/trix_student/user_delete.django.html:10
+#, python-format
+msgid ""
+"\n"
+"                    Are you sure you want to delete %(object)s? This cannot "
+"be undone!\n"
+"                    All progress will be deleted and cannot be recovered.\n"
+"                "
+msgstr ""
+"\n"
+"                    Er du sikker på at du vil slette %(object)s? Dette kan "
+"ikke angres!\n"
+"                    All progresjon vil bli slettet og kan ikke "
+"gjennopprettes.\n"
+"                "
+
+#: trix/trix_student/templates/trix_student/user_delete.django.html:18
+msgid "Delete"
+msgstr "Slett"
+
+#: trix/trix_student/templates/trix_student/user_delete.django.html:20
+msgid "Cancel"
+msgstr "Avbryt"
+
 #: trix/trix_student/templates/trix_student/users.django.html:6
 msgid "User"
 msgstr "Brukernavn"
 
-#: trix/trix_student/templates/trix_student/users.django.html:11
+#: trix/trix_student/templates/trix_student/users.django.html:12
 msgid "Account overview"
 msgstr "Kontooversikt"
 
-#: trix/trix_student/templates/trix_student/users.django.html:12
+#: trix/trix_student/templates/trix_student/users.django.html:15
 #: trix/trix_student/views/login.py:13
 msgid "Email"
 msgstr "E-post"
 
-#: trix/trix_student/templates/trix_student/users.django.html:14
+#: trix/trix_student/templates/trix_student/users.django.html:19
 msgid "Last login"
 msgstr "Sist innlogget"
 
-#: trix/trix_student/templates/trix_student/users.django.html:16
+#: trix/trix_student/templates/trix_student/users.django.html:23
 msgid "Role"
 msgstr "Rolle"
+
+#: trix/trix_student/templates/trix_student/users.django.html:31
+msgid "DELETE ME"
+msgstr "SLETT MEG"
 
 #: trix/trix_student/views/common.py:119
 msgid ""
@@ -289,10 +322,10 @@ msgstr ""
 "Vennligst skriv inn en gyldig e-postaddresse og passord. Begge feltene "
 "skiller mellom store og små bokstaver."
 
-#: trix/trix_student/views/users.py:28
+#: trix/trix_student/views/users.py:30
 msgid "Administrator for "
 msgstr "Administrator for "
 
-#: trix/trix_student/views/users.py:30
+#: trix/trix_student/views/users.py:32
 msgid "Student"
 msgstr "Student"

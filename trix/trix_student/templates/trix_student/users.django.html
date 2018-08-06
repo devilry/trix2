@@ -8,13 +8,29 @@
 {% block body %}
 <div class="page-header">
     <div class="container">
-        <h1>{% trans "Account overview" %}</h3>
-        <h3>{% trans "Email" %}</h3>
-        <p>{{ user }}</p>
-        <h3>{% trans "Last login" %}</h3>
-        <p>{{ user.last_login }}</p>
-        <h3>{% trans "Role" %}</h3>
-        <p>{{ user_role }}</p>
+        <div class="trix-user-text">
+            <h1>{% trans "Account overview" %}</h3>
+            <ul class="list-unstyled">
+                <li>
+                    <h3>{% trans "Email" %}</h3>
+                    <p>{{ user }}</p>
+                </li>
+                <li>
+                    <h3>{% trans "Last login" %}</h3>
+                    <p>{{ user.last_login }}</p>
+                </li>
+                <li>
+                    <h3>{% trans "Role" %}</h3>
+                    <p>{{ user_role }}</p>
+                </li>
+            </ul>
+        </div>
+        <div class="trix-user-buttons">
+            <a href="{% url 'trix_delete_user' pk=user.id %}" class="btn btn-danger">
+                <span class="fa fa-bin"></span>
+                {% trans "DELETE ME" %}
+            </a>
+        </div>
     </div>
 </div>
 {% comment %}
