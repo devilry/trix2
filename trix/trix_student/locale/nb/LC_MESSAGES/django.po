@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: trix_student\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-08-06 13:12+0200\n"
+"POT-Creation-Date: 2018-08-10 15:50+0200\n"
 "PO-Revision-Date: 2015-01-03 17:40+0100\n"
 "Last-Translator: Espen Angell Kristiansen <post@espenak.net>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -93,7 +93,83 @@ msgstr ""
 #: trix/trix_student/templates/trix_student/include/header.django.html:58
 msgid "Sign in"
 msgstr "Logg inn"
-#~ msgstr "Superbruker panel"
+
+#: trix/trix_student/templates/trix_student/consent_form_base.django.html:4
+msgid "Consent"
+msgstr "Samtykke"
+
+#: trix/trix_student/templates/trix_student/consent_form_base.django.html:10
+msgid "Data collection consent form"
+msgstr "Samtykkeskjema for datainnsamling"
+
+#: trix/trix_student/templates/trix_student/consent_form_base.django.html:18
+msgid ""
+"\n"
+"                    <p>\n"
+"                    By clicking accept below you accept that Trix collects "
+"personal information\n"
+"                    about you and your usage of the Trix platform. The data "
+"collected is:\n"
+"                    </p>\n"
+"                    <ul>\n"
+"                        <li>Time of consent</li>\n"
+"                        <li>Time of last login</li>\n"
+"                        <li>Email address you registered with</li>\n"
+"                        <li>How and when you solved assignments, by either "
+"clicking 'by myself'\n"
+"                            or 'with help'</li>\n"
+"                    </ul>\n"
+"                    <p>\n"
+"                    This data is made anonymous and made available to course "
+"administrators and used\n"
+"                    to collect information about the usage of the system.\n"
+"\n"
+"                    You have the option to delete your user account from "
+"Trix or to use Trix without\n"
+"                    logging in, but you will not have the option to select "
+"how you solved assignments.\n"
+"                    </p>\n"
+"                "
+msgstr ""
+"\n"
+"                    <p>\n"
+"                    Ved å klikke 'jeg samtykker' nedenfor godtar du at Trix "
+"samler personlig informasjon\n"
+"                    om deg og din bruk av Trix platformen. Dataen som samles "
+"er:\n"
+"                    </p>\n"
+"                    <ul>\n"
+"                        <li>Tidspunkt for samtykke</li>\n"
+"                        <li>Tidspunkt for sist innlogging</li>\n"
+"                        <li>Epost addressen du registrerte deg med</li>\n"
+"                        <li>Når og hvordan du løst oppgaver, enten med å "
+"klikke på 'På egenhånd'\n"
+"                            eller 'Med hjelp'</li>\n"
+"                    </ul>\n"
+"                    <p>\n"
+"                    Denne dataen blir gjort anonym og tilgjengelig for kurs-"
+"administratorer og brukt \n"
+"                    til å samle informasjon om bruken av systemet.\n"
+"\n"
+"                    Du har muligheten til å slette din brukerkonto fra Trix "
+"eller å bruke Trix uten \n"
+"                    å logge inn, men du vil ikke kunne velge hvordan du "
+"løste oppgaver.\n"
+"                    </p>\n"
+"                "
+
+#: trix/trix_student/templates/trix_student/consent_form_base.django.html:44
+msgid "I consent"
+msgstr "Jeg samtykker"
+
+#: trix/trix_student/templates/trix_student/consent_form_base.django.html:47
+msgid "Delete me"
+msgstr "Slett meg"
+
+#: trix/trix_student/templates/trix_student/consent_form_base.django.html:51
+#: trix/trix_student/templates/trix_student/include/header.django.html:53
+msgid "Sign out"
+msgstr "Logg ut"
 
 #: trix/trix_student/templates/trix_student/course.django.html:13
 #: trix/trix_student/templates/trix_student/include/assignment.django.html:15
@@ -181,7 +257,7 @@ msgid "Toggle navigation"
 msgstr "Vis/skjul navigering"
 
 #: trix/trix_student/templates/trix_student/include/header.django.html:28
-#: trix/trix_student/views/users.py:26
+#: trix/trix_student/views/users.py:27
 msgid "Superuser"
 msgstr "Superbruker"
 
@@ -192,10 +268,6 @@ msgstr "Administrer"
 #: trix/trix_student/templates/trix_student/include/header.django.html:43
 msgid "Profile"
 msgstr "Profil"
-
-#: trix/trix_student/templates/trix_student/include/header.django.html:53
-msgid "Sign out"
-msgstr "Logg ut"
 
 #: trix/trix_student/templates/trix_student/include/pager.django.html:32
 msgid "Previous"
@@ -289,10 +361,26 @@ msgid "Last login"
 msgstr "Sist innlogget"
 
 #: trix/trix_student/templates/trix_student/users.django.html:23
+msgid "Data collection"
+msgstr "Datainnsamling"
+
+#: trix/trix_student/templates/trix_student/users.django.html:25
+msgid "Consented: "
+msgstr "Samtykket: "
+
+#: trix/trix_student/templates/trix_student/users.django.html:27
+msgid "Has not consented"
+msgstr "Har ikke samtykket"
+
+#: trix/trix_student/templates/trix_student/users.django.html:30
+msgid "Consent form"
+msgstr "Samtykkeskjema"
+
+#: trix/trix_student/templates/trix_student/users.django.html:34
 msgid "Role"
 msgstr "Rolle"
 
-#: trix/trix_student/templates/trix_student/users.django.html:31
+#: trix/trix_student/templates/trix_student/users.django.html:42
 msgid "DELETE ME"
 msgstr "SLETT MEG"
 
@@ -322,10 +410,10 @@ msgstr ""
 "Vennligst skriv inn en gyldig e-postaddresse og passord. Begge feltene "
 "skiller mellom store og små bokstaver."
 
-#: trix/trix_student/views/users.py:30
+#: trix/trix_student/views/users.py:31
 msgid "Administrator for "
 msgstr "Administrator for "
 
-#: trix/trix_student/views/users.py:32
+#: trix/trix_student/views/users.py:33
 msgid "Student"
 msgstr "Student"

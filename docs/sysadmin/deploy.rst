@@ -105,6 +105,35 @@ Create a ``trix_uio_ldap_auth.py`` as follows (but adjust the email suffix)::
         def django_to_ldap_username(self, username):
             return username.split('@')[0]
 
+
+****************
+Consent template
+****************
+Customising the consent template is highly recommended and can be done by following these steps:
+
+    1. Create a directory for custom templates with a subfolder named ``trix_student``
+    2. Create a django html file called ``consent_form.django.html`` and make it look like this::
+
+        {% extends "trix_student/consent_form_base.django.html" %}
+
+        {% block consent_title %}<h1>Consent title here</h1>{% endblock %}
+
+        {% block consent_text %}Lorem Ipsum{% endblock %}
+
+        {# If you want to override the buttons you can add this #}
+        {# {% block consent_buttons %}BUTTONS{% endblock %} #}
+
+
+    3. In ``trix_settings.py`` do::
+
+        from trix.utils.template import add_custom_template
+
+        add_custom_template('custom_template_directory/goes/here')
+
+If you which to disable the consent dialog completely for some reason, add ``DISABLE_CONSENT = True``
+to your ``trix_settings.py`` file.
+
+
 ******************
 Make sure it works
 ******************
