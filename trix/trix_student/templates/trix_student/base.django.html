@@ -33,7 +33,7 @@
                             <strong>{% trans "You are not authenticated." %}</strong>
                             {% trans "If you are not authenticated, you will not be able to keep track of your progress." %}
                         </p>
-                        <a href="{% url 'trix-login' %}?next={{ request.get_full_path | urlencode }}" class="btn btn-warning">
+                        <a href="{% url 'trix_login' %}?next={{ request.get_full_path | urlencode }}" class="btn btn-warning">
                             <span class="fa fa-sign-in"></span>
                             {% trans "Sign in" %}
                         </a>
