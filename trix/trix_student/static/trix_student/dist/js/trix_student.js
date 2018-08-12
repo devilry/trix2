@@ -1,5 +1,5 @@
 (function() {
-  angular.module('trixStudent', ['ngCookies', 'ui.bootstrap', 'trixStudent.directives', 'trixStudent.assignments.controllers']).config([
+  angular.module('trixStudent', ['ngCookies', 'ngRoute', 'ui.bootstrap', 'trixStudent.directives', 'trixStudent.assignments.controllers']).config([
     '$httpProvider',
     function($httpProvider) {
       $httpProvider.defaults.xsrfHeaderName = 'X-CSRFToken';
@@ -17,7 +17,7 @@
 }).call(this);
 
 (function() {
-  angular.module('trixStudent.assignments.controllers', []).controller('AddTagCtrl', [
+  angular.module('trixStudent.assignments.controllers', ['ngRoute']).controller('AddTagCtrl', [
     '$scope',
     '$window',
     function($scope,

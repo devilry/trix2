@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: trix_student\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-08-10 15:50+0200\n"
+"POT-Creation-Date: 2018-08-12 14:47+0200\n"
 "PO-Revision-Date: 2015-01-03 17:40+0100\n"
 "Last-Translator: Espen Angell Kristiansen <post@espenak.net>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -77,11 +77,11 @@ msgstr "Fant ingen oppgaver"
 msgid "Trix"
 msgstr "Trix"
 
-#: trix/trix_student/templates/trix_student/base.django.html:33
+#: trix/trix_student/templates/trix_student/base.django.html:42
 msgid "You are not authenticated."
 msgstr "Du er ikke logget inn."
 
-#: trix/trix_student/templates/trix_student/base.django.html:34
+#: trix/trix_student/templates/trix_student/base.django.html:43
 msgid ""
 "If you are not authenticated, you will not be able to keep track of your "
 "progress."
@@ -89,8 +89,8 @@ msgstr ""
 "Så lenge du ikke er logget inn går du glipp av muligheten for å holde styr "
 "på din egen progresjon."
 
-#: trix/trix_student/templates/trix_student/base.django.html:38
-#: trix/trix_student/templates/trix_student/include/header.django.html:58
+#: trix/trix_student/templates/trix_student/base.django.html:47
+#: trix/trix_student/templates/trix_student/include/header.django.html:59
 msgid "Sign in"
 msgstr "Logg inn"
 
@@ -162,12 +162,12 @@ msgstr ""
 msgid "I consent"
 msgstr "Jeg samtykker"
 
-#: trix/trix_student/templates/trix_student/consent_form_base.django.html:47
+#: trix/trix_student/templates/trix_student/consent_form_base.django.html:48
 msgid "Delete me"
 msgstr "Slett meg"
 
-#: trix/trix_student/templates/trix_student/consent_form_base.django.html:51
-#: trix/trix_student/templates/trix_student/include/header.django.html:53
+#: trix/trix_student/templates/trix_student/consent_form_base.django.html:52
+#: trix/trix_student/templates/trix_student/include/header.django.html:54
 msgid "Sign out"
 msgstr "Logg ut"
 
@@ -252,20 +252,20 @@ msgstr "Lagrer..."
 msgid "See solution"
 msgstr "Vis løsningsforslag"
 
-#: trix/trix_student/templates/trix_student/include/header.django.html:11
+#: trix/trix_student/templates/trix_student/include/header.django.html:12
 msgid "Toggle navigation"
 msgstr "Vis/skjul navigering"
 
-#: trix/trix_student/templates/trix_student/include/header.django.html:28
-#: trix/trix_student/views/users.py:27
+#: trix/trix_student/templates/trix_student/include/header.django.html:29
+#: trix/trix_student/views/users.py:26
 msgid "Superuser"
 msgstr "Superbruker"
 
-#: trix/trix_student/templates/trix_student/include/header.django.html:36
+#: trix/trix_student/templates/trix_student/include/header.django.html:37
 msgid "Administer"
 msgstr "Administrer"
 
-#: trix/trix_student/templates/trix_student/include/header.django.html:43
+#: trix/trix_student/templates/trix_student/include/header.django.html:44
 msgid "Profile"
 msgstr "Profil"
 
@@ -410,10 +410,10 @@ msgstr ""
 "Vennligst skriv inn en gyldig e-postaddresse og passord. Begge feltene "
 "skiller mellom store og små bokstaver."
 
-#: trix/trix_student/views/users.py:31
+#: trix/trix_student/views/users.py:30
 msgid "Administrator for "
 msgstr "Administrator for "
 
-#: trix/trix_student/views/users.py:33
+#: trix/trix_student/views/users.py:32
 msgid "Student"
 msgstr "Student"

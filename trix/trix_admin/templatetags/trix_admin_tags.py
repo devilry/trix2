@@ -7,8 +7,10 @@ register = template.Library()
 
 
 @register.simple_tag
-def compute_and_set_stats_for_assignment(assignment, howsolved_filter, user_count):
-    return compute_stats_for_assignment(assignment, howsolved_filter, user_count)
+def compute_and_set_stats_for_assignment(assignment, howsolved_filter, user_count,
+                                         from_date=None, to_date=None):
+    return compute_stats_for_assignment(assignment, howsolved_filter, user_count,
+                                        from_date, to_date)
 
 
 @register.filter

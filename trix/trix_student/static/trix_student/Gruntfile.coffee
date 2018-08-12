@@ -23,11 +23,20 @@ module.exports = (grunt) ->
       'bower_components/components-font-awesome/webfonts/fa-solid-900.woff'
       'bower_components/components-font-awesome/webfonts/fa-solid-900.woff2'
     ]
+    glyph_fonts: [
+      'bower_components/bootstrap/fonts/glyphicons-halflings-regular.eot'
+      'bower_components/bootstrap/fonts/glyphicons-halflings-regular.svg'
+      'bower_components/bootstrap/fonts/glyphicons-halflings-regular.ttf'
+      'bower_components/bootstrap/fonts/glyphicons-halflings-regular.woff'
+    ]
     js: [
       'bower_components/angular/angular.min.js'
       'bower_components/angular-cookies/angular-cookies.min.js'
+      'bower_components/angular-route/angular-route.min.js'
       'bower_components/jsurl/url.min.js'
       'bower_components/angular-bootstrap/ui-bootstrap.min.js'
+      'bower_components/eonasdan-bootstrap-datetimepicker/build' +
+        '/js/bootstrap-datetimepicker.min.js'
     ]
   }
 
@@ -97,6 +106,11 @@ module.exports = (grunt) ->
           flatten: true
           src: vendorfiles.js
           dest: 'dist/vendor/js/'
+        }, {
+          expand: true
+          flatten: true
+          src: vendorfiles.glyph_fonts
+          dest: 'dist/fonts/'
         }]
   })
 

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: trix_admin\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-08-06 13:12+0200\n"
+"POT-Creation-Date: 2018-08-12 14:47+0200\n"
 "PO-Revision-Date: 2015-01-08 12:35+0100\n"
 "Last-Translator: Espen Angell Kristiansen <post@espenak.net>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -120,22 +120,34 @@ msgstr "Antall oppgaver:"
 msgid "Download csv file"
 msgstr "Last ned csv fil"
 
-#: trix/trix_admin/templates/trix_admin/statistics.django.html:92
-#: trix/trix_admin/views/statistics.py:148
+#: trix/trix_admin/templates/trix_admin/statistics.django.html:71
+msgid "From date"
+msgstr "Fra dato"
+
+#: trix/trix_admin/templates/trix_admin/statistics.django.html:83
+msgid "To date"
+msgstr "Til dato"
+
+#: trix/trix_admin/templates/trix_admin/statistics.django.html:95
+msgid "Filter"
+msgstr "Filtrer"
+
+#: trix/trix_admin/templates/trix_admin/statistics.django.html:151
+#: trix/trix_admin/views/statistics.py:176
 msgid "Completed by their own"
 msgstr "Løst på egenhånd"
 
-#: trix/trix_admin/templates/trix_admin/statistics.django.html:98
-#: trix/trix_admin/views/statistics.py:155
+#: trix/trix_admin/templates/trix_admin/statistics.django.html:157
+#: trix/trix_admin/views/statistics.py:183
 msgid "Completed with help"
 msgstr "Løst med hjelp"
 
-#: trix/trix_admin/templates/trix_admin/statistics.django.html:104
-#: trix/trix_admin/views/statistics.py:159
+#: trix/trix_admin/templates/trix_admin/statistics.django.html:163
+#: trix/trix_admin/views/statistics.py:187
 msgid "Not completed"
 msgstr "Ikke løst"
 
-#: trix/trix_admin/templates/trix_admin/statistics.django.html:110
+#: trix/trix_admin/templates/trix_admin/statistics.django.html:169
 msgid "There was no assignments matching the chosen tag"
 msgstr "Det fantes ingen oppgaver som er merket med valgte tag"
 
@@ -215,40 +227,43 @@ msgstr "Skriv inn taggen du vil fjerne fra valgte oppgaver"
 msgid "Select a course"
 msgstr "Velg et kurs"
 
-#: trix/trix_admin/views/statistics.py:137
+#: trix/trix_admin/views/statistics.py:165
 msgid ""
 "Simple statistics showing percentage share of how the assignments where "
 "solved"
 msgstr "Enkel statistikk som viser prosentvis hvordan oppgavene er løst"
 
-#: trix/trix_admin/views/statistics.py:139
+#: trix/trix_admin/views/statistics.py:167
 msgid "Total number of users"
 msgstr "Totalt antall brukere"
 
-#: trix/trix_admin/views/statistics.py:141
+#: trix/trix_admin/views/statistics.py:169
 msgid "Assignment title"
 msgstr "Oppgavetittel"
 
-#: trix/trix_admin/views/statistics.py:141
+#: trix/trix_admin/views/statistics.py:169
 msgid "Percentage"
 msgstr "Prosent"
 
-#: trix/trix_admin/views/statistics.py:141
+#: trix/trix_admin/views/statistics.py:169
 msgid "Number"
 msgstr "Antall"
 
-#: trix/trix_admin/views/statistics.py:208
+#: trix/trix_admin/views/statistics.py:253
 msgid "Title"
 msgstr "Tittel"
 
-#: trix/trix_admin/views/statistics.py:209
+#: trix/trix_admin/views/statistics.py:254
+msgid "ID"
+msgstr "ID"
+
+#: trix/trix_admin/views/statistics.py:255
 msgid "Date created"
 msgstr "Dato opprettet"
 
-#: trix/trix_admin/views/statistics.py:210
+#: trix/trix_admin/views/statistics.py:256
 msgid "Last updated"
 msgstr "Sist oppdatert"
 
-#: trix/trix_admin/views/statistics.py:239
-msgid "Number of assignments"
-msgstr "Antall oppgaver"
+#~ msgid "Submit"
+#~ msgstr "Legg til"

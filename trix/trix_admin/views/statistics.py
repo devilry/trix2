@@ -1,15 +1,16 @@
-from django.core.exceptions import PermissionDenied
-from django.db.models import Count
-from django.views.generic import ListView
-from django.views.generic import View
+import datetime
 from django.contrib.auth import get_user_model
-from django.utils.translation import ugettext as _
+from django.core.exceptions import PermissionDenied
+from django.db.models import Count, Q
 from django.http import HttpResponse
 from django.http import HttpResponseBadRequest
-from cradmin_legacy import crapp
+from django.views.generic import ListView
+from django.views.generic import View
+from django.utils.translation import ugettext as _
 from cradmin_legacy.viewhelpers import objecttable
 from django.utils.http import urlencode
 from django.core.exceptions import FieldError
+from cradmin_legacy import crapp
 
 import csv
 import codecs
@@ -50,27 +51,32 @@ class UnicodeWriter:
             self.writerow(row)
 
 
-def compute_stats_for_assignment(assignment, howsolved_filter, user_count):
+def compute_stats_for_assignment(assignment, howsolved_filter, user_count,
+                                 from_date=None, to_date=None):
     if user_count == 0:
         return {'percent': 0, 'count': 0}
 
-    if howsolved_filter == 'bymyself':
-        numerator = assignment.howsolved_set.filter(howsolved='bymyself').count()
-    elif howsolved_filter == 'withhelp':
-        numerator = assignment.howsolved_set.filter(howsolved='withhelp').count()
-    else:  # Not solved
-        bymyself_count = assignment.howsolved_set.filter(howsolved='bymyself').count()
-        withhelp_count = assignment.howsolved_set.filter(howsolved='withhelp').count()
-        numerator = user_count - (bymyself_count + withhelp_count)
+    if howsolved_filter != 'notsolved':
+        queryset = assignment.howsolved_set.filter(howsolved=howsolved_filter)
+    else:
+        queryset = assignment.howsolved_set.filter(Q(howsolved='bymyself') |
+                                                   Q(howsolved='withhelp'))
 
+    # Filter based on date if present
+    queryset = queryset.filter(solved_datetime__date__gte=from_date) if from_date else queryset
+    queryset = queryset.filter(solved_datetime__date__lte=to_date) if to_date else queryset
+    count = queryset.count()
+    # Not solved is number of users that has solved something, but not this task
+    numerator = user_count - count if howsolved_filter == 'notsolved' else count
     percentage = numerator / float(user_count) * 100
     return {'percent': percentage, 'count': numerator}
 
 
-def get_usercount_within_assignments(assignments):
-    user_ids = (trix_models.HowSolved.objects
-                .filter(assignment__in=assignments)
-                .values_list('user_id', flat=True))
+def get_usercount_within_assignments(assignments, from_date=None, to_date=None):
+    user_ids = trix_models.HowSolved.objects.filter(assignment__in=assignments)
+    user_ids = user_ids.filter(solved_datetime__date__gte=from_date) if from_date else user_ids
+    user_ids = user_ids.filter(solved_datetime__date__lte=to_date) if to_date else user_ids
+    user_ids = user_ids.values_list('user_id', flat=True)
     user_count = (get_user_model().objects
                   .filter(id__in=user_ids)
                   .distinct()
@@ -99,6 +105,18 @@ class AssignmentStatsMixin(object):
             tags.append(course_tag)
         return tags
 
+    def get_from_date(self):
+        from_date = self.request.GET.get('from')
+        if from_date == '':
+            from_date = None
+        return from_date
+
+    def get_to_date(self):
+        to_date = self.request.GET.get('to')
+        if to_date == '':
+            to_date = None
+        return to_date
+
     def get_sort_list(self):
         order_list = self.request.GET.get('ordering')
         if order_list:
@@ -114,6 +132,16 @@ class AssignmentStatsMixin(object):
         queryset = super(AssignmentStatsMixin, self).get_queryset()
         for tagstring in self.tags:
             queryset = queryset.filter(tags__tag=tagstring)
+        # Filter on dates if present
+        if self.from_date is not None:
+            queryset = queryset.filter(
+                howsolved__solved_datetime__date__gte=self.from_date
+            )
+        if self.to_date is not None:
+            queryset = queryset.filter(
+                howsolved__solved_datetime__date__lte=self.to_date
+            )
+        queryset = queryset.distinct()
         return queryset
 
 
@@ -168,6 +196,18 @@ class AssignmentStatsCsv(AssignmentStatsMixin, View):
         queryset = trix_models.Assignment.objects.all().order_by('title')
         for tagstring in self.tags:
             queryset = queryset.filter(tags__tag=tagstring)
+        # Filter on dates if present
+        from_date = self.get_from_date()
+        if from_date is not None:
+            queryset = queryset.filter(
+                howsolved__solved_datetime__date__gte=from_date
+            )
+        to_date = self.get_to_date()
+        if to_date is not None:
+            queryset = queryset.filter(
+                howsolved__solved_datetime__date__lte=to_date
+            )
+        queryset = queryset.distinct()
         return queryset
 
 
@@ -185,6 +225,8 @@ class StatisticsChartView(AssignmentStatsMixin, ListView):
     def get(self, request, *args, **kwargs):
         self.tags = self.get_tags(self.request.cradmin_role.course_tag.tag)
         self.sort_list = self.get_sort_list()
+        self.from_date = self.get_from_date()
+        self.to_date = self.get_to_date()
         return super(StatisticsChartView, self).get(request, *args, **kwargs)
 
     def _get_selectable_tags(self):
@@ -198,16 +240,22 @@ class StatisticsChartView(AssignmentStatsMixin, ListView):
 
     def get_context_data(self, **kwargs):
         context = super(StatisticsChartView, self).get_context_data(**kwargs)
-        context['user_count'] = get_usercount_within_assignments(self.get_queryset())
+        context['user_count'] = get_usercount_within_assignments(self.get_queryset(),
+                                                                 self.from_date,
+                                                                 self.to_date)
         context['assignment_count'] = self.get_queryset().count()
         context['selected_tags_string'] = ','.join(self.tags)
         context['selected_tags_list'] = self.tags
         context['selectable_tags_list'] = self._get_selectable_tags()
         context['course_tag'] = self.request.cradmin_role.course_tag.tag
         context['sort_list'] = ','.join(self.sort_list)
+        # List of ways to sort. To add or remove ways to sort just expand or remove from this list.
         context['selectable_sort_list'] = [(_('Title'), 'title'),
+                                           (_('ID'), 'id'),
                                            (_('Date created'), 'created_datetime'),
                                            (_('Last updated'), 'lastupdate_datetime')]
+        context['from_date'] = self.from_date
+        context['to_date'] = self.to_date
         return context
 
     def get_ordering(self):
@@ -220,42 +268,6 @@ class StatisticsChartView(AssignmentStatsMixin, ListView):
                 except FieldError:
                     return None
         return ordering
-
-
-class TagColumn(objecttable.SingleActionColumn):
-    modelfield = 'tag'
-
-    def get_actionurl(self, tag):
-        tags_string = u'{},{}'.format(self.view.request.cradmin_role.course_tag.tag, tag.tag)
-        return '{}?{}'.format(self.reverse_appurl(''), urlencode({
-            'tags': tags_string
-        }))
-
-
-class AssignmentCountColumn(objecttable.PlainTextColumn):
-    orderingfield = 'assignment__count'
-
-    def get_header(self):
-        return _('Number of assignments')
-
-    def render_value(self, tag):
-        return tag.assignment__count
-
-
-class StatisticsView(objecttable.ObjectTableView):
-    model = trix_models.Tag
-    columns = [
-        TagColumn,
-        AssignmentCountColumn,
-    ]
-    searchfields = [
-        'tag'
-    ]
-
-    def get_queryset_for_role(self, course):
-        return self.model.objects\
-            .annotate(Count('assignment', distinct=True))\
-            .exclude(tag=course.course_tag.tag)
 
 
 class App(crapp.App):

@@ -57,9 +57,62 @@
                             {% trans "Download csv file" %}
                         </a></li>
                     {% endif %}
-
                 </ul>
             </div>
+            <div class="trix-date-container">
+                <form method="get" action="">
+                    {% if request.GET.ordering %}
+                        <input type="hidden" name="ordering" value="{{ request.GET.ordering }}" />
+                    {% endif %}
+                    {% if request.GET.tags %}
+                        <input type="hidden" name="tags" value="{{ request.GET.tags }}" />
+                    {% endif %}
+                    <div class='col-md-3'>
+                        <label for="from">{% trans "From date" %}</label>
+                        <div class="form-group">
+                            <div class='input-group date' id='datetimepicker'>
+                                <input type='text' name="from" class="form-control"
+                                    value="{% if from_date %}{{from_date}}{% endif %}" />
+                                <span class="input-group-addon">
+                                    <span class="fas fa-calendar"></span>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class='col-md-3'>
+                        <label for="to">{% trans "To date" %}</label>
+                        <div class="form-group">
+                            <div class='input-group date' id='datetimepicker2'>
+                                <input type='text' name="to" class="form-control"
+                                    value="{% if to_date %}{{to_date}}{% endif %}" />
+                                <span class="input-group-addon">
+                                    <span class="fas fa-calendar"></span>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="trix-date-button">
+                        <input type="submit" class="btn btn-default" value="{% trans 'Filter' %}" />
+                    </div>
+                </form>
+            </div>
+            <script type="text/javascript">
+                $(function () {
+                    $('#datetimepicker').datetimepicker({
+                        format: 'YYYY-MM-DD'
+                    });
+                    $('#datetimepicker2').datetimepicker({
+                        format: 'YYYY-MM-DD',
+                        useCurrent: false //Important! See issue #1075
+                    });
+                    $("#datetimepicker").on("dp.change", function (e) {
+                        $('#datetimepicker2').data("DateTimePicker").minDate(e.date);
+                    });
+                    $("#datetimepicker2").on("dp.change", function (e) {
+                        $('#datetimepicker').data("DateTimePicker").maxDate(e.date);
+                    });
+                });
+            </script>
         </div>
         <div class="trix-div-sort-buttons">
             {% for name, order in selectable_sort_list %}
@@ -85,21 +138,27 @@
         {% for assignment in assignment_list %}
             <div class="assignment-info">
                 <h2>{{ assignment }}</h2>
+                <span class="btn-group">
+                    {% for tag in assignment.tags.all %}
+                        <button class="btn btn-default btn-xs" disabled>{{ tag.tag }}</button>
+                    {% endfor %}
+                </span>
+                <p>{{ assignment.id }}</p>
             </div>
             <div class="progress-info">
-                {% compute_and_set_stats_for_assignment assignment 'bymyself' user_count as bymyself %}
+                {% compute_and_set_stats_for_assignment assignment 'bymyself' user_count from_date to_date as bymyself %}
                 <p class="progress-element">
                     {% trans "Completed by their own" %} {{ bymyself.percent|floatformat:2 }}% ({{ bymyself.count }})
                     {% include "trix_admin/include/progress_bar.django.html" with percent=bymyself.percent style='success' %}
                 </p>
 
-                {% compute_and_set_stats_for_assignment assignment 'withhelp' user_count as withhelp %}
+                {% compute_and_set_stats_for_assignment assignment 'withhelp' user_count from_date to_date as withhelp %}
                 <p class="progress-element">
                     {% trans "Completed with help" %} {{ withhelp.percent|floatformat:2 }}% ({{ withhelp.count }})
                     {% include "trix_admin/include/progress_bar.django.html" with percent=withhelp.percent style='warning'%}
                 </p>
 
-                {% compute_and_set_stats_for_assignment assignment 'notsolved' user_count as notsolved %}
+                {% compute_and_set_stats_for_assignment assignment 'notsolved' user_count from_date to_date as notsolved %}
                 <p class="progress-element">
                     {% trans "Not completed" %} {{ notsolved.percent|floatformat:2 }}% ({{ notsolved.count }})
                     {% include "trix_admin/include/progress_bar.django.html" with percent=notsolved.percent style='info'%}
