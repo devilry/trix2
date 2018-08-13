@@ -1,0 +1,59 @@
+{% extends "trix_student/base.django.html" %}
+{% load i18n %}
+
+{% block title %}{% trans "Consent" %}{% endblock %}
+
+{% block body %}
+    <div class="page-header">
+        <div class="container" style="text-align: center;">
+            {% block consent_title %}
+            <h1>{% trans "Data collection consent form" %}</h1>
+            {% endblock %}
+        </div>
+    </div>
+    <div class="trix-consent-container">
+        <div class="container">
+            <div class="trix-consent-form">
+                {% block consent_text %}
+                {% blocktrans %}
+                    <p>
+                    By clicking accept below you accept that Trix collects personal information
+                    about you and your usage of the Trix platform. The data collected is:
+                    </p>
+                    <ul>
+                        <li>Time of consent</li>
+                        <li>Time of last login</li>
+                        <li>Email address you registered with</li>
+                        <li>How and when you solved assignments, by either clicking 'by myself'
+                            or 'with help'</li>
+                    </ul>
+                    <p>
+                    This data is made anonymous and made available to course administrators and used
+                    to collect information about the usage of the system.
+
+                    You have the option to delete your user account from Trix or to use Trix without
+                    logging in, but you will not have the option to select how you solved assignments.
+                    </p>
+                {% endblocktrans %}
+                {% endblock %}
+            </div>
+            {% block consent_buttons %}
+                {% if not user.has_consented %}
+                    <div class="trix-consent-btn">
+                        <form action="" method="post">{% csrf_token %}
+                            <input type="submit" name="_accept" value="{% trans 'I consent' %}"
+                                    class="btn btn-success" />
+                        </form>
+                        <a href="{% url 'trix_delete_user' pk=user.id %}"
+                            class="btn btn-danger">{% trans "Delete me" %}
+                        </a>
+                        <a href="{% url 'trix_logout' %}?next={% url 'trix_student_dashboard' %}"
+                            class="btn btn-primary">
+                            {% trans "Sign out" %}
+                        </a>
+                    </div>
+                {% endif %}
+            {% endblock %}
+        </div>
+    </div>
+{% endblock %}

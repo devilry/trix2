@@ -9277,6 +9277,28 @@ body {
 .trix-user-text > p {
   font-size: 1.1em;
 }
+/**
+* Styles for the consent form page.
+**/
+.trix-consent-container {
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 0;
+}
+.trix-consent-btn {
+  margin: 30px 0;
+  display: flex;
+  justify-content: space-between;
+  width: 40%;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+}
+@media (max-width: 992px) {
+  .trix-consent-btn {
+    width: 90%;
+  }
+}
 .codehilite {
   /* Comment */
   /* Error */

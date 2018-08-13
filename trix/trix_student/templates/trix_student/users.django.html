@@ -20,6 +20,17 @@
                     <p>{{ user.last_login }}</p>
                 </li>
                 <li>
+                    <h3>{% trans "Data collection" %}</h3>
+                    {% if user.has_consented %}
+                        <p>{% trans "Consented: " %}{{ user.consent_datetime }}</p>
+                    {% else %}
+                        <p>{% trans "Has not consented" %}</p>
+                    {% endif %}
+                    <a href="{% url 'trix_consent_form' %}">
+                        {% trans "Consent form" %}
+                    </a>
+                </li>
+                <li>
                     <h3>{% trans "Role" %}</h3>
                     <p>{{ user_role }}</p>
                 </li>
@@ -36,7 +47,8 @@
 {% comment %}
 TODO: List assignments that the user has solved
 <div class="container">
-    {% include "trix_student/include/pager.django.html" with pager_extraclass="pager-no-topmargin hidden-xs" %}
+    {% include "trix_student/include/pager.django.html" with
+        pager_extraclass="pager-no-topmargin hidden-xs" %}
     {% for item in solved_assignments %}
         <h3>{{ item.assignment }}</h3>
         <p>{{ item.howsolved }}</p>

@@ -27,9 +27,9 @@ class TrixAuthenticationForm(AuthenticationForm):
         self.helper = FormHelper()
         self.helper.add_input(Submit('login', _('Log in'), formnovalidate=True))
         if redirect_url is not None:
-            self.helper.form_action = reverse('trix-login') + "?next=" + redirect_url
+            self.helper.form_action = reverse('trix_login') + "?next=" + redirect_url
         else:
-            self.helper.form_action = reverse('trix-login')
+            self.helper.form_action = reverse('trix_login')
 
     def clean(self):
         """

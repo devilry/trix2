@@ -53,6 +53,11 @@ class User(AbstractBaseUser):
         unique=True
     )
 
+    consent_datetime = models.DateTimeField(
+        blank=True,
+        null=True
+    )
+
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = []
 
@@ -114,6 +119,10 @@ class User(AbstractBaseUser):
         Is the user a superuser?
         """
         return self.is_admin
+
+    @property
+    def has_consented(self):
+        return self.consent_datetime is not None
 
 
 class TagQuerySet(models.query.QuerySet):
@@ -319,6 +328,10 @@ class HowSolved(models.Model):
 
     assignment = models.ForeignKey(Assignment, on_delete=models.CASCADE)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
+    solved_datetime = models.DateTimeField(
+        verbose_name=_('Solved'),
+        auto_now=True
+    )
 
     def __unicode__(self):
         return self.howsolved

@@ -20,7 +20,7 @@
 {% load trix_core_tags %}
 
 {% if is_paginated %}
-    <div class="container-fluid pager-container">
+    <div class="container-fluid pager-container trix-no-print">
         <ul class="pager {{ pager_extraclass }}">
             <li class="previous {% if not page_obj.has_previous %}disabled{% endif %}">
                 {% if page_obj.has_previous %}
