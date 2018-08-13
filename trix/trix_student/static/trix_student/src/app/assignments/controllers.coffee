@@ -1,4 +1,4 @@
-angular.module('trixStudent.assignments.controllers', [])
+angular.module('trixStudent.assignments.controllers', ['ngRoute'])
 
 .controller('AddTagCtrl', [
   '$scope', '$window',
