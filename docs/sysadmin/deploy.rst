@@ -130,7 +130,7 @@ Customising the consent template is highly recommended and can be done by follow
 
         add_custom_template('custom_template_directory/goes/here')
 
-If you which to disable the consent dialog completely for some reason, add ``DISABLE_CONSENT = True``
+If you wish to disable the consent dialog completely for some reason, add ``DISABLE_CONSENT = True``
 to your ``trix_settings.py`` file.
 
 
