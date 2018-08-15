@@ -207,9 +207,11 @@ class AssignmentCreateView(AssignmentCreateUpdateMixin, create.CreateView):
 
     def serialize_preview(self, form):
         """
-        Override this to use commit=True, this fixes previewing unsaved assignments.
+        Override this to add an ID, else it will fail when previewing non-saved objects.
         """
-        return serializers.serialize('json', [self.save_object(form, commit=True)])
+        obj = self.save_object(form, commit=False)
+        obj.id = 0
+        return serializers.serialize('json', [obj])
 
 
 class AssignmentUpdateView(AssignmentQuerysetForRoleMixin,
