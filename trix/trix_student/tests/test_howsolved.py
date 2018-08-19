@@ -1,6 +1,7 @@
 import json
 from django.test import TestCase
 from django.urls import reverse
+from django.utils import timezone
 
 from trix.project.develop.testhelpers.user import create_user
 from trix.project.develop.testhelpers.login import LoginTestCaseMixin
@@ -9,7 +10,7 @@ from trix.trix_core import models
 
 class TestHowSolved(TestCase, LoginTestCaseMixin):
     def setUp(self):
-        self.testuser = create_user('testuser@example.com')
+        self.testuser = create_user('testuser@example.com', consent_datetime=timezone.now())
         self.assignment = models.Assignment.objects.create(title='Test')
 
     def _geturl(self, id):
