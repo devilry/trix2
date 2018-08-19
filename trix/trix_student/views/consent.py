@@ -1,11 +1,7 @@
-from django import forms
-from django.conf import settings
 from django.shortcuts import redirect
 from django.views.generic import TemplateView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.utils import timezone
-
-from trix.trix_core import models
 
 
 class ConsentFormView(LoginRequiredMixin, TemplateView):
