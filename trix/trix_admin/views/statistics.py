@@ -1,14 +1,11 @@
-import datetime
 from django.contrib.auth import get_user_model
 from django.core.exceptions import PermissionDenied
-from django.db.models import Count, Q
+from django.db.models import Q
 from django.http import HttpResponse
 from django.http import HttpResponseBadRequest
 from django.views.generic import ListView
 from django.views.generic import View
 from django.utils.translation import ugettext as _
-from cradmin_legacy.viewhelpers import objecttable
-from django.utils.http import urlencode
 from django.core.exceptions import FieldError
 from cradmin_legacy import crapp
 
