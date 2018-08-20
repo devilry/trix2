@@ -80,11 +80,9 @@
             <div class="col-sm-9 col-sm-pull-3 col-md-9 col-md-pull-3">
                 {% include "trix_student/include/pager.django.html" with pager_extraclass="pager-no-topmargin hidden-xs" %}
                 {% for assignment, howsolved in assignmentlist_with_howsolved %}
-                    {% if assignment.hidden is False or assignment.hidden is None or user_is_admin %}
-                        {% include "trix_student/include/assignment.django.html" %}
-                    {% endif %}
-                    {% empty %}
-                        <h2>{% trans "No assignments found" %}</h2>
+                    {% include "trix_student/include/assignment.django.html" %}
+                {% empty %}
+                    <h2>{% trans "No assignments found" %}</h2>
                 {% endfor %}
                 {% include "trix_student/include/pager.django.html" %}
             </div>

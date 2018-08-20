@@ -23,9 +23,9 @@ class CourseDetailView(AssignmentListViewBase):
             return False
 
     def get_all_available_assignments(self):
-        return models.Assignment.objects\
-            .filter_by_tag(self.course.course_tag)\
-            .filter_by_tag(self.course.active_period)
+        return (models.Assignment.objects
+                .filter_by_tag(self.course.course_tag)
+                .filter_by_tag(self.course.active_period))
 
     def get_already_selected_tags(self):
         already_selected_tags = [
