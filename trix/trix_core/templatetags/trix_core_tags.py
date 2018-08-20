@@ -34,3 +34,8 @@ def url_replace(context, field, value):
 @register.filter
 def add_string_list(string_list, item):
     return string_list + ',' + item
+
+
+@register.filter
+def startswith(tag, item):
+    return tag.startswith(item)
