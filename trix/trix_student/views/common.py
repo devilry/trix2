@@ -33,6 +33,9 @@ class AssignmentListViewBase(ListView):
             if exclude_list:
                 # Exclude any assignment that has an excluded tag
                 assignments = assignments.exclude(tags__tag__in=exclude_list)
+        # Exclude hidden tasks from those that are not admin
+        if not self._get_user_is_admin():
+            assignments = assignments.exclude(hidden=True)
         assignments = assignments.order_by('title')
         return assignments
 
@@ -95,8 +98,8 @@ class AssignmentListViewBase(ListView):
         """
         howsolvedmap = {}  # Map of assignment ID to HowSolved.howsolved for request.user
         if self.request.user.is_authenticated() and assignment_list:
-            howsolvedquery = models.HowSolved.objects\
-                .filter(user=self.request.user, assignment__in=assignment_list)
+            howsolvedquery = (models.HowSolved.objects
+                              .filter(user=self.request.user, assignment__in=assignment_list))
             howsolvedmap = dict(howsolvedquery.values_list('assignment_id', 'howsolved'))
         return [
             (assignment, howsolvedmap.get(assignment.id, ''))
