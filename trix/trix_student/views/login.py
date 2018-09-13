@@ -24,6 +24,7 @@ class TrixAuthenticationForm(AuthenticationForm):
     def __init__(self, request=None, *args, **kwargs):
         super(TrixAuthenticationForm, self).__init__(request, *args, **kwargs)
         redirect_url = request.GET.get('next')
+        self.fields['username'].widget.attrs.update({'autofocus': True})
         self.helper = FormHelper()
         self.helper.add_input(Submit('login', _('Log in'), formnovalidate=True))
         if redirect_url is not None:
