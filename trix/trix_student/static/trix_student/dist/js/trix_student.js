@@ -130,7 +130,7 @@
           $scope.saving = false;
           return $scope.howsolved = null;
         }).catch(function(response) {
-          if (reponse.status === 404) { // Handle 404 just like 200
+          if (response.status === 404) { // Handle 404 just like 200
             $scope.saving = false;
             return $scope.howsolved = null;
           } else {
@@ -167,7 +167,7 @@
           }
         }).catch(function(response) {
           return console.error('Failed to load progress:',
-    reponse.statusText);
+    response.statusText);
         });
       };
       unbindProgressChanged = $rootScope.$on('assignments.progressChanged',
