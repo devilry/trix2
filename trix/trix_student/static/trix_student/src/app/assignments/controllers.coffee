@@ -98,7 +98,7 @@ angular.module('trixStudent.assignments.controllers', ['ngRoute'])
           $scope.saving = false
           $scope.howsolved = null
         .catch (response) ->
-          if reponse.status == 404  # Handle 404 just like 200
+          if response.status == 404  # Handle 404 just like 200
             $scope.saving = false
             $scope.howsolved = null
           else
