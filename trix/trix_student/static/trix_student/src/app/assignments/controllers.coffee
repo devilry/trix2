@@ -127,7 +127,7 @@ angular.module('trixStudent.assignments.controllers', ['ngRoute'])
           else
             $scope.progressBarClass = ''
         .catch (response) ->
-          console.error('Failed to load progress:', reponse.statusText)
+          console.error('Failed to load progress:', response.statusText)
 
     unbindProgressChanged = $rootScope.$on 'assignments.progressChanged', ->
       $scope._loadProgress()
