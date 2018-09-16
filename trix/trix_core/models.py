@@ -68,7 +68,7 @@ class User(AbstractBaseUser):
         verbose_name_plural = _("Users")
         ordering = ['email']
 
-    def __unicode__(self):
+    def __str__(self):
         return self.displayname
 
     def get_long_name(self):
@@ -125,23 +125,10 @@ class User(AbstractBaseUser):
         return self.consent_datetime is not None
 
 
-class TagQuerySet(models.query.QuerySet):
-    def to_unicode(self):
-        return u', '.join(tag.tag for tag in self.all())
-
-
-class TagManager(models.Manager):
-    use_for_related_fields = True
-
-    def get_queryset(self):
-        return TagQuerySet(self.model)
-
-
 class Tag(models.Model):
     """
     A tag for an assignment and a course.
     """
-    objects = TagManager()
 
     # NOTE: Help and field size in UI must make users use short tags
     tag = models.CharField(
@@ -165,7 +152,7 @@ class Tag(models.Model):
         verbose_name_plural = _('Tags')
         ordering = ['tag']
 
-    def __unicode__(self):
+    def __str__(self):
         return self.tag
 
     @classmethod
@@ -190,7 +177,7 @@ class Tag(models.Model):
         else:
             return [
                 cls.normalize_tag(tagstring)
-                for tagstring in list(filter(None, re.split('[,\s]', commaseparatedtags)))]
+                for tagstring in list([_f for _f in re.split('[,\s]', commaseparatedtags) if _f])]
 
 
 class Course(models.Model):
@@ -227,7 +214,7 @@ class Course(models.Model):
         verbose_name_plural = _('Courses')
         ordering = ['course_tag']
 
-    def __unicode__(self):
+    def __str__(self):
         return self.course_tag.tag
 
 
@@ -289,7 +276,7 @@ class Assignment(models.Model):
         verbose_name_plural = _('Assignments')
         ordering = ['-lastupdate_datetime']
 
-    def __unicode__(self):
+    def __str__(self):
         return self.title
 
     @property
@@ -333,7 +320,7 @@ class HowSolved(models.Model):
         auto_now=True
     )
 
-    def __unicode__(self):
+    def __str__(self):
         return self.howsolved
 
 
@@ -362,7 +349,7 @@ class Permalink(models.Model):
         verbose_name_plural = _('Permalinks')
         ordering = ['title']
 
-    def __unicode__(self):
+    def __str__(self):
         return self.title
 
     @property

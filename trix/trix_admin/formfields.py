@@ -7,11 +7,11 @@ class ManyToManyTagInputField(forms.CharField):
 
     def prepare_value(self, value):
         if value:
-            if isinstance(value, basestring):
+            if isinstance(value, str):
                 tags = self.to_python(value)
-                return u', '.join([tag.tag for tag in tags])
+                return ', '.join([tag.tag for tag in tags])
             else:
-                return trix_models.Tag.objects.filter(tag__in=value).to_unicode()
+                return ', '.join(tag.tag for tag in value)
         else:
             return ''
 

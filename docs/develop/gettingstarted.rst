@@ -8,13 +8,12 @@ Install the requirements
 ************************
 Install the following:
 
-#. Python2.7
+#. Python3.6 or above
 #. PIP_
 #. VirtualEnv_
 #. virtualenvwrapper_
 #. gettext for Django translations
 #. nodejs and npm for our clientside stuff
-.. #. libjpeg, liblcms1, libfreetype6 and zlib for the required format support in Pillow
 
 
 Install the system packages on OSX with Homebrew

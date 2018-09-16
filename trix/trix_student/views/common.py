@@ -1,10 +1,11 @@
-import urllib
 import json
 from django import http
 from django.views.generic import ListView
 from django.utils.translation import ugettext_lazy as _
+from urllib import parse
 
 from trix.trix_core import models
+from functools import reduce
 
 
 class AssignmentListViewBase(ListView):
@@ -112,7 +113,7 @@ class AssignmentListViewBase(ListView):
         context['selected_tags'] = self.selected_tags
         context['selectable_tags'] = self.selectable_tags
         context['user_is_admin'] = self._get_user_is_admin()
-        context['urlencoded_success_url'] = urllib.urlencode({
+        context['urlencoded_success_url'] = parse.urlencode({
             'success_url': self.request.get_full_path()})
 
         context['assignmentlist_with_howsolved'] = self._get_assignmentlist_with_howsolved(

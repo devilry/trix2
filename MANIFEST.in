@@ -1,6 +1,5 @@
-include README.rst
+include README.md
 recursive-include trix/trix_core/locale *
-recursive-include trix/trix_admin/static *
 recursive-include trix/trix_admin/templates *
 recursive-include trix/trix_admin/locale *
 recursive-include trix/trix_student/static *
@@ -8,3 +7,4 @@ recursive-include trix/trix_student/templates *
 recursive-include trix/trix_student/locale *
 prune trix/trix_student/static/trix_student/node_modules
 prune trix/trix_student/static/trix_student/bower_components
+prune trix/trix_core/migrations

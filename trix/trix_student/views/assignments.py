@@ -17,7 +17,7 @@ class AssignmentListView(AssignmentListViewBase):
             return False
 
     def get_all_available_assignments(self):
-        assignment_ids = filter(None, self.kwargs['assignment_ids'].split('&'))
+        assignment_ids = [_f for _f in self.kwargs['assignment_ids'].split('&') if _f]
         return models.Assignment.objects.filter(id__in=assignment_ids)
 
     def get_already_selected_tags(self):

@@ -39,7 +39,7 @@ def bulk_update_assignment_tags(assignments_by_tag, existing_assignments):
             .delete()
 
     # Bulk create any missing tags
-    existing_tags = coremodels.Tag.objects.filter(tag__in=assignments_by_tag.keys())
+    existing_tags = coremodels.Tag.objects.filter(tag__in=list(assignments_by_tag.keys()))
     new_tags = set(assignments_by_tag.keys())
     new_tags.difference_update(set([tagobject.tag for tagobject in existing_tags]))
     new_tagobjects = [coremodels.Tag(tag=tag) for tag in new_tags]
@@ -47,7 +47,7 @@ def bulk_update_assignment_tags(assignments_by_tag, existing_assignments):
 
     # Bulk add tags to the assignments
     assignmenttags = []
-    for tagobject in coremodels.Tag.objects.filter(tag__in=assignments_by_tag.keys()):
+    for tagobject in coremodels.Tag.objects.filter(tag__in=list(assignments_by_tag.keys())):
         assignments = assignments_by_tag[tagobject.tag]
         for assignment in assignments:
             assignmenttags.append(AssignmentTag(tag=tagobject, assignment=assignment))

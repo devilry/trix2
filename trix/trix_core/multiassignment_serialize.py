@@ -20,7 +20,7 @@ class MarkdownString(object):
     def __init__(self, unicode_object):
         self.unicode_object = unicode_object
 
-    def __unicode__(self):
+    def __str__(self):
         return self.unicode_object
 
     @staticmethod
@@ -31,7 +31,7 @@ class MarkdownString(object):
         We represent MarkdownString as a ``!!str``-tag (I.E.: ``tag:yaml.org,2002:str``),
         with the `literal-scalar style <http://www.yaml.org/spec/1.2/spec.html#id2795688>`_.
         """
-        return dumper.represent_scalar(u'tag:yaml.org,2002:str', data.unicode_object, style='|')
+        return dumper.represent_scalar('tag:yaml.org,2002:str', data.unicode_object, style='|')
 
 
 yaml.SafeDumper.add_representer(MarkdownString, MarkdownString.representer)
@@ -49,11 +49,11 @@ class YamlMapOrderedDict(collections.OrderedDict):
         YAML representer for YamlMapOrderedDict.
         """
         value = []
-        for item_key, item_value in data.items():
+        for item_key, item_value in list(data.items()):
             node_key = dumper.represent_data(item_key)
             node_value = dumper.represent_data(item_value)
             value.append((node_key, node_value))
-        return yaml.nodes.MappingNode(u'tag:yaml.org,2002:map', value)
+        return yaml.nodes.MappingNode('tag:yaml.org,2002:map', value)
 
 
 yaml.SafeDumper.add_representer(YamlMapOrderedDict, YamlMapOrderedDict.representer)
@@ -147,7 +147,7 @@ class ListField(forms.Field):
         if not isinstance(value, list):
             raise ValidationError(_('Invalid value. Must be a list.'), code='invalid')
         for item in value:
-            if not isinstance(item, basestring):
+            if not isinstance(item, str):
                 raise ValidationError(_('Invalid value in list. Must be a list of strings.'),
                                       code='invalid')
 
@@ -197,7 +197,7 @@ class Deserializer(object):
     def _get_existing_assignments(self):
         existing_assignments = coremodels.Assignment.objects\
             .filter(
-                id__in=self.deserialized_assignments_with_id.keys(),
+                id__in=list(self.deserialized_assignments_with_id.keys()),
                 tags__tag=self.course_tag)
         if len(existing_assignments) != len(self.deserialized_assignments_with_id):
             raise DeserializerNotFoundError(

@@ -6,7 +6,7 @@ Setup Trix for production
 ********************
 Install dependencies
 ********************
-#. Python 2.7.X. Check your current version by running ``python --version``.
+#. Python 3.6 or higher. Check your current version by running ``python --version``.
 #. PIP_
 #. VirtualEnv_
 #. PostgreSQL server --- not needed if you just want to build the docs.
@@ -100,7 +100,7 @@ Create a ``trix_uio_ldap_auth.py`` as follows (but adjust the email suffix)::
 
     class TrixUioLDAPBackend(LDAPBackend):
         def ldap_to_django_username(self, username):
-            return u'{}@example.com'.format(username)
+            return '{}@example.com'.format(username)
 
         def django_to_ldap_username(self, username):
             return username.split('@')[0]
