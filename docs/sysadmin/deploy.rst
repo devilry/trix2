@@ -140,7 +140,7 @@ Make sure it works
 Just to make sure everything works, run::
 
     $ cd ~/trixdeploy/
-    $ venv/bin/python manage.py syncdb --noinput
+    $ venv/bin/python manage.py migrate
 
 This should create a file named ``~/trixdeploy/trixdb.sqlite``. You can remove that file now - it was just for testing.
 
