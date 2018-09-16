@@ -46,7 +46,7 @@ coverage.xml
 *.log
 *.pot
 /staticfiles/
-/migrations/
+**/migrations/
 
 # Sphinx documentation
 docs/_build/
