@@ -9,7 +9,8 @@ from django.utils.translation import ugettext as _
 from django.core.exceptions import FieldError
 from cradmin_legacy import crapp
 
-import unicodecsv as csv
+import csv
+# import unicodecsv as csv
 from trix.trix_core import models as trix_models
 
 
@@ -122,7 +123,7 @@ class AssignmentStatsCsv(AssignmentStatsMixin, View):
 
         try:
             response['Content-Disposition'] = 'attachment; filename="trix-statistics.csv"'
-            csvwriter = csv.writer(response, dialect='semicolons', encoding='utf-8')
+            csvwriter = csv.writer(response, dialect='semicolons')
             csvwriter.writerow([_('Simple statistics showing percentage share of how the '
                                   'assignments where solved')])
             csvwriter.writerow([_('Total number of users'), str(user_count)])

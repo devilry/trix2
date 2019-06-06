@@ -32,7 +32,6 @@ class TrixUserManager(BaseUserManager):
         return user
 
 
-@python_2_unicode_compatible
 class User(AbstractBaseUser):
     """
     The Trix user model.
@@ -127,7 +126,6 @@ class User(AbstractBaseUser):
         return self.consent_datetime is not None
 
 
-@python_2_unicode_compatible
 class Tag(models.Model):
     """
     A tag for an assignment and a course.
@@ -183,7 +181,6 @@ class Tag(models.Model):
                 for tagstring in list([_f for _f in re.split('[,\s]', commaseparatedtags) if _f])]
 
 
-@python_2_unicode_compatible
 class Course(models.Model):
     """
     A course is simply a tag with an optional active period tag, and a list of admins.
@@ -246,7 +243,6 @@ class AssignmentManager(models.Manager):
         return qryset
 
 
-@python_2_unicode_compatible
 class Assignment(models.Model):
     title = models.CharField(
         max_length=255,
@@ -305,7 +301,6 @@ class Assignment(models.Model):
         self.solution = self._normalize_text(self.solution)
 
 
-@python_2_unicode_compatible
 class HowSolved(models.Model):
     """
     This class holds information on how the assignment was solved.
@@ -330,7 +325,6 @@ class HowSolved(models.Model):
         return self.howsolved
 
 
-@python_2_unicode_compatible
 class Permalink(models.Model):
     course = models.ForeignKey(
         Course,
