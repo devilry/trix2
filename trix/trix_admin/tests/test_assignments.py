@@ -8,7 +8,7 @@ class TestValidateSingleTag(TestCase):
         validate_single_tag('test')
 
     def test_valid_unicodechars(self):
-        validate_single_tag(u'v\u00e6r')
+        validate_single_tag('v\u00e6r')
 
     def test_valid_numbers(self):
         validate_single_tag('2015')
