@@ -76,7 +76,7 @@ text: Testtext
             multiassignment_serialize.serialize([assignment]),
             ('id: {}\n'
              'title: A title\n'
-             'tags:\n- testtag\n- testtag2\n'
+             'tags: [testtag, testtag2]\n'
              'hidden: false\n'
              'text: |-\n'
              '  A text\n').format(assignment.id)
