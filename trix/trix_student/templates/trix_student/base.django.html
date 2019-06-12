@@ -12,6 +12,9 @@
 
         {% block css %}
             <link href='{% static "trix_student/dist/css/styles.css" %}' rel="stylesheet">
+            {% if wcag %}
+                <link href='{% static "trix_student/dist/css/wcag.css" %}' rel="stylesheet">
+            {% endif %}
         {% endblock %}
 
         <script src="{% static 'trix_student/dist/vendor/js/angular.min.js' %}" type="text/javascript"></script>
@@ -43,6 +46,8 @@
             {% endif %}
         {% endblock not_signed_in_warning %}
         {% block body %}{% endblock %}
-        {% block footer %}{% endblock footer %}
+        {% block footer %}
+            {% include "trix_student/include/footer.django.html" %}
+        {% endblock footer %}
     </body>
 </html>

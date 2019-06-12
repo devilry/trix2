@@ -5,9 +5,10 @@ from django.http import Http404
 from django.urls import reverse_lazy
 
 from trix.trix_core import models
+from trix.trix_student.views import base
 
 
-class ProfilePageView(LoginRequiredMixin, ListView):
+class ProfilePageView(LoginRequiredMixin, base.TrixListViewBase):
     template_name = 'trix_student/users.django.html'
     model = models.HowSolved
 

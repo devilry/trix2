@@ -1,0 +1,24 @@
+/*******************************************************
+* These styles fixes are done to be compliant with WCAG.
+********************************************************/
+/* Bootstrap fixes */
+.text-muted {
+  color: #696969;
+}
+.progress-bar-danger {
+  background-color: #D33A36;
+}
+.progress-bar-warning {
+  color: #5D737F;
+}
+.btn-success {
+  background-color: #008A00;
+}
+/* Assignment Page Fixes */
+.trix-assignmentsolutionexpander {
+  color: #306DA6;
+}
+.trix-select-tag {
+  color: #333333;
+  background-color: white;
+}

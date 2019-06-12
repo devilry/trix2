@@ -1,5 +1,19 @@
 {% load i18n %}
 {% load static %}
 
-<div class="trix-footer">
+<div class="trix-footer" role="contentinfo">
+    <div>
+        <span class="fa fa-bug"></span>
+        <a href="https://github.com/devilry/trix2/issues/new" target="_blank">Report bug</a>
+    </div>
+    <div>
+        {% if wcag %}
+            <span class="fa fa-eye-slash"></span>
+            <a href="{% url 'wcag' %}">Deactivate
+        {% else %}
+            <span class="fa fa-eye"></span>
+            <a href="{% url 'wcag' %}">Activate
+        {% endif %}
+        accessibility colours</a>
+    </div>
 </div>
