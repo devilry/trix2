@@ -44,16 +44,4 @@
         </div>
     </div>
 </div>
-{% comment %}
-TODO: List assignments that the user has solved
-<div class="container">
-    {% include "trix_student/include/pager.django.html" with
-        pager_extraclass="pager-no-topmargin hidden-xs" %}
-    {% for item in solved_assignments %}
-        <h3>{{ item.assignment }}</h3>
-        <p>{{ item.howsolved }}</p>
-    {% endfor %}
-    {% include "trix_student/include/pager.django.html" %}
-</div>
-{% endcomment %}
 {% endblock body %}

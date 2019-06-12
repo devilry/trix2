@@ -3,7 +3,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth import views as auth_views
 
 from trix.trix_student.views import login, dashboard, assignments, course,\
-    howsolved, permalink, users, consent
+    howsolved, permalink, users, consent, base
 
 
 urlpatterns = [
@@ -36,5 +36,6 @@ urlpatterns = [
         name='trix_logout'),
     url(r'^consent$',
         consent.ConsentFormView.as_view(),
-        name='trix_consent_form')
+        name='trix_consent_form'),
+    url(r'^wcag$', base.wcag_change, name="wcag")
 ]

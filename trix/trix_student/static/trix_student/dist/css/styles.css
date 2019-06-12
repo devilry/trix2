@@ -8918,6 +8918,36 @@ nav#trix_header {
   border: none;
   margin-bottom: 0;
 }
+nav#trix_header a {
+  color: white;
+}
+.page-header p a {
+  color: #3070A6;
+}
+.trix-footer {
+  overflow: auto;
+  display: flex;
+  background-color: transparent;
+  align-items: center;
+  justify-content: center;
+  margin-top: 20px;
+  margin-bottom: 5px;
+  padding-left: 10px;
+  padding-right: 10px;
+  width: 100%;
+  font-size: 0.8em;
+}
+.trix-footer a {
+  color: #757575;
+}
+.trix-footer > div {
+  margin: 0 10px;
+}
+@media (max-width: 767px) {
+  .trix-footer {
+    display: block;
+  }
+}
 .page-header {
   background: #f4f4f4;
   margin-top: 0;
@@ -9303,14 +9333,10 @@ fieldset[disabled] .btn-trix-admin.active {
 }
 .trix-neg {
   margin: 10px 0 10px;
+}
+.trix-neg > label {
   display: flex;
   justify-content: space-between;
-}
-.trix-neg > input {
-  width: 16px;
-  height: 16px;
-  margin-top: 3px !important;
-  margin-bottom: 5px !important;
 }
 /**
 * Styles for the delete template

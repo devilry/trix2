@@ -10,7 +10,6 @@ from django.core.exceptions import FieldError
 from cradmin_legacy import crapp
 
 import csv
-# import unicodecsv as csv
 from trix.trix_core import models as trix_models
 
 
