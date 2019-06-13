@@ -30,7 +30,6 @@
         {% block header %}
             {% include "trix_student/include/header.django.html" %}
         {% endblock header %}
-        </header>
         {% block not_signed_in_warning %}
             {% if not request.user.is_authenticated %}
                 <div class="alert alert-warning alert-edgetoedge alert-nomargin">
@@ -47,6 +46,7 @@
                 </div>
             {% endif %}
         {% endblock not_signed_in_warning %}
+        </header>
         <main>{% block body %}{% endblock %}</main>
         <footer>
             {% block footer %}

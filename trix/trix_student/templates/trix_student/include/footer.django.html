@@ -4,16 +4,18 @@
 <div class="trix-footer">
     <div>
         <span class="fa fa-bug"></span>
-        <a href="https://github.com/devilry/trix2/issues/new" target="_blank">Report bug</a>
+        <a href="https://github.com/devilry/trix2/issues/new" target="_blank">
+            {% trans "Report bug" %}
+        </a>
     </div>
     <div>
         {% if wcag %}
             <span class="fa fa-eye-slash"></span>
-            <a href="{% url 'wcag' %}">Deactivate
+            <a href="{% url 'wcag' %}">{% trans "Deactivate" %}
         {% else %}
             <span class="fa fa-eye"></span>
-            <a href="{% url 'wcag' %}">Activate
+            <a href="{% url 'wcag' %}">{% trans "Activate" %}
         {% endif %}
-        accessibility colours</a>
+        {% trans "accessibility colours" %}</a>
     </div>
 </div>

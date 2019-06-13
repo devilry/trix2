@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: trix_student\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-06-13 14:57+0200\n"
+"POT-Creation-Date: 2019-06-13 15:52+0200\n"
 "PO-Revision-Date: 2015-01-03 17:40+0100\n"
 "Last-Translator: Espen Angell Kristiansen <post@espenak.net>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -81,11 +81,11 @@ msgstr "Fant ingen oppgaver"
 msgid "Trix"
 msgstr "Trix"
 
-#: trix/trix_student/templates/trix_student/base.django.html:39
+#: trix/trix_student/templates/trix_student/base.django.html:38
 msgid "You are not authenticated."
 msgstr "Du er ikke logget inn."
 
-#: trix/trix_student/templates/trix_student/base.django.html:40
+#: trix/trix_student/templates/trix_student/base.django.html:39
 msgid ""
 "If you are not authenticated, you will not be able to keep track of your "
 "progress."
@@ -93,7 +93,7 @@ msgstr ""
 "Så lenge du ikke er logget inn går du glipp av muligheten for å holde styr "
 "på din egen progresjon."
 
-#: trix/trix_student/templates/trix_student/base.django.html:44
+#: trix/trix_student/templates/trix_student/base.django.html:43
 #: trix/trix_student/templates/trix_student/include/header.django.html:59
 msgid "Sign in"
 msgstr "Logg inn"
@@ -255,6 +255,22 @@ msgstr "Lagrer..."
 #: trix/trix_student/templates/trix_student/include/assignment.django.html:87
 msgid "See solution"
 msgstr "Vis løsningsforslag"
+
+#: trix/trix_student/templates/trix_student/include/footer.django.html:8
+msgid "Report bug"
+msgstr "Rapporter feil"
+
+#: trix/trix_student/templates/trix_student/include/footer.django.html:14
+msgid "Deactivate"
+msgstr "Deaktiver"
+
+#: trix/trix_student/templates/trix_student/include/footer.django.html:17
+msgid "Activate"
+msgstr "Aktiver"
+
+#: trix/trix_student/templates/trix_student/include/footer.django.html:19
+msgid "accessibility colours"
+msgstr "tilgjengelighetsfarger"
 
 #: trix/trix_student/templates/trix_student/include/header.django.html:12
 msgid "Toggle navigation"
