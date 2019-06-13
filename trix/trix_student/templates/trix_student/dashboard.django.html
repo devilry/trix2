@@ -3,32 +3,29 @@
 {% block title %}{% trans "Frontpage" %}{% endblock title %}
 
 {% block body %}
-<main role="main">
-    <div class="page-header">
-        <div class="container">
-        <h1>{% trans "Welcome to Trix" %}</h1>
-        <p>{% trans "Trix is a teaching platform to help you work more systematic towards your goal, resulting in a better learning outcome." %}</p>
-        <p>
-            {% blocktrans %}Trix acts as an assignments wiki, where educational authors provide you with a selection of assignments. Here you can study and track your progress as you advance through your learning goals.{% endblocktrans %}
-        </p>
-        <p>
-            {% blocktrans %}Trix follows a simple tag structure where assignments are marked with informative tags. This along with filtering capabilities ensures a tailored selection of assignments perfectly suited to your personal level. Trix is a day to day learning tool as well as a preparatory tool for focused learning.{% endblocktrans %}
-        </p>
-        <p>
-            {% trans "For more information" %}, <a href="{{ TRIX_STUDENT_GETTINGSTARTEDGUIDE_URL }}">{% trans "read the getting started guide" %}</a>.
-        </p>
-        </div>
-    </div>
-
+<div class="page-header">
     <div class="container">
-        <div class="course-list">
-            {% for course in object_list %}
-                <div class="course-list-element">
-                    <h2><a href="{% url 'trix_student_course' course.id %}">{{ course.course_tag }}</a></h2>
-                    <p class="text-muted">{{ course.description }}</p>
-                </div>
-            {% endfor %}
-        </div>
+    <h1>{% trans "Welcome to Trix" %}</h1>
+    <p>{% trans "Trix is a teaching platform to help you work more systematic towards your goal, resulting in a better learning outcome." %}</p>
+    <p>
+        {% blocktrans %}Trix acts as an assignments wiki, where educational authors provide you with a selection of assignments. Here you can study and track your progress as you advance through your learning goals.{% endblocktrans %}
+    </p>
+    <p>
+        {% blocktrans %}Trix follows a simple tag structure where assignments are marked with informative tags. This along with filtering capabilities ensures a tailored selection of assignments perfectly suited to your personal level. Trix is a day to day learning tool as well as a preparatory tool for focused learning.{% endblocktrans %}
+    </p>
+    <p>
+        {% trans "For more information" %}, <a href="{{ TRIX_STUDENT_GETTINGSTARTEDGUIDE_URL }}">{% trans "read the getting started guide" %}</a>.
+    </p>
     </div>
-</main>
+</div>
+<div class="container">
+    <div class="course-list">
+        {% for course in object_list %}
+            <div class="course-list-element">
+                <h2><a href="{% url 'trix_student_course' course.id %}">{{ course.course_tag }}</a></h2>
+                <p class="text-muted">{{ course.description }}</p>
+            </div>
+        {% endfor %}
+    </div>
+</div>
 {% endblock body %}

@@ -40,7 +40,7 @@
                 </div>
             {% endif %}
             <div ng-controller="RemoveTagCtrl" class="assignments-selectedtags-listing">
-                <h3>{% trans "Selected tags" %}:</h3>
+                <h2>{% trans "Selected tags" %}:</h2>
                 {% for tag in non_removeable_tags %}
                     <a tabindex="-1" class="btn btn-primary btn-sm disabled">
                         {{ tag }}

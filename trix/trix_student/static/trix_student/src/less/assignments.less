@@ -16,8 +16,6 @@
 .trix-assignment {
     margin-top: 30px;
     margin-bottom: 30px;
-    // padding-top: 80px;
-    // border-top: 1px solid #eee;
     padding: 20px;
     border-radius: 4px;
     font-size: @trix-article-font-size;
@@ -37,13 +35,6 @@
         background-color: @state-success-bg;
     }
 
-    @media (min-width: @screen-sm-min) {
-        &:first-child {
-            // border-top: none;
-            // padding-top: 0;
-        }
-    }
-
     &>h2 {
         margin-top: 0;
         padding-top: 0;
@@ -54,7 +45,6 @@
     }
 
     .trix-assignmenthowsolved {
-        // margin-top: 40px;
         .trix-assignmenthowsolvedsaving {
             display: inline-block;
             margin-left: 10px;
@@ -85,10 +75,6 @@
 }
 
 #assignments-taggingbox {
-    // *:first-child h3 {
-    //     margin-top: 0;
-    // }
-
     .assignments-progressbox {
         min-height: 80px;
         .fa.fa-spin {
@@ -111,6 +97,11 @@
     }
 
     .assignments-selectedtags-listing {
+        > h2 {
+            font-size: 1.3em;
+            border-bottom: 1px solid #eee;
+        }
+
         .btn {
             margin-bottom: 4px;
         }
