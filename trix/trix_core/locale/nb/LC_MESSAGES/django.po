@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: trix_core\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-09-16 20:16+0200\n"
+"POT-Creation-Date: 2019-06-13 14:57+0200\n"
 "PO-Revision-Date: 2014-12-21 22:43+0100\n"
 "Last-Translator: Tor Ivar Johansen <tor@appresso.no>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -168,20 +168,20 @@ msgstr "Permalink"
 msgid "Permalinks"
 msgstr "Permalinker"
 
-#: trix/trix_core/multiassignment_serialize.py:148
+#: trix/trix_core/multiassignment_serialize.py:152
 msgid "Invalid value. Must be a list."
 msgstr "Ugyldig verdi. Må være en liste"
 
-#: trix/trix_core/multiassignment_serialize.py:151
+#: trix/trix_core/multiassignment_serialize.py:155
 msgid "Invalid value in list. Must be a list of strings."
 msgstr "Ugyldig verdi i liste. Må være en liste av strenger"
 
-#: trix/trix_core/multiassignment_serialize.py:190
+#: trix/trix_core/multiassignment_serialize.py:194
 #, python-format
 msgid "More than one assignment with \"id=%(id)s\"."
 msgstr "Flere enn en oppgave med \"id=%(id)s\"."
 
-#: trix/trix_core/multiassignment_serialize.py:204
+#: trix/trix_core/multiassignment_serialize.py:208
 #, python-format
 msgid ""
 "One or more of the given IDs was not found among the assignments accessible "

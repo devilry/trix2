@@ -8927,7 +8927,7 @@ nav#trix_header a {
 .trix-footer {
   overflow: auto;
   display: flex;
-  background-color: transparent;
+  background-color: #fff;
   align-items: center;
   justify-content: center;
   margin-top: 20px;
@@ -9128,6 +9128,10 @@ fieldset[disabled] .btn-trix-admin.active {
   display: block;
   width: 100%;
 }
+#assignments-taggingbox .assignments-selectedtags-listing > h2 {
+  font-size: 1.3em;
+  border-bottom: 1px solid #eee;
+}
 #assignments-taggingbox .assignments-selectedtags-listing .btn {
   margin-bottom: 4px;
 }
@@ -9318,12 +9322,12 @@ fieldset[disabled] .btn-trix-admin.active {
   }
 }
 .trix-btn-neg {
-  background-color: #f44336;
+  background-color: #EA190B;
   border-color: #e44336;
   color: #fff;
 }
 .trix-btn-neg:hover {
-  background-color: #d44336;
+  background-color: #DB140B;
   border-color: #d44336;
   color: #fff;
 }
@@ -9724,6 +9728,15 @@ body {
 }
 .trix-user-text > p {
   font-size: 1.1em;
+}
+.trix-user-text h2 {
+  font-size: 1.5em;
+}
+.trix-del-btn {
+  background-color: #D43F3A;
+}
+.trix-cancel-btn {
+  color: #3071AB;
 }
 /**
 * Styles for the consent form page.

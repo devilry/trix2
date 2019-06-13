@@ -18,10 +18,7 @@ def wcag_change(request):
     '''
     Turn the WCAG colours on or off.
     '''
-    wcag = request.session.get("wcag")
-    if wcag is None:
-        request.session["wcag"] = True
-    else:
-        wcag = not wcag
-        request.session["wcag"] = wcag
+    wcag = request.session.get("wcag", False)
+    wcag = not wcag
+    request.session["wcag"] = wcag
     return redirect('trix_student_dashboard')

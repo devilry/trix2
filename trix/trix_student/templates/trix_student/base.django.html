@@ -26,9 +26,11 @@
     </head>
 
     <body>
+        <header>
         {% block header %}
             {% include "trix_student/include/header.django.html" %}
         {% endblock header %}
+        </header>
         {% block not_signed_in_warning %}
             {% if not request.user.is_authenticated %}
                 <div class="alert alert-warning alert-edgetoedge alert-nomargin">
@@ -45,9 +47,11 @@
                 </div>
             {% endif %}
         {% endblock not_signed_in_warning %}
-        {% block body %}{% endblock %}
-        {% block footer %}
-            {% include "trix_student/include/footer.django.html" %}
-        {% endblock footer %}
+        <main>{% block body %}{% endblock %}</main>
+        <footer>
+            {% block footer %}
+                {% include "trix_student/include/footer.django.html" %}
+            {% endblock footer %}
+        </footer>
     </body>
 </html>
