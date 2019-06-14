@@ -5,6 +5,9 @@
 .text-muted {
   color: #696969;
 }
+.progress-bar {
+  background-color: #337AB8;
+}
 .progress-bar-danger {
   background-color: #D33A36;
 }

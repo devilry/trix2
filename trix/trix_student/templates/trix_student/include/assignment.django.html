@@ -43,7 +43,7 @@
                 {% trans "How did you solve the assignment?" %}
             </p>
             <div class="btn-group" role="radiogroup">
-                <a class="btn"
+                <button class="btn"
                         ng-click="solvedOnMyOwn()"
                         ng-disabled="saving"
                         ng-class="buttonClass"
@@ -51,8 +51,8 @@
                         trix-aria-checked="howsolved=='bymyself'">
                     <span class="fa fa-check" ng-show="howsolved=='bymyself'"></span>
                     {% trans "On my own" %}
-                </a>
-                <a class="btn"
+                </button>
+                <button class="btn"
                         ng-click="solvedWithHelp()"
                         ng-class="buttonClass"
                         ng-disabled="saving"
@@ -60,8 +60,8 @@
                         trix-aria-checked="howsolved=='withhelp'">
                     <span class="fa fa-check" ng-show="howsolved=='withhelp'"></span>
                     {% trans "With help" %}
-                </a>
-                <a class="btn"
+                </button>
+                <button class="btn"
                         ng-click="notSolved()"
                         ng-class="buttonClass"
                         ng-disabled="saving"
@@ -69,7 +69,7 @@
                         trix-aria-checked="!howsolved">
                     <span class="fa fa-check" ng-show="!howsolved"></span>
                     {% trans "Not solved" %}
-                </a>
+                </button>
             </div>
             <span role="status" tabindex="-1" class="trix-assignmenthowsolvedsaving"
                     ng-show="saving">
@@ -81,15 +81,15 @@
     {% if assignment.solution %}
         <section class="trix-assignmentsolution" ng-cloak
                 ng-controller="SolutionCtrl">
-            <a ng-click="isVisible = !isVisible"
-                    class="trix-assignmentsolutionexpander"
+            <button ng-click="isVisible = !isVisible"
+                    class="btn btn-link trix-assignmentsolutionexpander"
                     ng-class="{'active': isVisible}">
                 {% trans "See solution" %}
                 <span class="fa trix-no-print" ng-class="{
                     'fa-angle-right': !isVisible,
                     'fa-angle-down': isVisible
                 }"></span>
-            </a>
+            </button>
             <section class="trix-markdownarticle" ng-class="{'collapse': !isVisible}">
                 {% trix_assignment_markdown assignment.solution %}
             </section>
