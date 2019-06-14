@@ -9100,6 +9100,9 @@ fieldset[disabled] .btn-trix-admin.active {
 .trix-assignment .trix-assignmentsolution .trix-assignmentsolutionexpander {
   cursor: pointer;
 }
+.trix-assignment .trix-assignmentsolution .trix-assignmentsolutionexpander.active {
+  box-shadow: none;
+}
 .trix-assignment .trix-assignmentsolution .trix-markdownarticle {
   background-color: #fff;
   padding: 20px;
