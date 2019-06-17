@@ -9056,6 +9056,10 @@ fieldset[disabled] .btn-trix-admin.active {
     transition-duration: 0.4s;
     transition-property: opacity;
   }
+  #assignments-heading .btn-trix-admin:focus,
+  .trix-assignment .btn-trix-admin:focus {
+    opacity: 1;
+  }
   #assignments-heading:hover .btn-trix-admin,
   .trix-assignment:hover .btn-trix-admin {
     opacity: 1;
