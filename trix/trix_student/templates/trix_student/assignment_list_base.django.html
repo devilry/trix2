@@ -62,7 +62,8 @@
                     <h3>{% trans "Filter" %}:</h3>
                     <div class="trix-neg">
                         <label>{% trans "Filter out" %}:
-                            <input type="checkbox" ng-model="negative">
+                            <input type="checkbox" ng-model="negative"
+                                aria-label="{% trans 'Remove assignments with selected tags' %}">
                         </label>
                     </div>
                     <select ng-model="tagToAdd" ng-change="addTag()"

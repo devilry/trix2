@@ -180,7 +180,6 @@ class AssignmentCreateUpdateMixin(object):
         assignment = super(AssignmentCreateUpdateMixin, self).save_object(form, commit=commit)
         if commit:
             # Replace the tags with the new tags
-            print(assignment, assignment.tags)
             assignment.tags.clear()
             for tag in form.cleaned_data['tags']:
                 assignment.tags.add(tag)
