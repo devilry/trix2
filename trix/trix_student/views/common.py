@@ -1,6 +1,5 @@
 import json
 from django import http
-from django.views.generic import ListView
 from django.utils.translation import ugettext_lazy as _
 from urllib import parse
 

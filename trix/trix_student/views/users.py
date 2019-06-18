@@ -1,4 +1,4 @@
-from django.views.generic import ListView, DeleteView
+from django.views.generic import DeleteView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.utils.translation import ugettext_lazy as _
 from django.http import Http404

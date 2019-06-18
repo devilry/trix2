@@ -1,5 +1,4 @@
 from django.conf import settings
-from django.views.generic import ListView
 from trix.trix_core import models
 from trix.trix_student.views import base
 
