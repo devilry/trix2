@@ -1,10 +1,13 @@
 from setuptools import setup, find_packages
 
-execfile('trix/version.py')
+with open('trix/version.py') as f:
+    code = compile(f.read(), "trix/version.py", 'exec')
+    exec(code)
 
 setup(
     name='trix',
-    description='Next generation Trix. Detailed task control and statistics app for better learning outcome.',
+    description='Next generation Trix. Detailed task control and statistics app for better'
+    ' learning outcome.',
     version=__version__,   # noqa
     url='https://github.com/devilry/trix2',
     author='Tor Johansen, Espen Angell Kristiansen, Jonas Sandbekk',
@@ -22,7 +25,6 @@ setup(
         'django-extensions',
         'dj-database-url>=0.5.0',
         'cradmin_legacy>=1.3.0a0',
-        # 'bleach>=2.1.3',
         'gunicorn',
     ],
     classifiers=[

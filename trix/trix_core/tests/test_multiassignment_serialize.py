@@ -24,13 +24,13 @@ text: |-
 title: Test Two
 text: Testtext
 """))
-        self.assertEquals(len(data), 2)
-        self.assertEquals(data[0], {
+        self.assertEqual(len(data), 2)
+        self.assertEqual(data[0], {
             'title': 'Test One',
             'tags': ['inf1000', 'oblig1', 'arrays'],
             'text': 'Hello\n\nCruel\n\nWorld'
         })
-        self.assertEquals(data[1], {
+        self.assertEqual(data[1], {
             'title': 'Test Two',
             'text': 'Testtext'
         })
@@ -41,11 +41,11 @@ text: Testtext
             {'title': 'New'},
             {'id': 2, 'title': 'Existing2'},
         ]), course_tag='duck1000')
-        self.assertEquals(
+        self.assertEqual(
             deserializer.deserialized_assignments_with_id,
             {1: {'id': 1, 'title': 'Existing1'}, 2: {'id': 2, 'title': 'Existing2'}}
         )
-        self.assertEquals(
+        self.assertEqual(
             deserializer.deserialized_assignments_without_id,
             [{'title': 'New'}]
         )
@@ -55,7 +55,7 @@ text: Testtext
             title='A title',
             text='A text'
         )
-        self.assertEquals(
+        self.assertEqual(
             multiassignment_serialize.serialize([assignment]),
             ('id: {}\n'
              'title: A title\n'
@@ -72,7 +72,7 @@ text: Testtext
         )
         assignment.tags.create(tag='testtag')
         assignment.tags.create(tag='testtag2')
-        self.assertEquals(
+        self.assertEqual(
             multiassignment_serialize.serialize([assignment]),
             ('id: {}\n'
              'title: A title\n'
@@ -88,7 +88,7 @@ text: Testtext
             text='A text',
             solution='A solution'
         )
-        self.assertEquals(
+        self.assertEqual(
             multiassignment_serialize.serialize([assignment]),
             ('id: {}\n'
              'title: A title\n'
@@ -109,7 +109,7 @@ text: Testtext
             title='A2',
             text='text2'
         )
-        self.assertEquals(
+        self.assertEqual(
             multiassignment_serialize.serialize([assignment1, assignment2]),
             ('id: {}\n'
              'title: A1\n'
@@ -145,13 +145,13 @@ text: Testtext
 
         assignments_by_tag = {}
         existing_assignments = deserializer._validate_existing_assignments(assignments_by_tag)
-        self.assertEquals(len(existing_assignments), 2)
-        self.assertEquals(
+        self.assertEqual(len(existing_assignments), 2)
+        self.assertEqual(
             set(assignments_by_tag.keys()),
             set(['duck1000', 'oblig1', 'oblig2', 'week3']))
-        self.assertEquals(
+        self.assertEqual(
             assignments_by_tag['duck1000'], [assignment2, assignment1])
-        self.assertEquals(
+        self.assertEqual(
             assignments_by_tag['oblig2'], [assignment2])
 
     def test_deserializer_validate_existing_assignments_invalid(self):
@@ -190,19 +190,19 @@ text: Testtext
         newassignment1 = coremodels.Assignment.objects.get(title='New1')
         newassignment2 = coremodels.Assignment.objects.get(title='New2')
 
-        self.assertEquals(assignment1.title, 'Updated1')
-        self.assertEquals(assignment1.solution, '')
-        self.assertEquals(assignment2.title, 'Updated2')
-        self.assertEquals(assignment2.solution, 'updatedSolution')
-        self.assertEquals(
+        self.assertEqual(assignment1.title, 'Updated1')
+        self.assertEqual(assignment1.solution, '')
+        self.assertEqual(assignment2.title, 'Updated2')
+        self.assertEqual(assignment2.solution, 'updatedSolution')
+        self.assertEqual(
             set([tagobject.tag for tagobject in assignment1.tags.all()]),
             set(['duck1000', 'oblig1']))
-        self.assertEquals(
+        self.assertEqual(
             set([tagobject.tag for tagobject in assignment2.tags.all()]),
             set(['duck1000', 'oblig2']))
-        self.assertEquals(
+        self.assertEqual(
             set([tagobject.tag for tagobject in newassignment1.tags.all()]),
             set(['duck1000']))
-        self.assertEquals(
+        self.assertEqual(
             set([tagobject.tag for tagobject in newassignment2.tags.all()]),
             set(['duck1000', 'oblig1']))

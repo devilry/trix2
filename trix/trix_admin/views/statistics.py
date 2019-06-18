@@ -10,42 +10,8 @@ from django.core.exceptions import FieldError
 from cradmin_legacy import crapp
 
 import csv
-import codecs
-import cStringIO
+# import unicodecsv as csv
 from trix.trix_core import models as trix_models
-
-
-class UnicodeWriter:
-    """
-
-    Picked from https://docs.python.org/2/library/csv.html#examples
-
-    A CSV writer which will write rows to CSV file "f",
-    which is encoded in the given encoding.
-    """
-
-    def __init__(self, f, dialect=csv.excel, encoding="utf-8", **kwds):
-        # Redirect output to a queue
-        self.queue = cStringIO.StringIO()
-        self.writer = csv.writer(self.queue, dialect=dialect, **kwds)
-        self.stream = f
-        self.encoder = codecs.getincrementalencoder(encoding)()
-
-    def writerow(self, row):
-        self.writer.writerow([s.encode("utf-8") for s in row])
-        # Fetch UTF-8 output from the queue ...
-        data = self.queue.getvalue()
-        data = data.decode("utf-8")
-        # ... and reencode it into the target encoding
-        data = self.encoder.encode(data)
-        # write to the target stream
-        self.stream.write(data)
-        # empty queue
-        self.queue.truncate(0)
-
-    def writerows(self, rows):
-        for row in rows:
-            self.writerow(row)
 
 
 def compute_stats_for_assignment(assignment, howsolved_filter, user_count,
@@ -143,7 +109,6 @@ class AssignmentStatsMixin(object):
 
 
 class AssignmentStatsCsv(AssignmentStatsMixin, View):
-
     def get(self, request, *args, **kwargs):
         self.tags = self.get_tags()
         if not self.tags:
@@ -158,7 +123,7 @@ class AssignmentStatsCsv(AssignmentStatsMixin, View):
 
         try:
             response['Content-Disposition'] = 'attachment; filename="trix-statistics.csv"'
-            csvwriter = UnicodeWriter(response, dialect='semicolons', encoding="utf-16")
+            csvwriter = csv.writer(response, dialect='semicolons')
             csvwriter.writerow([_('Simple statistics showing percentage share of how the '
                                   'assignments where solved')])
             csvwriter.writerow([_('Total number of users'), str(user_count)])
@@ -185,7 +150,7 @@ class AssignmentStatsCsv(AssignmentStatsMixin, View):
                                     "{}%".format(notsolved['percent']),
                                     "{}".format(notsolved['count'])])
                 csvwriter.writerow('')
-        except Exception, e:
+        except Exception as e:
             raise e
         return response
 

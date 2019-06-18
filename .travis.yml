@@ -4,11 +4,11 @@
 
 language: python
 python:
-  - "2.7"
+  - "3.6"
 
 # NOTE: We can add more tox testenvs here, and they will all be executed
 env:
-  - TOX_ENV=py27
+  - TOX_ENV=py36
   - TOX_ENV=flake8
 
 install:

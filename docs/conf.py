@@ -59,8 +59,8 @@ source_suffix = '.rst'
 master_doc = 'index'
 
 # General information about the project.
-project = u'trix'
-copyright = u'2018, trix'
+project = 'trix'
+copyright = '2018, trix'
 
 # The version info for the project you're documenting, acts as replacement for
 # |version| and |release|, also used in various other places throughout the
@@ -206,8 +206,8 @@ latex_elements = {
 # Grouping the document tree into LaTeX files. List of tuples
 # (source start file, target name, title, author, documentclass [howto/manual]).
 latex_documents = [
-    ('index', 'trix.tex', u'trix Documentation',
-     u'trix', 'manual'),
+    ('index', 'trix.tex', 'trix Documentation',
+     'trix', 'manual'),
 ]
 
 # The name of an image file (relative to this directory) to place at the top of
@@ -236,8 +236,8 @@ latex_documents = [
 # One entry per manual page. List of tuples
 # (source start file, name, description, authors, manual section).
 man_pages = [
-    ('index', 'mgp', u'trix Documentation',
-     [u'trix'], 1)
+    ('index', 'mgp', 'trix Documentation',
+     ['trix'], 1)
 ]
 
 # If true, show URL addresses after external links.
@@ -250,8 +250,8 @@ man_pages = [
 # (source start file, target name, title, author,
 #  dir menu entry, description, category)
 texinfo_documents = [
-    ('index', 'trix', u'trix Documentation',
-     u'trix', 'trix', 'One line description of project.',
+    ('index', 'trix', 'trix Documentation',
+     'trix', 'trix', 'One line description of project.',
      'Miscellaneous'),
 ]
 

@@ -14,6 +14,14 @@ def _manage(ctx, args, env='develop'):
 
 
 @task
+def py_version(ctx):
+    """
+    Runs the python version invoke is run with.
+    """
+    return ctx.run('python --version')
+
+
+@task
 def migrate(ctx):
     """
     Runs the makemigrations and migrate django management commands.

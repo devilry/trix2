@@ -46,13 +46,14 @@ coverage.xml
 *.log
 *.pot
 /staticfiles/
-
+**/migrations/
 
 # Sphinx documentation
 docs/_build/
 
 # Django development database
 db.sqlite3
+trixdb.sqlite
 
 # Ignore user-specific pycharm settings
 .idea/workspace.xml
