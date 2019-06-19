@@ -1,0 +1,46 @@
+/*******************************************************
+* These styles fixes are done to be compliant with WCAG.
+********************************************************/
+/* Bootstrap fixes */
+.text-muted {
+  color: #696969;
+}
+.progress-bar {
+  background-color: #337AB8;
+}
+.progress-bar-danger {
+  background-color: #D33A36;
+}
+.progress-bar-warning {
+  color: #3F4A55;
+}
+.progress-bar-success {
+  background-color: #378537;
+}
+.btn-primary,
+.btn-primary.disabled {
+  background-color: #337AB8;
+}
+.btn-success {
+  background-color: #008A00;
+}
+.btn-warning {
+  color: #3F4A55;
+}
+.btn-danger {
+  background-color: #D43F3A;
+}
+.trix-btn-neg {
+  background-color: #EA190B;
+}
+.list-unstyled a {
+  color: #3070A6;
+}
+/* Assignment Page Fixes */
+.trix-assignmentsolutionexpander {
+  color: #306DA6;
+}
+.trix-select-tag {
+  color: #333333;
+  background-color: white;
+}

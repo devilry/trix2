@@ -9,18 +9,18 @@
 <div class="page-header">
     <div class="container">
         <div class="trix-user-text">
-            <h1>{% trans "Account overview" %}</h3>
+            <h1>{% trans "Account overview" %}</h1>
             <ul class="list-unstyled">
                 <li>
-                    <h3>{% trans "Email" %}</h3>
+                    <h2>{% trans "Email" %}</h2>
                     <p>{{ user }}</p>
                 </li>
                 <li>
-                    <h3>{% trans "Last login" %}</h3>
+                    <h2>{% trans "Last login" %}</h2>
                     <p>{{ user.last_login }}</p>
                 </li>
                 <li>
-                    <h3>{% trans "Data collection" %}</h3>
+                    <h2>{% trans "Data collection" %}</h2>
                     {% if user.has_consented %}
                         <p>{% trans "Consented: " %}{{ user.consent_datetime }}</p>
                     {% else %}
@@ -31,7 +31,7 @@
                     </a>
                 </li>
                 <li>
-                    <h3>{% trans "Role" %}</h3>
+                    <h2>{% trans "Role" %}</h2>
                     <p>{{ user_role }}</p>
                 </li>
             </ul>
@@ -44,16 +44,4 @@
         </div>
     </div>
 </div>
-{% comment %}
-TODO: List assignments that the user has solved
-<div class="container">
-    {% include "trix_student/include/pager.django.html" with
-        pager_extraclass="pager-no-topmargin hidden-xs" %}
-    {% for item in solved_assignments %}
-        <h3>{{ item.assignment }}</h3>
-        <p>{{ item.howsolved }}</p>
-    {% endfor %}
-    {% include "trix_student/include/pager.django.html" %}
-</div>
-{% endcomment %}
 {% endblock body %}

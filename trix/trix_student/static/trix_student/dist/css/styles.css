@@ -8918,6 +8918,36 @@ nav#trix_header {
   border: none;
   margin-bottom: 0;
 }
+nav#trix_header a {
+  color: white;
+}
+.page-header p a {
+  color: #3070A6;
+}
+.trix-footer {
+  overflow: auto;
+  display: flex;
+  background-color: #fff;
+  align-items: center;
+  justify-content: center;
+  margin-top: 20px;
+  margin-bottom: 5px;
+  padding-left: 10px;
+  padding-right: 10px;
+  width: 100%;
+  font-size: 0.8em;
+}
+.trix-footer a {
+  color: #757575;
+}
+.trix-footer > div {
+  margin: 0 10px;
+}
+@media (max-width: 767px) {
+  .trix-footer {
+    display: block;
+  }
+}
 .page-header {
   background: #f4f4f4;
   margin-top: 0;
@@ -9026,6 +9056,10 @@ fieldset[disabled] .btn-trix-admin.active {
     transition-duration: 0.4s;
     transition-property: opacity;
   }
+  #assignments-heading .btn-trix-admin:focus,
+  .trix-assignment .btn-trix-admin:focus {
+    opacity: 1;
+  }
   #assignments-heading:hover .btn-trix-admin,
   .trix-assignment:hover .btn-trix-admin {
     opacity: 1;
@@ -9070,6 +9104,9 @@ fieldset[disabled] .btn-trix-admin.active {
 .trix-assignment .trix-assignmentsolution .trix-assignmentsolutionexpander {
   cursor: pointer;
 }
+.trix-assignment .trix-assignmentsolution .trix-assignmentsolutionexpander.active {
+  box-shadow: none;
+}
 .trix-assignment .trix-assignmentsolution .trix-markdownarticle {
   background-color: #fff;
   padding: 20px;
@@ -9097,6 +9134,10 @@ fieldset[disabled] .btn-trix-admin.active {
 #assignments-taggingbox select {
   display: block;
   width: 100%;
+}
+#assignments-taggingbox .assignments-selectedtags-listing > h2 {
+  font-size: 1.3em;
+  border-bottom: 1px solid #eee;
 }
 #assignments-taggingbox .assignments-selectedtags-listing .btn {
   margin-bottom: 4px;
@@ -9288,12 +9329,12 @@ fieldset[disabled] .btn-trix-admin.active {
   }
 }
 .trix-btn-neg {
-  background-color: #f44336;
+  background-color: #EA190B;
   border-color: #e44336;
   color: #fff;
 }
 .trix-btn-neg:hover {
-  background-color: #d44336;
+  background-color: #DB140B;
   border-color: #d44336;
   color: #fff;
 }
@@ -9303,14 +9344,10 @@ fieldset[disabled] .btn-trix-admin.active {
 }
 .trix-neg {
   margin: 10px 0 10px;
+}
+.trix-neg > label {
   display: flex;
   justify-content: space-between;
-}
-.trix-neg > input {
-  width: 16px;
-  height: 16px;
-  margin-top: 3px !important;
-  margin-bottom: 5px !important;
 }
 /**
 * Styles for the delete template
@@ -9698,6 +9735,15 @@ body {
 }
 .trix-user-text > p {
   font-size: 1.1em;
+}
+.trix-user-text h2 {
+  font-size: 1.5em;
+}
+.trix-del-btn {
+  background-color: #D43F3A;
+}
+.trix-cancel-btn {
+  color: #3071AB;
 }
 /**
 * Styles for the consent form page.

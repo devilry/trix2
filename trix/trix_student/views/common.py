@@ -1,14 +1,14 @@
 import json
 from django import http
-from django.views.generic import ListView
 from django.utils.translation import ugettext_lazy as _
 from urllib import parse
 
 from trix.trix_core import models
 from functools import reduce
+from trix.trix_student.views import base
 
 
-class AssignmentListViewBase(ListView):
+class AssignmentListViewBase(base.TrixListViewBase):
     paginate_by = 100
     context_object_name = 'assignment_list'
     already_selected_tags = []
@@ -116,7 +116,6 @@ class AssignmentListViewBase(ListView):
 
         context['assignmentlist_with_howsolved'] = self._get_assignmentlist_with_howsolved(
             context['assignment_list'])
-
         context['progresstext'] = _(
             'You have completed {{ solvedPercentage }} percent of assignments matching the '
             'currently selected tags.')

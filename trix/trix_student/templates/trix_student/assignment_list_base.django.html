@@ -5,88 +5,93 @@
 {% block title %}{% trans "Assignments" %}{% endblock title %}
 
 {% block body %}
-    {% block pageheader %}
-    {% endblock pageheader %}
-    <div class="container">
-        <div class="row">
-            <div id="assignments-taggingbox" class="col-sm-3 col-sm-push-9 col-md-3 col-md-push-9 trix-no-print">
-                {% if request.user.is_authenticated and assignmentlist_with_howsolved %}
-                    <div ng-controller="AssignmentListProgressController"
-                            class="assignments-progressbox"
-                            ng-cloak>
-                        <div ng-show="loading">
-                            <span class="fa fa-spin fa-spinner"></span>
-                            <span class="sr-only">{% trans "Loading progress..." %}</span>
-                        </div>
-                        <div ng-show="!loading">
-                            {% verbatim %}
-                                <div class="progress">
-                                    <div class="progress-bar"
-                                            ng-class="progressBarClass"
-                                            role="progressbar"
-                                            aria-valuenow="{{ solvedPercentage }}"
-                                            aria-valuemin="0"
-                                            aria-valuemax="100"
-                                            style="width: {{ solvedPercentage }}%;">
-                                        {{ solvedPercentage }}%
-                                    </div>
-                                </div>
-                            {% endverbatim %}
-                            <p class="text-muted"><small>
-                                {{ progresstext }}
-                            </small></p>
-                        </div>
+{% block pageheader %}
+{% endblock pageheader %}
+<div class="container">
+    <div class="row">
+        <div id="assignments-taggingbox" class="col-sm-3 col-sm-push-9 col-md-3 col-md-push-9
+                trix-no-print">
+            {% if request.user.is_authenticated and assignmentlist_with_howsolved %}
+                <div ng-controller="AssignmentListProgressController"
+                        class="assignments-progressbox"
+                        ng-cloak>
+                    <div ng-show="loading">
+                        <span class="fa fa-spin fa-spinner"></span>
+                        <span class="sr-only">{% trans "Loading progress..." %}</span>
                     </div>
-                {% endif %}
-                <div ng-controller="RemoveTagCtrl" class="assignments-selectedtags-listing">
-                    <h3>{% trans "Selected tags" %}:</h3>
-                    {% for tag in non_removeable_tags %}
-                        <button type="button" class="btn btn-primary btn-sm disabled">{{ tag }}</button>
-                    {% endfor %}
-                    {% if selected_tags %}
-                        {% for tag in selected_tags %}
-                            <button type="button" class="btn btn-sm {% if tag|startswith:'-' %}trix-btn-neg{% else %}btn-primary{% endif %}"
-                                    ng-click="removeTag('{{ tag }}')">
-                                {{ tag }}
-                                <span class="fa fa-times"></span>
-                            </button>
-                        {% endfor %}
-                    {% endif %}
+                    <div ng-show="!loading">
+                        {% verbatim %}
+                            <div class="progress">
+                                <div class="progress-bar"
+                                        ng-class="progressBarClass"
+                                        role="progressbar"
+                                        aria-valuenow="{{ solvedPercentage }}"
+                                        aria-valuemin="0"
+                                        aria-valuemax="100"
+                                        style="width: {{ solvedPercentage }}%;">
+                                    {{ solvedPercentage }}%
+                                </div>
+                            </div>
+                        {% endverbatim %}
+                        <p class="text-muted"><small>
+                            {{ progresstext }}
+                        </small></p>
+                    </div>
                 </div>
-                {% if selectable_tags %}
-                    <form ng-controller="AddTagCtrl" class="trix-no-print">
-                        <h3>{% trans "Filter" %}:</h3>
-                        <div class="trix-neg">
-                            <label>{% trans "Filter out" %}:</label>
-                            <input type="checkbox" ng-model="negative">
-                        </div>
-                        <select ng-model="tagToAdd" ng-change="addTag()">
-                            <option value="" selected>-- {% trans "Select a tag" %} --</option>
-                            {% for tag in selectable_tags %}
-                                <option value="{{ tag }}">{{ tag }}</option>
-                            {% endfor %}
-                        </select>
-                    </form>
-                {% endif %}
-
-                <div class="trix-no-print">
-                    <h3>{% trans "Print" %}:</h3>
-                    <button class="btn btn-default" onclick="window.print()">
-                        <span class="fa fa-print"></span>
-                        {% trans "Print this page" %}
-                    </button>
-                </div>
-            </div>
-            <div class="col-sm-9 col-sm-pull-3 col-md-9 col-md-pull-3">
-                {% include "trix_student/include/pager.django.html" with pager_extraclass="pager-no-topmargin hidden-xs" %}
-                {% for assignment, howsolved in assignmentlist_with_howsolved %}
-                    {% include "trix_student/include/assignment.django.html" %}
-                {% empty %}
-                    <h2>{% trans "No assignments found" %}</h2>
+            {% endif %}
+            <div ng-controller="RemoveTagCtrl" class="assignments-selectedtags-listing">
+                <h2>{% trans "Selected tags" %}:</h2>
+                {% for tag in non_removeable_tags %}
+                    <a tabindex="-1" class="btn btn-primary btn-sm disabled">
+                        {{ tag }}
+                    </a>
                 {% endfor %}
-                {% include "trix_student/include/pager.django.html" %}
+                {% if selected_tags %}
+                    {% for tag in selected_tags %}
+                        <a class="btn btn-sm
+                            {% if tag|startswith:'-' %}trix-btn-neg{% else %}btn-primary{% endif %}"
+                                ng-click="removeTag('{{ tag }}')">
+                            {{ tag }}
+                            <span class="fa fa-times"></span>
+                        </a>
+                    {% endfor %}
+                {% endif %}
+            </div>
+            {% if selectable_tags %}
+                <form ng-controller="AddTagCtrl" class="trix-no-print">
+                    <h3>{% trans "Filter" %}:</h3>
+                    <div class="trix-neg">
+                        <label>{% trans "Filter out" %}:
+                            <input type="checkbox" ng-model="negative"
+                                aria-label="{% trans 'Remove assignments with selected tags' %}">
+                        </label>
+                    </div>
+                    <select ng-model="tagToAdd" ng-change="addTag()"
+                        aria-label="{% trans 'Add tag' %}" class="trix-select-tag">
+                        <option value="" selected>-- {% trans "Select a tag" %} --</option>
+                        {% for tag in selectable_tags %}
+                            <option value="{{ tag }}">{{ tag }}</option>
+                        {% endfor %}
+                    </select>
+                </form>
+            {% endif %}
+            <div class="trix-no-print">
+                <h3>{% trans "Print" %}:</h3>
+                <button type="button" class="btn btn-default" onclick="window.print()">
+                    <span class="fa fa-print"></span>
+                    {% trans "Print this page" %}
+                </button>
             </div>
         </div>
+        <div class="col-sm-9 col-sm-pull-3 col-md-9 col-md-pull-3">
+            {% include "trix_student/include/pager.django.html" with pager_extraclass="pager-no-topmargin hidden-xs" %}
+            {% for assignment, howsolved in assignmentlist_with_howsolved %}
+                {% include "trix_student/include/assignment.django.html" %}
+            {% empty %}
+                <h2>{% trans "No assignments found" %}</h2>
+            {% endfor %}
+            {% include "trix_student/include/pager.django.html" %}
+        </div>
     </div>
-
+</div>
 {% endblock body %}
