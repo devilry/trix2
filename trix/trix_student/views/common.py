@@ -45,8 +45,6 @@ class AssignmentListViewBase(ListView):
         Gets the progress a user has made. Hidden tasks are not counted unless user is an admin.
         """
         assignments = self.get_queryset()
-        if (not self.request.user.is_admin):
-            assignments = assignments.exclude(hidden=True)
         how_solved = models.HowSolved.objects.filter(assignment__in=assignments)\
             .filter(user=self.request.user.id)
         num_solved = how_solved.count()
