@@ -114,7 +114,6 @@ ACCOUNT_USERNAME_REQUIRED = False
 ACCOUNT_AUTHENTICATION_METHOD = 'email'
 ACCOUNT_SESSION_REMEMBER = False
 DATAPORTEN_LOGOUT_URL = 'https://auth.dataporten.no/logout'
-# Custom settings, should be set by user
 SITE_ID = 1
 
 TEMPLATES = [
