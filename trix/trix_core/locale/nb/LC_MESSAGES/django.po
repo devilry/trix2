@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: trix_core\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-06-13 15:52+0200\n"
+"POT-Creation-Date: 2019-06-25 21:49+0200\n"
 "PO-Revision-Date: 2014-12-21 22:43+0100\n"
 "Last-Translator: Tor Ivar Johansen <tor@appresso.no>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,11 +18,11 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Poedit 1.6.11\n"
 
-#: trix/trix_core/admin.py:14
+#: trix/trix_core/admin.py:16
 msgid "Give admin access to the selected users"
 msgstr "Gi administratortilgang til valgte brukere"
 
-#: trix/trix_core/admin.py:21
+#: trix/trix_core/admin.py:23
 msgid "Remove admin access from the selected users"
 msgstr "Fjern administratortilgang til valgte brukere"
 
@@ -38,11 +38,11 @@ msgstr "Ja"
 msgid "No"
 msgstr "Nei"
 
-#: trix/trix_core/admin.py:96
+#: trix/trix_core/admin.py:97
 msgid "Number of assignments"
 msgstr "Antall oppgaver"
 
-#: trix/trix_core/admin.py:101
+#: trix/trix_core/admin.py:102
 msgid "Is in use"
 msgstr "Er i bruk"
 

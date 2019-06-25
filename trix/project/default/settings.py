@@ -107,14 +107,15 @@ CRISPY_TEMPLATE_PACK = 'bootstrap3'
 
 MEDIA_ROOT = join(BASE_DIR, 'media')
 
-# All auth
-SITE_ID = 2
+# Allauth
 ACCOUNT_USER_MODEL_USERNAME_FIELD = None
 ACCOUNT_EMAIL_REQUIRED = True
 ACCOUNT_USERNAME_REQUIRED = False
 ACCOUNT_AUTHENTICATION_METHOD = 'email'
-DATAPORTEN_LOGIN = True
+ACCOUNT_SESSION_REMEMBER = False
 DATAPORTEN_LOGOUT_URL = 'https://auth.dataporten.no/logout'
+# Custom settings, should be set by user
+SITE_ID = 1
 
 TEMPLATES = [
     {

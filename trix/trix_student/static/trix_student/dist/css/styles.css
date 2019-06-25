@@ -8924,6 +8924,10 @@ nav#trix_header a {
 .page-header p a {
   color: #3070A6;
 }
+footer {
+  align-self: stretch;
+  margin-top: auto;
+}
 .trix-footer {
   overflow: auto;
   display: flex;
@@ -9368,6 +9372,8 @@ body {
   height: 100%;
 }
 body {
+  display: flex;
+  flex-direction: column;
   background-color: #E6E6E6;
 }
 /**
