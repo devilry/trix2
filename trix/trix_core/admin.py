@@ -135,4 +135,4 @@ admin.site.register(coremodels.Course, CourseAdmin)
 
 
 # Unregister auth.groups
-admin.site.unregister(Group)
+# admin.site.unregister(Group)

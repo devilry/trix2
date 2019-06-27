@@ -1,0 +1,40 @@
+{% extends "trix_student/base.django.html" %}
+
+{% load i18n %}
+
+{% block header %}{% endblock header %}
+{% block not_signed_in_warning %}{% endblock not_signed_in_warning %}
+
+{% block body %}
+<div class="trix-course-wrapper">
+    <nav class="trix-course-menu">
+        <span class="trix-course-menu-icon fa fa-wrench"></span>
+        <ul class="trix-course-menu-items">
+            <li><a href="{% url 'trix_student_dashboard' %}">
+                <span class="fa fa-home"></span>
+                {% trans "Frontpage" %}
+            </a></li>
+            <li><a href="#">
+                <span class="fa fa-arrow-up"></span>
+                {% trans "Course overview" %}
+            </a></li>
+            <li><a href="#">
+                <span class="fa fa-database"></span>
+                {% trans "Assignments" %}
+            </a></li>
+        </ul>
+    </nav>
+    <div class="trix-course-container">
+        <header>
+            <div class="container trix-course-header">
+                {% block course-header %}{% endblock course-header %}
+            </div>
+        </header>
+        <main>
+            <div class="container trix-course-main">
+                {% block course-body %}{% endblock course-body %}
+            </div>
+        </main>
+    </div>
+</div>
+{% endblock body %}

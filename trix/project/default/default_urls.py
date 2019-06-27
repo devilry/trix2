@@ -1,5 +1,6 @@
 from django.conf.urls import include, url
 from django.contrib import admin
+from django.views.generic import RedirectView
 
 from trix.trix_admin.cradmin import CrAdminInstance
 from trix.trix_student import urls
@@ -8,7 +9,9 @@ from trix.trix_student import urls
 admin.autodiscover()
 
 default_urls = [
+    url(r'^student/', include(urls.urlpatterns)),
+    url(r'^course/', include('trix.trix_course.urls')),
     url(r'^admin/', admin.site.urls),
     url(r'^a/', include(CrAdminInstance.urls())),
-    url(r'^', include(urls.urlpatterns)),
+    url(r'^$', RedirectView.as_view(pattern_name='trix_student_dashboard')),
 ]

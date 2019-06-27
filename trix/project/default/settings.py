@@ -37,6 +37,7 @@ INSTALLED_APPS = [
     'django_extensions',
     'crispy_forms',
     'trix.trix_core',
+    'trix.trix_course',
     'trix.trix_admin',
     'trix.trix_student',
     'cradmin_legacy',  # Important: Must come after trix_admin because of template overrides
