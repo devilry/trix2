@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: trix_admin\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-06-13 15:52+0200\n"
+"POT-Creation-Date: 2019-06-25 21:49+0200\n"
 "PO-Revision-Date: 2015-01-08 12:35+0100\n"
 "Last-Translator: Espen Angell Kristiansen <post@espenak.net>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -186,7 +186,7 @@ msgid "Show on website"
 msgstr "Vis på nettsiden"
 
 #: trix/trix_admin/views/assignments.py:129
-#: trix/trix_admin/views/assignments.py:305
+#: trix/trix_admin/views/assignments.py:304
 msgid "Add tag"
 msgstr "Legg til tag"
 
@@ -194,32 +194,32 @@ msgstr "Legg til tag"
 msgid "Remove tag"
 msgstr "Fjern tag"
 
-#: trix/trix_admin/views/assignments.py:229
+#: trix/trix_admin/views/assignments.py:228
 msgid "Assignment YAML"
 msgstr "Oppgaver YAML"
 
-#: trix/trix_admin/views/assignments.py:265
+#: trix/trix_admin/views/assignments.py:264
 msgid "Save"
 msgstr "Lagre"
 
-#: trix/trix_admin/views/assignments.py:278
+#: trix/trix_admin/views/assignments.py:277
 msgid "Tag"
 msgstr "Tag"
 
-#: trix/trix_admin/views/assignments.py:301
-#: trix/trix_admin/views/assignments.py:337
+#: trix/trix_admin/views/assignments.py:300
+#: trix/trix_admin/views/assignments.py:336
 msgid "tags on selected assignments"
 msgstr "tags på valgte oppgaver"
 
-#: trix/trix_admin/views/assignments.py:311
+#: trix/trix_admin/views/assignments.py:310
 msgid "Type in the tag you want to add to the selected assignments"
 msgstr "Skriv inn taggen du vil legge til på valgte oppgaver"
 
-#: trix/trix_admin/views/assignments.py:341
+#: trix/trix_admin/views/assignments.py:340
 msgid "Delete tag"
 msgstr "Slett tag"
 
-#: trix/trix_admin/views/assignments.py:347
+#: trix/trix_admin/views/assignments.py:346
 msgid "Type in the tag you want to remove from the selected assignments"
 msgstr "Skriv inn taggen du vil fjerne fra valgte oppgaver"
 

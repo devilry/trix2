@@ -33,14 +33,28 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django.contrib.sites',
     'django.contrib.admin',
     'django_extensions',
     'crispy_forms',
     'trix.trix_core',
     'trix.trix_admin',
     'trix.trix_student',
+    'trix.trix_auth',
     'cradmin_legacy',  # Important: Must come after trix_admin because of template overrides
+    # Oauth2 apps
+    'allauth',
+    'allauth.account',
+    'allauth.socialaccount',
+    'allauth.socialaccount.providers.dataporten',
 ]
+
+AUTHENTICATION_BACKENDS = (
+    # Needed to login by username in Django admin, regardless of `allauth`
+    'django.contrib.auth.backends.ModelBackend',
+    # `allauth` specific authentication methods, such as login by e-mail
+    'allauth.account.auth_backends.AuthenticationBackend',
+)
 
 MIDDLEWARE = [
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -72,7 +86,7 @@ USE_L10N = True
 USE_TZ = True
 
 # https://docs.djangoproject.com/en/1.11/ref/clickjacking/
-# X_FRAME_OPTIONS = 'DENY'
+X_FRAME_OPTIONS = 'DENY'
 
 # Setup static files to be served at /s/.
 # - Gives us short urls for angular apps (I.E.: /s/v1/).
@@ -85,13 +99,22 @@ AUTH_USER_MODEL = 'trix_core.User'
 LOGIN_REDIRECT_URL = '/'
 LOGOUT_REDIRECT_URL = '/'
 
-LOGIN_URL = '/login'
-LOGOUT_URL = '/logout'
+LOGIN_URL = 'trix_login'
+LOGOUT_URL = 'trix_logout'
 
 # Use bootstrap3 template pack to django-crispy-forms.
 CRISPY_TEMPLATE_PACK = 'bootstrap3'
 
 MEDIA_ROOT = join(BASE_DIR, 'media')
+
+# Allauth
+ACCOUNT_USER_MODEL_USERNAME_FIELD = None
+ACCOUNT_EMAIL_REQUIRED = True
+ACCOUNT_USERNAME_REQUIRED = False
+ACCOUNT_AUTHENTICATION_METHOD = 'email'
+ACCOUNT_SESSION_REMEMBER = False
+DATAPORTEN_LOGOUT_URL = 'https://auth.dataporten.no/logout'
+SITE_ID = 1
 
 TEMPLATES = [
     {

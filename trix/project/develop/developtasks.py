@@ -9,16 +9,16 @@ DUMPSCRIPT_DATAFILE = join(
 
 
 def _manage(ctx, args, env='develop'):
-    command = 'python manage.py {0} --traceback'.format(args)
+    command = 'python3 manage.py {0} --traceback'.format(args)
     return ctx.run(command, env={'DJANGOENV': env})
 
 
 @task
 def py_version(ctx):
     """
-    Runs the python version invoke is run with.
+    Runs the python version invoke is run with, python3.
     """
-    return ctx.run('python --version')
+    return ctx.run('python3 --version')
 
 
 @task

@@ -1,0 +1,15 @@
+{% extends "trix_student/base.django.html" %}
+{% load i18n %}
+
+{% block title %}{% trans 'Authentication error' %}{% endblock title %}
+
+{% block body %}
+<div class="page-header">
+    <div class="container">
+        <h1>An error occured</h1>
+    </div>
+</div>
+<div class="container">
+    <p>An unknown error occured when trying to log in through Dataporten.</p>
+</div>
+{% endblock body %}

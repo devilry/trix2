@@ -3,10 +3,11 @@ from django.conf import settings
 from django.core.urlresolvers import reverse
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth.views import LoginView
+from django.http import HttpResponseRedirect
 from django.utils.translation import ugettext_lazy as _
+
 from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Submit
-
 
 # NOTE needed for LDAP
 TRIX_LOGIN_IS_USERNAME = getattr(settings, 'TRIX_LOGIN_IS_USERNAME', False)
@@ -53,6 +54,12 @@ class TrixAuthenticationForm(AuthenticationForm):
 
 
 class TrixLoginView(LoginView):
-    template_name = 'trix_student/login.django.html'
+    template_name = 'trix_auth/login.django.html'
     authentication_form = TrixAuthenticationForm
     extra_context = {'TRIX_LOGIN_MESSAGE': getattr(settings, 'TRIX_LOGIN_MESSAGE', None)}
+
+    def get(self, *args, **kwargs):
+        if getattr(settings, 'DATAPORTEN_LOGIN', False):
+            return HttpResponseRedirect(reverse('account_login'))
+        else:
+            return super(TrixLoginView, self).get(*args, **kwargs)

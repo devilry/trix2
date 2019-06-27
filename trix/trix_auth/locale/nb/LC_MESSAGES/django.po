@@ -1,0 +1,88 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2019-06-25 21:49+0200\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: trix/trix_auth/templates/socialaccount/authentication_error.html:4
+msgid "Authentication error"
+msgstr "Autentiseringsfeil"
+
+#: trix/trix_auth/templates/trix_auth/auth_logout.django.html:7
+msgid "Confirm logout"
+msgstr "Bekreft utlogging"
+
+#: trix/trix_auth/templates/trix_auth/auth_logout.django.html:17
+#: trix/trix_auth/templates/trix_auth/logout.django.html:5
+msgid "Log out"
+msgstr "Logg ut"
+
+#: trix/trix_auth/templates/trix_auth/auth_logout.django.html:18
+msgid "Are you sure you want to log out?"
+msgstr "Er du sikker på at du vil logge ut?"
+
+#: trix/trix_auth/templates/trix_auth/auth_logout.django.html:27
+#, fuzzy
+#| msgid "Sign Out"
+msgid "Sign out"
+msgstr "Logg Ut"
+
+#: trix/trix_auth/templates/trix_auth/auth_logout.django.html:29
+msgid "Cancel"
+msgstr "Avbryt"
+
+#: trix/trix_auth/templates/trix_auth/login.django.html:5
+#, fuzzy
+#| msgid "login"
+msgid "Login"
+msgstr "logg inn"
+
+#: trix/trix_auth/templates/trix_auth/login.django.html:17
+#: trix/trix_auth/views/login.py:30
+msgid "Log in"
+msgstr "Logg inn"
+
+#: trix/trix_auth/templates/trix_auth/logout.django.html:13
+msgid "You are now logged out"
+msgstr "Du er nå logget ut"
+
+#: trix/trix_auth/templates/trix_auth/logout.django.html:14
+msgid "Go to the frontpage"
+msgstr "Gå til forsiden"
+
+#: trix/trix_auth/views/login.py:14
+msgid "Email"
+msgstr "E-post"
+
+#: trix/trix_auth/views/login.py:16
+msgid "Username"
+msgstr "Brukernavn"
+
+#: trix/trix_auth/views/login.py:45
+msgid ""
+"Please enter username and password. Note that both fields are case-sensitive."
+msgstr ""
+"Vennligst skriv inn et gyldig brukernavn og passord. Begge feltene skiller "
+"mellom store og småbokstaver."
+
+#: trix/trix_auth/views/login.py:49
+msgid ""
+"Please enter a correct email and password. Note that both fields are case-"
+"sensitive."
+msgstr ""
+"Vennligst skriv inn en gyldig e-postaddresse og passord. Begge feltene "
+"skiller mellomstore og små bokstaver"

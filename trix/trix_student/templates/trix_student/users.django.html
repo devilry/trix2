@@ -5,6 +5,11 @@
 
 {% block title %}{% trans "User" %}{% endblock %}
 
+{# Since you have to be logged in to view the user pages, send them to the frontpage when logging out. #}
+{% block header %}
+    {% include "trix_student/include/header.django.html" with disable_next='True' %}
+{% endblock %}
+
 {% block body %}
 <div class="page-header">
     <div class="container">
