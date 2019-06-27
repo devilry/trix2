@@ -24,8 +24,8 @@
         <script src="{% static 'trix_student/dist/vendor/js/url.min.js' %}" type="text/javascript"></script>
         <script src="{% static 'trix_student/dist/js/trix_student.min.js' %}" type="text/javascript"></script>
     </head>
-
     <body>
+    {% block body %}
         <header>
         {% block header %}
             {% include "trix_student/include/header.django.html" %}
@@ -47,11 +47,12 @@
             {% endif %}
         {% endblock not_signed_in_warning %}
         </header>
-        <main>{% block body %}{% endblock %}</main>
+        <main>{% block content %}{% endblock %}</main>
         <footer>
             {% block footer %}
                 {% include "trix_student/include/footer.django.html" %}
             {% endblock footer %}
         </footer>
+    {% endblock body %}
     </body>
 </html>

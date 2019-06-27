@@ -3,8 +3,8 @@ from django import http
 from django.utils.translation import ugettext_lazy as _
 from urllib import parse
 
-from trix.trix_core import models
 from functools import reduce
+from trix.trix_core import models
 from trix.trix_student.views import base
 
 

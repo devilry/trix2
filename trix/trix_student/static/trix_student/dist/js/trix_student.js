@@ -96,7 +96,7 @@
         $rootScope.$emit('assignments.progressChanged');
       });
       $scope._getApiUrl = function() {
-        return '/assignment/howsolved/' + $scope.assignment_id;
+        return '/student/assignment/howsolved/' + $scope.assignment_id;
       };
       $scope._showError = function(message) {
         // TODO: Use bootstrap modal and a scope variable

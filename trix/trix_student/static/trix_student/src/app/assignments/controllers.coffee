@@ -65,7 +65,7 @@ angular.module('trixStudent.assignments.controllers', ['ngRoute'])
       return
 
     $scope._getApiUrl = ->
-      return '/assignment/howsolved/' + $scope.assignment_id
+      return '/student/assignment/howsolved/' + $scope.assignment_id
 
     $scope._showError = (message) ->
       # TODO: Use bootstrap modal and a scope variable

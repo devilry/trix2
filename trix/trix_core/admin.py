@@ -130,10 +130,6 @@ class CourseAdmin(admin.ModelAdmin):
         return queryset
 
 
-# Unregister auth.groups
-# admin.site.unregister(Group)
-
-
 # Fix for not being able to see the site ID.
 admin.site.unregister(Site)
 

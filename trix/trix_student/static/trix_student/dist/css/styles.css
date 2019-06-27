@@ -9773,6 +9773,74 @@ body {
     width: 90%;
   }
 }
+/********************************
+* Styles for the /course/ pages.
+********************************/
+.trix-course-wrapper {
+  display: flex;
+  height: 100%;
+}
+.trix-course-wrapper > nav {
+  flex-grow: 1;
+}
+.trix-course-container {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+.trix-course-container > main {
+  flex-grow: 1;
+}
+.trix-course-menu {
+  flex-direction: column;
+  padding-top: 25px;
+  background-color: #333333;
+  width: 250px;
+}
+.trix-course-menu-icon {
+  display: block;
+  padding-bottom: 30px;
+  text-align: center;
+  font-size: 70px;
+  color: #111;
+  border-bottom: 1px solid #444;
+}
+@media (max-width: 768px) {
+  .trix-course-menu-icon {
+    display: none;
+  }
+}
+.trix-course-menu-items {
+  display: flex;
+  flex-direction: column;
+  text-transform: uppercase;
+  font-size: 14px;
+  padding: 0;
+}
+.trix-course-menu-items > li {
+  padding: 15px 5px 15px 20px;
+  border-bottom: 1px solid #444;
+}
+.trix-course-menu-items a {
+  color: #aaa;
+}
+.trix-course-menu-items a:hover {
+  text-decoration: none;
+  color: #eee;
+}
+.trix-course-menu-items a .fa {
+  width: 30px;
+  font-size: 20px;
+}
+.trix-course-header {
+  background-color: #377CA8;
+  width: 100%;
+  color: white;
+  padding: 40px 0 20px 40px;
+}
+.trix-course-main {
+  width: 100%;
+}
 .codehilite {
   /* Comment */
   /* Error */

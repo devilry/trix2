@@ -3,6 +3,7 @@ from django.utils.translation import ugettext_lazy as _
 from django.db import models
 from django.contrib.auth.models import AbstractBaseUser
 from django.contrib.auth.models import BaseUserManager
+from django.contrib.auth.models import PermissionsMixin
 
 
 class TrixUserManager(BaseUserManager):
@@ -31,7 +32,7 @@ class TrixUserManager(BaseUserManager):
         return user
 
 
-class User(AbstractBaseUser):
+class User(AbstractBaseUser, PermissionsMixin):
     """
     The Trix user model.
     """
@@ -83,22 +84,6 @@ class User(AbstractBaseUser):
         Get a name for the user. Use this whenever you show the user in the UI.
         """
         return self.email
-
-    def has_perm(self, perm, obj=None):
-        """
-        Does the user have a specific permission?
-
-        We do not use the permission system, so we answer YES.
-        """
-        return True
-
-    def has_module_perms(self, app_label):
-        """
-        Does the user have permissions to view the app `app_label`?
-
-        We do not use the permission system, so we answer YES.
-        """
-        return True
 
     def is_admin_on_anything(self):
         if self.is_staff:
@@ -213,6 +198,10 @@ class Course(models.Model):
         verbose_name = _('Course')
         verbose_name_plural = _('Courses')
         ordering = ['course_tag']
+        permissions = (
+            ('edit_admins', _('Can edit administrators for the course.')),
+            ('view_admins', _('Can view a list of administrators for the course.')),
+        )
 
     def __str__(self):
         return self.course_tag.tag

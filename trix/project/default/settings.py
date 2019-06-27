@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'django_extensions',
     'crispy_forms',
     'trix.trix_core',
+    'trix.trix_course',
     'trix.trix_admin',
     'trix.trix_student',
     'trix.trix_auth',
