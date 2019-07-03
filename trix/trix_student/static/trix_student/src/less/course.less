@@ -49,7 +49,6 @@
     padding: 0;
 
     > li {
-        // padding: 5px 0 5px 35px;
         padding: 15px 5px 15px 20px;
         border-bottom: 1px solid #444;
     }
@@ -73,8 +72,58 @@
     width: 100%;
     color: white;
     padding: 40px 0 20px 40px;
+    height: 150px;
+
+    > h1 {
+        font-size: 24px;
+        font-weight: bold;
+    }
 }
 
 .trix-course-main {
     width: 100%;
+    padding: 0;
+    display: flex;
+}
+
+.trix-course-table {
+    width: 100%;
+    margin: 0;
+}
+
+.trix-course-table-head {
+    background-color: #fafafa;
+    font-size: 16px;
+    line-height: 50px;
+    border-bottom: 1px solid #ccc;
+
+    > tr th {
+        color: #666;
+        padding-left: 50px;
+    }
+}
+
+.trix-course-table-body {
+    > tr {
+        line-height: 60px;
+        border-bottom: 1px dashed #ccc;
+
+        &:hover {
+            background-color: #ddd;
+        }
+    }
+
+    > tr td {
+        padding-left: 50px;
+        color: #666;
+
+        &:first-child {
+            font-weight: bold;
+        }
+
+        &:nth-child(2) {
+            font-weight: bold;
+        }
+    }
+
 }

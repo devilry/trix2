@@ -5,6 +5,7 @@ from django.db.models import Count, Q
 from django.utils.translation import ugettext_lazy as _
 
 from trix.trix_core import models as coremodels
+from trix.trix_core.models import User, Tag, Course
 
 
 def set_administrators(modeladmin, request, queryset):
@@ -21,6 +22,7 @@ def unset_administrators(modeladmin, request, queryset):
 unset_administrators.short_description = _("Remove admin access from the selected users")
 
 
+@admin.register(User)
 class UserAdmin(admin.ModelAdmin):
     list_display = [
         'email',
@@ -35,9 +37,6 @@ class UserAdmin(admin.ModelAdmin):
     fields = ['email', 'is_admin']
     readonly_fields = ['last_login']
     actions = [set_administrators, unset_administrators]
-
-
-admin.site.register(coremodels.User, UserAdmin)
 
 
 class TagInUseFilter(admin.SimpleListFilter):
@@ -73,6 +72,7 @@ class TagAdminForm(forms.ModelForm):
         return self.cleaned_data['tag']
 
 
+@admin.register(Tag)
 class TagAdmin(admin.ModelAdmin):
     search_fields = ['tag']
     list_display = [
@@ -102,9 +102,7 @@ class TagAdmin(admin.ModelAdmin):
     is_in_use.boolean = True
 
 
-admin.site.register(coremodels.Tag, TagAdmin)
-
-
+@admin.register(Course)
 class CourseAdmin(admin.ModelAdmin):
     list_display = (
         'course_tag',
@@ -129,10 +127,3 @@ class CourseAdmin(admin.ModelAdmin):
             .select_related('course_tag', 'active_period')\
             .prefetch_related('admins')
         return queryset
-
-
-admin.site.register(coremodels.Course, CourseAdmin)
-
-
-# Unregister auth.groups
-# admin.site.unregister(Group)
