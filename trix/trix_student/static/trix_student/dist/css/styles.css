@@ -9376,6 +9376,9 @@ body {
   flex-direction: column;
   background-color: #E6E6E6;
 }
+a {
+  color: #3070A6;
+}
 /**
 * Choose course page
 */
@@ -9837,9 +9840,47 @@ body {
   width: 100%;
   color: white;
   padding: 40px 0 20px 40px;
+  height: 150px;
+}
+.trix-course-header > h1 {
+  font-size: 24px;
+  font-weight: bold;
 }
 .trix-course-main {
   width: 100%;
+  padding: 0;
+  display: flex;
+}
+.trix-course-table {
+  width: 100%;
+  margin: 0;
+}
+.trix-course-table-head {
+  background-color: #fafafa;
+  font-size: 16px;
+  line-height: 50px;
+  border-bottom: 1px solid #ccc;
+}
+.trix-course-table-head > tr th {
+  color: #666;
+  padding-left: 50px;
+}
+.trix-course-table-body > tr {
+  line-height: 60px;
+  border-bottom: 1px dashed #ccc;
+}
+.trix-course-table-body > tr:hover {
+  background-color: #ddd;
+}
+.trix-course-table-body > tr td {
+  padding-left: 50px;
+  color: #666;
+}
+.trix-course-table-body > tr td:first-child {
+  font-weight: bold;
+}
+.trix-course-table-body > tr td:nth-child(2) {
+  font-weight: bold;
 }
 .codehilite {
   /* Comment */

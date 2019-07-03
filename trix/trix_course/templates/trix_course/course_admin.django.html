@@ -1,0 +1,28 @@
+{% extends "trix_course/course_dashboard.django.html" %}
+
+{% load i18n %}
+
+{% block title %}{{ course }}{% endblock %}
+
+{% block course-header %}
+    <h1>{{ course }}</h1>
+    <p>{{ course.description }}</p>
+{% endblock %}
+
+{% block course-table-header %}
+<th>{% trans "" %}
+<th>{% trans "Administrators" %}</th>
+{% endblock %}
+
+{% block course-table-body %}
+{% for admin in course.admins.all %}
+    <tr>
+        {% if edit_perm %}
+            <td>
+                <button class="btn btn-danger">{% trans "Remove" %}</button>
+            </td>
+        {% endif %}
+        <td>{{ admin }}</td>
+    </tr>
+{% endfor %}
+{% endblock %}
