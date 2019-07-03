@@ -8,7 +8,7 @@ admin.autodiscover()
 
 default_urls = [
     url(r'^authenticate/', include('trix.trix_auth.urls')),
-    url(r'^student/', include(urls.urlpatterns)),
+    url(r'^student/', include('trix.trix_student.urls')),
     url(r'^course/', include('trix.trix_course.urls')),
     url(r'^admin/', admin.site.urls),
     url(r'^a/', include(CrAdminInstance.urls())),
