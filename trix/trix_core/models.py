@@ -199,8 +199,8 @@ class Course(models.Model):
         verbose_name_plural = _('Courses')
         ordering = ['course_tag']
         permissions = (
-            ('edit_admins', _('Can edit administrators for the course.')),
             ('view_admins', _('Can view a list of administrators for the course.')),
+            ('edit_admins', _('Can edit administrators for the course.')),
         )
 
     def __str__(self):

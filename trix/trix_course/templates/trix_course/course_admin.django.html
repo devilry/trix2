@@ -10,18 +10,21 @@
 {% endblock %}
 
 {% block course-table-header %}
-<th>{% trans "" %}
-<th>{% trans "Administrators" %}</th>
+<th>{% trans "" %}</th>
+<th>{% trans "Administrators" %}</th></td>
 {% endblock %}
 
 {% block course-table-body %}
 {% for admin in course.admins.all %}
     <tr>
-        {% if edit_perm %}
-            <td>
+        <td>
+            {% if admin.id == owner_id %}
+                <button class="btn" tabindex="-1" disabled>{% trans "Owner" %}</button>
+            {% endif %}
+            {% if edit_perm %}
                 <button class="btn btn-danger">{% trans "Remove" %}</button>
-            </td>
-        {% endif %}
+            {% endif %}
+        </td>
         <td>{{ admin }}</td>
     </tr>
 {% endfor %}

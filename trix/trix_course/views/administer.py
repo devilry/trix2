@@ -1,10 +1,10 @@
 from django.shortcuts import get_object_or_404
 
 from trix.trix_core import models
-from trix.trix_student.views import base
+from trix.trix_course.views import base
 
 
-class CourseAdminView(base.TrixListViewBase):
+class CourseAdminView(base.TrixCourseBaseView):
     model = models.Course
     template_name = "trix_course/course_admin.django.html"
 
@@ -16,6 +16,9 @@ class CourseAdminView(base.TrixListViewBase):
     def get_context_data(self, **kwargs):
         context = super(CourseAdminView, self).get_context_data(**kwargs)
         context['course'] = self.course
-        context['edit_perm'] = self.request.user.has_perm('Course.edit_admins')
-        print(self.request.user.has_perm('Course.edit_admins'))
+        print(self.request.user.get_all_permissions())
+        context['edit_perm'] = self.request.user.has_perm('app.edit_admins')
+        print(context['edit_perm'])
+        # Check if user is course owner
+        context['owner_id'] = 3  # TODO
         return context
