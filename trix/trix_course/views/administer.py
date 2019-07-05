@@ -1,24 +1,24 @@
-from django.shortcuts import get_object_or_404
+from django.shortcuts import get_object_or_404, redirect
 
-from trix.trix_core import models
+from trix.trix_core.models import Course
 from trix.trix_course.views import base
 
 
 class CourseAdminView(base.TrixCourseBaseView):
-    model = models.Course
+    model = Course
     template_name = "trix_course/course_admin.django.html"
 
     def get(self, request, **kwargs):
         self.course_id = kwargs['course_id']
-        self.course = get_object_or_404(models.Course, id=self.course_id)
+        self.course = get_object_or_404(Course, id=self.course_id)
         return super(CourseAdminView, self).get(request, **kwargs)
 
     def get_context_data(self, **kwargs):
         context = super(CourseAdminView, self).get_context_data(**kwargs)
+        user = self.request.user
         context['course'] = self.course
-        print(self.request.user.get_all_permissions())
-        context['edit_perm'] = self.request.user.has_perm('app.edit_admins')
-        print(context['edit_perm'])
         # Check if user is course owner
-        context['owner_id'] = 3  # TODO
+        context['owner'] = user.is_course_owner(self.course)
+        # Get the list of owners
+        context['owner_list'] = self.course.owner.all()
         return context

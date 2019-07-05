@@ -105,28 +105,49 @@ class TagAdmin(admin.ModelAdmin):
 
 @admin.register(Course)
 class CourseAdmin(admin.ModelAdmin):
+    course_id = None
+
     list_display = (
         'course_tag',
         'active_period',
         'get_admins',
+        'get_owner',
     )
     search_fields = [
         'course_tag__tag',
         'description',
         'active_period__tag',
     ]
-    filter_horizontal = ['admins']
+    filter_horizontal = ['admins', 'owner']
     raw_id_fields = ['course_tag', 'active_period']
 
     def get_admins(self, course):
         return ', '.join(str(user) for user in course.admins.all())
     get_admins.short_description = 'Admins'
 
+    def get_owner(self, course):
+        return ', '.join(str(user) for user in course.owner.all())
+    get_owner.short_description = 'Owner'
+
+    def get_form(self, request, obj=None, **kwargs):
+        if obj:
+            self.course_id = obj.id
+        return super(CourseAdmin, self).get_form(request, obj, **kwargs)
+
+    def formfield_for_manytomany(self, db_field, request, **kwargs):
+        # Limit choices for owner to only those that are admins for the course.
+        if db_field.name == "owner":
+            if self.course_id:
+                course = Course.objects.filter(id=self.course_id).get()
+                kwargs['queryset'] = course.admins
+        return super().formfield_for_manytomany(db_field, request, **kwargs)
+
     def get_queryset(self, request):
         queryset = super(CourseAdmin, self).get_queryset(request)
         queryset = queryset\
             .select_related('course_tag', 'active_period')\
-            .prefetch_related('admins')
+            .prefetch_related('admins')\
+            .prefetch_related('owner')
         return queryset
 
 

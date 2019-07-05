@@ -91,6 +91,12 @@ class User(AbstractBaseUser, PermissionsMixin):
         else:
             return Course.objects.filter(admins=self).exists()
 
+    def is_course_owner(self, course):
+        if self.is_staff:
+            return True
+        else:
+            return self.owner.filter(id=course.id).exists()
+
     @property
     def is_staff(self):
         """
@@ -167,9 +173,15 @@ class Tag(models.Model):
 
 class Course(models.Model):
     """
-    A course is simply a tag with an optional active period tag, and a list of admins.
+    A course is simply a tag with an optional active period tag, and a list of admins and owners.
     """
-    admins = models.ManyToManyField(User, blank=True)
+    admins = models.ManyToManyField(User, blank=True, related_name="admin")
+    owner = models.ManyToManyField(
+        User,
+        blank=True,
+        related_name="owner",
+    )
+
     description = models.TextField(
         verbose_name=_('Description'),
         blank=True,
@@ -198,10 +210,6 @@ class Course(models.Model):
         verbose_name = _('Course')
         verbose_name_plural = _('Courses')
         ordering = ['course_tag']
-        permissions = (
-            ('view_admins', _('Can view a list of administrators for the course.')),
-            ('edit_admins', _('Can edit administrators for the course.')),
-        )
 
     def __str__(self):
         return self.course_tag.tag
