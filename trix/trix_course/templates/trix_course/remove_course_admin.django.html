@@ -1,0 +1,23 @@
+{% extends "trix_course/course_dashboard.django.html" %}
+
+{% load i18n %}
+
+{% block course-header %}
+    <h1>{% trans "Confirm removal" %}</h1>
+{% endblock %}
+
+{% block course-body %}
+<div class="trix-course-remove-body">
+    <p>
+    {% blocktrans  %}
+        Are you sure you want to remove {{ admin_user }} as an admin from {{ object }}?
+    {% endblocktrans %}
+    </p>
+    <form method="post" action="" class="">{% csrf_token %}
+            <button class="btn btn-danger trix-del-btn" type="submit">{% trans "Remove" %}</button>
+            <a class="btn btn-cancel trix-cancel-btn" href="{% url 'trix_course_admin' object.id %}">
+                {% trans "Cancel" %}
+            </a>
+    </form>
+</div>
+{% endblock %}

@@ -9882,6 +9882,13 @@ a {
 .trix-course-table-body > tr td:nth-child(2) {
   font-weight: bold;
 }
+.trix-course-remove-body {
+  padding-left: 40px;
+  padding-top: 30px;
+}
+.trix-course-remove-body > form {
+  margin-top: 20px;
+}
 .codehilite {
   /* Comment */
   /* Error */

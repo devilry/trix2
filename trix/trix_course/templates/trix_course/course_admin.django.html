@@ -19,11 +19,10 @@
         <tr>
             <td>
                 {% if owner %}
-                    <form method="post" class="btn"
-                        action="{% url 'trix_remove_admin' course_id=course.id pk=admin.id %}">
-                        {% csrf_token %}
-                        <input class="btn btn-danger" type="submit" value="{% trans 'Remove' %}">
-                    </form>
+                    <a href="{% url 'trix_remove_admin' pk=course.id user_id=admin.id %}"
+                        class="btn btn-danger">
+                        <span class="fa fa-bin">{% trans "Remove" %}</span>
+                    </a>
                 {% endif %}
                 {% if admin in owner_list %}
                     <button class="btn" tabindex="-1" disabled>{% trans "Owner" %}</button>
