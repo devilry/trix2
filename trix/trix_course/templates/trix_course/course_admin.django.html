@@ -21,7 +21,7 @@
                 {% if owner %}
                     <a href="{% url 'trix_remove_admin' pk=course.id user_id=admin.id %}"
                         class="btn btn-danger">
-                        <span class="fa fa-bin">{% trans "Remove" %}</span>
+                        {% trans "Remove" %}
                     </a>
                 {% endif %}
                 {% if admin in owner_list %}

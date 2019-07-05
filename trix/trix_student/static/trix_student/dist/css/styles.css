@@ -9876,9 +9876,6 @@ a {
   padding-left: 50px;
   color: #666;
 }
-.trix-course-table-body > tr td:first-child {
-  font-weight: bold;
-}
 .trix-course-table-body > tr td:nth-child(2) {
   font-weight: bold;
 }
