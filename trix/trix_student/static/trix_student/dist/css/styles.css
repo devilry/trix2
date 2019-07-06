@@ -8914,6 +8914,12 @@ button.close {
   clip: rect(0, 0, 0, 0);
   border: 0;
 }
+/**********************
+* Color fixes for WCAG.
+***********************/
+.btn-danger {
+  background-color: #D43F3A;
+}
 nav#trix_header {
   border: none;
   margin-bottom: 0;
@@ -9783,8 +9789,11 @@ a {
   display: flex;
   height: 100%;
 }
-.trix-course-wrapper > nav {
-  flex-grow: 1;
+@media (max-width: 768px) {
+  .trix-course-wrapper {
+    flex-wrap: wrap;
+    flex-direction: column;
+  }
 }
 .trix-course-container {
   display: flex;
@@ -9799,6 +9808,15 @@ a {
   padding-top: 25px;
   background-color: #333333;
   width: 250px;
+  flex-grow: 1;
+}
+@media (max-width: 768px) {
+  .trix-course-menu {
+    width: 100%;
+    flex-grow: 0;
+    height: auto;
+    padding: 0px;
+  }
 }
 .trix-course-menu-icon {
   display: block;
@@ -9813,6 +9831,34 @@ a {
     display: none;
   }
 }
+.trix-course-menu-toggle {
+  display: none;
+}
+@media (max-width: 768px) {
+  .trix-course-menu-toggle {
+    display: block;
+    width: 100%;
+    background-color: #333;
+    text-transform: uppercase;
+    text-align: center;
+    color: #aaa;
+    font-weight: bold;
+    line-height: 50px;
+    border: none;
+    border-bottom: 1px solid #444;
+  }
+  .trix-course-menu-toggle:hover {
+    background-color: #262626;
+    color: #eee;
+    text-decoration: none;
+    outline: none;
+  }
+  .trix-course-menu-toggle:focus {
+    outline: thin dotted;
+    color: #eee;
+    text-decoration: none;
+  }
+}
 .trix-course-menu-items {
   display: flex;
   flex-direction: column;
@@ -9821,11 +9867,13 @@ a {
   padding: 0;
 }
 .trix-course-menu-items > li {
-  padding: 15px 5px 15px 20px;
   border-bottom: 1px solid #444;
+  display: flex;
 }
 .trix-course-menu-items a {
   color: #aaa;
+  padding: 15px 5px 15px 20px;
+  width: 100%;
 }
 .trix-course-menu-items a:hover {
   text-decoration: none;
@@ -9835,16 +9883,50 @@ a {
   width: 30px;
   font-size: 20px;
 }
+@media (max-width: 768px) {
+  .trix-course-menu-items {
+    margin-bottom: 0;
+    display: flex;
+  }
+  .trix-course-menu-items a {
+    width: 100%;
+  }
+}
+.trix-menu-collapse {
+  display: none;
+}
+@media (min-width: 768px) {
+  .trix-menu-collapse {
+    display: inherit;
+  }
+}
 .trix-course-header {
   background-color: #377CA8;
   width: 100%;
   color: white;
-  padding: 40px 0 20px 40px;
-  height: 150px;
+  padding: 10px 0 20px 40px;
+  height: 170px;
 }
-.trix-course-header > h1 {
+.trix-course-header-text {
+  height: 50%;
+}
+.trix-course-header-text > h1 {
   font-size: 24px;
   font-weight: bold;
+}
+.trix-course-header-buttons {
+  height: 35%;
+  margin: 10px 0;
+}
+.trix-course-header-buttons > button {
+  border: 1px solid #224d68;
+  color: white;
+  background-color: #377CA8;
+}
+.trix-course-header-buttons > button:hover {
+  background-color: #224d68;
+  border-color: #224d68;
+  color: white;
 }
 .trix-course-main {
   width: 100%;

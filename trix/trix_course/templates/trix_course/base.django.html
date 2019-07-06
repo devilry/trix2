@@ -7,9 +7,12 @@
 
 {% block body %}
 <div class="trix-course-wrapper">
-    <nav class="trix-course-menu">
+    <nav class="trix-course-menu" ng-controller="MenuCtrl">
         <span class="trix-course-menu-icon fa fa-wrench"></span>
-        <ul class="trix-course-menu-items">
+        <button class="trix-course-menu-toggle" ng-click="menuVisible = !menuVisible">
+            {% trans "Menu" %}
+        </button>
+        <ul class="trix-course-menu-items" ng-class="{'trix-menu-collapse': !menuVisible}">
             <li><a href="{% url 'trix_student_dashboard' %}">
                 <span class="fa fa-home"></span>
                 {% trans "Frontpage" %}
@@ -29,7 +32,12 @@
     <div class="trix-course-container">
         <header>
             <div class="container trix-course-header">
-                {% block course-header %}{% endblock course-header %}
+                <div class="trix-course-header-text">
+                    {% block course-header-text %}{% endblock %}
+                </div>
+                <div class="trix-course-header-buttons">
+                    {% block course-header-buttons %}{% endblock %}
+                </div>
             </div>
         </header>
         <main>

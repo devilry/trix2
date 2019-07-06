@@ -2,7 +2,9 @@
 
 {% load i18n %}
 
-{% block course-header %}
+{% block title %}{% trans "Confirm admin removal" %}{% endblock %}
+
+{% block course-header-text %}
     <h1>{% trans "Confirm removal" %}</h1>
 {% endblock %}
 
@@ -13,7 +15,7 @@
         Are you sure you want to remove {{ admin_user }} as an admin from {{ object }}?
     {% endblocktrans %}
     </p>
-    <form method="post" action="" class="">{% csrf_token %}
+    <form method="post" action="">{% csrf_token %}
             <button class="btn btn-danger trix-del-btn" type="submit">{% trans "Remove" %}</button>
             <a class="btn btn-cancel trix-cancel-btn" href="{% url 'trix_course_admin' object.id %}">
                 {% trans "Cancel" %}

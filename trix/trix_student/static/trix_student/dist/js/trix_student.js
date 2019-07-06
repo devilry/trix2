@@ -69,6 +69,11 @@
     function($scope) {
       return $scope.isVisible = false;
     }
+  ]).controller('MenuCtrl', [
+    '$scope',
+    function($scope) {
+      return $scope.menuVisible = false;
+    }
   ]).controller('AssignmentCtrl', [
     '$scope',
     '$http',

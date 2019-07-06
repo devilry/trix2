@@ -4,9 +4,13 @@
 
 {% block title %}{{ course }}{% endblock %}
 
-{% block course-header %}
+{% block course-header-text %}
     <h1>{{ course }}</h1>
     <p>{{ course.description }}</p>
+{% endblock %}
+
+{% block course-header-buttons %}
+    <button class="btn btn-default btn-sm">{% trans "Add admin" %}</button>
 {% endblock %}
 
 {% block course-table-header %}

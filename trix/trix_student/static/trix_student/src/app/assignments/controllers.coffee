@@ -41,6 +41,12 @@ angular.module('trixStudent.assignments.controllers', ['ngRoute'])
     $scope.isVisible = false
 ])
 
+.controller('MenuCtrl', [
+  '$scope',
+  ($scope) ->
+    $scope.menuVisible = false
+])
+
 .controller('AssignmentCtrl', [
   '$scope', '$http', '$rootScope',
   ($scope, $http, $rootScope) ->
