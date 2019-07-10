@@ -15,10 +15,7 @@ class CourseAdminView(base.TrixCourseBaseView):
 
     def get_context_data(self, **kwargs):
         context = super(CourseAdminView, self).get_context_data(**kwargs)
-        user = self.request.user
         context['course'] = self.course
         # Check if user is course owner
-        context['owner'] = user.is_course_owner(self.course)
-        # Get the list of owners
-        context['owner_list'] = self.course.owner.all()
+        context['owner'] = self.request.user.is_course_owner(self.course)
         return context

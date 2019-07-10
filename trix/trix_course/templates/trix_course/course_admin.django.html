@@ -10,7 +10,9 @@
 {% endblock %}
 
 {% block course-header-buttons %}
-    <button class="btn btn-default btn-sm">{% trans "Add admin" %}</button>
+    <a class="btn btn-default btn-sm" href="{% url 'trix_add_admin' course.id %}">
+        {% trans "Add admin" %}
+    </a>
 {% endblock %}
 
 {% block course-table-header %}
@@ -28,8 +30,8 @@
                         {% trans "Remove" %}
                     </a>
                 {% endif %}
-                {% if admin in owner_list %}
-                    <button class="btn" tabindex="-1" disabled>{% trans "Owner" %}</button>
+                {% if admin in course.owner.all %}
+                    <button class="btn btn-default" tabindex="-1" disabled>{% trans "Owner" %}</button>
                 {% endif %}
             </td>
             <td>{{ admin }}</td>

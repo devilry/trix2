@@ -1,11 +1,11 @@
 from django import forms
+from django.conf import settings
 from django.contrib import admin
 from django.contrib.auth.models import Group
 from django.db.models import Count, Q
 from django.utils.translation import ugettext_lazy as _
 from django.contrib.sites.models import Site
 
-from trix.trix_core import models as coremodels
 from trix.trix_core.models import Course, Tag, User
 
 
@@ -68,7 +68,7 @@ class TagInUseFilter(admin.SimpleListFilter):
 class TagAdminForm(forms.ModelForm):
     def clean_tag(self):
         tag = self.cleaned_data['tag']
-        tag = coremodels.Tag.split_commaseparated_tags(tag)
+        tag = Tag.split_commaseparated_tags(tag)
         self.cleaned_data['tag'] = tag[0]
         return self.cleaned_data['tag']
 
@@ -138,7 +138,7 @@ class CourseAdmin(admin.ModelAdmin):
         # Limit choices for owner to only those that are admins for the course.
         if db_field.name == "owner":
             if self.course_id:
-                course = Course.objects.filter(id=self.course_id).get()
+                course = Course.objects.get(id=self.course_id)
                 kwargs['queryset'] = course.admins
         return super().formfield_for_manytomany(db_field, request, **kwargs)
 
@@ -153,6 +153,9 @@ class CourseAdmin(admin.ModelAdmin):
 
 # Fix for not being able to see the site ID.
 admin.site.unregister(Site)
+
+# Unregister group since it is not in use.
+admin.site.unregister(Group)
 
 
 @admin.register(Site)

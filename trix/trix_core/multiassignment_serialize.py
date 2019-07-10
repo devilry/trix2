@@ -5,13 +5,11 @@ from django import forms
 from django.db import transaction
 from django.utils.translation import ugettext_lazy as _
 from django.core.exceptions import ValidationError
-from django.utils.encoding import python_2_unicode_compatible
 
 from trix.trix_core import models as coremodels
 from trix.trix_core.tagutils import bulk_update_assignment_tags
 
 
-@python_2_unicode_compatible
 class MarkdownString(object):
     """
     Used to mark unicode strings as Markdown for the YAML serializer.
@@ -104,7 +102,6 @@ class DeserializerNotFoundError(DeserializerError):
     """
 
 
-@python_2_unicode_compatible
 class DeserializerSingleValidationError(DeserializerError):
     """
     Used to store info about a ``django.core.exceptions.ValidationError``
@@ -122,7 +119,6 @@ class DeserializerSingleValidationError(DeserializerError):
         return '{!r}: {!r}'.format(assignmentdict, self.errordict)
 
 
-@python_2_unicode_compatible
 class DeserializerValidationErrors(DeserializerError):
     """
     See :exc:`DeserializerSingleValidationError`.

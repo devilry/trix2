@@ -37,7 +37,8 @@
             {% else %}
                 <p>Looks like it's empty here...</p>
             {% endif %}
-        {% endblock %}
+        {% endblock course-table-body %}
     </tbody>
 </table>
+{% include "trix_student/include/pager.django.html" with pager_extraclass='trix-course-pager' %}
 {% endblock course-body %}

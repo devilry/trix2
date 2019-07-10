@@ -7,7 +7,7 @@ register = template.Library()
 
 @register.simple_tag
 def trix_assignment_markdown(inputmarkdown):
-    r"""
+    """
     Tag to render the trix assignment text/solution markdown dialect.
 
     Example::

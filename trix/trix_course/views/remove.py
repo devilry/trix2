@@ -24,7 +24,7 @@ class RemoveCourseAdminView(DeleteView):
 
     def get_context_data(self, **kwargs):
         context = super(RemoveCourseAdminView, self).get_context_data(**kwargs)
-        context['admin_user'] = User.objects.filter(id=self.user_id).get()
+        context['admin_user'] = User.objects.get(id=self.user_id)
         return context
 
     def delete(self, request, *args, **kwargs):
@@ -33,8 +33,15 @@ class RemoveCourseAdminView(DeleteView):
         '''
         course_id = kwargs['pk']
         user_id = kwargs['user_id']
-        course = Course.objects.filter(id=course_id).get()
-        admin_user = course.admins.filter(id=user_id).get()
-        course.admins.remove(admin_user)
+        course = Course.objects.get(id=course_id)
+        admin_user = course.admins.get(id=user_id)
+
+        # Check if we only want to remove as an owner
+        if request.POST.get('owner'):
+            course.owner.remove(admin_user)
+        else:
+            course.admins.remove(admin_user)
+            if admin_user in course.owner.all():
+                course.owner.remove(admin_user)
 
         return redirect('trix_course_admin', course_id=course_id)

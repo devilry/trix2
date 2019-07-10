@@ -6,13 +6,13 @@
     display: flex;
     height: 100%;
 
-    @media (max-width: @screen-sm-min) {
-        flex-wrap: wrap;
-        flex-direction: column;
+    @media (max-width: @screen-md-min) {
+        flex-flow: column;
     }
 }
 
 .trix-course-container {
+    overflow: auto;
     display: flex;
     flex-direction: column;
     width: 100%;
@@ -29,7 +29,7 @@
     width: 250px;
     flex-grow: 1;
 
-    @media (max-width: @screen-sm-min) {
+    @media (max-width: @screen-md-min) {
         width: 100%;
         flex-grow: 0;
         height: auto;
@@ -45,7 +45,7 @@
     color: #111;
     border-bottom: 1px solid #444;
 
-    @media (max-width: @screen-sm-min) {
+    @media (max-width: @screen-md-min) {
         display: none;
     }
 }
@@ -53,7 +53,7 @@
 .trix-course-menu-toggle {
     display: none;
 
-    @media (max-width: @screen-sm-min) {
+    @media (max-width: @screen-md-min) {
         display: block;
         width: 100%;
         background-color: #333;
@@ -107,7 +107,7 @@
         font-size: 20px;
     }
 
-    @media (max-width: @screen-sm-min) {
+    @media (max-width: @screen-md-min) {
         margin-bottom: 0;
         display: flex;
 
@@ -120,7 +120,7 @@
 .trix-menu-collapse {
     display: none;
 
-    @media (min-width: @screen-sm-min) {
+    @media (min-width: @screen-md-min) {
         display: inherit;
     }
 }
@@ -146,15 +146,19 @@
     height: 35%;
     margin: 10px 0;
 
+    > a,
     > button {
         border: 1px solid #224d68;
         color: white;
         background-color: #377CA8;
 
-        &:hover {
+        &:hover,
+        &:active,
+        &:focus {
             background-color: #224d68;
             border-color: #224d68;
             color: white;
+            outline: none;
         }
     }
 }
@@ -163,11 +167,13 @@
     width: 100%;
     padding: 0;
     display: flex;
+    flex-direction: column;
 }
 
 .trix-course-table {
     width: 100%;
     margin: 0;
+    height: 100%;
 }
 
 .trix-course-table-head {
@@ -178,13 +184,13 @@
 
     > tr th {
         color: #666;
-        padding-left: 50px;
+        padding-left: 30px;
     }
 }
 
 .trix-course-table-body {
     > tr {
-        line-height: 60px;
+        line-height: 50px;
         border-bottom: 1px dashed #ccc;
 
         &:hover {
@@ -193,14 +199,13 @@
     }
 
     > tr td {
-        padding-left: 50px;
+        padding-left: 30px;
         color: #666;
 
         &:nth-child(2) {
             font-weight: bold;
         }
     }
-
 }
 
 .trix-course-remove-body {
@@ -210,4 +215,10 @@
     > form {
         margin-top: 20px;
     }
+}
+
+.trix-course-pager {
+    width: 20%;
+    margin-left: auto;
+    margin-right: auto;
 }

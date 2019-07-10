@@ -8,9 +8,7 @@ class CourseDashboardView(base.TrixCourseBaseView):
     model = models.Course
     template_name = "trix_course/course_dashboard.django.html"
     context_object_name = "courses"
-
-    def get(self, request, **kwargs):
-        return super(CourseDashboardView, self).get(request, **kwargs)
+    paginate_by = 20
 
     def get_context_data(self, **kwargs):
         context = super(CourseDashboardView, self).get_context_data(**kwargs)
