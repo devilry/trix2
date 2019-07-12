@@ -10,7 +10,7 @@
 {% endblock %}
 
 {% block course-header-buttons %}
-    <a class="btn btn-default btn-sm" href="{% url 'trix_add_admin' course.id %}">
+    <a class="btn btn-default" href="{% url 'trix_add_admin' course.id %}">
         {% trans "Add admin" %}
     </a>
 {% endblock %}
@@ -21,7 +21,7 @@
 {% endblock %}
 
 {% block course-table-body %}
-    {% for admin in course.admins.all %}
+    {% for admin in admin_list %}
         <tr>
             <td>
                 {% if owner %}
@@ -34,7 +34,14 @@
                     <button class="btn btn-default" tabindex="-1" disabled>{% trans "Owner" %}</button>
                 {% endif %}
             </td>
-            <td>{{ admin }}</td>
+            <td>
+                {{ admin }}
+                {% if admin.is_superuser %}
+                    <i class="fa fa-check" style="color: green"
+                        title="{% trans 'Superuser' %}"></i>
+                    <span class="sr-only">{% trans "Superuser" %}</span>
+                {% endif %}
+            </td>
         </tr>
     {% endfor %}
 {% endblock %}

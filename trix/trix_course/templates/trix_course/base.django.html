@@ -35,8 +35,22 @@
                 <div class="trix-course-header-text">
                     {% block course-header-text %}{% endblock %}
                 </div>
-                <div class="trix-course-header-buttons">
-                    {% block course-header-buttons %}{% endblock %}
+                <div class="trix-course-header-button-wrapper">
+                    <div class="trix-course-header-buttons">
+                        {% block course-header-buttons %}{% endblock %}
+                    </div>
+                    <div class="trix-course-header-search">
+                        {% block course-header-search %}
+                            <form action="" method="get">
+                                <input name="q" type="text" aria-label="{% trans 'Search input' %}"
+                                    placeholder="Search..." />
+                                <button class="btn btn-primary" type="submit">
+                                    <i class="fa fa-search"></i>
+                                    <span class="sr-only">{% trans "Search" %}</span>
+                                </button>
+                            </form>
+                        {% endblock %}
+                    </div>
                 </div>
             </div>
         </header>

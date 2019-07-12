@@ -34,7 +34,7 @@ class RemoveCourseAdminView(DeleteView):
         course_id = kwargs['pk']
         user_id = kwargs['user_id']
         course = Course.objects.get(id=course_id)
-        admin_user = course.admins.get(id=user_id)
+        admin_user = User.objects.get(id=user_id)
 
         # Check if we only want to remove as an owner
         if request.POST.get('owner'):

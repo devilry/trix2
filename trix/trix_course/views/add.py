@@ -12,8 +12,11 @@ class AddCourseAdminListView(base.TrixCourseBaseView):
     paginate_by = 20
 
     def get_queryset(self):
+        search = self.request.GET.get('q')
         course = Course.objects.get(id=self.kwargs['course_id'])
         users = User.objects.filter(is_active=True).exclude(owner=course)
+        if search:
+            users = users.filter(email__icontains=search)
         return users
 
     def get_context_data(self, **kwargs):
@@ -35,6 +38,7 @@ class UpdateCourseAdminView(base.TrixCourseBaseView):
             course.admins.add(user)
             messages.info(request, user.displayname + " added as course admin.")
         if request.POST.get('owner'):
+            course.admins.add(user)
             course.owner.add(user)
             messages.info(request, user.displayname + " added as course owner.")
-        return redirect(reverse('trix_add_admin', kwargs={'course_id': 1}))
+        return redirect(reverse('trix_add_admin', kwargs={'course_id': kwargs['course_id']}))

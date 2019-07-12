@@ -9909,39 +9909,70 @@ a {
 * Header content
 ****************/
 .trix-course-header {
+  display: flex;
+  flex-direction: column;
+  align-content: space-between;
   background-color: #377CA8;
   width: 100%;
   color: white;
-  padding: 10px 0 20px 40px;
+  padding: 10px 20px 20px 40px;
   height: 170px;
-}
-.trix-course-header-text {
-  height: 50%;
 }
 .trix-course-header-text > h1 {
   font-size: 24px;
   font-weight: bold;
 }
-.trix-course-header-buttons {
-  height: 35%;
-  margin: 10px 0;
+.trix-course-header-button-wrapper {
+  display: flex;
+  flex-direction: row;
+  margin-top: auto;
 }
-.trix-course-header-buttons > a,
-.trix-course-header-buttons > button {
+.trix-course-header-button-wrapper a,
+.trix-course-header-button-wrapper button {
+  margin-right: 10px;
+  text-align: center;
   border: 1px solid #224d68;
   color: white;
   background-color: #377CA8;
 }
-.trix-course-header-buttons > a:hover,
-.trix-course-header-buttons > button:hover,
-.trix-course-header-buttons > a:active,
-.trix-course-header-buttons > button:active,
-.trix-course-header-buttons > a:focus,
-.trix-course-header-buttons > button:focus {
+.trix-course-header-button-wrapper a:hover,
+.trix-course-header-button-wrapper button:hover,
+.trix-course-header-button-wrapper a:active,
+.trix-course-header-button-wrapper button:active,
+.trix-course-header-button-wrapper a:focus,
+.trix-course-header-button-wrapper button:focus {
   background-color: #224d68;
   border-color: #224d68;
   color: white;
   outline: none;
+}
+.trix-course-header-search {
+  height: auto;
+  margin-left: auto;
+  margin-right: 0;
+}
+.trix-course-header-search > form input {
+  border-radius: 4px;
+  max-width: 100%;
+  background-color: white;
+  color: #555;
+  padding: 6px 12px;
+  height: 36px;
+  border: 1px solid #ccc;
+  outline: none;
+  margin-left: 0;
+  border-bottom-right-radius: 0;
+  border-top-right-radius: 0;
+}
+.trix-course-header-search > form button {
+  margin-left: -3px;
+  border-bottom-left-radius: 0;
+  border-top-left-radius: 0;
+  border-left: none;
+  margin-top: 1px;
+}
+.trix-course-header-search > form button > i {
+  vertical-align: middle;
 }
 /*************
 * Main content
@@ -10000,7 +10031,7 @@ a {
   flex-direction: row;
   width: 80%;
   background-color: #333333;
-  height: 75px;
+  height: 65px;
   margin: auto;
   border-radius: 4px 4px 0 0;
   color: white;

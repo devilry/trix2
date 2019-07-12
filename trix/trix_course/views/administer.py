@@ -1,4 +1,6 @@
+from django.db.models import Q
 from django.shortcuts import get_object_or_404, redirect
+from itertools import chain
 
 from trix.trix_core.models import Course
 from trix.trix_course.views import base
@@ -18,4 +20,11 @@ class CourseAdminView(base.TrixCourseBaseView):
         context['course'] = self.course
         # Check if user is course owner
         context['owner'] = self.request.user.is_course_owner(self.course)
+        admin_list = self.course.admins.all()
+        search = self.request.GET.get('q')
+        if search:
+            owner = True if search == "owner" else False
+            admin_list = admin_list.filter(Q(email__icontains=search) |
+                                           Q(owner=owner))
+        context['admin_list'] = admin_list
         return context
