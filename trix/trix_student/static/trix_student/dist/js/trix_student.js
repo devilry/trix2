@@ -74,6 +74,14 @@
     function($scope) {
       return $scope.menuVisible = false;
     }
+  ]).controller('CourseCtrl', [
+    '$scope',
+    function($scope) {
+      $scope.footerVisible = false;
+      return $scope.hideFooter = function() {
+        return $scope.footerVisible = true;
+      };
+    }
   ]).controller('AssignmentCtrl', [
     '$scope',
     '$http',

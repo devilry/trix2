@@ -1,3 +1,4 @@
+from django.contrib import messages
 from django.shortcuts import get_object_or_404, redirect
 from django.urls import reverse
 
@@ -32,6 +33,8 @@ class UpdateCourseAdminView(base.TrixCourseBaseView):
         course = Course.objects.get(id=kwargs['course_id'])
         if request.POST.get('admin'):
             course.admins.add(user)
+            messages.info(request, user.displayname + " added as course admin.")
         if request.POST.get('owner'):
             course.owner.add(user)
+            messages.info(request, user.displayname + " added as course owner.")
         return redirect(reverse('trix_add_admin', kwargs={'course_id': 1}))

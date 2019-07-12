@@ -16,12 +16,12 @@
     display: flex;
     flex-direction: column;
     width: 100%;
-
-    > main {
-        flex-grow: 1;
-    }
+    flex-grow: 1;
 }
 
+/*************
+* Menu content
+*************/
 .trix-course-menu {
     flex-direction: column;
     padding-top: 25px;
@@ -125,6 +125,9 @@
     }
 }
 
+/****************
+* Header content
+****************/
 .trix-course-header {
     background-color: #377CA8;
     width: 100%;
@@ -163,6 +166,9 @@
     }
 }
 
+/*************
+* Main content
+**************/
 .trix-course-main {
     width: 100%;
     padding: 0;
@@ -221,4 +227,50 @@
     width: 20%;
     margin-left: auto;
     margin-right: auto;
+}
+
+
+/***************
+* Footer content
+***************/
+.trix-course-footer {
+    // display: flex;
+    flex-direction: row;
+    width: 80%;
+    background-color: #333333;
+    height: 75px;
+    margin: auto;
+    border-radius: 4px 4px 0 0;
+    color: white;
+    display: none;
+
+    > p {
+        text-align: center;
+        font-size: 18px;
+        margin: auto;
+    }
+
+    > a {
+        align-self: center;
+        color: white;
+        margin-right: 20px;
+        margin-left: auto;
+
+        i {
+            font-size: 24px;
+        }
+    }
+
+    @media (max-width: @screen-md-min) {
+        width: 100%;
+        border-radius: 0;
+    }
+}
+
+.trix-footer-show {
+    display: flex;
+}
+
+.trix-footer-hide {
+    display: none;
 }

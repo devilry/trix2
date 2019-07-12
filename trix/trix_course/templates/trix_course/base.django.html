@@ -29,7 +29,7 @@
             {% endcomment %}
         </ul>
     </nav>
-    <div class="trix-course-container">
+    <div class="trix-course-container" ng-controller="CourseCtrl">
         <header>
             <div class="container trix-course-header">
                 <div class="trix-course-header-text">
@@ -45,6 +45,17 @@
                 {% block course-body %}{% endblock course-body %}
             </div>
         </main>
+        <footer>
+            <div class="trix-course-footer {% if messages %}trix-footer-show{% endif %}"
+                    ng-cloak ng-class="{'trix-footer-hide': footerVisible}">
+                {% block course-footer %}
+                    {% for message in messages %}
+                        <p>{{ message }}</p>
+                    {% endfor %}
+                    <a ng-click="hideFooter()"><i class="fa fa-times-circle"></i></a>
+                {% endblock course-footer %}
+            </div>
+        </footer>
     </div>
 </div>
 {% endblock body %}
