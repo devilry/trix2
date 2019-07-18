@@ -17,6 +17,20 @@
     flex-direction: column;
     width: 100%;
     flex-grow: 1;
+
+    > main {
+        flex-grow: 1;
+    }
+
+    > footer {
+        margin-left: auto;
+        margin-right: auto;
+
+        @media (max-width: @screen-md-min) {
+            margin-left: 0;
+            margin-right: 0;
+        }
+    }
 }
 
 /*************
@@ -135,8 +149,14 @@
     background-color: #377CA8;
     width: 100%;
     color: white;
-    padding: 10px 20px 20px 40px;
+    padding: 10px 0px 20px 40px;
     height: 170px;
+}
+
+.trix-course-header-text-wrapper {
+    display: flex;
+    height: auto;
+    width: 100%;
 }
 
 .trix-course-header-text {
@@ -205,6 +225,46 @@
     }
 }
 
+/***************
+* Message content
+***************/
+.trix-course-messages {
+    display: none;
+    flex-direction: row;
+    width: 35%;
+    background-color: #333333;
+    height: auto;
+    margin-left: auto;
+    border-radius: 4px 0 0 4px;
+    color: white;
+    padding-right: 10px;
+
+    > p {
+        text-align: center;
+        font-size: 14px;
+        margin: auto;
+    }
+
+    > a {
+        align-self: center;
+        color: white;
+        margin-right: 5px;
+        margin-left: 15px;
+
+        i {
+            font-size: 20px;
+        }
+    }
+}
+
+.trix-messages-show {
+    display: flex;
+}
+
+.trix-messages-hide {
+    display: none;
+}
+
 /*************
 * Main content
 **************/
@@ -268,47 +328,26 @@
     margin-right: auto;
 }
 
-
-/***************
+/****************
 * Footer content
-***************/
+****************/
+
 .trix-course-footer {
-    flex-direction: row;
-    width: 80%;
+    display: flex;
     background-color: #333333;
-    height: 65px;
+    flex-direction: row;
+    height: auto;
     margin: auto;
+    padding: 15px 10px 10px 10px;
     border-radius: 4px 4px 0 0;
-    color: white;
-    display: none;
+    align-content: center;
 
-    > p {
-        text-align: center;
-        font-size: 18px;
+    > form {
         margin: auto;
-    }
 
-    > a {
-        align-self: center;
-        color: white;
-        margin-right: 20px;
-        margin-left: auto;
-
-        i {
-            font-size: 24px;
+        > input {
+            margin-right: 10px;
+            margin-left: 10px;
         }
     }
-
-    @media (max-width: @screen-md-min) {
-        width: 100%;
-        border-radius: 0;
-    }
-}
-
-.trix-footer-show {
-    display: flex;
-}
-
-.trix-footer-hide {
-    display: none;
 }

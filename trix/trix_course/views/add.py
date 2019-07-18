@@ -1,6 +1,7 @@
 from django.contrib import messages
 from django.shortcuts import get_object_or_404, redirect
 from django.urls import reverse
+from django.utils.translation import ugettext_lazy as _
 
 from trix.trix_core.models import Course, User
 from trix.trix_course.views import base
@@ -32,13 +33,28 @@ class UpdateCourseAdminView(base.TrixCourseBaseView):
         '''
         Adds a user as a course admin or owner.
         '''
-        user = User.objects.get(id=kwargs['user_id'])
         course = Course.objects.get(id=kwargs['course_id'])
-        if request.POST.get('admin'):
+
+        # Add admin or owner based on type of post.
+        if 'admin' in request.POST:
+            self._add_admins(request, course, [kwargs['user_id']])
+        elif 'owner' in request.POST:
+            self._add_owners(request, course, [kwargs['user_id']])
+        elif 'admin_list' in request.POST:
+            self._add_admins(request, course, request.POST.getlist('selected_students'))
+        elif 'owner_list' in request.POST:
+            self._add_owners(request, course, request.POST.getlist('selected_students'))
+        return redirect(reverse('trix_add_admin', kwargs={'course_id': kwargs['course_id']}))
+
+    def _add_admins(self, request, course, id_list):
+        for user_id in id_list:
+            user = User.objects.get(id=user_id)
             course.admins.add(user)
-            messages.info(request, user.displayname + " added as course admin.")
-        if request.POST.get('owner'):
+            messages.info(request, _(f"{user.displayname} added as a course admin."))
+
+    def _add_owners(self, request, course, id_list):
+        for user_id in id_list:
+            user = User.objects.get(id=user_id)
             course.admins.add(user)
             course.owner.add(user)
-            messages.info(request, user.displayname + " added as course owner.")
-        return redirect(reverse('trix_add_admin', kwargs={'course_id': kwargs['course_id']}))
+            messages.info(request, _(f"{user.displayname} added as course owner."))

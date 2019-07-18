@@ -13,29 +13,35 @@
 {% endblock %}
 
 {% block course-table-header %}
-    <th><input type="checkbox"></input></th>
-    <th>{% trans "Email" %}</th>
-    <th></th>
+    <th scope="col">
+        <input type="checkbox" ng-model="checkLeader" aria-label="{% trans 'Check all' %}"
+        ng-click="footerVisible = !footerVisible"></input></th>
+    <th scope="col">{% trans "Email" %}</th>
+    <th scope="col"></th>
 {% endblock %}
 
 {% block course-table-body %}
     {% for student in object_list %}
         <tr>
             <td>
-                <input type="checkbox"></input>
+                <input type="checkbox" name="selected_students" form="multi_admin"
+                    aria-labelledby="student{{ student.id }}"
+                    ng-checked="checkLeader"
+                    ng-click="footerVisible = !footerVisible"
+                    value="{{ student.id }}"></input>
             </td>
-            <td>
+            <td id="student{{ student.id }}">
                 {{ student.displayname }}
                 {% if student.is_superuser %}
                     <i class="fa fa-check" style="color: green"
                         title="{% trans 'Superuser' %}"></i>
                     <span class="sr-only">{% trans "Superuser" %}</span>
                 {% endif %}
-                <br />
             </td>
             <td>
                 <form method="post"
-                    action="{% url 'trix_add_admin_update' course_id=course.id user_id=student.id %}">{% csrf_token %}
+                    action="{% url 'trix_add_admin_update' course_id=course.id user_id=student.id %}">
+                    {% csrf_token %}
                     {% if student not in course.admins.all %}
                         <input class="btn btn-primary" type="submit" name="admin"
                             value="{% trans 'Make admin' %}" />
@@ -50,4 +56,15 @@
             </td>
         </tr>
     {% endfor %}
+{% endblock %}
+
+{% block course-footer %}
+    <form method="post" action="{% url 'trix_add_admin_update' course_id=course.id %}"
+        id="multi_admin">
+        {% csrf_token %}
+        <input class="btn btn-primary" type="submit" name="admin_list"
+            value="{% trans 'Make admins' %}" />
+        <input class="btn btn-default" type="submit" name="owner_list"
+            value="{% trans 'Make owners' %}" />
+    </form>
 {% endblock %}

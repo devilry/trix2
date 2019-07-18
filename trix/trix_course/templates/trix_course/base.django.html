@@ -32,8 +32,22 @@
     <div class="trix-course-container" ng-controller="CourseCtrl">
         <header>
             <div class="container trix-course-header">
-                <div class="trix-course-header-text">
-                    {% block course-header-text %}{% endblock %}
+                <div class="trix-course-header-text-wrapper">
+                    <div class="trix-course-header-text">
+                        {% block course-header-text %}{% endblock %}
+                    </div>
+                    <div class="trix-course-messages {% if messages %}trix-messages-show{% endif %}"
+                            ng-cloak ng-class="{'trix-messages-hide': messagesVisible}">
+                        <a href="#" ng-click="hideMessages()"
+                            aria-label="{% trans 'Dismiss message' %}">
+                            <i class="fa fa-times-circle"></i>
+                        </a>
+                        {% block course-messages %}
+                            {% for message in messages %}
+                                <p>{{ message }}</p>
+                            {% endfor %}
+                        {% endblock course-messages %}
+                    </div>
                 </div>
                 <div class="trix-course-header-button-wrapper">
                     <div class="trix-course-header-buttons">
@@ -60,13 +74,8 @@
             </div>
         </main>
         <footer>
-            <div class="trix-course-footer {% if messages %}trix-footer-show{% endif %}"
-                    ng-cloak ng-class="{'trix-footer-hide': footerVisible}">
+            <div class="trix-course-footer" ng-class="{'trix-footer-visible': footerVisible}">
                 {% block course-footer %}
-                    {% for message in messages %}
-                        <p>{{ message }}</p>
-                    {% endfor %}
-                    <a ng-click="hideFooter()"><i class="fa fa-times-circle"></i></a>
                 {% endblock course-footer %}
             </div>
         </footer>

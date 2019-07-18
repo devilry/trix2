@@ -50,9 +50,9 @@ angular.module('trixStudent.assignments.controllers', ['ngRoute'])
 .controller('CourseCtrl', [
     '$scope',
     ($scope) ->
-        $scope.footerVisible = false
-        $scope.hideFooter = () ->
-            $scope.footerVisible = true
+        $scope.messagesVisible = false
+        $scope.hideMessages = () ->
+            $scope.messagesVisible = true
 ])
 
 .controller('AssignmentCtrl', [

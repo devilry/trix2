@@ -77,9 +77,9 @@
   ]).controller('CourseCtrl', [
     '$scope',
     function($scope) {
-      $scope.footerVisible = false;
-      return $scope.hideFooter = function() {
-        return $scope.footerVisible = true;
+      $scope.messagesVisible = false;
+      return $scope.hideMessages = function() {
+        return $scope.messagesVisible = true;
       };
     }
   ]).controller('AssignmentCtrl', [
