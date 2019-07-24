@@ -31,7 +31,7 @@
                     {% endif %}
                     {% if request.user.is_admin_on_anything %}
                     <li>
-                        <a href="{% url 'trix_courseadmin-frontpage' %}">
+                        <a href="{% url 'trix_course_dashboard' %}">
                             <span class="fas fa-cog"></span>
                             {% trans "Administer" %}
                         </a>

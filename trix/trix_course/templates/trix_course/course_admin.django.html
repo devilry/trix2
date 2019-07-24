@@ -1,4 +1,4 @@
-{% extends "trix_course/course_dashboard.django.html" %}
+{% extends "trix_course/base.django.html" %}
 
 {% load i18n %}
 
@@ -15,33 +15,43 @@
     </a>
 {% endblock %}
 
-{% block course-table-header %}
-    <th>{% trans "" %}</th>
-    <th>{% trans "Administrators" %}</th></td>
-{% endblock %}
-
-{% block course-table-body %}
-    {% for admin in admin_list %}
+{% block course-body %}
+<table class="trix-course-table">
+    <thead class="trix-course-table-head">
         <tr>
-            <td>
-                {% if owner %}
-                    <a href="{% url 'trix_remove_admin' pk=course.id user_id=admin.id %}"
-                        class="btn btn-danger">
-                        {% trans "Remove" %}
-                    </a>
-                {% endif %}
-                {% if admin in course.owner.all %}
-                    <button class="btn btn-default" tabindex="-1" disabled>{% trans "Owner" %}</button>
-                {% endif %}
-            </td>
-            <td>
-                {{ admin }}
-                {% if admin.is_superuser %}
-                    <i class="fa fa-check" style="color: green"
-                        title="{% trans 'Superuser' %}"></i>
-                    <span class="sr-only">{% trans "Superuser" %}</span>
-                {% endif %}
-            </td>
+            {% block course-table-header %}
+                <th>{% trans "" %}</th>
+                <th>{% trans "Administrators" %}</th></td>
+            {% endblock %}
         </tr>
-    {% endfor %}
-{% endblock %}
+    </thead>
+    <tbody class="trix-course-table-body">
+        {% block course-table-body %}
+        {% for admin in admin_list %}
+            <tr>
+                <td>
+                    {% if owner %}
+                        <a href="{% url 'trix_remove_admin' pk=course.id user_id=admin.id %}"
+                            class="btn btn-danger">
+                            {% trans "Remove" %}
+                        </a>
+                    {% endif %}
+                    {% if admin in course.owner.all %}
+                        <button class="btn btn-default" tabindex="-1" disabled>{% trans "Owner" %}</button>
+                    {% endif %}
+                </td>
+                <td>
+                    {{ admin }}
+                    {% if admin.is_superuser %}
+                        <i class="fa fa-check" style="color: green"
+                            title="{% trans 'Superuser' %}"></i>
+                        <span class="sr-only">{% trans "Superuser" %}</span>
+                    {% endif %}
+                </td>
+            </tr>
+        {% endfor %}
+        {% endblock course-table-body %}
+    </tbody>
+</table>
+{% include "trix_student/include/pager.django.html" with pager_extraclass='trix-course-pager' %}
+{% endblock course-body %}

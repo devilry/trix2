@@ -1,47 +1,29 @@
-{% extends "trix_course/base.django.html" %}
+{% extends "trix_student/base.django.html" %}
 
 {% load i18n %}
 
-{% block title %}{% trans "Course Admin" %}{% endblock title %}
+{% block title %}{% trans "Choose course" %}{% endblock title %}
 
-{% block course-header-text %}
-    <h1>{% trans "Please choose a course to administer" %}</h1>
-{% endblock course-header-text %}
-
-{% block course-body %}
-<table class="trix-course-table">
-    <thead class="trix-course-table-head">
-        <tr>
-            {% block course-table-header %}
-                <th scope="col"></th>
-                <th scope="col">{% trans "ID" %}</th>
-                <th scope="col">{% trans "Name" %}</th>
-                <th scope="col">{% trans "Description" %}</th>
-            {% endblock %}
-        </tr>
-    </thead>
-    <tbody class="trix-course-table-body">
-        {% block course-table-body %}
-            {% if num_courses > 0 %}
-                {% for course in courses %}
-                    <tr>
-                        <td><a href="{% url 'trix_course_admin' course.id %}">
-                            {% trans "Edit" %}
-                        </a></td>
-                        <td>{{ course.id }}</td>
-                        <td>{{ course }}</td>
-                        <td>{{ course.description }}</td>
-                    </tr>
-                </div>
-                {% endfor %}
-            {% else %}
-                <td>Looks like it's empty here...</td>
-                <td></td>
-                <td></td>
-                <td></td>
-            {% endif %}
-        {% endblock course-table-body %}
-    </tbody>
-</table>
-{% include "trix_student/include/pager.django.html" with pager_extraclass='trix-course-pager' %}
-{% endblock course-body %}
+{% block content %}
+<div class="page-header">
+    <div class="container">
+        <h1>{% trans "Please choose a course to administer" %}</h1>
+    </div>
+</div>
+    <div class="container">
+        <div class="course-list">
+        {% if num_courses > 0 %}
+            {% for course in courses %}
+            <div class="trix-course-list-element">
+                <h2><a href="{% url 'trix_course_admin' course.id %}">
+                    {{ course }}
+                </a></h2>
+                <p class="text-muted">{{ course.description }}</p>
+            </div>
+            {% endfor %}
+        {% else %}
+            <p>Looks like it's empty here...</p>
+        {% endif %}
+        </div>
+    </div>
+{% endblock content %}

@@ -1,5 +1,5 @@
 /********************************
-* Styles for the /course/ pages.
+* Styles for the /c/ pages.
 ********************************/
 
 .trix-course-wrapper {
@@ -32,6 +32,7 @@
         }
     }
 }
+
 
 /*************
 * Menu content
@@ -229,40 +230,7 @@
 * Message content
 ***************/
 .trix-course-messages {
-    display: none;
-    flex-direction: row;
-    width: 35%;
-    background-color: #333333;
-    height: auto;
-    margin-left: auto;
-    border-radius: 4px 0 0 4px;
-    color: white;
-    padding-right: 10px;
-
-    > p {
-        text-align: center;
-        font-size: 14px;
-        margin: auto;
-    }
-
-    > a {
-        align-self: center;
-        color: white;
-        margin-right: 5px;
-        margin-left: 15px;
-
-        i {
-            font-size: 20px;
-        }
-    }
-}
-
-.trix-messages-show {
-    display: flex;
-}
-
-.trix-messages-hide {
-    display: none;
+    margin-bottom: 0;
 }
 
 /*************
@@ -331,9 +299,8 @@
 /****************
 * Footer content
 ****************/
-
 .trix-course-footer {
-    display: flex;
+    display: none;
     background-color: #333333;
     flex-direction: row;
     height: auto;
@@ -350,4 +317,12 @@
             margin-left: 10px;
         }
     }
+}
+
+.trix-footer-hide {
+    display: none;
+}
+
+.trix-footer-visible {
+    display: flex;
 }

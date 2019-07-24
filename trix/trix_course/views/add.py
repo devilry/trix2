@@ -50,11 +50,11 @@ class UpdateCourseAdminView(base.TrixCourseBaseView):
         for user_id in id_list:
             user = User.objects.get(id=user_id)
             course.admins.add(user)
-            messages.info(request, _(f"{user.displayname} added as a course admin."))
+            messages.success(request, _(f"{user.displayname} added as a course admin."))
 
     def _add_owners(self, request, course, id_list):
         for user_id in id_list:
             user = User.objects.get(id=user_id)
             course.admins.add(user)
             course.owner.add(user)
-            messages.info(request, _(f"{user.displayname} added as course owner."))
+            messages.success(request, _(f"{user.displayname} added as course owner."))

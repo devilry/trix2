@@ -1,4 +1,4 @@
-{% extends "trix_course/course_dashboard.django.html" %}
+{% extends "trix_course/course_admin.django.html" %}
 
 {% load i18n %}
 
@@ -8,6 +8,7 @@
     <h1>{% trans "Confirm removal" %}</h1>
 {% endblock %}
 
+{% block course-header-buttons %}{% endblock %}
 {% block course-header-search %}{% endblock %}
 
 {% block course-body %}

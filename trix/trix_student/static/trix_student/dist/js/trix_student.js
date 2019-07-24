@@ -77,9 +77,9 @@
   ]).controller('CourseCtrl', [
     '$scope',
     function($scope) {
-      $scope.messagesVisible = false;
-      return $scope.hideMessages = function() {
-        return $scope.messagesVisible = true;
+      $scope.footerVisible = false;
+      return $scope.showFooter = function() {
+        return $scope.footerVisible = !$scope.footerVisible;
       };
     }
   ]).controller('AssignmentCtrl', [
@@ -109,7 +109,7 @@
         $rootScope.$emit('assignments.progressChanged');
       });
       $scope._getApiUrl = function() {
-        return '/student/assignment/howsolved/' + $scope.assignment_id;
+        return '/assignment/howsolved/' + $scope.assignment_id;
       };
       $scope._showError = function(message) {
         // TODO: Use bootstrap modal and a scope variable

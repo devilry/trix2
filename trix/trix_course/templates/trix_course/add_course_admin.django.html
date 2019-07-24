@@ -1,4 +1,4 @@
-{% extends "trix_course/course_dashboard.django.html" %}
+{% extends "trix_course/course_admin.django.html" %}
 
 {% load i18n %}
 
@@ -27,7 +27,7 @@
                 <input type="checkbox" name="selected_students" form="multi_admin"
                     aria-labelledby="student{{ student.id }}"
                     ng-checked="checkLeader"
-                    ng-click="footerVisible = !footerVisible"
+                    ng-click="showFooter()"
                     value="{{ student.id }}"></input>
             </td>
             <td id="student{{ student.id }}">

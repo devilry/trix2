@@ -50,9 +50,9 @@ angular.module('trixStudent.assignments.controllers', ['ngRoute'])
 .controller('CourseCtrl', [
     '$scope',
     ($scope) ->
-        $scope.messagesVisible = false
-        $scope.hideMessages = () ->
-            $scope.messagesVisible = true
+        $scope.footerVisible = false
+        $scope.showFooter = () ->
+            $scope.footerVisible = !$scope.footerVisible
 ])
 
 .controller('AssignmentCtrl', [
@@ -79,7 +79,7 @@ angular.module('trixStudent.assignments.controllers', ['ngRoute'])
       return
 
     $scope._getApiUrl = ->
-      return '/student/assignment/howsolved/' + $scope.assignment_id
+      return '/assignment/howsolved/' + $scope.assignment_id
 
     $scope._showError = (message) ->
       # TODO: Use bootstrap modal and a scope variable
