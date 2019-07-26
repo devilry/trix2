@@ -1,0 +1,167 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2019-07-26 17:21+0200\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: trix/trix_course/templates/trix_course/add_course_admin.django.html:5
+msgid "Add course admin"
+msgstr "Legg til kurs eier"
+
+#: trix/trix_course/templates/trix_course/add_course_admin.django.html:12
+msgid "Back"
+msgstr "Tilbake"
+
+#: trix/trix_course/templates/trix_course/add_course_admin.django.html:17
+msgid "Check all"
+msgstr "Velg alle"
+
+#: trix/trix_course/templates/trix_course/add_course_admin.django.html:19
+msgid "Email"
+msgstr "E-post"
+
+#: trix/trix_course/templates/trix_course/add_course_admin.django.html:37
+#: trix/trix_course/templates/trix_course/add_course_admin.django.html:38
+#: trix/trix_course/templates/trix_course/course_admin.django.html:49
+#: trix/trix_course/templates/trix_course/course_admin.django.html:50
+msgid "Superuser"
+msgstr "Superbruker"
+
+#: trix/trix_course/templates/trix_course/add_course_admin.django.html:47
+msgid "Make admin"
+msgstr "Gjør til administrator"
+
+#: trix/trix_course/templates/trix_course/add_course_admin.django.html:52
+msgid "Make owner"
+msgstr "Gjør til eier"
+
+#: trix/trix_course/templates/trix_course/add_course_admin.django.html:66
+msgid "Make admins"
+msgstr "Gjør til administratorer"
+
+#: trix/trix_course/templates/trix_course/add_course_admin.django.html:69
+msgid "Make owners"
+msgstr "Gjør til eiere"
+
+#: trix/trix_course/templates/trix_course/base.django.html:13
+msgid "Menu"
+msgstr "Meny"
+
+#: trix/trix_course/templates/trix_course/base.django.html:18
+msgid "Frontpage"
+msgstr "Forside"
+
+#: trix/trix_course/templates/trix_course/base.django.html:22
+msgid "Course overview"
+msgstr "Kursoversikt"
+
+#: trix/trix_course/templates/trix_course/base.django.html:26
+#: trix/trix_course/templates/trix_course/course_admin.django.html:26
+msgid "Administrators"
+msgstr "Administrator"
+
+#: trix/trix_course/templates/trix_course/base.django.html:30
+msgid "Assignments"
+msgstr "Oppgaver"
+
+#: trix/trix_course/templates/trix_course/base.django.html:34
+msgid "Permalinks"
+msgstr "Permalinker"
+
+#: trix/trix_course/templates/trix_course/base.django.html:38
+msgid "Statistics"
+msgstr "Statistikk"
+
+#: trix/trix_course/templates/trix_course/base.django.html:57
+#: trix/trix_course/templates/trix_course/base.django.html:61
+msgid "Search"
+msgstr "Søk"
+
+#: trix/trix_course/templates/trix_course/base.django.html:58
+#, fuzzy
+#| msgid "Search"
+msgid "Search..."
+msgstr "Søk..."
+
+#: trix/trix_course/templates/trix_course/base.django.html:71
+msgid "Close"
+msgstr "Lukk"
+
+#: trix/trix_course/templates/trix_course/course_admin.django.html:15
+msgid "Add admin"
+msgstr "Legg til admin"
+
+#: trix/trix_course/templates/trix_course/course_admin.django.html:38
+#: trix/trix_course/templates/trix_course/remove_course_admin.django.html:23
+msgid "Remove"
+msgstr "Fjern"
+
+#: trix/trix_course/templates/trix_course/course_admin.django.html:42
+msgid "Owner"
+msgstr "Eier"
+
+#: trix/trix_course/templates/trix_course/course_dashboard.django.html:5
+msgid "Choose course"
+msgstr "Velg kurs"
+
+#: trix/trix_course/templates/trix_course/course_dashboard.django.html:10
+msgid "Please choose a course to administer"
+msgstr "Velg et kurs å administrere"
+
+#: trix/trix_course/templates/trix_course/remove_course_admin.django.html:5
+msgid "Confirm admin removal"
+msgstr "Bekreft fjerning av admin"
+
+#: trix/trix_course/templates/trix_course/remove_course_admin.django.html:8
+msgid "Confirm removal"
+msgstr "Bekreft fjerning"
+
+#: trix/trix_course/templates/trix_course/remove_course_admin.django.html:17
+#, python-format
+msgid ""
+"\n"
+"        Are you sure you want to remove <strong>%(admin_user)s</strong> as "
+"an admin from\n"
+"        <strong>%(object)s</strong>?\n"
+"    "
+msgstr ""
+"\n"
+"       Er du sikker på at du vil fjerne <strong>%(admin_user)s</strong> as "
+"som admin fra\n"
+"       <strong>%(object)s</strong>?\n"
+"    "
+
+#: trix/trix_course/templates/trix_course/remove_course_admin.django.html:26
+msgid "Only as owner"
+msgstr "Bare som eier"
+
+#: trix/trix_course/templates/trix_course/remove_course_admin.django.html:30
+msgid "Cancel"
+msgstr "Avbryt"
+
+#: trix/trix_course/views/add.py:67
+#, python-brace-format
+msgid "{user.displayname} added as a course admin."
+msgstr "{user.displayname} lagt til som kurs admin."
+
+#: trix/trix_course/views/add.py:74
+#, python-brace-format
+msgid "{user.displayname} added as course owner."
+msgstr "{user.displayname} lagt til som kurs eier."
+
+#~ msgid "Search input"
+#~ msgstr "Søk"

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: trix_admin\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-06-25 21:49+0200\n"
+"POT-Creation-Date: 2019-07-26 17:21+0200\n"
 "PO-Revision-Date: 2015-01-08 12:35+0100\n"
 "Last-Translator: Espen Angell Kristiansen <post@espenak.net>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -27,14 +27,18 @@ msgid "Course overview"
 msgstr "Kursoversikt"
 
 #: trix/trix_admin/cradmin.py:47
+msgid "Administrators"
+msgstr ""
+
+#: trix/trix_admin/cradmin.py:52
 msgid "Assignments"
 msgstr "Oppgaver"
 
-#: trix/trix_admin/cradmin.py:52
+#: trix/trix_admin/cradmin.py:57
 msgid "Permalinks"
 msgstr "Permalinker"
 
-#: trix/trix_admin/cradmin.py:57
+#: trix/trix_admin/cradmin.py:62
 #: trix/trix_admin/templates/trix_admin/statistics.django.html:7
 #: trix/trix_admin/templates/trix_admin/statistics.django.html:13
 msgid "Statistics"
@@ -186,7 +190,7 @@ msgid "Show on website"
 msgstr "Vis på nettsiden"
 
 #: trix/trix_admin/views/assignments.py:129
-#: trix/trix_admin/views/assignments.py:304
+#: trix/trix_admin/views/assignments.py:303
 msgid "Add tag"
 msgstr "Legg til tag"
 
@@ -202,24 +206,24 @@ msgstr "Oppgaver YAML"
 msgid "Save"
 msgstr "Lagre"
 
-#: trix/trix_admin/views/assignments.py:277
+#: trix/trix_admin/views/assignments.py:276
 msgid "Tag"
 msgstr "Tag"
 
-#: trix/trix_admin/views/assignments.py:300
-#: trix/trix_admin/views/assignments.py:336
+#: trix/trix_admin/views/assignments.py:299
+#: trix/trix_admin/views/assignments.py:335
 msgid "tags on selected assignments"
 msgstr "tags på valgte oppgaver"
 
-#: trix/trix_admin/views/assignments.py:310
+#: trix/trix_admin/views/assignments.py:309
 msgid "Type in the tag you want to add to the selected assignments"
 msgstr "Skriv inn taggen du vil legge til på valgte oppgaver"
 
-#: trix/trix_admin/views/assignments.py:340
+#: trix/trix_admin/views/assignments.py:339
 msgid "Delete tag"
 msgstr "Slett tag"
 
-#: trix/trix_admin/views/assignments.py:346
+#: trix/trix_admin/views/assignments.py:345
 msgid "Type in the tag you want to remove from the selected assignments"
 msgstr "Skriv inn taggen du vil fjerne fra valgte oppgaver"
 

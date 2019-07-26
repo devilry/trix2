@@ -25,6 +25,8 @@ class AddCourseAdminListView(base.TrixCourseBaseView):
         search = self.request.GET.get('q')
         course = Course.objects.get(id=self.kwargs['course_id'])
         users = User.objects.filter(is_active=True).exclude(owner=course)
+        if not self.request.user.is_superuser:
+            users = users.exclude(admin=course)
         if search:
             users = users.filter(email__icontains=search)
         return users
