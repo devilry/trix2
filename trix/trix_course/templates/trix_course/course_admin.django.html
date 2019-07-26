@@ -10,9 +10,11 @@
 {% endblock %}
 
 {% block course-header-buttons %}
-    <a class="btn btn-default" href="{% url 'trix_add_admin' course.id %}">
-        {% trans "Add admin" %}
-    </a>
+    {% if owner %}
+        <a class="btn btn-default" href="{% url 'trix_add_admin' course.id %}">
+            {% trans "Add admin" %}
+        </a>
+    {% endif %}
 {% endblock %}
 
 {% block course-body %}

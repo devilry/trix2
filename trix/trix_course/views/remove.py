@@ -1,26 +1,24 @@
 from django.core.exceptions import PermissionDenied
-from django.views.generic import DeleteView
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import get_object_or_404, redirect
+from django.views.generic import DeleteView
 from django.urls import reverse
 
 from trix.trix_core.models import Course, User
 
 
-class RemoveCourseAdminView(DeleteView):
+class RemoveCourseAdminView(LoginRequiredMixin, DeleteView):
     model = Course
     template_name = "trix_course/remove_course_admin.django.html"
     user_id = None
 
     def get(self, request, **kwargs):
         self.user_id = kwargs['user_id']
-        if request.user.is_authenticated:
-            course = get_object_or_404(Course, id=kwargs['pk'])
-            if request.user.is_course_owner(course):
-                return super(RemoveCourseAdminView, self).get(request, **kwargs)
-            else:
-                raise PermissionDenied
+        course = get_object_or_404(Course, id=kwargs['pk'])
+        if request.user.is_course_owner(course):
+            return super(RemoveCourseAdminView, self).get(request, **kwargs)
         else:
-            return redirect('trix_login')
+            raise PermissionDenied
 
     def get_context_data(self, **kwargs):
         context = super(RemoveCourseAdminView, self).get_context_data(**kwargs)

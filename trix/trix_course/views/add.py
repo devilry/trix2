@@ -1,3 +1,4 @@
+from django.core.exceptions import PermissionDenied
 from django.contrib import messages
 from django.shortcuts import get_object_or_404, redirect
 from django.urls import reverse
@@ -11,6 +12,14 @@ class AddCourseAdminListView(base.TrixCourseBaseView):
     model = Course
     template_name = "trix_course/add_course_admin.django.html"
     paginate_by = 20
+
+    def get(self, request, **kwargs):
+        course_id = kwargs['course_id']
+        course = get_object_or_404(Course, id=course_id)
+        if request.user.is_course_owner(course):
+            return super(AddCourseAdminListView, self).get(request, **kwargs)
+        else:
+            raise PermissionDenied
 
     def get_queryset(self):
         search = self.request.GET.get('q')
@@ -34,6 +43,9 @@ class UpdateCourseAdminView(base.TrixCourseBaseView):
         Adds a user as a course admin or owner.
         '''
         course = Course.objects.get(id=kwargs['course_id'])
+
+        if not request.user.is_course_owner(course):
+            raise PermissionDenied
 
         # Add admin or owner based on type of post.
         if 'admin' in request.POST:

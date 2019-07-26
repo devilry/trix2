@@ -11,8 +11,7 @@ class CourseAdminView(base.TrixCourseBaseView):
     template_name = "trix_course/course_admin.django.html"
 
     def get(self, request, **kwargs):
-        self.course_id = kwargs['course_id']
-        self.course = get_object_or_404(Course, id=self.course_id)
+        self.course = get_object_or_404(Course, id=kwargs['course_id'])
         return super(CourseAdminView, self).get(request, **kwargs)
 
     def get_context_data(self, **kwargs):
