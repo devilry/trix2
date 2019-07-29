@@ -1,0 +1,93 @@
+{% extends "trix_student/base.django.html" %}
+
+{% load i18n %}
+
+{% block header %}{% endblock header %}
+{% block not_signed_in_warning %}{% endblock not_signed_in_warning %}
+
+{% block body %}
+<div class="trix-course-wrapper">
+    <nav class="trix-course-menu" ng-controller="MenuCtrl">
+        <span class="trix-course-menu-icon fa fa-wrench"></span>
+        <button class="trix-course-menu-toggle" ng-click="menuVisible = !menuVisible">
+            {% trans "Menu" %}
+        </button>
+        <ul class="trix-course-menu-items" ng-class="{'trix-menu-collapse': !menuVisible}">
+            <li><a href="{% url 'trix_student_dashboard' %}">
+                <span class="fa fa-home"></span>
+                {% trans "Frontpage" %}
+            </a></li>
+            <li><a href="{% url 'trix_course_dashboard' %}">
+                <span class="fa fa-arrow-up"></span>
+                {% trans "Course overview" %}
+            </a></li>
+            <li><a href="{% url 'trix_course_admin' course.id %}">
+                <span class="fa fa-user"></span>
+                {% trans "Administrators" %}
+            </a></li>
+            <li><a href="{% url 'trix_courseadmin-assignments-INDEX' course.id %}">
+                <span class="fa fa-database"></span>
+                {% trans "Assignments" %}
+            </a></li>
+            <li><a href="{% url 'trix_courseadmin-permalinks-INDEX' course.id %}">
+                <span class="fa fa-link"></span>
+                {% trans "Permalinks" %}
+            </a></li>
+            <li><a href="{% url 'trix_courseadmin-statistics-INDEX' course.id %}">
+                <span class="fa fa-chart-bar"></span>
+                {% trans "Statistics" %}
+            </a></li>
+        </ul>
+    </nav>
+    <div class="trix-course-container" ng-controller="CourseCtrl">
+        <header>
+            <div class="container trix-course-header">
+                <div class="trix-course-header-text-wrapper">
+                    <div class="trix-course-header-text">
+                        {% block course-header-text %}{% endblock %}
+                    </div>
+                </div>
+                <div class="trix-course-header-button-wrapper">
+                    <div class="trix-course-header-buttons">
+                        {% block course-header-buttons %}{% endblock %}
+                    </div>
+                    <div class="trix-course-header-search">
+                        {% block course-header-search %}
+                            <form action="" method="get">
+                                <input name="q" type="text" aria-label="{% trans 'Search' %}"
+                                    placeholder="{% trans 'Search...' %}" />
+                                <button class="btn btn-primary" type="submit">
+                                    <i class="fa fa-search"></i>
+                                    <span class="sr-only">{% trans "Search" %}</span>
+                                </button>
+                            </form>
+                        {% endblock %}
+                    </div>
+                </div>
+            </div>
+            {% block course-messages %}
+            {% for message in messages %}
+            <div class="trix-course-messages alert alert-dismissable {{ message.tags }}" role="alert">
+                <button type="button" class="close" data-dismiss="alert" aria-label="{% trans 'Close' %}">
+                    <span aria-hidden="true" class="fa fa-times-circle"></span>
+                </button>
+                    <p>{{ message }}</p>
+            </div>
+            {% endfor %}
+            {% endblock course-messages %}
+        </header>
+        <main>
+            <div class="container trix-course-main">
+                {% block course-body %}{% endblock course-body %}
+            </div>
+        </main>
+        <footer>
+            <div class="trix-course-footer trix-footer-hide"
+                ng-cloak ng-class="{'trix-footer-visible': footerVisible}">
+                {% block course-footer %}
+                {% endblock course-footer %}
+            </div>
+        </footer>
+    </div>
+</div>
+{% endblock body %}

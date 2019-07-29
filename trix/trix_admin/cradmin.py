@@ -40,8 +40,13 @@ class Menu(crmenu.Menu):
         )
         self.add_menuitem(
             label=_('Course overview'),
-            url=self.cradmin_instance.roleselectview_url(),
+            url=reverse('trix_course_dashboard'),
             extra_context_data={'icon': 'arrow-up'},
+        )
+        self.add_menuitem(
+            label=_('Administrators'),
+            url=reverse('trix_course_admin', kwargs={'course_id': self.request.cradmin_role.id}),
+            extra_context_data={'icon': 'user'},
         )
         self.add_menuitem(
             label=_('Assignments'),

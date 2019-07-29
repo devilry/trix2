@@ -6,4 +6,3 @@ System administrator docs: Install, update, ...
    :maxdepth: 2
 
    deploy
-   heroku

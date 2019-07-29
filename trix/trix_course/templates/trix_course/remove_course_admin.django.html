@@ -1,0 +1,34 @@
+{% extends "trix_course/course_admin.django.html" %}
+
+{% load i18n %}
+
+{% block title %}{% trans "Confirm admin removal" %}{% endblock %}
+
+{% block course-header-text %}
+    <h1>{% trans "Confirm removal" %}</h1>
+{% endblock %}
+
+{% block course-header-buttons %}{% endblock %}
+{% block course-header-search %}{% endblock %}
+
+{% block course-body %}
+<div class="trix-course-remove-body">
+    <p>
+    {% blocktrans  %}
+        Are you sure you want to remove <strong>{{ admin_user }}</strong> as an admin from
+        <strong>{{ object }}</strong>?
+    {% endblocktrans %}
+    </p>
+    <form method="post" action="">{% csrf_token %}
+        <input class="btn btn-danger trix-del-btn" type="submit" value="{% trans 'Remove' %}"
+            name="admin"/>
+        {% if admin_user in course.owner.all %}
+            <input class="btn btn-danger trix-del-btn" type="submit" value="{% trans 'Only as owner' %}"
+                name="owner" />
+        {% endif %}
+        <a class="btn btn-cancel trix-cancel-btn" href="{% url 'trix_course_admin' object.id %}">
+            {% trans "Cancel" %}
+        </a>
+    </form>
+</div>
+{% endblock %}

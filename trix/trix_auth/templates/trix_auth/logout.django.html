@@ -3,7 +3,7 @@
 {% load i18n %}
 
 {% block title %}{% trans "Log out" %}{% endblock title %}
-{% block body %}
+{% block content %}
     <div class="page-header">
         <div class="container">
             <h1>{{ title }}</h1>
@@ -13,4 +13,4 @@
         <p>{% trans "You are now logged out" %}.
             <a href="{% url 'trix_student_dashboard' %}">{% trans "Go to the frontpage" %}.</a></p>
     </div>
-{% endblock body %}
+{% endblock content %}

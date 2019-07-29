@@ -5,6 +5,7 @@ from cradmin_legacy import css_icon_map
 css_icon_map.FONT_AWESOME.update({'arrow-up': 'fa fa-arrow-up',
                                   'database': 'fa fa-database',
                                   'link': 'fa fa-link',
+                                  'user': 'fa fa-user',
                                   'chart-bar': 'fa fa-chart-bar',
                                   'home': 'fa fa-home',
                                   'wrench': 'fa fa-wrench'})

@@ -38,7 +38,7 @@ Install Trix
 
     $ cd ~/trixdeploy
     $ virtualenv venv
-    $ venv/bin/pip install psycopg2 dj-static trix
+    $ venv/bin/pip3 install psycopg2 dj-static trix
 
 
 *********************************
@@ -112,9 +112,9 @@ Dataporten
 ***********
 Replacing the login with Dataporten login is relatively easy and can be done in a few steps:
 
-    1. Register a new [Dataporten application](https://dashboard.dataporten.no/#!/_).
-    Documentation can be found [here](
-    https://docs.feide.no/developer_oauth/register_and_manage_applications/getting_started_app_developers.html).
+    1. Register a new `Dataporten Application <https://dashboard.dataporten.no/>`_.
+    Documentation can be found in their
+    `Dataporten docs <https://docs.feide.no/developer_oauth/register_and_manage_applications/getting_started_app_developers.html>`_.
     Use the redirect URL ``http://<webpage URL>:<port>/authenticate/allauth/dataporten/login/callback/``
     2. Go to the superuser panel (Django admin pages) and modify Sites. There should be an example
     site with id 1. Either edit this site or create a new one to reflect the name of the page.

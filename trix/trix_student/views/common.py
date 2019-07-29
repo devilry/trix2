@@ -3,8 +3,8 @@ from django import http
 from django.utils.translation import ugettext_lazy as _
 from urllib import parse
 
-from trix.trix_core import models
 from functools import reduce
+from trix.trix_core import models
 from trix.trix_student.views import base
 
 
@@ -96,7 +96,7 @@ class AssignmentListViewBase(base.TrixListViewBase):
             HowSolved object for ``request.user`` for the assignment.
         """
         howsolvedmap = {}  # Map of assignment ID to HowSolved.howsolved for request.user
-        if self.request.user.is_authenticated() and assignment_list:
+        if self.request.user.is_authenticated and assignment_list:
             howsolvedquery = (models.HowSolved.objects
                               .filter(user=self.request.user, assignment__in=assignment_list))
             howsolvedmap = dict(howsolvedquery.values_list('assignment_id', 'howsolved'))

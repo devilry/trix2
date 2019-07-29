@@ -3,6 +3,7 @@ from django.utils.translation import ugettext_lazy as _
 from django.db import models
 from django.contrib.auth.models import AbstractBaseUser
 from django.contrib.auth.models import BaseUserManager
+from django.contrib.auth.models import PermissionsMixin
 
 
 class TrixUserManager(BaseUserManager):
@@ -31,7 +32,7 @@ class TrixUserManager(BaseUserManager):
         return user
 
 
-class User(AbstractBaseUser):
+class User(AbstractBaseUser, PermissionsMixin):
     """
     The Trix user model.
     """
@@ -84,27 +85,17 @@ class User(AbstractBaseUser):
         """
         return self.email
 
-    def has_perm(self, perm, obj=None):
-        """
-        Does the user have a specific permission?
-
-        We do not use the permission system, so we answer YES.
-        """
-        return True
-
-    def has_module_perms(self, app_label):
-        """
-        Does the user have permissions to view the app `app_label`?
-
-        We do not use the permission system, so we answer YES.
-        """
-        return True
-
     def is_admin_on_anything(self):
         if self.is_staff:
             return True
         else:
             return Course.objects.filter(admins=self).exists()
+
+    def is_course_owner(self, course):
+        if self.is_staff:
+            return True
+        else:
+            return self.owner.filter(id=course.id).exists()
 
     @property
     def is_staff(self):
@@ -182,9 +173,15 @@ class Tag(models.Model):
 
 class Course(models.Model):
     """
-    A course is simply a tag with an optional active period tag, and a list of admins.
+    A course is simply a tag with an optional active period tag, and a list of admins and owners.
     """
-    admins = models.ManyToManyField(User, blank=True)
+    admins = models.ManyToManyField(User, blank=True, related_name="admin")
+    owner = models.ManyToManyField(
+        User,
+        blank=True,
+        related_name="owner",
+    )
+
     description = models.TextField(
         verbose_name=_('Description'),
         blank=True,
