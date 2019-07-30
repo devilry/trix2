@@ -124,24 +124,24 @@ Consent template
 ****************
 Customising the consent template is highly recommended and can be done by following these steps:
 
-    1. Create a directory for custom templates with a subfolder named ``trix_student``
-    2. Create a django html file called ``consent_form.django.html`` and make it look like this::
+#. Create a directory for custom templates with a subfolder named ``trix_student``
+#. Create a django html file called ``consent_form.django.html`` and make it look like this::
 
-        {% extends "trix_student/consent_form_base.django.html" %}
+    {% extends "trix_student/consent_form_base.django.html" %}
 
-        {% block consent_title %}<h1>Consent title here</h1>{% endblock %}
+    {% block consent_title %}<h1>Consent title here</h1>{% endblock %}
 
-        {% block consent_text %}Lorem Ipsum{% endblock %}
+    {% block consent_text %}Lorem Ipsum{% endblock %}
 
-        {# If you want to override the buttons you can add this #}
-        {# {% block consent_buttons %}BUTTONS{% endblock %} #}
+    {# If you want to override the buttons you can add this #}
+    {# {% block consent_buttons %}BUTTONS{% endblock %} #}
 
 
-    3. In ``trix_settings.py`` do::
+#. In ``trix_settings.py`` do::
 
-        from trix.utils.template import add_custom_template
+    from trix.utils.template import add_custom_template
 
-        add_custom_template('custom_template_directory/goes/here')
+    add_custom_template('custom_template_directory/goes/here')
 
 If you wish to disable the consent dialog completely for some reason, add ``DISABLE_CONSENT = True``
 to your ``trix_settings.py`` file.
