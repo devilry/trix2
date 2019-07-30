@@ -112,18 +112,11 @@ Dataporten
 ***********
 Replacing the login with Dataporten login is relatively easy and can be done in a few steps:
 
-    1. Register a new `Dataporten Application <https://dashboard.dataporten.no/>`_.
-    Documentation can be found in their
-    `Dataporten docs <https://docs.feide.no/developer_oauth/register_and_manage_applications/getting_started_app_developers.html>`_.
-    Use the redirect URL ``http://<webpage URL>:<port>/authenticate/allauth/dataporten/login/callback/``
-    2. Go to the superuser panel (Django admin pages) and modify Sites. There should be an example
-    site with id 1. Either edit this site or create a new one to reflect the name of the page.
-    3. Create a new Social application using Dataporten as the provider. Give it a name and fill in
-    the client id and secret key. Add the site you configured earlier.
-    4. If you created a new Site, add ``SITE_ID = x`` to your ``trix_settings.py`` file,
-    where X = Site ID.
-    5. Login and logout should now work through Dataporten. Users will still be created and can be
-    edited as normal.
+#. Register a new `Dataporten Application <https://dashboard.dataporten.no/>`_. Documentation can be found in their `Dataporten docs <https://docs.feide.no/developer_oauth/register_and_manage_applications/getting_started_app_developers.html>`_. Use the redirect URL ``http://<webpage URL>:<port>/authenticate/allauth/dataporten/login/callback/``
+#. Go to the superuser panel (Django admin pages) and modify Sites. There should be an example site with id 1. Either edit this site or create a new one to reflect the name of the page.
+#. Create a new Social application using Dataporten as the provider. Give it a name and fill in the client id and secret key. Add the site you configured earlier.
+#. If you created a new Site, add ``SITE_ID = x`` to your ``trix_settings.py`` file, where X = Site ID.
+#. Login and logout should now work through Dataporten. Users will still be created and can be edited as normal.
 
 
 ****************
