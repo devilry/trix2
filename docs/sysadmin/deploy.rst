@@ -38,7 +38,7 @@ Install Trix
 
     $ cd ~/trixdeploy
     $ virtualenv venv
-    $ venv/bin/pip install psycopg2 dj-static trix
+    $ venv/bin/pip3 install psycopg2 dj-static trix
 
 
 *********************************
@@ -112,18 +112,11 @@ Dataporten
 ***********
 Replacing the login with Dataporten login is relatively easy and can be done in a few steps:
 
-    1. Register a new [Dataporten application](https://dashboard.dataporten.no/#!/_).
-    Documentation can be found [here](
-    https://docs.feide.no/developer_oauth/register_and_manage_applications/getting_started_app_developers.html).
-    Use the redirect URL ``http://<webpage URL>:<port>/authenticate/allauth/dataporten/login/callback/``
-    2. Go to the superuser panel (Django admin pages) and modify Sites. There should be an example
-    site with id 1. Either edit this site or create a new one to reflect the name of the page.
-    3. Create a new Social application using Dataporten as the provider. Give it a name and fill in
-    the client id and secret key. Add the site you configured earlier.
-    4. If you created a new Site, add ``SITE_ID = x`` to your ``trix_settings.py`` file,
-    where X = Site ID.
-    5. Login and logout should now work through Dataporten. Users will still be created and can be
-    edited as normal.
+#. Register a new `Dataporten Application <https://dashboard.dataporten.no/>`_. Documentation can be found in their `Dataporten docs <https://docs.feide.no/developer_oauth/register_and_manage_applications/getting_started_app_developers.html>`_. Use the redirect URL ``http://<webpage URL>:<port>/authenticate/allauth/dataporten/login/callback/``
+#. Go to the superuser panel (Django admin pages) and modify Sites. There should be an example site with id 1. Either edit this site or create a new one to reflect the name of the page.
+#. Create a new Social application using Dataporten as the provider. Give it a name and fill in the client id and secret key. Add the site you configured earlier.
+#. If you created a new Site, add ``SITE_ID = x`` to your ``trix_settings.py`` file, where X = Site ID.
+#. Login and logout should now work through Dataporten. Users will still be created and can be edited as normal.
 
 
 ****************
@@ -131,24 +124,24 @@ Consent template
 ****************
 Customising the consent template is highly recommended and can be done by following these steps:
 
-    1. Create a directory for custom templates with a subfolder named ``trix_student``
-    2. Create a django html file called ``consent_form.django.html`` and make it look like this::
+#. Create a directory for custom templates with a subfolder named ``trix_student``
+#. Create a django html file called ``consent_form.django.html`` and make it look like this::
 
-        {% extends "trix_student/consent_form_base.django.html" %}
+    {% extends "trix_student/consent_form_base.django.html" %}
 
-        {% block consent_title %}<h1>Consent title here</h1>{% endblock %}
+    {% block consent_title %}<h1>Consent title here</h1>{% endblock %}
 
-        {% block consent_text %}Lorem Ipsum{% endblock %}
+    {% block consent_text %}Lorem Ipsum{% endblock %}
 
-        {# If you want to override the buttons you can add this #}
-        {# {% block consent_buttons %}BUTTONS{% endblock %} #}
+    {# If you want to override the buttons you can add this #}
+    {# {% block consent_buttons %}BUTTONS{% endblock %} #}
 
 
-    3. In ``trix_settings.py`` do::
+#. In ``trix_settings.py`` do::
 
-        from trix.utils.template import add_custom_template
+    from trix.utils.template import add_custom_template
 
-        add_custom_template('custom_template_directory/goes/here')
+    add_custom_template('custom_template_directory/goes/here')
 
 If you wish to disable the consent dialog completely for some reason, add ``DISABLE_CONSENT = True``
 to your ``trix_settings.py`` file.

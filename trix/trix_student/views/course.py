@@ -14,7 +14,7 @@ class CourseDetailView(AssignmentListViewBase):
         return super(CourseDetailView, self).get(request, **kwargs)
 
     def _get_user_is_admin(self):
-        if self.request.user.is_authenticated():
+        if self.request.user.is_authenticated:
             if self.request.user.is_admin:
                 return True
             else:

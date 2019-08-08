@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: trix_student\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-06-25 21:49+0200\n"
+"POT-Creation-Date: 2019-07-26 17:21+0200\n"
 "PO-Revision-Date: 2015-01-03 17:40+0100\n"
 "Last-Translator: Espen Angell Kristiansen <post@espenak.net>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -59,7 +59,7 @@ msgstr "Filtrer ut"
 
 #: trix/trix_student/templates/trix_student/assignment_list_base.django.html:66
 msgid "Remove assignments with selected tags"
-msgstr ""
+msgstr "Fjern oppgaver med valgte tags"
 
 #: trix/trix_student/templates/trix_student/assignment_list_base.django.html:70
 msgid "Add tag"
@@ -85,11 +85,11 @@ msgstr "Fant ingen oppgaver"
 msgid "Trix"
 msgstr "Trix"
 
-#: trix/trix_student/templates/trix_student/base.django.html:38
+#: trix/trix_student/templates/trix_student/base.django.html:40
 msgid "You are not authenticated."
 msgstr "Du er ikke logget inn."
 
-#: trix/trix_student/templates/trix_student/base.django.html:39
+#: trix/trix_student/templates/trix_student/base.django.html:41
 msgid ""
 "If you are not authenticated, you will not be able to keep track of your "
 "progress."
@@ -97,7 +97,7 @@ msgstr ""
 "Så lenge du ikke er logget inn går du glipp av muligheten for å holde styr "
 "på din egen progresjon."
 
-#: trix/trix_student/templates/trix_student/base.django.html:43
+#: trix/trix_student/templates/trix_student/base.django.html:45
 #: trix/trix_student/templates/trix_student/include/header.django.html:63
 msgid "Sign in"
 msgstr "Logg inn"
@@ -293,16 +293,19 @@ msgstr "Administrer"
 msgid "Profile"
 msgstr "Profil"
 
-#: trix/trix_student/templates/trix_student/include/pager.django.html:32
+#: trix/trix_student/templates/trix_student/include/pager.django.html:34
 msgid "Previous"
 msgstr "Forrige"
 
-#: trix/trix_student/templates/trix_student/include/pager.django.html:36
+#: trix/trix_student/templates/trix_student/include/pager.django.html:39
 #, python-format
-msgid "Page %(number)s of %(total)s"
-msgstr "Side %(number)s av %(total)s"
+msgid ""
+"\n"
+"                    Page %(number)s of %(total)s\n"
+"                "
+msgstr ""
 
-#: trix/trix_student/templates/trix_student/include/pager.django.html:45
+#: trix/trix_student/templates/trix_student/include/pager.django.html:51
 msgid "Next"
 msgstr "Neste"
 
@@ -413,6 +416,9 @@ msgstr "Administrator for "
 #: trix/trix_student/views/users.py:32
 msgid "Student"
 msgstr "Student"
+
+#~ msgid "Page %(number)s of %(total)s"
+#~ msgstr "Side %(number)s av %(total)s"
 
 #~ msgid "login"
 #~ msgstr "logg inn"

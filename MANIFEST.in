@@ -5,6 +5,10 @@ recursive-include trix/trix_admin/locale *
 recursive-include trix/trix_student/static *
 recursive-include trix/trix_student/templates *
 recursive-include trix/trix_student/locale *
+recursive-include trix/trix_auth/templates *
+recursive-include trix/trix_auth/locale *
+recursive-include trix/trix_course/templates *
+recursive-include trix/trix_course/locale *
 prune trix/trix_student/static/trix_student/node_modules
 prune trix/trix_student/static/trix_student/bower_components
 prune trix/trix_core/migrations

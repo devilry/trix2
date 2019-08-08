@@ -23,7 +23,7 @@
                 {% if request.user.is_authenticated %}
                     {% if request.user.is_admin %}
                     <li>
-                        <a href="/admin/">
+                        <a href="{% url 'admin:index' %}">
                             <span class="fas fa-cogs"></span>
                             {% trans "Superuser" %}
                         </a>
@@ -31,14 +31,14 @@
                     {% endif %}
                     {% if request.user.is_admin_on_anything %}
                     <li>
-                        <a href="/a/">
+                        <a href="{% url 'trix_course_dashboard' %}">
                             <span class="fas fa-cog"></span>
                             {% trans "Administer" %}
                         </a>
                     </li>
                     {% endif %}
                     <li>
-                        <a href='/user/'>
+                        <a href='{% url "trix_profile_page" %}'>
                             <span class="fa fa-user"></span>
                             {% trans "Profile" %}
                         </a>

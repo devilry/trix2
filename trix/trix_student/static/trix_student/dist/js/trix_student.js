@@ -69,6 +69,19 @@
     function($scope) {
       return $scope.isVisible = false;
     }
+  ]).controller('MenuCtrl', [
+    '$scope',
+    function($scope) {
+      return $scope.menuVisible = false;
+    }
+  ]).controller('CourseCtrl', [
+    '$scope',
+    function($scope) {
+      $scope.footerVisible = false;
+      return $scope.showFooter = function() {
+        return $scope.footerVisible = !$scope.footerVisible;
+      };
+    }
   ]).controller('AssignmentCtrl', [
     '$scope',
     '$http',

@@ -1,6 +1,6 @@
 {% comment %}
     Usage:
-        {% include "cradmin_legacy/viewhelpers/includes/pager.django.html" %}
+        {% include "trix_student/include/pager.django.html" %}
 
     Required context variables:
 
@@ -20,31 +20,39 @@
 {% load trix_core_tags %}
 
 {% if is_paginated %}
+<nav aria-label="Page navigation">
     <div class="container-fluid pager-container trix-no-print">
         <ul class="pager {{ pager_extraclass }}">
-            <li class="previous {% if not page_obj.has_previous %}disabled{% endif %}">
-                {% if page_obj.has_previous %}
-                    <a href="?{% url_replace 'page' page_obj.previous_page_number %}">
-                {% else %}
-                    <a href="?{% url_replace 'page' '1' %}">
-                {% endif %}
-                    <i class="fa fa-chevron-left"></i>
-                    <span class="sr-only">{% trans "Previous" %}</span>
-                </a>
+            {% if page_obj.has_previous %}
+                <li class="previous">
+                    {% if page_obj.has_previous %}
+                        <a href="?{% url_replace 'page' page_obj.previous_page_number %}">
+                    {% else %}
+                        <a href="?{% url_replace 'page' '1' %}">
+                    {% endif %}
+                        <i class="fa fa-chevron-left"></i>
+                        <span class="sr-only">{% trans "Previous" %}</span>
+                    </a>
+                </li>
+            {% endif %}
+            <li class="page-counter">
+                {% blocktrans with number=page_obj.number total=page_obj.paginator.num_pages %}
+                    Page {{ number }} of {{ total }}
+                {% endblocktrans %}
             </li>
-            <li class="pager-counter">
-                {% blocktrans with number=page_obj.number total=page_obj.paginator.num_pages %}Page {{ number }} of {{ total }}{% endblocktrans %}
-            </li>
-            <li class="next {% if not page_obj.has_next %}disabled{% endif %}">
-                {% if page_obj.has_next %}
-                    <a href="?{% url_replace 'page' page_obj.next_page_number %}">
-                {% else %}
-                    <a href="?{% url_replace 'page' 'last' %}">
-                {% endif %}
-                    <i class="fa fa-chevron-right"></i>
-                    <span class="sr-only">{% trans "Next" %}</span>
-                </a>
-            </li>
+            {% if page_obj.has_next %}
+                <li class="next">
+                    {% if page_obj.has_next %}
+                        <a href="?{% url_replace 'page' page_obj.next_page_number %}">
+                    {% else %}
+                        <a href="?{% url_replace 'page' 'last' %}">
+                    {% endif %}
+                        <i class="fa fa-chevron-right"></i>
+                        <span class="sr-only">{% trans "Next" %}</span>
+                    </a>
+                </li>
+            {% endif %}
         </ul>
     </div>
+</nav>
 {% endif %}

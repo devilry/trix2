@@ -12,3 +12,4 @@ Developer docs
    databasedumps
    docs
    git
+   release

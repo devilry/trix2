@@ -10,6 +10,7 @@ https://docs.djangoproject.com/en/1.11/ref/settings/
 from os.path import join
 from os.path import dirname
 from trix.trix_admin import css_icon_map
+from django.contrib.messages import constants as messages
 
 
 # The base directory with manage.py
@@ -38,6 +39,7 @@ INSTALLED_APPS = [
     'django_extensions',
     'crispy_forms',
     'trix.trix_core',
+    'trix.trix_course',
     'trix.trix_admin',
     'trix.trix_student',
     'trix.trix_auth',
@@ -54,6 +56,7 @@ AUTHENTICATION_BACKENDS = (
     'django.contrib.auth.backends.ModelBackend',
     # `allauth` specific authentication methods, such as login by e-mail
     'allauth.account.auth_backends.AuthenticationBackend',
+    # 'trix.trix_auth.backend.authentication.TrixAuthenticationBackend',
 )
 
 MIDDLEWARE = [
@@ -147,3 +150,12 @@ TRIX_STUDENT_GETTINGSTARTEDGUIDE_URL = 'http://trix2.readthedocs.org/en/latest/'
 
 # Used to update the icon map since the legacy version is outdated or does not include what we need.
 CRADMIN_LEGACY_CSS_ICON_MAP = css_icon_map.FONT_AWESOME
+
+# Ties CSS to different message levels.
+MESSAGE_TAGS = {
+    messages.DEBUG: 'alert-info',
+    messages.INFO: 'alert-info',
+    messages.SUCCESS: 'alert-success',
+    messages.WARNING: 'alert-warning',
+    messages.ERROR: 'alert-danger',
+}

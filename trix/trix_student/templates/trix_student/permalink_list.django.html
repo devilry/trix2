@@ -2,10 +2,10 @@
 {% load i18n %}
 {% block title %}{% trans "Trix - permalink" %}{% endblock title %}
 
-{% block body %}
+{% block content %}
     <div class="page-header">
         <div class="container">
-        <h1>{% trans "Permalink list" %}</h1> 
+        <h1>{% trans "Permalink list" %}</h1>
         <p>{% trans "All the permalinks created are listed below" %}</p>
         </div>
     </div>
@@ -21,4 +21,4 @@
             {% endfor %}
         </div>
     </div>
-{% endblock body %}
+{% endblock content %}

@@ -266,7 +266,6 @@ class AssignmentMultiEditView(AssignmentQuerysetForRoleMixin, multiselect.MultiS
 
     def get_field_layout(self):
         return [
-            # TODO update to own custom css
             layout.Div('data', css_class="cradmin-focusfield cradmin-focusfield-screenheight"),
         ]
 

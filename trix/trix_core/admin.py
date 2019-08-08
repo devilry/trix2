@@ -1,11 +1,11 @@
 from django import forms
+from django.conf import settings
 from django.contrib import admin
 from django.contrib.auth.models import Group
 from django.db.models import Count, Q
 from django.utils.translation import ugettext_lazy as _
 from django.contrib.sites.models import Site
 
-from trix.trix_core import models as coremodels
 from trix.trix_core.models import Course, Tag, User
 
 
@@ -68,7 +68,7 @@ class TagInUseFilter(admin.SimpleListFilter):
 class TagAdminForm(forms.ModelForm):
     def clean_tag(self):
         tag = self.cleaned_data['tag']
-        tag = coremodels.Tag.split_commaseparated_tags(tag)
+        tag = Tag.split_commaseparated_tags(tag)
         self.cleaned_data['tag'] = tag[0]
         return self.cleaned_data['tag']
 
@@ -105,37 +105,57 @@ class TagAdmin(admin.ModelAdmin):
 
 @admin.register(Course)
 class CourseAdmin(admin.ModelAdmin):
+    course_id = None
+
     list_display = (
         'course_tag',
         'active_period',
         'get_admins',
+        'get_owner',
     )
     search_fields = [
         'course_tag__tag',
         'description',
         'active_period__tag',
     ]
-    filter_horizontal = ['admins']
+    filter_horizontal = ['admins', 'owner']
     raw_id_fields = ['course_tag', 'active_period']
 
     def get_admins(self, course):
         return ', '.join(str(user) for user in course.admins.all())
     get_admins.short_description = 'Admins'
 
+    def get_owner(self, course):
+        return ', '.join(str(user) for user in course.owner.all())
+    get_owner.short_description = 'Owner'
+
+    def get_form(self, request, obj=None, **kwargs):
+        if obj:
+            self.course_id = obj.id
+        return super(CourseAdmin, self).get_form(request, obj, **kwargs)
+
+    def formfield_for_manytomany(self, db_field, request, **kwargs):
+        # Limit choices for owner to only those that are admins for the course.
+        if db_field.name == "owner":
+            if self.course_id:
+                course = Course.objects.get(id=self.course_id)
+                kwargs['queryset'] = course.admins
+        return super().formfield_for_manytomany(db_field, request, **kwargs)
+
     def get_queryset(self, request):
         queryset = super(CourseAdmin, self).get_queryset(request)
         queryset = queryset\
             .select_related('course_tag', 'active_period')\
-            .prefetch_related('admins')
+            .prefetch_related('admins')\
+            .prefetch_related('owner')
         return queryset
-
-
-# Unregister auth.groups
-# admin.site.unregister(Group)
 
 
 # Fix for not being able to see the site ID.
 admin.site.unregister(Site)
+
+# Unregister group since it is not in use.
+admin.site.unregister(Group)
 
 
 @admin.register(Site)
