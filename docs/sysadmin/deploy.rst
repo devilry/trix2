@@ -116,6 +116,7 @@ Replacing the login with Dataporten login is relatively easy and can be done in 
 #. Go to the superuser panel (Django admin pages) and modify Sites. There should be an example site with id 1. Either edit this site or create a new one to reflect the name of the page.
 #. Create a new Social application using Dataporten as the provider. Give it a name and fill in the client id and secret key. Add the site you configured earlier.
 #. If you created a new Site, add ``SITE_ID = x`` to your ``trix_settings.py`` file, where X = Site ID.
+#. Add ``DATAPORTEN_LOGIN = True`` to your ``trix_settings.py`` file.
 #. Login and logout should now work through Dataporten. Users will still be created and can be edited as normal.
 
 

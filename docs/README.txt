@@ -1,4 +1,4 @@
+## Documentation for Trix.
 
-To make html files from doc, run
 
-$ inv docs
+Compile the docs by running ```$ inv docs``` from inside the `docs` folder.
