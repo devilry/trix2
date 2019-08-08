@@ -360,15 +360,12 @@ class PreviewAssignmentView(TemplateView):
     template_name = 'trix_admin/assignments/preview.django.html'
 
     def __get_page(self):
-        if self.kwargs['pk'] is None:
-            return AssignmentCreateView.get_preview_data(self.request)
-        else:
-            # NOTE: The queryset ensures only admins on the current site gains access.
-            course = self.request.cradmin_role
-            return get_object_or_404(trix_models.Assignment.objects.filter(
-                                     tags=course.course_tag
-                                     ).distinct(),
-                                     pk=self.kwargs['pk'])
+        # NOTE: The queryset ensures only admins on the current site gains access.
+        course = self.request.cradmin_role
+        return get_object_or_404(trix_models.Assignment.objects.filter(
+                                 tags=course.course_tag
+                                 ).distinct(),
+                                 pk=self.kwargs['pk'])
 
     def get_context_data(self, **kwargs):
         context = super(PreviewAssignmentView, self).get_context_data(**kwargs)
