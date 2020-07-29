@@ -14,6 +14,7 @@ Install the following:
 #. virtualenvwrapper_
 #. gettext for Django translations
 #. nodejs and npm for our clientside stuff
+#. Postgres database
 
 
 Install the system packages on OSX with Homebrew
