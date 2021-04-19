@@ -24,7 +24,7 @@ ipython==5.7.0
 mock==2.0.0
 
 # For debugging
-django-debug-toolbar==1.9.1
+django-debug-toolbar==1.11.1
 
 # For cradmin
 ievv-opensource==5.4.0
