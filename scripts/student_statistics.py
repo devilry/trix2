@@ -20,14 +20,12 @@ def get_arguments():
     parser.add_argument(
         '--subject-shortname',
         type=str,
-        required=True,
         dest='subject_shortname',
         help='The shortname of a subject. This is unique.'
     )
     parser.add_argument(
         '--period-shortname',
         type=str,
-        required=True,
         dest='period_shortname',
         help='The shortname of a period/semester. This is unique together with the subject shortname.'
     )
@@ -49,27 +47,38 @@ if __name__ == "__main__":
 
     now = timezone.now()
     at = 0
-    course_name = argument_dict['subject_shortname']
-    period = argument_dict['period_shortname']
-    course_tag = core_models.Tag.objects.get(tag=course_name, category='c')
-    period_tag = core_models.Tag.objects.get(tag=period, category='p')
+    assignments = core_models.Assignment.objects.all()
+    if argument_dict['subject_shortname'] != None :
+        course_tag = core_models.Tag.objects.get(tag=argument_dict['subject_shortname'], category='c')
+        assignments = assignments.filter(tags=course_tag)
+    if argument_dict['period_shortname'] != None:
+        period_tag = core_models.Tag.objects.get(tag=argument_dict['period_shortname'], category='p')
+        assignments = assignments.filter(tags=period_tag)
+
+    
+
     for user_shortname in argument_dict['username_list']:
-        for assignment in core_models.Assignment.objects.filter_by_tags(tags=[course_tag, period_tag]):
-            user = core_models.User.objects.get(email=user_shortname)
-            solved_queryset = core_models.HowSolved.objects.filter(assignment=assignment, user=user)
-            out = f'{at} - {user_shortname} - {course_name} - {assignment} - '
-            if solved_queryset.exists():
-                for solved in solved_queryset:
-                    out += f'{solved.solved_datetime} - yes - '
-                    if solved.howsolved == 'bymyself':
-                        out += ' no - yes'
-                    else:
-                        out += ' yes - no'
-            else:
-                out += f'{now} - no - no - no'
+        try:
+            for assignment in assignments:
+                user = core_models.User.objects.get(email=user_shortname)
+                solved_queryset = core_models.HowSolved.objects.filter(assignment=assignment, user=user)
+                subject_name = assignment.tags.get(category='c')
+                period = assignment.tags.get(category='p')
+                out = f'{at} - {user_shortname} - {period} - {subject_name} - {assignment} - '
+                if solved_queryset.exists():
+                    for solved in solved_queryset:
+                        out += f'{solved.solved_datetime} - yes - '
+                        if solved.howsolved == 'bymyself':
+                            out += ' no - yes'
+                        else:
+                            out += ' yes - no'
+                else:
+                    out += f'{now} - no - no - no'
             
-            print(out)
-            at += 1
+                print(out)
+                at += 1
+        except core_models.User.DoesNotExist:
+            print(f'!!!{user_shortname} Not found!!!')
 
 
         
