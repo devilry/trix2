@@ -49,11 +49,19 @@ if __name__ == "__main__":
     at = 0
     assignments = core_models.Assignment.objects.all()
     if argument_dict['subject_shortname'] != None :
-        course_tag = core_models.Tag.objects.get(tag=argument_dict['subject_shortname'], category='c')
-        assignments = assignments.filter(tags=course_tag)
+        subject = argument_dict['subject_shortname']
+        try:
+            course_tag = core_models.Tag.objects.get(tag=subject], category='c')
+            assignments = assignments.filter(tags=course_tag)
+        except core_models.Tag.DoesNotExist:
+            print(f'!!!{subject} Does not exist!!!')
     if argument_dict['period_shortname'] != None:
-        period_tag = core_models.Tag.objects.get(tag=argument_dict['period_shortname'], category='p')
-        assignments = assignments.filter(tags=period_tag)
+        period = argument_dict['period_shortname']
+        try:
+            period_tag = core_models.Tag.objects.get(tag=period, category='p')
+            assignments = assignments.filter(tags=period_tag)
+        except:
+            print(f'!!!{period} Does not exist!!!')
 
     
 
