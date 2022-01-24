@@ -18,7 +18,7 @@ django_dbdev==1.2.1
 sh==1.12.14
 
 # Better Django shell and other utils for development
-ipython==5.7.0
+ipython>=5.11
 
 # For mocking tests
 mock==2.0.0
