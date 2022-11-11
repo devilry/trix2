@@ -7,15 +7,12 @@ from allauth.socialaccount import providers
 
 class AllauthLoginView(LoginView):
     def get(self, *args, **kwargs):
-        redirect_url = getattr(settings, 'DATAPORTEN_LOGIN_URL', None)
-        if redirect_url == None:
-            all_providers = providers.registry.get_list(request=self.request)
-            provider = all_providers[0]
-            redirect_url = provider.get_login_url(
+        all_providers = providers.registry.get_list(request=self.request)
+        provider = all_providers[0]
+        return HttpResponseRedirect(
+            provider.get_login_url(
                 request=self.request,
-                process='login')
-
-        return HttpResponseRedirect(redirect_url)
+                process='login'))
 
 
 class AllauthLogoutView(LogoutView):
