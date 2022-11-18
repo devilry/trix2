@@ -10,17 +10,7 @@ LANGUAGE_CODE = 'nb'
 DATABASES = {}
 
 INSTALLED_APPS += [
-    # Oauth2 apps
-    'allauth',
-    'allauth.account',
-    'allauth.socialaccount',
-    'allauth.socialaccount.providers.dataporten',
     'gunicorn',
-]
-
-AUTHENTICATION_BACKENDS += [
-    # `allauth` specific authentication methods, such as login by e-mail
-    'allauth.account.auth_backends.AuthenticationBackend',
 ]
 
 # Honor the 'X-Forwarded-Proto' header for request.is_secure()

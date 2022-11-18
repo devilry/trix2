@@ -38,6 +38,12 @@ INSTALLED_APPS = [
     'django.contrib.admin',
     'django_extensions',
     'crispy_forms',
+    # Oauth2 apps
+    'allauth',
+    'allauth.account',
+    'allauth.socialaccount',
+    'allauth.socialaccount.providers.dataporten',
+
     'trix.trix_core',
     'trix.trix_course',
     'trix.trix_admin',
@@ -49,6 +55,8 @@ INSTALLED_APPS = [
 AUTHENTICATION_BACKENDS = [
     # Needed to login by username in Django admin, regardless of `allauth`
     'django.contrib.auth.backends.ModelBackend',
+    # `allauth` specific authentication methods, such as login by e-mail
+    'allauth.account.auth_backends.AuthenticationBackend',
 ]
 
 MIDDLEWARE = [
@@ -127,9 +135,9 @@ TEMPLATES = [
                 "django.template.context_processors.media",
                 "django.template.context_processors.static",
                 "django.template.context_processors.tz",
-                "django.template.context_processors.request",
                 "django.contrib.messages.context_processors.messages",
                 "cradmin_legacy.context_processors.cradmin",
+                "django.template.context_processors.request",
             ],
         },
     }
