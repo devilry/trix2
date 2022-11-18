@@ -5,6 +5,8 @@ from django.contrib.auth.models import AbstractBaseUser
 from django.contrib.auth.models import BaseUserManager
 from django.contrib.auth.models import PermissionsMixin
 
+from allauth.account.utils import sync_user_email_addresses
+
 
 class TrixUserManager(BaseUserManager):
 
@@ -60,6 +62,7 @@ class User(AbstractBaseUser, PermissionsMixin):
     )
 
     USERNAME_FIELD = 'email'
+    EMAIL_FIELD = 'email'
     REQUIRED_FIELDS = []
 
     objects = TrixUserManager()
@@ -114,6 +117,10 @@ class User(AbstractBaseUser, PermissionsMixin):
     @property
     def has_consented(self):
         return self.consent_datetime is not None
+
+    def save(self, *args, **kwargs):
+        super().save(*args, **kwargs)
+        sync_user_email_addresses(self)
 
 
 class Tag(models.Model):
@@ -219,6 +226,7 @@ class AssignmentQuerySet(models.query.QuerySet):
     """ AssignmentQuerySet
 
     """
+
     def filter_by_tag(self, tag):
         return self.filter(tags=tag)
 

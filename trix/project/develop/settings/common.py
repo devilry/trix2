@@ -10,6 +10,10 @@ ROOT_URLCONF = 'trix.project.develop.urls'
 INSTALLED_APPS = list(INSTALLED_APPS) + [
     'django_dbdev',
     # 'debug_toolbar',
+    'allauth',
+    'allauth.account',
+    'allauth.socialaccount',
+    'allauth.socialaccount.providers.dataporten',
 ]
 
 DATABASES = {
