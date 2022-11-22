@@ -12,6 +12,10 @@ def fix_user_email(apps, schema_editor):
     Users = apps.get_model("trix_core", "User")
 
     for u in Users.objects.all():
+        email = u.email.split('@')
+        if email[1].endswith('.uio.no'):
+            u.email = email[0] + '@' + 'uio.no'
+            u.save()
         sync_user_email_addresses(u)
 
 

@@ -118,10 +118,6 @@ class User(AbstractBaseUser, PermissionsMixin):
     def has_consented(self):
         return self.consent_datetime is not None
 
-    def save(self, *args, **kwargs):
-        super().save(*args, **kwargs)
-        sync_user_email_addresses(self)
-
 
 class Tag(models.Model):
     """
