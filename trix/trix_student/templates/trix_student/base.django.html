@@ -1,8 +1,9 @@
 {% spaceless %}
 {% load i18n %}
 {% load static %}
+{% get_current_language as LANGUAGE_CODE %}
 {% endspaceless %}<!DOCTYPE html>
-<html lang="en" ng-app="trixStudent">
+<html lang="{{ LANGUAGE_CODE }}" ng-app="trixStudent">
     <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
