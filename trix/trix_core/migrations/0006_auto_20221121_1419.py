@@ -10,19 +10,25 @@ from allauth.account.utils import sync_user_email_addresses
 def fix_user_email(apps, schema_editor):
 
     Users = apps.get_model("trix_core", "User")
+    EmailAddress = apps.get_model("account", "EmailAddress")
 
     for u in Users.objects.all():
         email = u.email.split('@')
         if email[1].endswith('.uio.no'):
             u.email = email[0] + '@' + 'uio.no'
             u.save()
-        sync_user_email_addresses(u)
+        if not EmailAddress.objects.filter(user=u, email__iexact=u.email).exists():
+            EmailAddress.objects.create(user=u,
+                                        email=u.email,
+                                        primary=False,
+                                        verified=False)
 
 
 class Migration(migrations.Migration):
 
     dependencies = [
         ('trix_core', '0005_auto_20190818_2150'),
+        ('account', '0002_email_max_length')
     ]
 
     operations = [
