@@ -116,6 +116,7 @@ ACCOUNT_EMAIL_REQUIRED = True
 ACCOUNT_USERNAME_REQUIRED = False
 ACCOUNT_AUTHENTICATION_METHOD = 'email'
 ACCOUNT_SESSION_REMEMBER = False
+SOCIALACCOUNT_ADAPTER = 'trix.trix_auth.allauth_adapter.TrixSocialAccountAdapter'
 DATAPORTEN_LOGOUT_URL = 'https://auth.dataporten.no/logout'
 SITE_ID = 1
 
