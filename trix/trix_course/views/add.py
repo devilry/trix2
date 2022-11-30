@@ -2,7 +2,7 @@ from django.core.exceptions import PermissionDenied
 from django.contrib import messages
 from django.shortcuts import get_object_or_404, redirect
 from django.urls import reverse
-from django.utils.translation import ugettext_lazy as _
+from django.utils.translation import gettext_lazy as _
 
 from trix.trix_core.models import Course, User
 from trix.trix_course.views import base

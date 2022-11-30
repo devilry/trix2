@@ -14,7 +14,6 @@ def assignment_markdown(inputmarkdown):
             'markdown.extensions.nl2br',  # Support github style newline handling
             'markdown.extensions.sane_lists',  # Break into new ul/ol tag when the next line starts
                                                # with another class of list indicator
-            'markdown.extensions.smart_strong',  # Do not let hello_world create an <em>,
             'markdown.extensions.def_list',  # Support definition lists
             'markdown.extensions.tables',  # Support tables
         ])

@@ -1,11 +1,9 @@
 import re
-from django.utils.translation import ugettext_lazy as _
+from django.utils.translation import gettext_lazy as _
 from django.db import models
 from django.contrib.auth.models import AbstractBaseUser
 from django.contrib.auth.models import BaseUserManager
 from django.contrib.auth.models import PermissionsMixin
-
-from allauth.account.utils import sync_user_email_addresses
 
 
 class TrixUserManager(BaseUserManager):
@@ -265,7 +263,8 @@ class Assignment(models.Model):
         verbose_name=_('Last changed'),
         auto_now=True)
     HIDDEN_CHOICES = [(True, _('Yes')), (False, _('No'))]
-    hidden = models.NullBooleanField(
+    hidden = models.BooleanField(
+        null=True,
         choices=HIDDEN_CHOICES,
         default=False,
         verbose_name=_('Hide assignment from students'))

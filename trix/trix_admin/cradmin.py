@@ -1,5 +1,5 @@
 from django.contrib.auth.decorators import login_required
-from django.utils.translation import ugettext_lazy as _
+from django.utils.translation import gettext_lazy as _
 from django.urls import reverse
 from cradmin_legacy import crinstance
 from cradmin_legacy import crmenu

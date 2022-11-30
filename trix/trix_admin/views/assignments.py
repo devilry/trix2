@@ -6,7 +6,7 @@ from django.core import serializers
 from django.shortcuts import get_object_or_404
 from django.template import defaultfilters
 from django.template.defaultfilters import truncatechars
-from django.utils.translation import ugettext_lazy as _
+from django.utils.translation import gettext_lazy as _
 from django.urls import reverse
 from django.views.generic import TemplateView
 from cradmin_legacy.viewhelpers import objecttable
