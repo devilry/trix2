@@ -169,7 +169,7 @@ class Tag(models.Model):
         else:
             return [
                 cls.normalize_tag(tagstring)
-                for tagstring in list([_f for _f in re.split('[,\s]', commaseparatedtags) if _f])]
+                for tagstring in list([_f for _f in re.split(r'[,\s]', commaseparatedtags) if _f])]
 
 
 class Course(models.Model):

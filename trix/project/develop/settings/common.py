@@ -7,7 +7,7 @@ from django_dbdev.backends.postgres import DBSETTINGS
 DEBUG = True
 ROOT_URLCONF = 'trix.project.develop.urls'
 
-INSTALLED_APPS = list(INSTALLED_APPS) + [
+INSTALLED_APPS = list(INSTALLED_APPS) + [  # noqa: F405
     'django_dbdev',
     # 'debug_toolbar',
 ]
@@ -20,7 +20,7 @@ DATABASES['default']['PORT'] = 20987
 
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
-MIDDLEWARE += [
+MIDDLEWARE += [  # noqa: F405
     'debug_toolbar.middleware.DebugToolbarMiddleware',
 ]
 

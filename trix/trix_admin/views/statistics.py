@@ -21,8 +21,8 @@ def compute_stats_for_assignment(assignment, howsolved_filter, user_count,
     if howsolved_filter != 'notsolved':
         queryset = assignment.howsolved_set.filter(howsolved=howsolved_filter)
     else:
-        queryset = assignment.howsolved_set.filter(Q(howsolved='bymyself') |
-                                                   Q(howsolved='withhelp'))
+        queryset = assignment.howsolved_set.filter(Q(howsolved='bymyself')
+                                                   | Q(howsolved='withhelp'))  # noqa: W503
 
     # Filter based on date if present
     queryset = queryset.filter(solved_datetime__date__gte=from_date) if from_date else queryset

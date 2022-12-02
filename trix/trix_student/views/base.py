@@ -14,7 +14,7 @@ class TrixListViewBase(ListView):
         if page:
             paginator = Paginator(self.get_queryset(), self.paginate_by)
             try:
-                posts = paginator.page(page)
+                paginator.page(page)
             except (PageNotAnInteger, EmptyPage):
                 return redirect(request.path)
         return super(TrixListViewBase, self).get(request, **kwargs)
