@@ -37,6 +37,7 @@
             {% if not request.user.is_authenticated %}
                 <div class="alert alert-warning alert-edgetoedge alert-nomargin">
                     <div class="container">
+                        
                         <p>
                             <strong>{% trans "You are not authenticated." %}</strong>
                             {% trans "If you are not authenticated, you will not be able to keep track of your progress." %}
@@ -50,7 +51,18 @@
             {% endif %}
         {% endblock not_signed_in_warning %}
         </header>
-        <main>{% block content %}{% endblock %}</main>
+        <main>
+            {% block student-messages %}
+            {% for message in messages %}
+            <div class="trix-course-messages alert alert-dismissable {{ message.tags }}" role="alert">
+                <button type="button" class="close" data-dismiss="alert" aria-label="{% trans 'Close' %}">
+                    <span aria-hidden="true" class="fa fa-times-circle"></span>
+                </button>
+                <p>{{ message }}</p>
+            </div>
+            {% endfor %}
+            {% endblock student-messages %}
+            {% block content %}{% endblock %}</main>
         <footer>
             {% block footer %}
                 {% include "trix_student/include/footer.django.html" %}

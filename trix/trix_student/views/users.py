@@ -1,5 +1,6 @@
 from django.views.generic import DeleteView
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib import messages
 from django.utils.translation import gettext_lazy as _
 from django.http import Http404
 from django.urls import reverse_lazy
@@ -36,9 +37,14 @@ class UserDeleteView(LoginRequiredMixin, DeleteView):
     template_name = 'trix_student/user_delete.django.html'
     model = models.User
     success_url = reverse_lazy('trix_student_dashboard')
+    success_message = _('Brukeren din er nå slettet')
 
     def get_object(self, queryset=None):
         user = super(UserDeleteView, self).get_object()
         if not user.id == self.request.user.id:
             raise Http404
         return user
+
+    def get_success_url(self) -> str:
+        messages.success(self.request, self.success_message)
+        return super().get_success_url()
