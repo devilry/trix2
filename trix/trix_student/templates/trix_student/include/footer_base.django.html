@@ -1,0 +1,25 @@
+{% load i18n %}
+{% load static %}
+
+<div class="trix-footer">
+    <div>
+        {% block report_bug %}
+        
+        {% endblock %}
+    </div>
+    <div>
+        {% if wcag %}
+            <span class="fa fa-eye-slash"></span>
+            <a href="{% url 'wcag' %}">{% trans "Deactivate" %}
+        {% else %}
+            <span class="fa fa-eye"></span>
+            <a href="{% url 'wcag' %}">{% trans "Activate" %}
+        {% endif %}
+        {% trans "accessibility colours" %}</a>
+    </div>
+    <div>
+        {% block contact_info %}
+
+        {% endblock %}
+    </div>
+</div>

@@ -148,6 +148,30 @@ If you wish to disable the consent dialog completely for some reason, add ``DISA
 to your ``trix_settings.py`` file.
 
 
+****************
+Footer template
+****************
+Customize the footer template to contain your own information
+
+#. Create a directory for custom templates with a subfolder named ``trix_student``
+#. In ``trix_student`` create a subfolder named ``include``
+#. Create a django html file called ``footer.django.html`` and make it look like this::
+
+    {% extends "trix_student/include/footer_base.django.html" %}
+
+    {% block report_bug %}
+    <span class="fa fa-bug"></span>
+    <a href="bug report url" target="_blank">
+        "bug report text"
+    </a>
+    {% endblock %}
+    
+    {% block contact_info %}
+    <span class="fa fa-address-card"></span>
+    your contact info
+    {% endblock %}
+
+
 ******************
 Make sure it works
 ******************

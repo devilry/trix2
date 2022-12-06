@@ -1,21 +1,18 @@
-{% load i18n %}
-{% load static %}
+{% extends "trix_student/include/footer_base.django.html" %}
 
-<div class="trix-footer">
-    <div>
-        <span class="fa fa-bug"></span>
-        <a href="https://github.com/devilry/trix2/issues/new" target="_blank">
-            {% trans "Report bug" %}
-        </a>
-    </div>
-    <div>
-        {% if wcag %}
-            <span class="fa fa-eye-slash"></span>
-            <a href="{% url 'wcag' %}">{% trans "Deactivate" %}
-        {% else %}
-            <span class="fa fa-eye"></span>
-            <a href="{% url 'wcag' %}">{% trans "Activate" %}
-        {% endif %}
-        {% trans "accessibility colours" %}</a>
-    </div>
-</div>
+{% load i18n %}
+
+{% comment %}
+    Overwrite this to use your own footer content
+{% endcomment %}
+
+{% block report_bug %}
+<span class="fa fa-bug"></span>
+<a href="https://github.com/devilry/trix2/issues/new" target="_blank">
+    {% trans "Report bug" %}
+</a>
+ {% endblock %}
+
+{% block contact_info %}
+
+{% endblock %}
