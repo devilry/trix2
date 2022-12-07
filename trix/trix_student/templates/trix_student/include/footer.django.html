@@ -6,13 +6,15 @@
     Overwrite this to use your own footer content
 {% endcomment %}
 
-{% block report_bug %}
-<span class="fa fa-bug"></span>
-<a href="https://github.com/devilry/trix2/issues/new" target="_blank">
-    {% trans "Report bug" %}
-</a>
- {% endblock %}
+{% block body %}
+    <span class="fa fa-bug"></span>
+    <a href="https://github.com/devilry/trix2/issues/new" target="_blank">
+        {% trans "Report bug" %}
+    </a>
 
-{% block contact_info %}
+    <span class="fa fa-question"></span>
+    <a href="link1">{% trans "Help" %}</a>
 
+    <span class="fa fa-info"></span>
+    <a href="link2">{% trans "Privacy" %}</a>
 {% endblock %}

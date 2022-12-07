@@ -13,9 +13,6 @@
 
         {% block css %}
             <link href='{% static "trix_student/dist/css/styles.css" %}' rel="stylesheet">
-            {% if wcag %}
-                <link href='{% static "trix_student/dist/css/wcag.css" %}' rel="stylesheet">
-            {% endif %}
         {% endblock %}
 
         <script src="{% static 'trix_student/dist/vendor/js/jquery.slim.min.js' %}" type="text/javascript"></script>

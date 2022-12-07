@@ -158,17 +158,19 @@ Customize the footer template to contain your own information
 #. Create a django html file called ``footer.django.html`` and make it look like this::
 
     {% extends "trix_student/include/footer_base.django.html" %}
+    {% load i18n %}
 
-    {% block report_bug %}
-    <span class="fa fa-bug"></span>
-    <a href="bug report url" target="_blank">
-        "bug report text"
-    </a>
-    {% endblock %}
-    
-    {% block contact_info %}
-    <span class="fa fa-address-card"></span>
-    your contact info
+    {% block body %}
+        <span class="fa fa-bug"></span>
+        <a href="report url" target="_blank">
+            {% trans "Report bug" %}
+        </a>
+
+        <span class="fa fa-question"></span>
+        <a href="link1">{% trans "Help" %}</a>
+
+        <span class="fa fa-info"></span>
+        <a href="link2">{% trans "Privacy" %}</a>
     {% endblock %}
 
 

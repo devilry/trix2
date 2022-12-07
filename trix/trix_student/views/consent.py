@@ -1,11 +1,10 @@
 from django.shortcuts import redirect
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.utils import timezone
+from django.views.generic import TemplateView
 
-from trix.trix_student.views.base import TrixTemplateViewBase
 
-
-class ConsentFormView(LoginRequiredMixin, TrixTemplateViewBase):
+class ConsentFormView(LoginRequiredMixin, TemplateView):
     template_name = "trix_student/consent_form.django.html"
 
     def post(self, request, **kwargs):
