@@ -9,6 +9,7 @@ from django.template.defaultfilters import truncatechars
 from django.utils.translation import gettext_lazy as _
 from django.urls import reverse
 from django.views.generic import TemplateView
+from django.views.decorators.clickjacking import xframe_options_sameorigin
 from cradmin_legacy.viewhelpers import objecttable
 from cradmin_legacy.viewhelpers import create
 from cradmin_legacy.viewhelpers import update
@@ -16,9 +17,9 @@ from cradmin_legacy.viewhelpers import delete
 from cradmin_legacy.viewhelpers import multiselect
 from cradmin_legacy import crispylayouts
 from cradmin_legacy import crapp
+from cradmin_legacy.acemarkdown.widgets import AceMarkdownWidget
 from crispy_forms import layout
 from crispy_forms.utils import flatatt
-from cradmin_legacy.acemarkdown.widgets import AceMarkdownWidget
 
 from trix.trix_core import models as trix_models
 from trix.trix_core import multiassignment_serialize
@@ -38,13 +39,13 @@ class TitleColumn(objecttable.MultiActionColumn):
         buttons = [
             objecttable.Button(
                 label=_('Edit'),
-                url=self.reverse_appurl('edit', args=[assignment.id])),
+                url=self.reverse_appurl('edit', kwargs={'pk': assignment.id})),
             objecttable.PagePreviewButton(
                 label=_('Preview'),
-                url=self.reverse_appurl('preview', args=[assignment.id])),
+                url=self.reverse_appurl('preview', kwargs={'pk': assignment.id})),
             objecttable.Button(
                 label=_('Delete'),
-                url=self.reverse_appurl('delete', args=[assignment.id]),
+                url=self.reverse_appurl('delete', kwargs={'pk': assignment.id}),
                 buttonclass="btn btn-danger btn-sm"),
         ]
 
@@ -155,7 +156,7 @@ class AssignmentCreateUpdateMixin(object):
     model = trix_models.Assignment
 
     def get_preview_url(self):
-        return self.request.cradmin_app.reverse_appurl('preview')
+        return self.request.cradmin_app.reverse_appurl('preview', kwargs={'pk': self.object.id})
 
     def get_field_layout(self):
         """
@@ -165,15 +166,15 @@ class AssignmentCreateUpdateMixin(object):
             layout.Div('title', css_class="trix-focusfield"),
             layout.Div('tags', css_class="trix-focusfield"),
             layout.Div('hidden', css_class="trix-focusfield"),
-            layout.Div('text', css_class="trix-focusfield"),
-            layout.Div('solution', css_class="trix-focusfield"),
+            layout.Div('text', css_class="trix-focusfield ng-non-bindable"),
+            layout.Div('solution', css_class="trix-focusfield ng-non-bindable"),
         ]
 
     def get_form(self, form_class=None):
         form = super(AssignmentCreateUpdateMixin, self).get_form(form_class)
         form.fields['tags'] = formfields.ManyToManyTagInputField(required=False)
-        form.fields['text'].widget = AceMarkdownWidget()
-        form.fields['solution'].widget = AceMarkdownWidget()
+        form.fields['text'] = forms.CharField(widget=forms.Textarea, required=False)
+        form.fields['solution'] = forms.CharField(widget=forms.Textarea, required=False)
         return form
 
     def save_object(self, form, commit=True):
@@ -371,6 +372,10 @@ class PreviewAssignmentView(TemplateView):
         context = super(PreviewAssignmentView, self).get_context_data(**kwargs)
         context['assignment'] = self.__get_page()
         return context
+
+    @xframe_options_sameorigin
+    def dispatch(self, request, *args, **kwargs):
+        return super().dispatch(request, *args, **kwargs)
 
 
 class App(crapp.App):
