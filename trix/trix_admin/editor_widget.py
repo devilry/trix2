@@ -4,7 +4,6 @@ from xml.sax.saxutils import quoteattr
 
 from django.utils.translation import pgettext
 from django import forms
-from django.urls import reverse
 
 
 class DevilryMarkdownWidget(forms.widgets.Textarea):
@@ -34,7 +33,8 @@ class DevilryMarkdownWidget(forms.widgets.Textarea):
                 'labelText': self.label,
                 'helpText': pgettext(
                     'trix markdown widget',
-                    'Write a comment in markdown format. Use <strong>**text here**</strong> for bold and <em>*text here*</em> for italic.'
+                    'Write a comment in markdown format. Use <strong>**text here**</strong>'
+                    ' for bold and <em>*text here*</em> for italic.'
                 ),
                 'markdownGuideLinkText': pgettext(
                     'Trix markdown widget',
