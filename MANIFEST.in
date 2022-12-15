@@ -1,5 +1,6 @@
 include README.md
 recursive-include trix/trix_core/locale *
+recursive-include trix/trix_admin/static *
 recursive-include trix/trix_admin/templates *
 recursive-include trix/trix_admin/locale *
 recursive-include trix/trix_student/static *
