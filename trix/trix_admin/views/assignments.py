@@ -17,13 +17,13 @@ from cradmin_legacy.viewhelpers import delete
 from cradmin_legacy.viewhelpers import multiselect
 from cradmin_legacy import crispylayouts
 from cradmin_legacy import crapp
-from cradmin_legacy.acemarkdown.widgets import AceMarkdownWidget
 from crispy_forms import layout
 from crispy_forms.utils import flatatt
 
 from trix.trix_core import models as trix_models
 from trix.trix_core import multiassignment_serialize
 from trix.trix_admin import formfields
+from trix.trix_admin.editor_widget import DevilryMarkdownWidget
 
 
 def validate_single_tag(value):
@@ -173,8 +173,8 @@ class AssignmentCreateUpdateMixin(object):
     def get_form(self, form_class=None):
         form = super(AssignmentCreateUpdateMixin, self).get_form(form_class)
         form.fields['tags'] = formfields.ManyToManyTagInputField(required=False)
-        form.fields['text'] = forms.CharField(widget=forms.Textarea, required=False)
-        form.fields['solution'] = forms.CharField(widget=forms.Textarea, required=False)
+        form.fields['text'].widget = DevilryMarkdownWidget(request=self.request, label=False)
+        form.fields['solution'].widget = DevilryMarkdownWidget(request=self.request, label=False)
         return form
 
     def save_object(self, form, commit=True):
