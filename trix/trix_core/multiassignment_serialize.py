@@ -3,7 +3,7 @@ import yaml
 import itertools
 from django import forms
 from django.db import transaction
-from django.utils.translation import ugettext_lazy as _
+from django.utils.translation import gettext_lazy as _
 from django.core.exceptions import ValidationError
 
 from trix.trix_core import models as coremodels
@@ -17,6 +17,7 @@ class MarkdownString(object):
     This is just so we can dump them using the literal-scalar style.
 
     """
+
     def __init__(self, unicode_object):
         self.unicode_object = unicode_object
 
@@ -110,6 +111,7 @@ class DeserializerSingleValidationError(DeserializerError):
     :exc:`.DeserializerValidationErrors` containing a list of all the
     DeserializerSingleValidationError objects.
     """
+
     def __init__(self, errordict, data):
         self.errordict = errordict
         self.data = data
@@ -123,6 +125,7 @@ class DeserializerValidationErrors(DeserializerError):
     """
     See :exc:`DeserializerSingleValidationError`.
     """
+
     def __init__(self, errors):
         """
         Parameters:

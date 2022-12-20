@@ -46,7 +46,6 @@ coverage.xml
 *.log
 *.pot
 /staticfiles/
-**/migrations/
 
 # Sphinx documentation
 docs/_build/
@@ -66,3 +65,8 @@ docs/.DS_Store
 
 # dbdev_tempdata
 dbdev_tempdata/
+
+# VSCODE
+Trix.code-workspace
+.vscode
+.python-version

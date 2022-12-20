@@ -3,12 +3,13 @@ from django import forms
 from django import http
 from django.core.exceptions import ValidationError
 from django.core import serializers
-from django.shortcuts import get_object_or_404
 from django.template import defaultfilters
+from django.shortcuts import get_object_or_404
 from django.template.defaultfilters import truncatechars
-from django.utils.translation import ugettext_lazy as _
+from django.utils.translation import gettext_lazy as _
 from django.urls import reverse
 from django.views.generic import TemplateView
+from django.views.decorators.clickjacking import xframe_options_sameorigin
 from cradmin_legacy.viewhelpers import objecttable
 from cradmin_legacy.viewhelpers import create
 from cradmin_legacy.viewhelpers import update
@@ -18,11 +19,11 @@ from cradmin_legacy import crispylayouts
 from cradmin_legacy import crapp
 from crispy_forms import layout
 from crispy_forms.utils import flatatt
-from cradmin_legacy.acemarkdown.widgets import AceMarkdownWidget
 
 from trix.trix_core import models as trix_models
 from trix.trix_core import multiassignment_serialize
 from trix.trix_admin import formfields
+from trix.trix_admin.editor_widget import DevilryMarkdownWidget
 
 
 def validate_single_tag(value):
@@ -38,13 +39,13 @@ class TitleColumn(objecttable.MultiActionColumn):
         buttons = [
             objecttable.Button(
                 label=_('Edit'),
-                url=self.reverse_appurl('edit', args=[assignment.id])),
+                url=self.reverse_appurl('edit', kwargs={'pk': assignment.id})),
             objecttable.PagePreviewButton(
                 label=_('Preview'),
-                url=self.reverse_appurl('preview', args=[assignment.id])),
+                url=self.reverse_appurl('preview', kwargs={'pk': assignment.id})),
             objecttable.Button(
                 label=_('Delete'),
-                url=self.reverse_appurl('delete', args=[assignment.id]),
+                url=self.reverse_appurl('delete', kwargs={'pk': assignment.id}),
                 buttonclass="btn btn-danger btn-sm"),
         ]
 
@@ -154,9 +155,6 @@ class AssignmentListView(AssignmentQuerysetForRoleMixin, objecttable.ObjectTable
 class AssignmentCreateUpdateMixin(object):
     model = trix_models.Assignment
 
-    def get_preview_url(self):
-        return self.request.cradmin_app.reverse_appurl('preview')
-
     def get_field_layout(self):
         """
         Sets the layout using crispy forms
@@ -165,15 +163,15 @@ class AssignmentCreateUpdateMixin(object):
             layout.Div('title', css_class="trix-focusfield"),
             layout.Div('tags', css_class="trix-focusfield"),
             layout.Div('hidden', css_class="trix-focusfield"),
-            layout.Div('text', css_class="trix-focusfield"),
-            layout.Div('solution', css_class="trix-focusfield"),
+            layout.Div('text', css_class="trix-focusfield ng-non-bindable"),
+            layout.Div('solution', css_class="trix-focusfield ng-non-bindable"),
         ]
 
     def get_form(self, form_class=None):
         form = super(AssignmentCreateUpdateMixin, self).get_form(form_class)
         form.fields['tags'] = formfields.ManyToManyTagInputField(required=False)
-        form.fields['text'].widget = AceMarkdownWidget()
-        form.fields['solution'].widget = AceMarkdownWidget()
+        form.fields['text'].widget = DevilryMarkdownWidget(request=self.request, label=False)
+        form.fields['solution'].widget = DevilryMarkdownWidget(request=self.request, label=False)
         return form
 
     def save_object(self, form, commit=True):
@@ -199,19 +197,31 @@ class AssignmentCreateUpdateMixin(object):
             button.flat_attrs = flatatt({'formnovalidate': True}) + button.flat_attrs
         return buttons
 
-
-class AssignmentCreateView(AssignmentCreateUpdateMixin, create.CreateView):
-    """
-    View used to create new assignments.
-    """
-
     def serialize_preview(self, form):
         """
         Override this to add an ID, else it will fail when previewing non-saved objects.
         """
         obj = self.save_object(form, commit=False)
         obj.id = 0
+
         return serializers.serialize('json', [obj])
+
+    @classmethod
+    def deserialize_preview(cls, serialized):
+        return list(serializers.deserialize('json', serialized))[0].object
+
+
+class AssignmentCreateView(AssignmentCreateUpdateMixin, create.CreateView):
+    """
+    View used to create new assignments.
+    """
+
+    def get_preview_url(self):
+        return self.request.cradmin_app.reverse_appurl('previewCreate')
+
+    @xframe_options_sameorigin
+    def dispatch(self, request, *args, **kwargs):
+        return super().dispatch(request, *args, **kwargs)
 
 
 class AssignmentUpdateView(AssignmentQuerysetForRoleMixin,
@@ -220,6 +230,62 @@ class AssignmentUpdateView(AssignmentQuerysetForRoleMixin,
     """
     View used to edit existing assignments.
     """
+
+    def get_preview_url(self):
+        return self.request.cradmin_app.reverse_appurl('previewUpdate')
+
+    @xframe_options_sameorigin
+    def dispatch(self, request, *args, **kwargs):
+        return super().dispatch(request, *args, **kwargs)
+
+
+class PreviewCreateAssignmentView(TemplateView):
+    template_name = 'trix_admin/assignments/preview.django.html'
+
+    def get_context_data(self, **kwargs):
+        context = super(PreviewCreateAssignmentView, self).get_context_data(**kwargs)
+        context['assignment'] = AssignmentCreateView.get_preview_data(self.request)
+        return context
+
+    @xframe_options_sameorigin
+    def dispatch(self, request, *args, **kwargs):
+        return super().dispatch(request, *args, **kwargs)
+
+
+class PreviewUpdateAssignmentView(TemplateView):
+    template_name = 'trix_admin/assignments/preview.django.html'
+
+    def get_context_data(self, **kwargs):
+        context = super(PreviewUpdateAssignmentView, self).get_context_data(**kwargs)
+        context['assignment'] = AssignmentUpdateView.get_preview_data(self.request)
+        print(context['assignment'])
+
+        return context
+
+    @ xframe_options_sameorigin
+    def dispatch(self, request, *args, **kwargs):
+        return super().dispatch(request, *args, **kwargs)
+
+
+class PreviewAssignmentView(TemplateView):
+    template_name = 'trix_admin/assignments/preview.django.html'
+
+    def __get_page(self):
+        # NOTE: The queryset ensures only admins on the current site gains access.
+        course = self.request.cradmin_role
+        return get_object_or_404(trix_models.Assignment.objects.filter(
+                                 tags=course.course_tag
+                                 ).distinct(),
+                                 pk=self.kwargs['pk'])
+
+    def get_context_data(self, **kwargs):
+        context = super(PreviewAssignmentView, self).get_context_data(**kwargs)
+        context['assignment'] = self.__get_page()
+        return context
+
+    @ xframe_options_sameorigin
+    def dispatch(self, request, *args, **kwargs):
+        return super().dispatch(request, *args, **kwargs)
 
 
 class AssignmentMultiEditForm(forms.Form):
@@ -356,23 +422,6 @@ class AssignmentDeleteView(AssignmentQuerysetForRoleMixin, delete.DeleteView):
     template_name = "trix_admin/delete.django.html"
 
 
-class PreviewAssignmentView(TemplateView):
-    template_name = 'trix_admin/assignments/preview.django.html'
-
-    def __get_page(self):
-        # NOTE: The queryset ensures only admins on the current site gains access.
-        course = self.request.cradmin_role
-        return get_object_or_404(trix_models.Assignment.objects.filter(
-                                 tags=course.course_tag
-                                 ).distinct(),
-                                 pk=self.kwargs['pk'])
-
-    def get_context_data(self, **kwargs):
-        context = super(PreviewAssignmentView, self).get_context_data(**kwargs)
-        context['assignment'] = self.__get_page()
-        return context
-
-
 class App(crapp.App):
     appurls = [
         crapp.Url(
@@ -391,6 +440,14 @@ class App(crapp.App):
             r'^preview/(?P<pk>\d+)?$',
             PreviewAssignmentView.as_view(),
             name="preview"),
+        crapp.Url(
+            r'^previewCreate$',
+            PreviewCreateAssignmentView.as_view(),
+            name="previewCreate"),
+        crapp.Url(
+            r'^previewUpdate$',
+            PreviewUpdateAssignmentView.as_view(),
+            name="previewUpdate"),
         crapp.Url(
             r'^multiedit$',
             AssignmentMultiEditView.as_view(),

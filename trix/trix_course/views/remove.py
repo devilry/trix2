@@ -2,7 +2,6 @@ from django.core.exceptions import PermissionDenied
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import get_object_or_404, redirect
 from django.views.generic import DeleteView
-from django.urls import reverse
 
 from trix.trix_core.models import Course, User
 

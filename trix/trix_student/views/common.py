@@ -1,6 +1,6 @@
 import json
 from django import http
-from django.utils.translation import ugettext_lazy as _
+from django.utils.translation import gettext_lazy as _
 from urllib import parse
 
 from functools import reduce

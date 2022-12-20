@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: trix_student\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-07-26 17:21+0200\n"
+"POT-Creation-Date: 2022-12-07 11:00+0100\n"
 "PO-Revision-Date: 2015-01-03 17:40+0100\n"
 "Last-Translator: Espen Angell Kristiansen <post@espenak.net>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -45,43 +45,43 @@ msgstr "Oppgaver"
 msgid "Loading progress..."
 msgstr "Laster progresjon..."
 
-#: trix/trix_student/templates/trix_student/assignment_list_base.django.html:43
+#: trix/trix_student/templates/trix_student/assignment_list_base.django.html:44
 msgid "Selected tags"
 msgstr "Valgte tags"
 
-#: trix/trix_student/templates/trix_student/assignment_list_base.django.html:62
+#: trix/trix_student/templates/trix_student/assignment_list_base.django.html:63
 msgid "Filter"
 msgstr "Filtrer"
 
-#: trix/trix_student/templates/trix_student/assignment_list_base.django.html:64
+#: trix/trix_student/templates/trix_student/assignment_list_base.django.html:65
 msgid "Filter out"
 msgstr "Filtrer ut"
 
-#: trix/trix_student/templates/trix_student/assignment_list_base.django.html:66
+#: trix/trix_student/templates/trix_student/assignment_list_base.django.html:67
 msgid "Remove assignments with selected tags"
 msgstr "Fjern oppgaver med valgte tags"
 
-#: trix/trix_student/templates/trix_student/assignment_list_base.django.html:70
+#: trix/trix_student/templates/trix_student/assignment_list_base.django.html:71
 msgid "Add tag"
 msgstr "Legg til tag"
 
-#: trix/trix_student/templates/trix_student/assignment_list_base.django.html:71
+#: trix/trix_student/templates/trix_student/assignment_list_base.django.html:72
 msgid "Select a tag"
 msgstr "Velg en tag"
 
-#: trix/trix_student/templates/trix_student/assignment_list_base.django.html:79
+#: trix/trix_student/templates/trix_student/assignment_list_base.django.html:80
 msgid "Print"
 msgstr "Skriv ut"
 
-#: trix/trix_student/templates/trix_student/assignment_list_base.django.html:82
+#: trix/trix_student/templates/trix_student/assignment_list_base.django.html:83
 msgid "Print this page"
 msgstr "Skriv ut denne siden"
 
-#: trix/trix_student/templates/trix_student/assignment_list_base.django.html:91
+#: trix/trix_student/templates/trix_student/assignment_list_base.django.html:92
 msgid "No assignments found"
 msgstr "Fant ingen oppgaver"
 
-#: trix/trix_student/templates/trix_student/base.django.html:11
+#: trix/trix_student/templates/trix_student/base.django.html:12
 msgid "Trix"
 msgstr "Trix"
 
@@ -101,6 +101,10 @@ msgstr ""
 #: trix/trix_student/templates/trix_student/include/header.django.html:63
 msgid "Sign in"
 msgstr "Logg inn"
+
+#: trix/trix_student/templates/trix_student/base.django.html:56
+msgid "Close"
+msgstr "Lukk"
 
 #: trix/trix_student/templates/trix_student/consent_form_base.django.html:4
 msgid "Consent"
@@ -260,28 +264,24 @@ msgstr "Lagrer..."
 msgid "See solution"
 msgstr "Vis løsningsforslag"
 
-#: trix/trix_student/templates/trix_student/include/footer.django.html:8
+#: trix/trix_student/templates/trix_student/include/footer.django.html:12
 msgid "Report bug"
 msgstr "Rapporter feil"
 
-#: trix/trix_student/templates/trix_student/include/footer.django.html:14
-msgid "Deactivate"
-msgstr "Deaktiver"
-
-#: trix/trix_student/templates/trix_student/include/footer.django.html:17
-msgid "Activate"
-msgstr "Aktiver"
+#: trix/trix_student/templates/trix_student/include/footer.django.html:16
+msgid "Help"
+msgstr "Hjelp"
 
 #: trix/trix_student/templates/trix_student/include/footer.django.html:19
-msgid "accessibility colours"
-msgstr "tilgjengelighetsfarger"
+msgid "Privacy"
+msgstr "Personvern"
 
 #: trix/trix_student/templates/trix_student/include/header.django.html:11
 msgid "Toggle navigation"
 msgstr "Vis/skjul navigering"
 
 #: trix/trix_student/templates/trix_student/include/header.django.html:28
-#: trix/trix_student/views/users.py:26
+#: trix/trix_student/views/users.py:27
 msgid "Superuser"
 msgstr "Superbruker"
 
@@ -409,13 +409,26 @@ msgid ""
 msgstr ""
 "Du har fullført {{ solvedPercentage }}% av oppgavene med de valgte taggene."
 
-#: trix/trix_student/views/users.py:30
+#: trix/trix_student/views/users.py:31
 msgid "Administrator for "
 msgstr "Administrator for "
 
-#: trix/trix_student/views/users.py:32
+#: trix/trix_student/views/users.py:33
 msgid "Student"
 msgstr "Student"
+
+#: trix/trix_student/views/users.py:40
+msgid "Brukeren din er nå slettet"
+msgstr "Your user was deleted successfully"
+
+#~ msgid "Deactivate"
+#~ msgstr "Deaktiver"
+
+#~ msgid "Activate"
+#~ msgstr "Aktiver"
+
+#~ msgid "accessibility colours"
+#~ msgstr "tilgjengelighetsfarger"
 
 #~ msgid "Page %(number)s of %(total)s"
 #~ msgstr "Side %(number)s av %(total)s"

@@ -1,5 +1,4 @@
 from django.db.models import Q
-from functools import reduce
 
 from trix.trix_core import models
 from trix.trix_course.views import base
@@ -21,8 +20,8 @@ class CourseDashboardView(base.TrixCourseBaseView):
             if search.isdigit():
                 courses = courses.filter(id=int(search))
             else:
-                courses = courses.filter(Q(course_tag__tag__icontains=search) |
-                                         Q(description__icontains=search))
+                courses = courses.filter(Q(course_tag__tag__icontains=search)
+                                         | Q(description__icontains=search))  # noqa: W503
         return courses
 
     def get_context_data(self, **kwargs):

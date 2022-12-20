@@ -1,9 +1,8 @@
 from django import forms
-from django.conf import settings
 from django.contrib import admin
 from django.contrib.auth.models import Group
 from django.db.models import Count, Q
-from django.utils.translation import ugettext_lazy as _
+from django.utils.translation import gettext_lazy as _
 from django.contrib.sites.models import Site
 
 from trix.trix_core.models import Course, Tag, User
@@ -53,15 +52,15 @@ class TagInUseFilter(admin.SimpleListFilter):
     def queryset(self, request, queryset):
         if self.value() == 'yes':
             return queryset.filter(
-                Q(assignment__count__gt=0) |
-                Q(active_period_set__count__gt=0) |
-                Q(course_set__count__gt=0)
+                Q(assignment__count__gt=0)
+                | Q(active_period_set__count__gt=0)  # noqa: W503
+                | Q(course_set__count__gt=0)  # noqa: W503
             )
         if self.value() == 'no':
             return queryset.filter(
-                Q(assignment__count=0) &
-                Q(active_period_set__count=0) &
-                Q(course_set__count=0)
+                Q(assignment__count=0)
+                & Q(active_period_set__count=0)  # noqa: W503
+                & Q(course_set__count=0)  # noqa: W503
             )
 
 

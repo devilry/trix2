@@ -1,5 +1,5 @@
 import re
-from django.utils.translation import ugettext_lazy as _
+from django.utils.translation import gettext_lazy as _
 from django.db import models
 from django.contrib.auth.models import AbstractBaseUser
 from django.contrib.auth.models import BaseUserManager
@@ -60,6 +60,7 @@ class User(AbstractBaseUser, PermissionsMixin):
     )
 
     USERNAME_FIELD = 'email'
+    EMAIL_FIELD = 'email'
     REQUIRED_FIELDS = []
 
     objects = TrixUserManager()
@@ -168,7 +169,7 @@ class Tag(models.Model):
         else:
             return [
                 cls.normalize_tag(tagstring)
-                for tagstring in list([_f for _f in re.split('[,\s]', commaseparatedtags) if _f])]
+                for tagstring in list([_f for _f in re.split(r'[,\s]', commaseparatedtags) if _f])]
 
 
 class Course(models.Model):
@@ -219,6 +220,7 @@ class AssignmentQuerySet(models.query.QuerySet):
     """ AssignmentQuerySet
 
     """
+
     def filter_by_tag(self, tag):
         return self.filter(tags=tag)
 
@@ -261,7 +263,8 @@ class Assignment(models.Model):
         verbose_name=_('Last changed'),
         auto_now=True)
     HIDDEN_CHOICES = [(True, _('Yes')), (False, _('No'))]
-    hidden = models.NullBooleanField(
+    hidden = models.BooleanField(
+        null=True,
         choices=HIDDEN_CHOICES,
         default=False,
         verbose_name=_('Hide assignment from students'))

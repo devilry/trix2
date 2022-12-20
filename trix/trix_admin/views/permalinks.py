@@ -1,5 +1,5 @@
-from django.core.urlresolvers import reverse
-from django.utils.translation import ugettext_lazy as _
+from django.urls import reverse
+from django.utils.translation import gettext_lazy as _
 from django.template.defaultfilters import truncatechars
 from cradmin_legacy.viewhelpers import objecttable
 from cradmin_legacy.viewhelpers import create
