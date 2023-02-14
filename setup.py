@@ -18,7 +18,7 @@ setup(
     include_package_data=True,
     install_requires=[
         'setuptools',
-        'Django>=3.2.16, <4.0.0',
+        'Django==3.2.*',
         'django-crispy-forms<=1.14, >=1.13',
         'Markdown>=3.4.1',
         'PyYAML>=6.0',
