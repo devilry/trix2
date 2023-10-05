@@ -18,13 +18,13 @@ setup(
     include_package_data=True,
     install_requires=[
         'setuptools',
-        'Django==3.2.*',
+        'Django==4.2.*',
         'django-crispy-forms<=1.14, >=1.13',
         'Markdown>=3.4.1',
         'PyYAML>=6.0',
         'django-extensions',
         'dj-database-url>=0.5.0',
-        'cradmin_legacy>=4.1.2',
+        'cradmin_legacy>=5.0.0',
         'gunicorn',
     ],
     classifiers=[
