@@ -5,7 +5,7 @@ from django.http import HttpResponse
 from django.http import HttpResponseBadRequest
 from django.views.generic import ListView
 from django.views.generic import View
-from django.utils.translation import ugettext as _
+from django.utils.translation import gettext as _
 from django.core.exceptions import FieldError
 from cradmin_legacy import crapp
 

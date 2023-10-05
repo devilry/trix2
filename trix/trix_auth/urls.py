@@ -1,4 +1,4 @@
-from django.conf.urls import include, re_path
+from django.urls import include, re_path
 from trix.trix_auth.views import allauth_views, login
 
 urlpatterns = [
