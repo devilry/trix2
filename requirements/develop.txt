@@ -1,5 +1,7 @@
 -r common.txt
 
+psycopg2-binary==2.9.*
+
 # For automating development tasks
 invoke==1.7.3
 

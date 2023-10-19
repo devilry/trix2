@@ -2,11 +2,4 @@
 
 gunicorn
 django-toolbelt
-
-# For search
-#pyelasticsearch==0.6.1
-
-
-
-# WSGI
-dj-static==0.0.6
+psycopg2

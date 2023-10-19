@@ -6,10 +6,9 @@ Markdown>=3.4.1
 Pygments==2.15.0
 PyYAML==6.0
 cradmin-legacy==5.0.0
-psycopg2-binary==2.9.5
 
 # For Dataporten login
-django-allauth==0.51.0
+django-allauth==0.54.0
 
 #-e git://github.com/appressoas/django_cradmin.git#egg=django_cradmin
 
