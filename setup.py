@@ -23,7 +23,6 @@ setup(
         'Markdown>=3.4.1',
         'PyYAML>=6.0',
         'django-extensions',
-        'dj-database-url>=0.5.0',
         'cradmin_legacy>=5.0.0',
         'gunicorn',
     ],
