@@ -77,10 +77,9 @@ Trix is configured through a ``trix_settings.py`` file. Start by copying the fol
         'PORT': '5432',
         'OPTIONS': {
           'sslmode': 'require',
-      },
+        },
+      }
     }
-}
-    DATABASES = {'default': dj_database_url.config(default=DATABASE_URL)}
 
     # Set this to False to turn of debug mode in production
     DEBUG = False
