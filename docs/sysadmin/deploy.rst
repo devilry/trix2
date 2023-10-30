@@ -6,7 +6,7 @@ Setup Trix for production
 ********************
 Install dependencies
 ********************
-#. Python 3.6 or higher. Check your current version by running ``python --version``.
+#. Python 3.8 or higher. Check your current version by running ``python --version``.
 #. PIP_
 #. VirtualEnv_
 #. PostgreSQL server --- not needed if you just want to build the docs.
@@ -38,7 +38,7 @@ Install Trix
 
     $ cd ~/trixdeploy
     $ virtualenv venv
-    $ venv/bin/pip3 install psycopg2 dj-static trix
+    $ venv/bin/pip3 install psycopg2 trix
 
 
 *********************************
@@ -59,16 +59,27 @@ Copy this script into ``~/trixdeploy/manage.py``::
 Configure
 *********
 Trix is configured through a ``trix_settings.py`` file. Start by copying the following into
-``~/trixdeploy/trix_settings.py``::
+``~/trixdeploy/trix_settings.py`` and replace the database placeholders with your own::
 
     from trix.project.production.settings import *
-    import dj_database_url
 
     # Make this 50 chars and RANDOM - do not share it with anyone
     SECRET_KEY = 'XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX'
 
     # Database config
-    DATABASE_URL = 'sqlite:///trixdb.sqlite'
+    DATABASES = {
+      'default': {
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'DATABASE_NAME',
+        'USER': 'DATABASE_USERNAME',
+        'PASSWORD': 'DATABASE_PASSWORD',
+        'HOST': 'DATABASE_HOST',
+        'PORT': '5432',
+        'OPTIONS': {
+          'sslmode': 'require',
+      },
+    }
+}
     DATABASES = {'default': dj_database_url.config(default=DATABASE_URL)}
 
     # Set this to False to turn of debug mode in production
@@ -182,8 +193,6 @@ Just to make sure everything works, run::
     $ cd ~/trixdeploy/
     $ venv/bin/python manage.py migrate
 
-This should create a file named ``~/trixdeploy/trixdb.sqlite``. You can remove that file now - it was just for testing.
-
 
 ********************
 Collect static files
@@ -193,15 +202,6 @@ Run the following command to collect all static files (CSS, javascript, ...) for
     $ venv/bin/python manage.py collectstatic
 
 The files are written to the ``staticfiles`` sub-directory (~/trixdeploy/staticfiles).
-
-
-********************
-Configure a database
-********************
-Configure a Postgres database by editing the ``DATABASE_URL`` setting in your ``trix_settings.py`` script.
-The format is::
-
-    DATABASE_URL = "postgres://USER:PASSWORD@HOST:PORT/NAME"
 
 
 **********************
