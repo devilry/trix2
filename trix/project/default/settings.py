@@ -89,19 +89,12 @@ USE_I18N = True
 USE_L10N = True
 USE_TZ = True
 
-# https://docs.djangoproject.com/en/1.11/ref/clickjacking/
-X_FRAME_OPTIONS = 'SAMEORIGIN'
-
 # Setup static files to be served at /s/.
 # - Gives us short urls for angular apps (I.E.: /s/v1/).
 STATIC_URL = '/static/'
 
 # Custom authentication model
 AUTH_USER_MODEL = 'trix_core.User'
-
-# Redirect logins and logouts to the frontpage by default
-LOGIN_REDIRECT_URL = '/'
-LOGOUT_REDIRECT_URL = '/'
 
 LOGIN_URL = 'trix_login'
 LOGOUT_URL = 'trix_logout'
