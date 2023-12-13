@@ -12,5 +12,6 @@ default_urls = [
     re_path(r'^admin/', admin.site.urls),
     re_path(r'^c/', include('trix.trix_course.urls')),
     re_path(r'^a/', include(CrAdminInstance.urls())),
+    re_path(r'^trix_core/', include('trix.trix_core.urls')),
     re_path(r'^', include('trix.trix_student.urls')),
 ]
