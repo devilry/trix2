@@ -96,7 +96,7 @@ STATIC_URL = '/static/'
 # Custom authentication model
 AUTH_USER_MODEL = 'trix_core.User'
 
-LOGIN_URL = 'trix_login'
+LOGIN_URL = 'trix_login_redirect'
 LOGOUT_URL = 'trix_logout'
 
 # Use bootstrap3 template pack to django-crispy-forms.
