@@ -15,7 +15,7 @@ class AllauthLoginView(LoginView):
         return HttpResponseRedirect(
             provider.get_login_url(
                 request=self.request,
-                process='login'), next=redirect_url)
+                process='login', next=redirect_url))
 
 
 class AllauthLogoutView(LogoutView):
