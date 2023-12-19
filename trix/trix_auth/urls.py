@@ -1,4 +1,4 @@
-from django.conf.urls import include, re_path
+from django.urls import include, re_path
 from trix.trix_auth.views import allauth_views, login
 
 urlpatterns = [
@@ -15,4 +15,5 @@ urlpatterns = [
             allauth_views.AllauthLogoutView.as_view(),
             name='account_logout'),
     re_path(r'^allauth/', include('allauth.urls')),
+    re_path(r'^login-redirect/$', login.TrixLoginRedirectView.as_view(), name='trix_login_redirect'),
 ]

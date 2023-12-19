@@ -1,15 +1,14 @@
-Django==3.2.*
+Django==4.2.*
 django-extensions==3.2.1
 django-crispy-forms>=1.13.0, <=1.14.0
 python-dateutil==2.8.2
 Markdown>=3.4.1
 Pygments==2.15.0
 PyYAML==6.0
-cradmin-legacy==4.1.2
-psycopg2-binary==2.9.5
+cradmin-legacy==5.0.0
 
 # For Dataporten login
-django-allauth==0.51.0
+django-allauth==0.58.2
 
 #-e git://github.com/appressoas/django_cradmin.git#egg=django_cradmin
 

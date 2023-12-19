@@ -2,17 +2,20 @@ from django.http import HttpResponseRedirect
 from django.conf import settings
 
 from allauth.account.views import LoginView, LogoutView
-from allauth.socialaccount import providers
+from allauth.socialaccount.adapter import get_adapter
 
 
 class AllauthLoginView(LoginView):
     def get(self, *args, **kwargs):
-        all_providers = providers.registry.get_list(request=self.request)
+
+        redirect_url = self.request.GET.get('next')
+        adapter = get_adapter(self.request)
+        all_providers = adapter.list_providers(self.request)
         provider = all_providers[0]
         return HttpResponseRedirect(
             provider.get_login_url(
                 request=self.request,
-                process='login'))
+                process='login', next=redirect_url))
 
 
 class AllauthLogoutView(LogoutView):

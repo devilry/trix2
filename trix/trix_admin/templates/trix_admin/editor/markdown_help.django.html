@@ -1,10 +1,10 @@
-{% extends "cradmin_legacy/base.django.html" %}
+{% extends "trix_student/base.django.html" %}
 {% load i18n %}
-{% load cradmin_legacy_tags %}
 
 {% block title %}
     {% trans "Markdown help" %}
 {% endblock title %}
+
 
 {% block pageheader-inner %}
     <h1>{% trans "Markdown help" %}</h1>
@@ -340,7 +340,3 @@ with some extra text below.</pre>
         </pre>
     </div>
 {% endblock content %}
-
-{% block devilry_footer %}
-    {% include "devilry_deploy/frontpage_footer.django.html" %}
-{% endblock devilry_footer %}

@@ -1,5 +1,7 @@
 -r common.txt
 
+psycopg2-binary==2.9.*
+
 # For automating development tasks
 invoke==1.7.3
 
@@ -27,4 +29,4 @@ mock==4.0.3
 django-debug-toolbar>=3.2.4
 
 # For cradmin
-ievv-opensource==8.2.0
+ievv-opensource==9.2.3
