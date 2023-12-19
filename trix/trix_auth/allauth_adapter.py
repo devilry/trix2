@@ -16,13 +16,15 @@ class TrixSocialAccountAdapter(DefaultSocialAccountAdapter):
             existing_user = Users.objects.get(email=email)
         except Users.DoesNotExist:
             sociallogin.user.email = email
+            connecting = False
         else:
             sociallogin.user = existing_user
+            connecting = True
 
         sociallogin.user.set_unusable_password()
         sociallogin.user.full_clean()
         sociallogin.user.save()
-        sociallogin.save(request)
+        sociallogin.save(request, connecting)
 
         return sociallogin.user
 
