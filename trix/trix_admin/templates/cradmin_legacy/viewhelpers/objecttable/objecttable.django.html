@@ -91,6 +91,7 @@
                                 {% elif form_action %}
                                     action="{{ form_action }}"
                                 {% endif %}>
+                                <fieldset>
 
                             {% if multiselect_actions %}
                                 {% comment %}
@@ -199,6 +200,7 @@
                                     </button>
                                 </div>
                             {% endif %}
+                            </fieldset>
                         </form>
                     </div> {# END div with ng-controller="CradminMultiselectObjectTableViewController" #}
 
