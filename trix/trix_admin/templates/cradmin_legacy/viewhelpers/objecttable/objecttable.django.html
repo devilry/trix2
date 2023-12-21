@@ -41,6 +41,7 @@
                             <input class="form-control" name="search" type="text"
                                    placeholder="{% trans 'Search...' %}"
                                    value="{{ current_search }}"
+                                   aria-label="{% trans 'Search' %}"
                                    {% if focus_on_searchfield %}focusonme{% endif %}>
                             <span class="input-group-btn">
                                 <button type="submit" class="btn btn-default">
@@ -106,13 +107,13 @@
                                 <thead class="{% if hide_column_headers %}sr-only{% endif %}">
                                     <tr>
                                         {% if multiselect_actions %}
-                                            <th class="objecttableview-multiselectcolumn">
+                                            <td class="objecttableview-multiselectcolumn" style="vertical-align: middle;">
                                                 <input type="checkbox"
                                                     ng-cloak
                                                     ng-checked="selectAllChecked"
                                                     ng-click="toggleAllCheckboxes()"
                                                     aria-label="Checkbox all">
-                                            </th>
+                                            </td>
                                         {% endif %}
                                         {% for column in columns %}
                                             <th class="{{ column.get_headercell_css_class_string }}"
