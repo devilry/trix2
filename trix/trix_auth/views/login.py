@@ -56,19 +56,24 @@ class TrixAuthenticationForm(AuthenticationForm):
 
 
 class TrixLoginRedirectView(RedirectView):
-    def get_redirect_url(self, *args: Any, **kwargs: Any) -> str | None:
-        redirect_url = self.request.GET.get('next')
-        if redirect_url:
-            redirect_url = '?next=' + redirect_url
-        else:
-            redirect_url = ''
+    query_string = True
+
+    def __init__(self, **kwargs: Any) -> None:
+        super().__init__(**kwargs)
         if getattr(settings, 'DATAPORTEN_LOGIN', False):
-            return reverse('account_login') + redirect_url
+            self.url = reverse('account_login')
         else:
-            return reverse('trix_login') + redirect_url
+            self.url = reverse('trix_login')
 
 
 class TrixLoginView(LoginView):
     template_name = 'trix_auth/login.django.html'
     authentication_form = TrixAuthenticationForm
     extra_context = {'TRIX_LOGIN_MESSAGE': getattr(settings, 'TRIX_LOGIN_MESSAGE', None)}
+
+    def get_redirect_url(self) -> str:
+        url = super().get_redirect_url()
+        if url:
+            return url
+        else:
+            return '/'

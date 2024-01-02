@@ -7,11 +7,11 @@ from allauth.socialaccount.adapter import get_adapter
 
 class AllauthLoginView(LoginView):
     def get(self, *args, **kwargs):
-
-        redirect_url = self.request.GET.get('next')
+        redirect_url = self.request.GET.get('next', '/')
+        if redirect_url == '':
+            redirect_url = '/'
         adapter = get_adapter(self.request)
-        all_providers = adapter.list_providers(self.request)
-        provider = all_providers[0]
+        provider = adapter.get_provider(self.request, 'dataporten')
         return HttpResponseRedirect(
             provider.get_login_url(
                 request=self.request,

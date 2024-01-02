@@ -50,7 +50,7 @@
                     {% if request.user.is_authenticated %}
                         {# Either redirect to frontpage or the page the user was at. #}
                         {% if disable_next %}
-                            <a href="{% url 'trix_logout' %}?next{% url 'trix_student_dashboard' %}">
+                            <a href="{% url 'trix_logout' %}?next={% url 'trix_student_dashboard' %}">
                         {% else %}
                             <a href="{% url 'trix_logout' %}?next={{ request.get_full_path | urlencode }}">
                         {% endif %}
