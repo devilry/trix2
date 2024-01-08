@@ -20,7 +20,7 @@ def cut_tag_preserve(tags, tag):
     """
     tag_list = tags[:]
     tag_list.remove(tag)
-    return ",".join(tag_list)
+    return ",".join([str(t) for t in tag_list])
 
 
 @register.simple_tag

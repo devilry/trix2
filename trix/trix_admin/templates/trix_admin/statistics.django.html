@@ -50,7 +50,11 @@
             <div class="stat-info">
                 <ul class="list-unstyled">
                     <li>{% trans "Number of users:" %} {{ user_count }}</li>
-                    <li>{% trans "Number of assignments:" %} {{ assignment_count }}</li>
+                    {% if is_paginated %}
+                    <li>{% trans "Number of assignments:" %} {{ paginator.count }}</li>
+                    {% else %}
+                    <li>{% trans "Number of assignments:" %} {{ assignment_list.count }}</li>
+                    {% endif %}
                     {% if assignment_list.count  %}
                         <li><a href="{% cradmin_appurl 'ascsv' %}?tags={{ selected_tags_string }}">
                             <span class="fa fa-download"></span>
@@ -146,6 +150,7 @@
                 <p>{{ assignment.id }}</p>
             </div>
             <div class="progress-info">
+
                 {% compute_and_set_stats_for_assignment assignment 'bymyself' user_count from_date to_date as bymyself %}
                 <p class="progress-element">
                     {% trans "Completed by their own" %} {{ bymyself.percent|floatformat:2 }}% ({{ bymyself.count }})
@@ -153,6 +158,7 @@
                 </p>
 
                 {% compute_and_set_stats_for_assignment assignment 'withhelp' user_count from_date to_date as withhelp %}
+
                 <p class="progress-element">
                     {% trans "Completed with help" %} {{ withhelp.percent|floatformat:2 }}% ({{ withhelp.count }})
                     {% include "trix_admin/include/progress_bar.django.html" with percent=withhelp.percent style='warning'%}
