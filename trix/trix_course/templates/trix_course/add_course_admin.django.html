@@ -33,8 +33,7 @@
             <td id="student{{ student.id }}">
                 {{ student.displayname }}
                 {% if student.is_superuser %}
-                    <i class="fa fa-check" style="color: green"
-                        title="{% trans 'Superuser' %}"></i>
+                    <i class="fa fa-check" title="{% trans 'Superuser' %}"></i>
                     <span class="sr-only">{% trans "Superuser" %}</span>
                 {% endif %}
             </td>

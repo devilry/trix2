@@ -10392,6 +10392,9 @@ fieldset[disabled] .btn-trix-admin.active {
   margin-top: 0;
   padding-top: 0;
 }
+.trix-assignment > h2 > a {
+  color: black;
+}
 .trix-assignment .trix-assignmenttext {
   margin-top: 40px;
 }
@@ -10416,6 +10419,9 @@ fieldset[disabled] .btn-trix-admin.active {
 }
 .trix-assignment-hidden {
   background: repeating-linear-gradient(-45deg, #ccc, #ccc 1px, transparent 1px, transparent 60px);
+}
+.trix-assignment-hidden > h2 > .fa-eye-slash {
+  font-size: 24px;
 }
 #assignments-taggingbox .assignments-progressbox {
   min-height: 80px;
@@ -11322,6 +11328,9 @@ a {
 }
 .trix-course-table-body > tr td:nth-child(2) {
   font-weight: bold;
+}
+.trix-course-table-body > tr td > .fa-check {
+  color: green;
 }
 .trix-course-remove-body {
   padding-left: 40px;
