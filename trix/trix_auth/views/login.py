@@ -76,4 +76,4 @@ class TrixLoginView(LoginView):
         if url:
             return url
         else:
-            return '/'
+            return reverse('trix_student_dashboard')
