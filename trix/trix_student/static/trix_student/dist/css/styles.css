@@ -10692,6 +10692,13 @@ a {
   width: 65%;
   margin-top: 40px;
 }
+.trix-roleselect-first {
+    margin-top: 20px;
+}
+
+.trix-roleselect-second {
+    margin-top: 40px;
+}
 @media (max-width: 992px) {
   .trix-roleselect .cradmin-legacy-focusedpage-wrapper {
     width: 100%;
@@ -10997,6 +11004,12 @@ a {
 .trix-error > h1,
 .trix-error > p {
   padding-bottom: 20px;
+}
+/**
+* Markdown help
+**/
+pre.trix-prelined {
+    white-space: pre-line;
 }
 /**
 * Styles for printing
@@ -11418,6 +11431,9 @@ a {
 .devilry-comment-editor__textarea .devilry-comment-editor-textarea--copy {
   visibility: hidden;
   margin-bottom: 15px;
+}
+.trix-preview-padding {
+  padding-top: 40px;
 }
 .tab {
   overflow: hidden;

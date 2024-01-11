@@ -5,7 +5,7 @@
 
 {% block title %}{% trans "Select course" %}{% endblock title %}
 {% block body %}
-    <div class="container trix-roleselect-container" style="margin-top: 20px;">
+    <div class="container trix-roleselect-container trix-roleselect-first">
         <a href="{% url 'trix_student_dashboard' %}">
             <span class="fa fa-arrow-left"></span>
             {% trans "Back to the frontpage" %}
@@ -16,7 +16,7 @@
         {{ block.super }}
     </div>
 
-    <div class="container trix-roleselect-container" style="margin-top: 40px;">
+    <div class="container trix-roleselect-container trix-roleselect-second">
         <h2>{% trans "Documentation" %}</h2>
         <a href="{{ TRIX_ADMIN_DOCUMENTATION_URL }}">{{ TRIX_ADMIN_DOCUMENTATION_LABEL }}</a>
 
