@@ -76,13 +76,6 @@
                     </select>
                 </form>
             {% endif %}
-            <div class="trix-no-print">
-                <h3>{% trans "Print" %}:</h3>
-                <button type="button" class="btn btn-default" onclick="window.print()">
-                    <span class="fa fa-print"></span>
-                    {% trans "Print this page" %}
-                </button>
-            </div>
         </div>
         <div class="col-sm-9 col-sm-pull-3 col-md-9 col-md-pull-3">
             {% include "trix_student/include/pager.django.html" with pager_extraclass="pager-no-topmargin hidden-xs" %}
