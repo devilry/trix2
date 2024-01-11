@@ -20,7 +20,11 @@ msgstr ""
 
 #: trix/trix_course/templates/trix_course/add_course_admin.django.html:5
 msgid "Add course admin"
-msgstr "Legg til kurs eier"
+msgstr "Legg til kursadmin"
+
+#: trix/trix_course/templates/trix_course/add_course_admin.django.html:8
+msgid "Add course administrator to"
+msgstr "Legg til kursadministrator for"
 
 #: trix/trix_course/templates/trix_course/add_course_admin.django.html:12
 msgid "Back"
