@@ -22,14 +22,13 @@
                     <div ng-show="!loading">
                         {% verbatim %}
                             <div class="progress">
-                                <div class="progress-bar"
+                                <div class="progress-bar progress-bar-width-{{ solvedPercentage }}"
                                         ng-class="progressBarClass"
                                         role="progressbar"
                                         aria-valuenow="{{ solvedPercentage }}"
                                         aria-valuemin="0"
                                         aria-valuemax="100"
-                                        aria-label= {% trans "Assignment progress" %}
-                                        style="width: {{ solvedPercentage }}%;">
+                                        aria-label= {% trans "Assignment progress" %}>
                                     {{ solvedPercentage }}%
                                 </div>
                             </div>
