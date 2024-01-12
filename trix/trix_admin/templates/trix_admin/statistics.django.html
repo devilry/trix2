@@ -112,7 +112,7 @@
                 <span class="btn trix-sort-button">
                     {% order_in_use order sort_list as is_negative %}
                     <a href="?{% url_replace 'ordering' '' %}"
-                    style="{% if order not in sort_list %}visibility:hidden;{% endif %}">
+                        {% if order not in sort_list %} class="hide-button" {% endif %}>
                         <span class="fa fa-times"></span>
                     </a>
                     <a class="btn btn-link"
@@ -120,7 +120,7 @@
                         {{ name }}
                     </a>
                     <span class="fa {% if is_negative %}fa-arrow-up{% else %}fa-arrow-down{% endif %}"
-                        {% if order not in sort_list %}style="visibility:hidden;"{% endif %}>
+                        {% if order not in sort_list %} class="hide-button" {% endif %}>
                     </span>
                 </span>
             {% endfor %}
@@ -159,7 +159,7 @@
                     {% include "trix_admin/include/progress_bar.django.html" with percent=notsolved.percent style='info'%}
                 </p>
             </div>
-            <hr style="border-bottom: dotted 1px #ccc;" />
+            <hr class="trix-border-bottom-dotted" />
         {% empty %}
             <h2 class="empty-assignment-list-info">{% trans "There was no assignments matching the chosen tag" %}</h2>
         {% endfor %}
