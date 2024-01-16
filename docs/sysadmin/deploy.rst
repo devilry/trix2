@@ -181,6 +181,9 @@ Customize the footer template to contain your own information
 
         <span class="fa fa-info"></span>
         <a href="link2">{% trans "Privacy" %}</a>
+
+        <span class="fa fa-info"></span>
+        <a href="version url">Trix v{{ TRIX_VERSION }}<a>
     {% endblock %}
 
 
