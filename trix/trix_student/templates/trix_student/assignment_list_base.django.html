@@ -22,14 +22,13 @@
                     <div ng-show="!loading">
                         {% verbatim %}
                             <div class="progress">
-                                <div class="progress-bar"
+                                <div class="progress-bar progress-bar-width-{{ solvedPercentage }}"
                                         ng-class="progressBarClass"
                                         role="progressbar"
                                         aria-valuenow="{{ solvedPercentage }}"
                                         aria-valuemin="0"
                                         aria-valuemax="100"
-                                        aria-label= {% trans "Assignment progress" %}
-                                        style="width: {{ solvedPercentage }}%;">
+                                        aria-label= {% trans "Assignment progress" %}>
                                     {{ solvedPercentage }}%
                                 </div>
                             </div>
@@ -76,13 +75,6 @@
                     </select>
                 </form>
             {% endif %}
-            <div class="trix-no-print">
-                <h3>{% trans "Print" %}:</h3>
-                <button type="button" class="btn btn-default" onclick="window.print()">
-                    <span class="fa fa-print"></span>
-                    {% trans "Print this page" %}
-                </button>
-            </div>
         </div>
         <div class="col-sm-9 col-sm-pull-3 col-md-9 col-md-pull-3">
             {% include "trix_student/include/pager.django.html" with pager_extraclass="pager-no-topmargin hidden-xs" %}

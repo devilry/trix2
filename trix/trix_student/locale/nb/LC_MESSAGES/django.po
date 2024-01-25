@@ -69,14 +69,6 @@ msgstr "Legg til tag"
 msgid "Select a tag"
 msgstr "Velg en tag"
 
-#: trix/trix_student/templates/trix_student/assignment_list_base.django.html:80
-msgid "Print"
-msgstr "Skriv ut"
-
-#: trix/trix_student/templates/trix_student/assignment_list_base.django.html:83
-msgid "Print this page"
-msgstr "Skriv ut denne siden"
-
 #: trix/trix_student/templates/trix_student/assignment_list_base.django.html:92
 msgid "No assignments found"
 msgstr "Fant ingen oppgaver"

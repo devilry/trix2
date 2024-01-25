@@ -40,9 +40,13 @@
         background-color: @state-success-bg;
     }
 
-    &>h2 {
+    > h2 {
         margin-top: 0;
         padding-top: 0;
+    }
+
+    > h2 > a {
+        color: black;
     }
 
     .trix-assignmenttext {
@@ -81,6 +85,10 @@
       transparent 1px,
       transparent 60px
     );
+
+    > h2 > .fa-eye-slash {
+        font-size: 24px;
+    }
 }
 
 #assignments-taggingbox {

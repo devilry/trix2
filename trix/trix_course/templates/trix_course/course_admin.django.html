@@ -22,7 +22,7 @@
     <thead class="trix-course-table-head">
         <tr>
             {% block course-table-header %}
-                <th></th>
+                <td>&nbsp;</td>
                 <th>{% trans "Administrators" %}</th></td>
             {% endblock %}
         </tr>
@@ -45,8 +45,7 @@
                 <td>
                     {{ admin }}
                     {% if admin.is_superuser %}
-                        <i class="fa fa-check" style="color: green"
-                            title="{% trans 'Superuser' %}"></i>
+                        <i class="fa fa-check" title="{% trans 'Superuser' %}"></i>
                         <span class="sr-only">{% trans "Superuser" %}</span>
                     {% endif %}
                 </td>

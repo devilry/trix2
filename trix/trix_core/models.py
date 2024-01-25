@@ -207,6 +207,11 @@ class Course(models.Model):
             'category': 'p'
         })
 
+    visible = models.BooleanField(
+        default=True,
+        verbose_name=_('Visible?'),
+        help_text=_('Is this course visible to students?'))
+
     class Meta:
         verbose_name = _('Course')
         verbose_name_plural = _('Courses')

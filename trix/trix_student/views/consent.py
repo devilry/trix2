@@ -2,6 +2,7 @@ from django.shortcuts import redirect
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.utils import timezone
 from django.views.generic import TemplateView
+from django.urls import reverse
 
 
 class ConsentFormView(LoginRequiredMixin, TemplateView):
@@ -10,4 +11,4 @@ class ConsentFormView(LoginRequiredMixin, TemplateView):
     def post(self, request, **kwargs):
         request.user.consent_datetime = timezone.now()
         request.user.save()
-        return redirect('/')
+        return redirect(reverse('trix_student_dashboard'))

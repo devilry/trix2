@@ -1,6 +1,8 @@
 {% extends "cradmin_legacy/standalone-base-internal.django.html" %}
 {% load i18n %}
 {% load static %}
+{% get_current_language as LANGUAGE_CODE %}
+{% block html-element-lang %}{{ LANGUAGE_CODE }}{% endblock %}
 
 {% block title-pre %}{% trans "Trix" %} -  {% endblock title-pre %}
 {% block jsimports %}

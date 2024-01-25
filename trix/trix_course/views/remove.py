@@ -1,6 +1,7 @@
 from django.core.exceptions import PermissionDenied
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import get_object_or_404, redirect
+from django.urls import reverse
 from django.views.generic import DeleteView
 
 from trix.trix_core.models import Course, User
@@ -24,17 +25,17 @@ class RemoveCourseAdminView(LoginRequiredMixin, DeleteView):
         context['admin_user'] = User.objects.get(id=self.user_id)
         return context
 
-    def delete(self, request, *args, **kwargs):
+    def form_valid(self, form):
         '''
         Removes a single given admin from the course.
         '''
-        course_id = kwargs['pk']
-        user_id = kwargs['user_id']
+        course_id = self.object.pk
+        user_id = self.kwargs['user_id']
         course = Course.objects.get(id=course_id)
         admin_user = User.objects.get(id=user_id)
 
         # Check if we only want to remove as an owner
-        if request.POST.get('owner'):
+        if self.request.POST.get('owner'):
             course.owner.remove(admin_user)
         else:
             course.admins.remove(admin_user)

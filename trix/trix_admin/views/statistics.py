@@ -6,7 +6,6 @@ from django.http import HttpResponseBadRequest
 from django.views.generic import ListView
 from django.views.generic import View
 from django.utils.translation import gettext as _
-from django.core.exceptions import FieldError
 from cradmin_legacy import crapp
 
 import csv
@@ -65,7 +64,8 @@ class AssignmentStatsMixin(object):
             tags = []
         if course_tag is not None and course_tag not in tags:
             tags.append(course_tag)
-        return tags
+
+        return trix_models.Tag.objects.filter(tag__in=tags)
 
     def get_from_date(self):
         from_date = self.request.GET.get('from')
@@ -90,24 +90,45 @@ class AssignmentStatsMixin(object):
             sort_list = []
         return sort_list
 
-    def get_queryset(self):
-        queryset = super(AssignmentStatsMixin, self).get_queryset()
-        for tagstring in self.tags:
-            queryset = queryset.filter(tags__tag=tagstring)
-        # Filter on dates if present
-        if self.from_date is not None:
-            queryset = queryset.filter(
-                howsolved__solved_datetime__date__gte=self.from_date
-            )
-        if self.to_date is not None:
-            queryset = queryset.filter(
-                howsolved__solved_datetime__date__lte=self.to_date
-            )
-        queryset = queryset.distinct()
+    def _create_filter_object(self, howsolved_filter):
+        f = Q(howsolved__howsolved=howsolved_filter)
+        return f
+
+    def _get_howsolved(self, from_date=None, to_date=None):
+        queryset = trix_models.HowSolved.objects.all()
+        if from_date and to_date:
+            queryset = queryset.filter(solved_datetime__date__range=(from_date, to_date))
+        else:
+            if self.from_date is not None:
+                queryset = queryset.filter(
+                    solved_datetime__date__gte=self.from_date
+                )
+            if self.to_date is not None:
+                queryset = queryset.filter(
+                    solved_datetime__date__lte=self.to_date
+                )
+
         return queryset
+
+    def _get_usercount(self):
+        assignment_id_list = self.object_list.values_list('id', flat=True)
+        queryset = self._get_howsolved(self.from_date, self.to_date)
+        queryset = queryset.filter(assignment_id__in=assignment_id_list).distinct('user_id')
+        return queryset.values('user_id').count()
+
+    def get_queryset(self):
+        queryset = super(AssignmentStatsMixin, self).get_queryset().prefetch_related('tags')
+        queryset = queryset.filter(tags__in=self.tags)
+
+        # Filter on dates if present
+        howsolved_assignment_ids = self._get_howsolved(self.from_date, self.to_date) \
+            .values_list('assignment_id', flat=True)
+
+        return queryset.filter(id__in=howsolved_assignment_ids).distinct()
 
 
 class AssignmentStatsCsv(AssignmentStatsMixin, View):
+
     def get(self, request, *args, **kwargs):
         self.tags = self.get_tags()
         if not self.tags:
@@ -155,8 +176,7 @@ class AssignmentStatsCsv(AssignmentStatsMixin, View):
 
     def get_queryset(self):
         queryset = trix_models.Assignment.objects.all().order_by('title')
-        for tagstring in self.tags:
-            queryset = queryset.filter(tags__tag=tagstring)
+        queryset = queryset.filter(tags__in=self.tags)
         # Filter on dates if present
         from_date = self.get_from_date()
         if from_date is not None:
@@ -168,6 +188,7 @@ class AssignmentStatsCsv(AssignmentStatsMixin, View):
             queryset = queryset.filter(
                 howsolved__solved_datetime__date__lte=to_date
             )
+
         queryset = queryset.distinct()
         return queryset
 
@@ -192,8 +213,8 @@ class StatisticsChartView(AssignmentStatsMixin, ListView):
 
     def _get_selectable_tags(self):
         tags = (trix_models.Tag.objects
-                .filter(assignment__in=self.get_queryset())
-                .exclude(tag__in=self.tags)
+                .filter(assignment__in=self.object_list)
+                .exclude(id__in=self.tags)
                 .order_by('tag')
                 .distinct()
                 .values_list('tag', flat=True))
@@ -201,11 +222,9 @@ class StatisticsChartView(AssignmentStatsMixin, ListView):
 
     def get_context_data(self, **kwargs):
         context = super(StatisticsChartView, self).get_context_data(**kwargs)
-        context['user_count'] = get_usercount_within_assignments(self.get_queryset(),
-                                                                 self.from_date,
-                                                                 self.to_date)
-        context['assignment_count'] = self.get_queryset().count()
-        context['selected_tags_string'] = ','.join(self.tags)
+
+        context['user_count'] = self._get_usercount()
+        context['selected_tags_string'] = ','.join(self.tags.values_list('tag', flat=True))
         context['selected_tags_list'] = self.tags
         context['selectable_tags_list'] = self._get_selectable_tags()
         context['course_tag'] = self.request.cradmin_role.course_tag.tag
@@ -220,14 +239,10 @@ class StatisticsChartView(AssignmentStatsMixin, ListView):
         return context
 
     def get_ordering(self):
-        ordering = self.request.GET.get('ordering', None)
+        ordering = self.request.GET.get('ordering', 'id')
+
         if ordering is not None:
             ordering = ordering.split(',')
-            for order in ordering:
-                try:
-                    str(self.model.objects.order_by(order))
-                except FieldError:
-                    return None
         return ordering
 
 

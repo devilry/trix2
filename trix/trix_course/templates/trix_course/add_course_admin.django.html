@@ -5,7 +5,7 @@
 {% block title %}{% trans "Add course admin" %}{% endblock %}
 
 {% block course-header-text %}
-    <h1>Add course administrator to {{ course }}</h1>
+    <h1>{% trans "Add course administrator to" %} {{ course }}</h1>
 {% endblock %}
 
 {% block course-header-buttons %}
@@ -33,8 +33,7 @@
             <td id="student{{ student.id }}">
                 {{ student.displayname }}
                 {% if student.is_superuser %}
-                    <i class="fa fa-check" style="color: green"
-                        title="{% trans 'Superuser' %}"></i>
+                    <i class="fa fa-check" title="{% trans 'Superuser' %}"></i>
                     <span class="sr-only">{% trans "Superuser" %}</span>
                 {% endif %}
             </td>
