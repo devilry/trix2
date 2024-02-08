@@ -8,7 +8,7 @@ PyYAML==6.0
 cradmin-legacy==5.0.0
 
 # For Dataporten login
-django-allauth==0.58.2
+django-allauth==0.60.*
 
 #-e git://github.com/appressoas/django_cradmin.git#egg=django_cradmin
 
