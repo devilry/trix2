@@ -3920,6 +3920,7 @@
   font-weight: normal;
   src: url('../vendor/fonts/fa-brands-400.eot');
   src: url('../vendor/fonts/fa-brands-400.eot?#iefix') format('embedded-opentype'), url('../vendor/fonts/fa-brands-400.woff2') format('woff2'), url('../vendor/fonts/fa-brands-400.woff') format('woff'), url('../vendor/fonts/fa-brands-400.ttf') format('truetype'), url('../vendor/fonts/fa-brands-400.svg#fontawesome') format('svg');
+  font-display: swap;
 }
 .fab {
   font-family: 'Font Awesome 5 Brands';
@@ -3938,6 +3939,7 @@
 .far {
   font-family: 'Font Awesome 5 Free';
   font-weight: 400;
+  font-display: swap;
 }
 /*!
  * Font Awesome Free 5.4.2 by @fontawesome - https://fontawesome.com
@@ -3949,6 +3951,7 @@
   font-weight: 900;
   src: url('../vendor/fonts/fa-solid-900.eot');
   src: url('../vendor/fonts/fa-solid-900.eot?#iefix') format('embedded-opentype'), url('../vendor/fonts/fa-solid-900.woff2') format('woff2'), url('../vendor/fonts/fa-solid-900.woff') format('woff'), url('../vendor/fonts/fa-solid-900.ttf') format('truetype'), url('../vendor/fonts/fa-solid-900.svg#fontawesome') format('svg');
+  font-display: swap;
 }
 .fa,
 .fas {
@@ -6424,6 +6427,7 @@ input[type="button"].btn-block {
   font-family: 'Glyphicons Halflings';
   src: url('../fonts/glyphicons-halflings-regular.eot');
   src: url('../fonts/glyphicons-halflings-regular.eot?#iefix') format('embedded-opentype'), url('../fonts/glyphicons-halflings-regular.woff') format('woff'), url('../fonts/glyphicons-halflings-regular.ttf') format('truetype'), url('../fonts/glyphicons-halflings-regular.svg#glyphicons_halflingsregular') format('svg');
+  font-display: swap;
 }
 .glyphicon {
   position: relative;
