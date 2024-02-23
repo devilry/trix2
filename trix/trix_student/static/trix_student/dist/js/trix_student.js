@@ -64,11 +64,6 @@
         return $window.location.href = currentUrl.toString();
       };
     }
-  ]).controller('SolutionCtrl', [
-    '$scope',
-    function($scope) {
-      return $scope.isVisible = false;
-    }
   ]).controller('MenuCtrl', [
     '$scope',
     function($scope) {

@@ -79,18 +79,14 @@
         </div>
     {% endif %}
     {% if assignment.solution %}
-        <section class="trix-assignmentsolution" ng-cloak
-                ng-controller="SolutionCtrl">
-            <button ng-click="isVisible = !isVisible"
-                    class="btn btn-link trix-assignmentsolutionexpander"
-                    ng-class="{'active': isVisible}">
+        <section class="trix-assignmentsolution">
+            <button class="btn btn-link trix-assignmentsolutionexpander"
+                _="on click toggle .trix-solution-invisible on the next .trix-markdownarticle
+                      then toggle between .fa-angle-right and .fa-angle-down on .fa in me">
                 {% trans "See solution" %}
-                <span class="fa trix-no-print" ng-class="{
-                    'fa-angle-right': !isVisible,
-                    'fa-angle-down': isVisible
-                }"></span>
+                <span class="fa trix-no-print fa-angle-right"></span>
             </button>
-            <section class="trix-markdownarticle" ng-class="{'collapse': !isVisible}">
+            <section class="trix-markdownarticle trix-solution-invisible">
                 {% trix_assignment_markdown assignment.solution %}
             </section>
         </section>
