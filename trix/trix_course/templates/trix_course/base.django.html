@@ -7,12 +7,13 @@
 
 {% block body %}
 <div class="trix-course-wrapper">
-    <nav class="trix-course-menu" ng-controller="MenuCtrl">
+    <nav class="trix-course-menu">
         <span class="trix-course-menu-icon fa fa-wrench"></span>
-        <button class="trix-course-menu-toggle" ng-click="menuVisible = !menuVisible">
+        <button class="trix-course-menu-toggle"
+            _="on click toggle .trix-menu-collapse on the next .trix-course-menu-items">
             {% trans "Menu" %}
         </button>
-        <ul class="trix-course-menu-items" ng-class="{'trix-menu-collapse': !menuVisible}">
+        <ul class="trix-course-menu-items trix-menu-collapse">
             <li><a href="{% url 'trix_student_dashboard' %}">
                 <span class="fa fa-home"></span>
                 {% trans "Frontpage" %}

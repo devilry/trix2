@@ -5,9 +5,7 @@
     <div class="container">
         <div class="navbar-header">
             <button type="button" class="navbar-toggle"
-                    ng-init="trixNavigationCollapse = true"
-                    ng-click="trixNavigationCollapse = !trixNavigationCollapse"
-                    data-toggle="collapse" data-target="#trix_header_collapse">
+                _="on click toggle .collapse on the next .navbar-collapse">
                 <span class="sr-only">{% trans "Toggle navigation" %}</span>
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
@@ -17,8 +15,7 @@
                 Trix
             </a>
         </div>
-        <div class="collapse navbar-collapse navbar-responsive-collapse"
-                ng-class="{'collapse': trixNavigationCollapse}">
+        <div class="collapse navbar-collapse navbar-responsive-collapse">
             <ul class="nav navbar-nav navbar-right">
                 {% if request.user.is_authenticated %}
                     {% if request.user.is_admin %}
