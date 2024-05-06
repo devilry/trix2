@@ -133,7 +133,7 @@ class AssignmentStatsCsv(AssignmentStatsMixin, View):
         self.tags = self.get_tags()
         if not self.tags:
             return HttpResponseBadRequest()
-        if self.request.cradmin_role.course_tag.tag not in self.tags:
+        if not self.tags.filter(tag=self.request.cradmin_role.course_tag).exists():
             raise PermissionDenied()
         assignmentqueryset = self.get_queryset()
 
