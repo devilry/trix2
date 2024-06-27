@@ -1,0 +1,27 @@
+{% extends "trix_student/base.django.html"%}
+
+{% load i18n %}
+{% load socialaccount %}
+
+{% block title %}
+    {% trans "Choose a login provider" %}
+{% endblock title %}
+
+{% block not_signed_in_warning %}{% endblock %}
+{% block header %}
+    {% include "trix_student/include/header.django.html" with remove_login='True' %}
+{% endblock %}
+
+{% block content %}
+<div class="page-header">
+    <div class="container">
+        <h1>{% trans 'Select login provider' %}</h1>
+        <p>{% trans 'Click on one of the following login services to be redirected' %}:</p>
+        <ul>
+        {% for provider in providers %}
+            <li><a href="{% provider_login_url provider.id %}">{% trans "Login with" %} {{ provider.name }}</a></li>
+        {% endfor %}
+        </ul>
+    </div>
+</div>
+{% endblock %}

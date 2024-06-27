@@ -5,6 +5,7 @@ from django.utils.translation import gettext_lazy as _
 from django.http import Http404
 from django.urls import reverse_lazy
 
+from allauth.socialaccount.adapter import get_adapter
 from trix.trix_core import models
 from trix.trix_student.views import base
 
@@ -15,6 +16,13 @@ class ProfilePageView(LoginRequiredMixin, base.TrixListViewBase):
 
     def get_context_data(self):
         context = super(ProfilePageView, self).get_context_data()
+        session_login_method = self.request.session.get('account_authentication_methods')[0]
+        if session_login_method['method'] == 'socialaccount':
+            provider = get_adapter(self.request). \
+                get_provider(self.request, session_login_method['provider'])
+            context['session_idp_name'] = provider.name
+        else:
+            context['session_idp_name'] = False
         context['solved_assignments'] = self.get_solved_assignments()
         context['user_role'] = self.get_user_role()
         return context

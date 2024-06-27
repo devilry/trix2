@@ -7,7 +7,8 @@ from django.dispatch import receiver
 
 
 def update_user_with_socialaccount(email, request, sociallogin, connecting):
-    expected_response = getattr(settings, 'SOCIALACCOUNT_EXPECTED_RESPONSE', None)
+    expected_response = getattr(settings, 'SOCIALACCOUNT_EXPECTED_RESPONSES', {}). \
+                                get(sociallogin.account.provider, None)
     if expected_response:
         response_keys = sociallogin.account.extra_data.keys()
         if response_keys != expected_response.keys():
@@ -38,7 +39,7 @@ class MisalignedProviderResponseError(Exception):
     """
     Raised by :class:`.TrixSocialAccountAdapter` if the response from a social
     account provider lack expected root elements and/or had surplus root
-    elements when compared with `SOCIALACCOUNT_EXPECTED_RESPONSE`.
+    elements when compared with `SOCIALACCOUNT_EXPECTED_RESPONSES`.
     """
     def __init__(self, msg):
         self.msg = msg
@@ -73,7 +74,7 @@ def pre_social_login_handler(request, sociallogin, **kwargs):
     except get_user_model().DoesNotExist:
         pass
     else:
-        existing_socialaccount = SocialAccount.objects.filter(provider='dataporten', extra_data__contains={'email': email})
+        existing_socialaccount = SocialAccount.objects.filter(provider=sociallogin.account.provider, extra_data__contains={'email': email})
         if not existing_socialaccount:
             sociallogin.user = existing_user
             update_user_with_socialaccount(email, request, sociallogin, connecting=True)

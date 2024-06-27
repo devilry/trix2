@@ -38,12 +38,11 @@ INSTALLED_APPS = [
     'django.contrib.admin',
     'django_extensions',
     'crispy_forms',
-    # Oauth2 apps
     'allauth',
     'allauth.account',
     'allauth.socialaccount',
     'allauth.socialaccount.providers.dataporten',
-
+    'allauth.socialaccount.providers.openid_connect',
     'trix.trix_core',
     'trix.trix_course',
     'trix.trix_admin',
@@ -110,7 +109,7 @@ ACCOUNT_AUTHENTICATION_METHOD = 'email'
 ACCOUNT_SESSION_REMEMBER = False
 SOCIALACCOUNT_ADAPTER = 'trix.trix_auth.allauth_adapter.TrixSocialAccountAdapter'
 SOCIALACCOUNT_LOGIN_ON_GET = True
-DATAPORTEN_LOGOUT_URL = 'https://auth.dataporten.no/logout'
+SOCIALACCOUNT_PROVIDERS = None
 SITE_ID = 1
 
 TEMPLATES = [

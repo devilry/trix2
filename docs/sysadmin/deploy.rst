@@ -118,16 +118,71 @@ Create a ``trix_uio_ldap_auth.py`` as follows (but adjust the email suffix)::
 
 
 ***********
-Dataporten
+Federated authentication
 ***********
-Replacing the login with Dataporten login is relatively easy and can be done in a few steps:
+Trix has build-in support for replacing the login using OpenID Connect (OIDC) with Feide (through
+Dataporten) and/or other OIDC-compliant identify providers through Keycloak. If two or more
+providers are configured the user will be asked to select one of the available providers before
+they are redirected.
 
-#. Register a new `Dataporten Application <https://dashboard.dataporten.no/>`_. Documentation can be found in their `Dataporten docs <https://docs.feide.no/developer_oauth/register_and_manage_applications/getting_started_app_developers.html>`_. Use the redirect URL ``http://<webpage URL>:<port>/authenticate/allauth/dataporten/login/callback/``
-#. Go to the superuser panel (Django admin pages) and modify Sites. There should be an example site with id 1. Either edit this site or create a new one to reflect the name of the page.
-#. Create a new Social application using Dataporten as the provider. Give it a name and fill in the client id and secret key. Add the site you configured earlier.
-#. If you created a new Site, add ``SITE_ID = x`` to your ``trix_settings.py`` file, where X = Site ID.
-#. Add ``DATAPORTEN_LOGIN = True`` to your ``trix_settings.py`` file.
-#. Login and logout should now work through Dataporten. Users will still be created and can be edited as normal.
+Steps to enable Feide login:
+#. Register a new `Dataporten Application <https://dashboard.dataporten.no/>`_. Documentation can
+be found in their `Dataporten docs <https://docs.feide.no/developer_oauth/register_and_manage_applications/getting_started_app_developers.html>`_.
+Use the redirect URL ``http://<webpage URL>:<port>/authenticate/allauth/dataporten/login/callback/``
+
+#. Add the provider details to your ``trix_settings.py`` file using by overwriting
+``SOCIALACCOUNT_PROVIDERS`` (default: ``None``)::
+
+    SOCIALACCOUNT_PROVIDERS = {
+        'dataporten': {
+            'APPS': [
+                {
+                    'client_id': 'TRIX_DATAPORTEN_CLIENT_ID',
+                    'secret': 'TRIX_DATAPORTEN_SECRET',
+                }
+            ]
+        }
+    }
+
+Optional settings for logout URLs and validating the response can be provided separately::
+
+    SOCIALACCOUNT_EXPECTED_RESPONSES = {
+        'dataporten': {"userid": "", "email": "", "userid_sec": []},
+    }
+    
+    SOCIALACCOUNT_LOGOUT_URLS = {
+        'dataporten': 'https://auth.dataporten.no/logout',
+    }
+
+
+#. Login and logout should now work through Dataporten. Users will still be created and can be
+edited as normal.
+
+In a similar fashion, Keycloak can be enabled using `Allauth's OpenID Connect provider <https://docs.allauth.org/en/latest/socialaccount/providers/keycloak.html>`_::
+
+    SOCIALACCOUNT_PROVIDERS = {
+        'dataporten': {
+            (...)
+        },
+        'openid_connect': {
+            'APPS': [
+                {
+                    'provider_id': 'keycloak',
+                    'name': 'Displayed when choosing between providers',
+                    'client_id': 'TRIX_KEYCLOAK_CLIENT_ID',
+                    'secret': 'TRIX_KEYCLOAK_SECRET',
+                    'settings': {
+                        'server_url': 'http://keycloak:8080/realms/master/.well-known/openid-configuration',
+                    },
+                }
+            ],
+            'SCOPES': ['email', 'openid', 'profile']
+        }
+    }
+    
+    SOCIALACCOUNT_LOGOUT_URLS = {
+        'keycloak': 'URL_TO_END_SESSION_ENDPOINT',
+    }
 
 
 ****************

@@ -14,6 +14,9 @@ urlpatterns = [
     re_path(r'^allauth/logout/$',
             allauth_views.AllauthLogoutView.as_view(),
             name='account_logout'),
+    re_path(r'^select_login_provider/$',
+            allauth_views.selecting_provider_view,
+            name='select_provider'),
     re_path(r'^allauth/', include('allauth.urls')),
     re_path(r'^login-redirect/$', login.TrixLoginRedirectView.as_view(), name='trix_login_redirect'),
 ]
