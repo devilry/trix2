@@ -11726,7 +11726,7 @@ pre.trix-prelined {
   letter-spacing: 1px;
   width: 100%;
   min-height: 200px;
-  overflow-y: hidden;
+  overflow-y: auto;
 }
 .devilry-comment-editor__textarea .devilry-comment-editor-textarea--real {
   position: absolute;
