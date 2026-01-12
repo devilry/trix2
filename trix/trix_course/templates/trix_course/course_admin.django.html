@@ -7,12 +7,16 @@
 {% block course-header-text %}
     <h1>{{ course }}</h1>
     <p>{{ course.description }}</p>
+    <p>{% trans "Active period" %}: {{ course.active_period }}</p>
 {% endblock %}
 
 {% block course-header-buttons %}
     {% if owner %}
         <a class="btn btn-default" href="{% url 'trix_add_admin' course.id %}">
             {% trans "Add admin" %}
+        </a>
+        <a class="btn btn-default" href="{% url 'trix_edit_period' course.id %}">
+            {% trans "Edit active period" %}
         </a>
     {% endif %}
 {% endblock %}

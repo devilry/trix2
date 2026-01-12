@@ -1,0 +1,49 @@
+{% extends "trix_course/course_admin.django.html" %}
+
+{% load i18n %}
+
+{% block title %}{% trans "Edit active period for" %} {{ course }}{% endblock %}
+
+{% block course-header-text %}
+    <h1>{% trans "Edit active period for" %} {{ course }}</h1>
+{% endblock %}
+
+{% block course-header-buttons %}
+    <a class="btn btn-primary" href="{% url 'trix_course_admin' course.id %}">{% trans "Back" %}</a>
+{% endblock %}
+
+{% block course-table-header %}
+    <th scope="col">{% trans "Period" %}</th>
+    <th scope="col"></th>
+{% endblock %}
+
+{% block course-table-body %}
+  {% for period in periods %}
+    <tr>
+      <td>
+        <label for="period_{{ period.pk }}">{{ period.tag }}</label>
+      </td>
+      <td>
+        <input type="radio"
+               id="period_{{ period.pk }}"
+               name="active_period"
+               value="{{ period.pk }}"
+               form="set_active_period_form"
+               onchange="document.getElementById('set_active_period_form').submit();"
+               {% if course.active_period and course.active_period.pk == period.pk %}checked{% endif %}>
+      </td>
+    </tr>
+  {% empty %}
+    <tr>
+      <td colspan="2">{% trans "No periods found." %}</td>
+    </tr>
+  {% endfor %}
+{% endblock %}
+
+{% block course-footer %}
+    {% include "trix_student/include/pager.django.html" with pager_extraclass='trix-course-pager' %}
+
+  <form id="set_active_period_form" method="post" action="{{ request.path }}{% if page_obj.number %}?page={{ page_obj.number }}{% endif %}">
+    {% csrf_token %}
+  </form>
+{% endblock %}

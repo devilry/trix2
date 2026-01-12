@@ -105,9 +105,17 @@ msgstr "Søk..."
 msgid "Close"
 msgstr "Lukk"
 
-#: trix/trix_course/templates/trix_course/course_admin.django.html:15
+#: trix/trix_course/templates/trix_course/course_admin.django.html:10
+msgid "Active period"
+msgstr "Gjeldende semester"
+
+#: trix/trix_course/templates/trix_course/course_admin.django.html:16
 msgid "Add admin"
 msgstr "Legg til admin"
+
+#: trix/trix_course/templates/trix_course/course_admin.django.html:19
+msgid "Edit active period"
+msgstr "Rediger gjeldende semester"
 
 #: trix/trix_course/templates/trix_course/course_admin.django.html:38
 #: trix/trix_course/templates/trix_course/remove_course_admin.django.html:23
@@ -156,6 +164,15 @@ msgstr "Bare som eier"
 #: trix/trix_course/templates/trix_course/remove_course_admin.django.html:30
 msgid "Cancel"
 msgstr "Avbryt"
+
+#: trix/trix_course/templates/trix_course/edit_course_active_period.django.html:5
+#: trix/trix_course/templates/trix_course/edit_course_active_period.django.html:8
+msgid "Edit active period for"
+msgstr "Rediger gjeldende semester for"
+
+#: trix/trix_course/templates/trix_course/edit_course_active_period.django.html:38
+msgid "No periods found"
+msgstr "Ingen tilgjengelig semestre."
 
 #: trix/trix_course/views/add.py:67
 #, python-brace-format
