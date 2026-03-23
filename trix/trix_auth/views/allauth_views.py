@@ -42,9 +42,14 @@ class AllauthLogoutView(LogoutView):
 
     def get_redirect_url(self):
         '''Redirect to log out from the identity provider (IdP) as well.'''
-        session_login_method = self.request.session.get('account_authentication_methods')[0]
         logout_urls = getattr(settings, 'SOCIALACCOUNT_LOGOUT_URLS', {})
-        if session_login_method['method'] == 'socialaccount' and session_login_method['provider'] in logout_urls:
-            return logout_urls[session_login_method['provider']]
-        else:
-            return super(AllauthLogoutView, self).get_redirect_url()
+
+        methods = self.request.session.get('account_authentication_methods')
+        if methods:
+            session_login_method = methods[0]
+            if (
+                session_login_method['method'] == 'socialaccount'
+                and session_login_method['provider'] in logout_urls
+            ):
+                return logout_urls[session_login_method['provider']]
+        return super(AllauthLogoutView, self).get_redirect_url()
