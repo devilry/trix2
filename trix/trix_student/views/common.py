@@ -9,7 +9,7 @@ from trix.trix_student.views import base
 
 
 class AssignmentListViewBase(base.TrixListViewBase):
-    paginate_by = 100
+    paginate_by = 20
     context_object_name = 'assignment_list'
     already_selected_tags = []
 
@@ -116,9 +116,6 @@ class AssignmentListViewBase(base.TrixListViewBase):
 
         context['assignmentlist_with_howsolved'] = self._get_assignmentlist_with_howsolved(
             context['assignment_list'])
-        context['progresstext'] = _(
-            'You have completed {{ solvedPercentage }} percent of assignments matching the '
-            'currently selected tags.')
         return context
 
     def _get_user_is_admin(self):

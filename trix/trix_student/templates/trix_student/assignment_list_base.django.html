@@ -12,31 +12,15 @@
         <div id="assignments-taggingbox" class="col-sm-3 col-sm-push-9 col-md-3 col-md-push-9
                 trix-no-print">
             {% if request.user.is_authenticated and assignmentlist_with_howsolved %}
-                <div ng-controller="AssignmentListProgressController"
-                        class="assignments-progressbox"
-                        ng-cloak>
-                    <div ng-show="loading">
-                        <span class="fa fa-spin fa-spinner"></span>
-                        <span class="sr-only">{% trans "Loading progress..." %}</span>
-                    </div>
-                    <div ng-show="!loading">
-                        {% verbatim %}
-                            <div class="progress">
-                                <div class="progress-bar progress-bar-width-{{ solvedPercentage }}"
-                                        ng-class="progressBarClass"
-                                        role="progressbar"
-                                        aria-valuenow="{{ solvedPercentage }}"
-                                        aria-valuemin="0"
-                                        aria-valuemax="100"
-                                        aria-label= {% trans "Assignment progress" %}>
-                                    {{ solvedPercentage }}%
-                                </div>
-                            </div>
-                        {% endverbatim %}
-                        <p class="text-muted"><small>
-                            {{ progresstext }}
-                        </small></p>
-                    </div>
+                <div id="course-progress-container"
+                     {% if course %}
+                        hx-get="{% url 'course_progress_partial' course.id %}"
+                     {% else %}
+                        hx-get="{% url 'assignments_progress_partial' request.resolver_match.kwargs.assignment_ids %}{% if request.GET.tags %}?tags={{ request.GET.tags|urlencode }}{% endif %}"
+                     {% endif %}
+                     hx-trigger="assignmentUpdated from:body"
+                     hx-swap="innerHTML">
+                     {% include "trix_student/include/progressbox.django.html" %}
                 </div>
             {% endif %}
             <div ng-controller="RemoveTagCtrl" class="assignments-selectedtags-listing">

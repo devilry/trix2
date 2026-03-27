@@ -1,0 +1,28 @@
+{% load i18n %}
+
+{% if request.user.is_authenticated and assignmentlist_with_howsolved %}
+  <div class="assignments-progressbox">
+    <div class="progress">
+      <div class="progress-bar progress-bar-width-{{ progress_percentage }}
+          {% if progress_percentage > 1 and progress_percentage < 20 %}progress-bar-danger
+          {% elif progress_percentage < 45 %}progress-bar-warning
+          {% elif progress_percentage == 100 %}progress-bar-success
+          {% endif %}"
+          role="progressbar"
+          aria-valuenow="{{ progress_percentage }}"
+          aria-valuemin="0"
+          aria-valuemax="100"
+          aria-label="{% trans 'Assignment progress' %}">
+        {{ progress_percentage }}%
+      </div>
+    </div>
+
+    <p class="text-muted">
+      <small>
+        {% trans "You have completed " %}
+        <span class="progress-inline">{{ progress_percentage }}</span>
+        {% trans " percent of assignments matching the currently selected tags." %}
+      </small>
+    </p>
+  </div>
+{% endif %}
