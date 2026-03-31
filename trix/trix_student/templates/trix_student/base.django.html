@@ -14,9 +14,17 @@
 
         {% block css %}<link href='{% static "trix_student/dist/css/styles.css" %}' rel="stylesheet">{% endblock %}
 
-        {% block js %}<script src='{% static "trix_student/dist/vendor/js/_hyperscript-v0.9.14.min.js" %}' type="text/javascript"></script>
+        {% block js %}<script src='{% static "trix_student/dist/vendor/js/jquery.slim.min.js" %}' type="text/javascript"></script>
+        <script src='{% static "trix_student/dist/vendor/js/angular.min.js" %}' type="text/javascript"></script>
+        <script src='{% static "trix_student/dist/vendor/js/angular-cookies.min.js" %}' type="text/javascript"></script>
+        <script src='{% static "trix_student/dist/vendor/js/angular-route.min.js" %}' type="text/javascript"></script>
+        <script src='{% static "trix_student/dist/vendor/js/ui-bootstrap.min.js" %}' type="text/javascript"></script>
+        <script src='{% static "trix_student/dist/vendor/js/alert.js" %}' type="text/javascript"></script>
+        <script src='{% static "trix_student/dist/vendor/js/url.min.js" %}' type="text/javascript"></script>
+        <script src='{% static "trix_student/dist/vendor/js/_hyperscript-v0.9.14.min.js" %}' type="text/javascript"></script>
         <script src='{% static "trix_student/dist/vendor/js/htmx-v2.0.8.min.js" %}' type="text/javascript"></script>
-        <script src='{% static "trix_student/dist/vendor/js/htmx-ext-json-enc-v2.0.1.js" %}' type="text/javascript"></script>{% endblock %}
+        <script src='{% static "trix_student/dist/vendor/js/htmx-ext-json-enc-v2.0.1.js" %}' type="text/javascript"></script>
+        <script src='{% static "trix_student/dist/js/trix_student.min.js" %}' type="text/javascript"></script>{% endblock %}
     </head>
     <body hx-headers='{"X-CSRFToken": "{{ csrf_token }}"}'>
     {% block body %}
