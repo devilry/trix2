@@ -1,13 +1,6 @@
 {% load i18n %}
 {% load trix_core_tags %}
-
-<section class="trix-assignment {% if assignment.hidden %}trix-assignment-hidden{% endif %}"
-        ng-controller="AssignmentCtrl"
-        ng-class="boxClass"
-        ng-init="
-            assignment_id='{{ assignment.id }}';
-            howsolved='{{ howsolved }}';
-        ">
+<section id="assignment-{{ assignment.id }}" class="trix-assignment{% if assignment.hidden %} trix-assignment-hidden{% endif %} {% if howsolved == '' %}trix-assignment-notsolved{% else %}trix-assignment-solved{{ howsolved }}{% endif %}">
     {% if user_is_admin and course.id %}
         <a href="{% url 'trix_courseadmin-assignments-edit' course.id assignment.id %}?{{ urlencoded_success_url }}"
                 class="btn btn-trix-admin pull-right trix-no-print">
@@ -34,63 +27,57 @@
         </div>
     {% endif %}
 
-    <section class="trix-assignmenttext  trix-markdownarticle" ng-non-bindable>
+    <section class="trix-assignmenttext trix-markdownarticle disable-scripting">
         {% trix_assignment_markdown assignment.text %}
     </section>
     {% if request.user.is_authenticated and not disable_howsolved_box %}
-        <div class="trix-assignmenthowsolved trix-no-print" ng-cloak>
-            <p>
-                {% trans "How did you solve the assignment?" %}
-            </p>
-            <div class="btn-group" role="radiogroup">
-                <button class="btn"
-                        ng-click="solvedOnMyOwn()"
-                        ng-disabled="saving"
-                        ng-class="buttonClass"
-                        role="radio"
-                        trix-aria-checked="howsolved=='bymyself'">
-                    <span class="fa fa-check" ng-show="howsolved=='bymyself'"></span>
+        <form class="trix-assignmenthowsolved trix-no-print" method="post">
+            <fieldset role="radiogroup">
+                <p>{% trans "How did you solve the assignment?" %}</p>
+                <button type="button" class="btn btn-{% if howsolved == '' %}default{% elif howsolved == 'bymyself' %}success{% else %}warning{% endif %}" role="radio"
+                    aria-checked="{% if howsolved == 'bymyself' %}true{% else %}false{% endif %}"
+                    hx-post="{% url 'trix_student_howsolved' assignment.id %}"
+                    hx-ext="json-enc"
+                    name="howsolved" value="bymyself"
+                    hx-trigger="click"
+                    hx-target="#assignment-{{ assignment.id }}"
+                    hx-swap="outerHTML">
+                    {% if howsolved == 'bymyself' %}<span class="fa fa-check">{% endif %}
                     {% trans "On my own" %}
                 </button>
-                <button class="btn"
-                        ng-click="solvedWithHelp()"
-                        ng-class="buttonClass"
-                        ng-disabled="saving"
-                        role="radio"
-                        trix-aria-checked="howsolved=='withhelp'">
-                    <span class="fa fa-check" ng-show="howsolved=='withhelp'"></span>
+                <button type="button" class="btn btn-{% if howsolved == '' %}default{% elif howsolved == 'bymyself' %}success{% else %}warning{% endif %}" role="radio"
+                    aria-checked="{% if howsolved == 'withhelp' %}true{% else %}false{% endif %}"
+                    hx-post="{% url 'trix_student_howsolved' assignment.id %}"
+                    hx-ext="json-enc"
+                    name="howsolved" value="withhelp"
+                    hx-trigger="click"
+                    hx-target="#assignment-{{ assignment.id }}"
+                    hx-swap="outerHTML">
+                    {% if howsolved == 'withhelp' %}<span class="fa fa-check">{% endif %}
                     {% trans "With help" %}
                 </button>
-                <button class="btn"
-                        ng-click="notSolved()"
-                        ng-class="buttonClass"
-                        ng-disabled="saving"
-                        role="radio"
-                        trix-aria-checked="!howsolved">
-                    <span class="fa fa-check" ng-show="!howsolved"></span>
+                <button type="button" class="btn btn-{% if howsolved == '' %}default{% elif howsolved == 'bymyself' %}success{% else %}warning{% endif %}" role="radio"
+                    aria-checked="{% if howsolved == '' %}true{% else %}false{% endif %}"
+                    hx-delete="{% url 'trix_student_howsolved' assignment.id %}"
+                    hx-params="none"
+                    hx-trigger="click"
+                    hx-target="#assignment-{{ assignment.id }}"
+                    hx-swap="outerHTML">
+                    {% if howsolved == '' %}<span class="fa fa-check">{% endif %}
                     {% trans "Not solved" %}
                 </button>
-            </div>
-            <span role="status" tabindex="-1" class="trix-assignmenthowsolvedsaving"
-                    ng-show="saving">
-                <span class="fa fa-spin fa-spinner"></span>
-                <span class="text-success">{% trans "Saving..." %}</span>
-            </span>
-        </div>
+            </fieldset>
+        </form>
     {% endif %}
     {% if assignment.solution %}
-        <section class="trix-assignmentsolution" ng-cloak
-                ng-controller="SolutionCtrl">
-            <button ng-click="isVisible = !isVisible"
-                    class="btn btn-link trix-assignmentsolutionexpander"
-                    ng-class="{'active': isVisible}">
+        <section class="trix-assignmentsolution">
+            <button class="btn btn-link trix-assignmentsolutionexpander"
+                _="on click toggle .trix-solution-invisible on the next .trix-markdownarticle
+                      then toggle between .fa-angle-right and .fa-angle-down on .fa in me">
                 {% trans "See solution" %}
-                <span class="fa trix-no-print" ng-class="{
-                    'fa-angle-right': !isVisible,
-                    'fa-angle-down': isVisible
-                }"></span>
+                <span class="fa trix-no-print fa-angle-right"></span>
             </button>
-            <section class="trix-markdownarticle" ng-class="{'collapse': !isVisible}">
+            <section class="trix-markdownarticle trix-solution-invisible">
                 {% trix_assignment_markdown assignment.solution %}
             </section>
         </section>

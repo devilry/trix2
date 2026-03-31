@@ -45,6 +45,18 @@ msgstr "Oppgaver"
 msgid "Loading progress..."
 msgstr "Laster progresjon..."
 
+#: trix/trix_student/templates/trix_student/assignment_list_base.django.html:30
+msgid "Assignment progress"
+msgstr "Oppgaveprogresjon"
+
+#: trix/trix_student/templates/trix_student/assignment_list_base.django.html:35
+msgid "You have completed "
+msgstr "Du har fullført "
+
+#: trix/trix_student/templates/trix_student/assignment_list_base.django.html:37
+msgid " percent of assignments matching the currently selected tags."
+msgstr "% av oppgavene med de valgte taggene."
+
 #: trix/trix_student/templates/trix_student/assignment_list_base.django.html:44
 msgid "Selected tags"
 msgstr "Valgte tags"
@@ -393,13 +405,6 @@ msgstr "Rolle"
 #: trix/trix_student/templates/trix_student/users.django.html:47
 msgid "DELETE ME"
 msgstr "SLETT MEG"
-
-#: trix/trix_student/views/common.py:120
-msgid ""
-"You have completed {{ solvedPercentage }} percent of assignments matching "
-"the currently selected tags."
-msgstr ""
-"Du har fullført {{ solvedPercentage }}% av oppgavene med de valgte taggene."
 
 #: trix/trix_student/views/users.py:31
 msgid "Administrator for "

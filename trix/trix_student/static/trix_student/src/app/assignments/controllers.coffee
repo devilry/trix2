@@ -35,18 +35,6 @@ angular.module('trixStudent.assignments.controllers', ['ngRoute'])
       $window.location.href = currentUrl.toString()
 ])
 
-.controller('SolutionCtrl', [
-  '$scope',
-  ($scope) ->
-    $scope.isVisible = false
-])
-
-.controller('MenuCtrl', [
-  '$scope',
-  ($scope) ->
-    $scope.menuVisible = false
-])
-
 .controller('CourseCtrl', [
     '$scope',
     ($scope) ->

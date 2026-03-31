@@ -1,6 +1,9 @@
 {% extends "trix_student/base.django.html" %}
 
 {% load i18n %}
+{% load static %}
+
+{% block js %}{{ block.super }}{% endblock %}
 
 {% block title %}{% trans "Choose course" %}{% endblock title %}
 

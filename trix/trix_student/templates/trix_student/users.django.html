@@ -22,7 +22,7 @@
                 </li>
                 <li>
                     <h2>{% trans "Last login" %}</h2>
-                    <p>{{ user.last_login }}</p>
+                    <p>{{ user.last_login }}{% if session_idp_name %} via {{ session_idp_name }}{% endif %}</p>
                 </li>
                 <li>
                     <h2>{% trans "Data collection" %}</h2>
