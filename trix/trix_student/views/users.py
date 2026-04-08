@@ -6,6 +6,7 @@ from django.http import Http404
 from django.urls import reverse_lazy
 
 from allauth.socialaccount.adapter import get_adapter
+from allauth.socialaccount.models import SocialApp
 from trix.trix_core import models
 from trix.trix_student.views import base
 
@@ -18,9 +19,15 @@ class ProfilePageView(LoginRequiredMixin, base.TrixListViewBase):
         context = super(ProfilePageView, self).get_context_data()
         session_login_method = self.request.session.get('account_authentication_methods')[0]
         if session_login_method['method'] == 'socialaccount':
-            provider = get_adapter(self.request). \
-                get_provider(self.request, session_login_method['provider'])
-            context['session_idp_name'] = provider.name
+            try:
+                provider = get_adapter(self.request).get_provider(
+                    self.request,
+                    session_login_method['provider']
+                )
+            except SocialApp.DoesNotExist:
+                context['session_idp_name'] = False
+            else:
+                context['session_idp_name'] = provider.name
         else:
             context['session_idp_name'] = False
         context['solved_assignments'] = self.get_solved_assignments()
