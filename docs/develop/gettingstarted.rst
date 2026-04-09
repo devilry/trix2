@@ -39,7 +39,7 @@ Install in a virtualenv
 ***********************
 Create a virtualenv (an isolated Python environment)::
 
-    $ mkvirtualenv trix
+    $ python -m venv trix
 
 
 .. _enable-virtualenv:
@@ -53,7 +53,8 @@ Create a virtualenv (an isolated Python environment)::
 
 Install the development requirements::
 
-    $ pip install -r requirements/develop.txt
+    $ pip install --upgrade pip setuptools
+    $ pip install --editable ".[develop]"
 
 
 Run npm install (include -g if you want global)::

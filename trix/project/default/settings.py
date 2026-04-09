@@ -83,7 +83,6 @@ DATABASES = {
 LANGUAGE_CODE = 'en-us'
 TIME_ZONE = 'Europe/Oslo'
 USE_I18N = True
-USE_L10N = True
 USE_TZ = True
 
 # Setup static files to be served at /s/.
@@ -109,7 +108,7 @@ ACCOUNT_AUTHENTICATION_METHOD = 'email'
 ACCOUNT_SESSION_REMEMBER = False
 SOCIALACCOUNT_ADAPTER = 'trix.trix_auth.allauth_adapter.TrixSocialAccountAdapter'
 SOCIALACCOUNT_LOGIN_ON_GET = True
-SOCIALACCOUNT_PROVIDERS = None
+SOCIALACCOUNT_PROVIDERS = {}
 SITE_ID = 1
 
 TEMPLATES = [

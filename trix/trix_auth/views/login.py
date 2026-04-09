@@ -60,7 +60,7 @@ class TrixLoginRedirectView(RedirectView):
 
     def __init__(self, **kwargs: Any) -> None:
         super().__init__(**kwargs)
-        socialaccount_providers = getattr(settings, 'SOCIALACCOUNT_PROVIDERS', None)
+        socialaccount_providers = getattr(settings, 'SOCIALACCOUNT_PROVIDERS', {})
         if socialaccount_providers:
             if len(socialaccount_providers) > 1:
                 self.url = reverse('select_provider')

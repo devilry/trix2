@@ -6,7 +6,7 @@ Setup Trix for production
 ********************
 Install dependencies
 ********************
-#. Python 3.8 or higher. Check your current version by running ``python --version``.
+#. Python 3.10 or higher. Check your current version by running ``python --version``.
 #. PIP_
 #. VirtualEnv_
 #. PostgreSQL server --- not needed if you just want to build the docs.
@@ -38,7 +38,7 @@ Install Trix
 
     $ cd ~/trixdeploy
     $ virtualenv venv
-    $ venv/bin/pip3 install psycopg2 trix
+    $ venv/bin/pip3 install gunicorn psycopg trix
 
 
 *********************************
@@ -69,7 +69,7 @@ Trix is configured through a ``trix_settings.py`` file. Start by copying the fol
     # Database config
     DATABASES = {
       'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'DATABASE_NAME',
         'USER': 'DATABASE_USERNAME',
         'PASSWORD': 'DATABASE_PASSWORD',
@@ -128,10 +128,10 @@ they are redirected.
 Steps to enable Feide login:
 #. Register a new `Dataporten Application <https://dashboard.dataporten.no/>`_. Documentation can
 be found in their `Dataporten docs <https://docs.feide.no/developer_oauth/register_and_manage_applications/getting_started_app_developers.html>`_.
-Use the redirect URL ``http://<webpage URL>:<port>/authenticate/allauth/dataporten/login/callback/``
+Use the redirect URL ``https://{webpage URL}:{port}/authenticate/allauth/dataporten/login/callback/``
 
 #. Add the provider details to your ``trix_settings.py`` file using by overwriting
-``SOCIALACCOUNT_PROVIDERS`` (default: ``None``)::
+``SOCIALACCOUNT_PROVIDERS`` (default: ``{}``)::
 
     SOCIALACCOUNT_PROVIDERS = {
         'dataporten': {
@@ -158,7 +158,7 @@ Optional settings for logout URLs and validating the response can be provided se
 #. Login and logout should now work through Dataporten. Users will still be created and can be
 edited as normal.
 
-In a similar fashion, Keycloak can be enabled using `Allauth's OpenID Connect provider <https://docs.allauth.org/en/latest/socialaccount/providers/keycloak.html>`_::
+In a similar fashion, Keycloak can be enabled using `Allauth's OpenID Connect provider <https://docs.allauth.org/en/latest/socialaccount/providers/openid_connect.html>`_::
 
     SOCIALACCOUNT_PROVIDERS = {
         'dataporten': {
@@ -183,6 +183,8 @@ In a similar fashion, Keycloak can be enabled using `Allauth's OpenID Connect pr
     SOCIALACCOUNT_LOGOUT_URLS = {
         'keycloak': 'URL_TO_END_SESSION_ENDPOINT',
     }
+
+Use the redirect URL ``https://{webpage URL}:{port}/authenticate/allauth/oidc/{provider_id}/login/callback/``.
 
 
 ****************
