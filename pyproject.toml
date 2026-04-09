@@ -27,7 +27,6 @@ dependencies = [
     "PyYAML>=6.0",
     "cradmin-legacy>=5.0.0",
     "django-allauth[socialaccount]==65.3.*",
-    "gunicorn",
 ]
 
 classifiers = [

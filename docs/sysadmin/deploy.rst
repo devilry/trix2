@@ -6,7 +6,7 @@ Setup Trix for production
 ********************
 Install dependencies
 ********************
-#. Python 3.8 or higher. Check your current version by running ``python --version``.
+#. Python 3.10 or higher. Check your current version by running ``python --version``.
 #. PIP_
 #. VirtualEnv_
 #. PostgreSQL server --- not needed if you just want to build the docs.
@@ -38,7 +38,7 @@ Install Trix
 
     $ cd ~/trixdeploy
     $ virtualenv venv
-    $ venv/bin/pip3 install psycopg2 trix
+    $ venv/bin/pip3 install gunicorn psycopg trix
 
 
 *********************************
@@ -69,7 +69,7 @@ Trix is configured through a ``trix_settings.py`` file. Start by copying the fol
     # Database config
     DATABASES = {
       'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'DATABASE_NAME',
         'USER': 'DATABASE_USERNAME',
         'PASSWORD': 'DATABASE_PASSWORD',
