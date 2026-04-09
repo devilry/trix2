@@ -8,18 +8,22 @@ from django.contrib.sites.models import Site
 from trix.trix_core.models import Course, Tag, User
 
 
+@admin.action(
+    description=_("Give admin access to the selected users")
+)
 def set_administrators(modeladmin, request, queryset):
     queryset.update(is_admin=True)
 
 
-set_administrators.short_description = _("Give admin access to the selected users")
 
 
+@admin.action(
+    description=_("Remove admin access from the selected users")
+)
 def unset_administrators(modeladmin, request, queryset):
     queryset.update(is_admin=False)
 
 
-unset_administrators.short_description = _("Remove admin access from the selected users")
 
 
 @admin.register(User)
@@ -91,15 +95,19 @@ class TagAdmin(admin.ModelAdmin):
                 Count('active_period_set', distinct=True),
                 Count('course_set', distinct=True))
 
+    @admin.display(
+        description=_('Number of assignments'),
+        ordering='assignment__count',
+    )
     def get_assignment_count(self, tag):
         return str(tag.assignment__count)
-    get_assignment_count.short_description = _('Number of assignments')
-    get_assignment_count.admin_order_field = 'assignment__count'
 
+    @admin.display(
+        description=_('Is in use'),
+        boolean=True,
+    )
     def is_in_use(self, tag):
         return (tag.assignment__count + tag.active_period_set__count + tag.course_set__count) > 0
-    is_in_use.short_description = _('Is in use')
-    is_in_use.boolean = True
 
 
 @admin.register(Course)
@@ -120,13 +128,17 @@ class CourseAdmin(admin.ModelAdmin):
     filter_horizontal = ['admins', 'owner']
     raw_id_fields = ['course_tag', 'active_period']
 
+    @admin.display(
+        description='Admins'
+    )
     def get_admins(self, course):
         return ', '.join(str(user) for user in course.admins.all())
-    get_admins.short_description = 'Admins'
 
+    @admin.display(
+        description='Owner'
+    )
     def get_owner(self, course):
         return ', '.join(str(user) for user in course.owner.all())
-    get_owner.short_description = 'Owner'
 
     def get_form(self, request, obj=None, **kwargs):
         if obj:
