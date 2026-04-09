@@ -7,7 +7,6 @@ from django.urls import reverse
 
 from allauth.account.views import LoginView, LogoutView
 from allauth.socialaccount.adapter import get_adapter
-from allauth.socialaccount.models import SocialApp
 
 logger = logging.getLogger(__name__)
 
@@ -25,11 +24,14 @@ class AllauthLoginView(LoginView):
         if redirect_url == '':
             redirect_url = reverse('trix_student_dashboard')
         adapter = get_adapter(self.request)
-        socialaccount_providers = getattr(settings, 'SOCIALACCOUNT_PROVIDERS', None)
-        if socialaccount_providers and len(socialaccount_providers) == 1:
-            provider = adapter.get_provider(self.request, list(socialaccount_providers)[0])
+        socialaccount_providers = getattr(settings, 'SOCIALACCOUNT_PROVIDERS', {})
+        if socialaccount_providers:
+            if len(socialaccount_providers) == 1:
+                provider = adapter.get_provider(self.request, list(socialaccount_providers)[0])
+            else:
+                logger.error(msg='AllauthLoginView should only be invoked with one IdP in SOCIALACCOUNT_PROVIDERS.')
         else:
-            logger.error(msg='AllauthLoginView should only be invoked with one IdP in SOCIALACCOUNT_PROVIDERS.')
+            logger.error(msg='AllauthLoginView invoked without any IdP in SOCIALACCOUNT_PROVIDERS.')
 
         return HttpResponseRedirect(
             provider.get_login_url(

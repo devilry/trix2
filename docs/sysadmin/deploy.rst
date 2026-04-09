@@ -131,7 +131,7 @@ be found in their `Dataporten docs <https://docs.feide.no/developer_oauth/regist
 Use the redirect URL ``https://{webpage URL}:{port}/authenticate/allauth/dataporten/login/callback/``
 
 #. Add the provider details to your ``trix_settings.py`` file using by overwriting
-``SOCIALACCOUNT_PROVIDERS`` (default: ``None``)::
+``SOCIALACCOUNT_PROVIDERS`` (default: ``{}``)::
 
     SOCIALACCOUNT_PROVIDERS = {
         'dataporten': {
