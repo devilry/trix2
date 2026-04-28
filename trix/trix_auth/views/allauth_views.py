@@ -25,14 +25,13 @@ class AllauthLoginView(LoginView):
             redirect_url = reverse('trix_student_dashboard')
         adapter = get_adapter(self.request)
         socialaccount_providers = getattr(settings, 'SOCIALACCOUNT_PROVIDERS', {})
-        if socialaccount_providers:
-            if len(socialaccount_providers) == 1:
-                provider = adapter.get_provider(self.request, list(socialaccount_providers)[0])
-            else:
-                logger.error(msg='AllauthLoginView should only be invoked with one IdP in SOCIALACCOUNT_PROVIDERS.')
-        else:
-            logger.error(msg='AllauthLoginView invoked without any IdP in SOCIALACCOUNT_PROVIDERS.')
-
+        if not socialaccount_providers:
+            logger.warning('AllauthLoginView accessed with no IdP configured.')
+            return HttpResponseRedirect(reverse('trix_login'))
+        if len(socialaccount_providers) > 1:
+            logger.warning(f'AllauthLoginView accessed directly with {len(socialaccount_providers)} IdPs. Redirecting to selector.')
+            return HttpResponseRedirect(reverse('select_provider'))
+        provider = adapter.get_provider(self.request, list(socialaccount_providers)[0])
         return HttpResponseRedirect(
             provider.get_login_url(
                 request=self.request,
