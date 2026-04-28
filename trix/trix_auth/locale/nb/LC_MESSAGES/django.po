@@ -86,3 +86,16 @@ msgid ""
 msgstr ""
 "Vennligst skriv inn en gyldig e-postaddresse og passord. Begge feltene "
 "skiller mellomstore og små bokstaver"
+
+#: trix/trix_auth/templates/trix_auth/select_provider.django.html:7
+#: trix/trix_auth/templates/trix_auth/select_provider.django.html:18
+msgid "Select login provider"
+msgstr "Velg en innloggingstjeneste"
+
+#: trix/trix_auth/templates/trix_auth/select_provider.django.html:19
+msgid "Click on one of the following login services to be redirected"
+msgstr "Klikk på en av de følgende innloggingstjenestene for å gå videre"
+
+#: trix/trix_auth/templates/trix_auth/select_provider.django.html:21
+msgid "Login with"
+msgstr "Logg inn med"
