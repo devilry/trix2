@@ -4,8 +4,6 @@ from __future__ import unicode_literals
 
 from django.db import migrations
 
-from allauth.account.utils import sync_user_email_addresses
-
 
 def fix_user_email(apps, schema_editor):
 
