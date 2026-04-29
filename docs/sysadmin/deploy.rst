@@ -146,11 +146,11 @@ Use the redirect URL ``https://{webpage URL}:{port}/authenticate/allauth/datapor
 
 Optional settings for logout URLs and validating the response can be provided separately::
 
-    SOCIALACCOUNT_EXPECTED_RESPONSES = {
+    TRIX_SOCIALACCOUNT_EXPECTED_RESPONSES = {
         'dataporten': {"userid": "", "email": "", "userid_sec": []},
     }
     
-    SOCIALACCOUNT_LOGOUT_URLS = {
+    TRIX_SOCIALACCOUNT_LOGOUT_URLS = {
         'dataporten': 'https://auth.dataporten.no/logout',
     }
 
@@ -180,7 +180,7 @@ In a similar fashion, Keycloak can be enabled using `Allauth's OpenID Connect pr
         }
     }
     
-    SOCIALACCOUNT_LOGOUT_URLS = {
+    TRIX_SOCIALACCOUNT_LOGOUT_URLS = {
         'keycloak': 'URL_TO_END_SESSION_ENDPOINT',
     }
 

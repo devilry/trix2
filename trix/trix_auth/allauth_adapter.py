@@ -7,7 +7,7 @@ from django.dispatch import receiver
 
 
 def update_user_with_socialaccount(email, request, sociallogin, connecting):
-    expected_response = getattr(settings, 'SOCIALACCOUNT_EXPECTED_RESPONSES', {}). \
+    expected_response = getattr(settings, 'TRIX_SOCIALACCOUNT_EXPECTED_RESPONSES', {}). \
                                 get(sociallogin.account.provider, None)
     if expected_response:
         response_keys = sociallogin.account.extra_data.keys()
@@ -39,7 +39,7 @@ class MisalignedProviderResponseError(Exception):
     """
     Raised by :class:`.TrixSocialAccountAdapter` if the response from a social
     account provider lack expected root elements and/or had surplus root
-    elements when compared with `SOCIALACCOUNT_EXPECTED_RESPONSES`.
+    elements when compared with `TRIX_SOCIALACCOUNT_EXPECTED_RESPONSES`.
     """
     def __init__(self, msg):
         self.msg = msg
