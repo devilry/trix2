@@ -28,4 +28,4 @@ class CourseListView(base.TrixListViewBase):
             return models.Course.objects.filter(visible=True)
         if self.user.is_admin:
             return super().get_queryset()
-        return models.Course.objects.filter(Q(visible=True) | Q(admins=self.user))
+        return models.Course.objects.filter(Q(visible=True) | Q(admins=self.user)).distinct()
