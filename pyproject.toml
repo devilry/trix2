@@ -57,7 +57,7 @@ develop = [
 
     # Easier to work with databases during development
     "django_dbdev==1.2.3",
-    "sh==1.14.3",
+    "sh==2.2.4",
     "python-dateutil==2.8.2",
 
     # Better Django shell and other utils for development
