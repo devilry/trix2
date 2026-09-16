@@ -1,34 +1,53 @@
 from allauth.socialaccount.adapter import DefaultSocialAccountAdapter
-from allauth.socialaccount.models import SocialAccount
 from allauth.socialaccount.signals import pre_social_login
 from django.contrib.auth import get_user_model
 from django.conf import settings
 from django.dispatch import receiver
 
 
-def update_user_with_socialaccount(email, request, sociallogin, connecting):
-    expected_response = getattr(settings, 'TRIX_SOCIALACCOUNT_EXPECTED_RESPONSES', {}). \
-                                get(sociallogin.account.provider, None)
-    if expected_response:
-        response_keys = sociallogin.account.extra_data.keys()
-        if response_keys != expected_response.keys():
-            try:
-                extra_keys = set(response_keys).difference(expected_response.keys())
-                if extra_keys:
-                    for key in extra_keys:
-                        sociallogin.account.extra_data.pop(key, None)
-                    raise MisalignedProviderResponseError('{} unexpected element(s) removed from extra_data.'.format(len(extra_keys)))
-                else:
-                    raise MisalignedProviderResponseError('Expected element(s) missing from response.')
-            except MisalignedProviderResponseError as err:
-                try:
-                    from sentry_sdk import capture_exception as sentry_capture_exception, set_user as sentry_set_user
-                    if email:
-                        sentry_set_user({"email": email})
-                    sentry_capture_exception(err)
-                except ImportError:
-                    pass
+def get_socialaccount_claims(sociallogin):
+    """
+    Return a dict holding provider claims. For Allauth's OIDC provider
+    they are nests under ``userinfo`` with the decoded id_token
+    alongside it, while dedicated providers such as ``dataporten``
+    store them flat at the root of ``extra_data``.
+    """
+    extra_data = sociallogin.account.extra_data
+    return extra_data.get('userinfo') or extra_data.get('id_token') or extra_data
 
+
+def prune_unexpected_extra_data(email, sociallogin):
+    provider = sociallogin.account.provider
+    expected_response = getattr(settings, 'TRIX_SOCIALACCOUNT_EXPECTED_RESPONSES', {}). \
+                                get(provider, None)
+    if not expected_response:
+        return
+    claims = get_socialaccount_claims(sociallogin)
+    if claims.keys() == expected_response.keys():
+        return
+    extra_keys = sorted(set(claims.keys()).difference(expected_response.keys()))
+    missing_keys = sorted(set(expected_response.keys()).difference(claims.keys()))
+    problems = []
+    if extra_keys:
+        for key in extra_keys:
+            claims.pop(key, None)
+        problems.append('{} unexpected element{} removed from extra_data: {}'.format(
+            len(extra_keys), '' if len(extra_keys) == 1 else 's', ', '.join(extra_keys)))
+    if missing_keys:
+        problems.append('{} expected element{} missing from response: {}'.format(
+            len(missing_keys), '' if len(missing_keys) == 1 else 's', ', '.join(missing_keys)))
+    err = MisalignedProviderResponseError('Provider \'{}\' returned a misaligned response: {}'.format(
+                                          provider, '; '.join(problems)))
+    try:
+        from sentry_sdk import capture_exception as sentry_capture_exception, set_user as sentry_set_user
+        if email:
+            sentry_set_user({"email": email})
+        sentry_capture_exception(err)
+    except ImportError:
+        pass
+
+
+def update_user_with_socialaccount(email, request, sociallogin, connecting):
     sociallogin.user.set_unusable_password()
     sociallogin.user.full_clean()
     sociallogin.user.save()
@@ -37,9 +56,9 @@ def update_user_with_socialaccount(email, request, sociallogin, connecting):
 
 class MisalignedProviderResponseError(Exception):
     """
-    Raised by :class:`.TrixSocialAccountAdapter` if the response from a social
-    account provider lack expected root elements and/or had surplus root
-    elements when compared with `TRIX_SOCIALACCOUNT_EXPECTED_RESPONSES`.
+    Raised by :func:`.pre_social_login_handler` if the response from a social
+    account provider lack expected elements and/or had surplus elements when
+    compared with `TRIX_SOCIALACCOUNT_EXPECTED_RESPONSES`.
     """
     def __init__(self, msg):
         self.msg = msg
@@ -69,13 +88,14 @@ class TrixSocialAccountAdapter(DefaultSocialAccountAdapter):
 def pre_social_login_handler(request, sociallogin, **kwargs):
     email = sociallogin.account.extra_data.get('email', '') or ''
 
+    prune_unexpected_extra_data(email, sociallogin)
+    if sociallogin.account.pk is not None:
+        sociallogin.account.save(update_fields=['extra_data'])
+        return
+
     try:
         existing_user = get_user_model().objects.get(email=email)
     except get_user_model().DoesNotExist:
-        pass
-    else:
-        existing_socialaccount = SocialAccount.objects.filter(provider=sociallogin.account.provider, extra_data__contains={'email': email})
-        if not existing_socialaccount:
-            sociallogin.user = existing_user
-            update_user_with_socialaccount(email, request, sociallogin, connecting=True)
-            return sociallogin.user
+        return
+    sociallogin.user = existing_user
+    update_user_with_socialaccount(email, request, sociallogin, connecting=True)
